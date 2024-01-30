@@ -1,0 +1,129 @@
+import 'package:flutter/material.dart';
+
+class PeraturanDetailScreen extends StatefulWidget {
+  const PeraturanDetailScreen({super.key});
+
+  @override
+  State<PeraturanDetailScreen> createState() => _PeraturanDetailScreenState();
+}
+
+class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Peraturan"),
+        actions: const [],
+        leading: BackButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          color: Colors.black,
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: 350,
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+              color: Colors.green,
+              child: Column(
+                children: [
+                  Container(
+                    height: 320,
+                    width: 344,
+                    color: Colors.yellow,
+                    child: Stack(
+                      children: [
+                        Container(
+                          height: 320,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: const BoxDecoration(
+                              //color: Colors.orange,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(
+                                  12.0,
+                                ),
+                              ),
+                              image: DecorationImage(
+                                  image: AssetImage(
+                                      'assets/images/appbar-bg2.png'),
+                                  fit: BoxFit.cover)),
+                        ),
+                        Container(
+                          height: 250,
+                          width: 344,
+                          color: Colors.brown,
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 20, horizontal: 0),
+                          child: const Center(
+                            child: Column(
+                              children: [
+                                Text(
+                                  "Peraturan Tk Eselon I",
+                                  style: TextStyle(
+                                    fontSize: 24.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 8.0,
+                                ),
+                                Text(
+                                  "SK-8/DKU.MBU/12/2023Keputusan",
+                                  style: TextStyle(
+                                    fontSize: 14.0,
+                                    color: Colors.white,
+                                  ),
+                                  overflow: TextOverflow.visible,
+                                ),
+                                SizedBox(
+                                  height: 20.0,
+                                ),
+                                Text(
+                                  "Keputusan Deputi Bidang Keuangan dan Manajemen Risiko tentang Petunjuk Teknis Penilaian Indeks Kematangan Risiko (Risk Maturity Index) di Lingkungan Badan Usaha Milik Negara",
+                                  style: TextStyle(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                  overflow: TextOverflow.visible,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Row(
+              children: [
+                Container(
+                  width: 72.0,
+                  height: 85.0,
+                  color: Colors.red,
+                ),
+                Container(
+                  width: 100.0,
+                  height: 100.0,
+                  color: Colors.blue,
+                ),
+                Container(
+                  width: 100.0,
+                  height: 100.0,
+                  color: Colors.purple,
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

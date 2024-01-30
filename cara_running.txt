@@ -1,0 +1,7 @@
+https://stackoverflow.com/questions/59732883/flutter-gradle-build-failed-to-produce-an-apk-file-its-likely-that-this-file
+(pakai jawaban yang pertama)
+
+
+cara running di cmd: flutter run --flavor staging -t lib/main.dart
+
+folder apknya ada di: √  Built build\app\outputs\flutter-apk\app-staging-debug.apk.

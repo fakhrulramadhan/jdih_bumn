@@ -1,0 +1,41 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:jdih_bumn/presentation/berita/widget/berita_widget.dart';
+
+class ListBeritaWidget extends StatefulWidget {
+  const ListBeritaWidget({super.key});
+
+  @override
+  State<ListBeritaWidget> createState() => _ListBeritaWidgetState();
+}
+
+class _ListBeritaWidgetState extends State<ListBeritaWidget> {
+  @override
+  void initState() {
+    //context.read<GetProdukHukumBloc>().add(DoGetProdukHukumEvent());
+
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return StaggeredGrid.count(
+      crossAxisCount: 2,
+      mainAxisSpacing: 4,
+      crossAxisSpacing: 4,
+      children: const [
+        StaggeredGridTile.count(
+            crossAxisCellCount: 2, mainAxisCellCount: 2, child: BeritaWidget()),
+        StaggeredGridTile.count(
+            crossAxisCellCount: 2, mainAxisCellCount: 3, child: BeritaWidget()),
+        StaggeredGridTile.count(
+            crossAxisCellCount: 2, mainAxisCellCount: 3, child: BeritaWidget()),
+        StaggeredGridTile.count(
+            crossAxisCellCount: 2, mainAxisCellCount: 3, child: BeritaWidget()),
+        StaggeredGridTile.count(
+            crossAxisCellCount: 2, mainAxisCellCount: 3, child: BeritaWidget())
+      ],
+    );
+  }
+}

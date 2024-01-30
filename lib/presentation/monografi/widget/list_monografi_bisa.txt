@@ -1,0 +1,80 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jdih_bumn/bloc/get_produk_hukum/get_produk_hukum_bloc.dart';
+import 'package:jdih_bumn/data/model/response/produk_hukum_response_model.dart';
+
+class ListMonografiWidget extends StatefulWidget {
+  const ListMonografiWidget({super.key});
+
+  @override
+  State<ListMonografiWidget> createState() => _ListMonografiWidgetState();
+}
+
+class _ListMonografiWidgetState extends State<ListMonografiWidget> {
+  @override
+  void initState() {
+    context.read<GetProdukHukumBloc>().add(DoGetProdukHukumEvent());
+
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<GetProdukHukumBloc, GetProdukHukumState>(
+      builder: (context, state) {
+        if (state is GetProdukHukumError) {
+          return const Center(
+            child: Text("Data Error"),
+          );
+        }
+        if (state is GetProdukHukumLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+
+        if (state is GetProdukHukumLoaded) {
+          if (state.data == null) {
+            return const Center(
+              child: Center(
+                child: Text("Belum ada data"),
+              ),
+            );
+          }
+          List<ProdukHukumResponseModel> produkhukumList = state.data;
+
+          return GridView.builder(
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, // Adjust the cross-axis count as needed
+              crossAxisSpacing: 8.0,
+              mainAxisSpacing: 8.0,
+            ),
+            itemCount: produkhukumList.length,
+            itemBuilder: (context, index) {
+              ProdukHukumResponseModel produkHukum = produkhukumList[index];
+              return Card(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(produkHukum.judul ?? ''),
+                    Text(produkHukum.noPeraturan ?? ''),
+                    // Add more fields as needed
+                  ],
+                ),
+              );
+            },
+          );
+        }
+
+        return const Center(
+          child: Center(
+            child: Text("Belum ada data"),
+          ),
+        );
+      },
+    );
+  }
+}

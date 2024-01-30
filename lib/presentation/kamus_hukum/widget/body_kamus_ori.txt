@@ -1,0 +1,63 @@
+import 'package:flutter/material.dart';
+
+class BodyKamusWidget extends StatelessWidget {
+  const BodyKamusWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // height: 60,
+      // width: MediaQuery.of(context).size.width * 0.8,
+      constraints: BoxConstraints(
+          minHeight: 90,
+          maxHeight: 170,
+          minWidth: MediaQuery.of(context).size.width * 0.9),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //agar posisi columnya mulai dari atas
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: 0.3 * MediaQuery.of(context).size.width,
+                child: const Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "Badan Usaha Milik Negara",
+                    style: TextStyle(
+                        fontSize: 12.0,
+                        color: Colors.black,
+                        fontWeight: FontWeight.normal),
+                    overflow: TextOverflow.visible,
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 0.5 * MediaQuery.of(context).size.width,
+                child: const Text(
+                  "Keputusan Deputi Bidang Keuangan dan Manajemen Risiko tentang Petunjuk Teknis Penilaian Indeks Kematangan Risiko (Risk Maturity Index) di Lingkungan Badan Usaha Milik Negara Subtext",
+                  style: TextStyle(
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                  overflow: TextOverflow.visible,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 3.0,
+          ),
+          const Divider(
+            color: Colors.black,
+          ),
+          const SizedBox(
+            height: 3.0,
+          ),
+        ],
+      ),
+    );
+  }
+}

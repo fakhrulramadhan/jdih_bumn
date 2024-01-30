@@ -1,0 +1,195 @@
+import 'package:flutter/material.dart';
+import 'package:jdih_bumn/presentation/peraturan_detail/widget/bagikan_button_widget.dart';
+import 'package:jdih_bumn/presentation/peraturan_detail/widget/download_button_widget.dart';
+import 'package:jdih_bumn/presentation/peraturan_detail/widget/info_detail_widget.dart';
+
+import 'widget/icon_info_widget.dart';
+
+class PeraturanDetailScreen extends StatefulWidget {
+  const PeraturanDetailScreen({super.key});
+
+  @override
+  State<PeraturanDetailScreen> createState() => _PeraturanDetailScreenState();
+}
+
+class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Peraturan"),
+        actions: const [],
+        leading: BackButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          color: Colors.black,
+        ),
+      ),
+      body: SingleChildScrollView(
+        controller: ScrollController(),
+        child: Column(
+          //mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
+              height: 350,
+              child: Stack(
+                children: [
+                  Container(
+                    height: 350,
+                    width: MediaQuery.of(context).size.width,
+                    margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
+                    // decoration: const BoxDecoration(
+                    //     borderRadius: BorderRadius.all(
+                    //       Radius.circular(
+                    //         12.0,
+                    //       ),
+                    //     ),
+                    //     image: DecorationImage(
+                    //         image: AssetImage('assets/images/appbar-bg2.png'),
+                    //         fit: BoxFit.cover)),
+                    child: Image.asset(
+                      "assets/images/appbar-bg2.png",
+                      width: MediaQuery.of(context).size.width,
+                      height: 350,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Container(
+                    height: 350,
+                    width: MediaQuery.of(context).size.width,
+                    margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
+                    child: const Column(
+                      children: [
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        Text(
+                          "Peraturan Tk Eselon I",
+                          style: TextStyle(
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        Text(
+                          "SK-8/DKU.MBU/12/2023Keputusan",
+                          style: TextStyle(
+                            fontSize: 14.0,
+                            color: Colors.white,
+                          ),
+                          overflow: TextOverflow.visible,
+                        ),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        Text(
+                          "Keputusan Deputi Bidang Keuangan dan Manajemen Risiko tentang Petunjuk Teknis Penilaian Indeks Kematangan Risiko (Risk Maturity Index) di Lingkungan Badan Usaha Milik Negara",
+                          style: TextStyle(
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                          overflow: TextOverflow.visible,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Positioned(
+                    //bottom: -100,
+                    child: SizedBox(
+                      height: 350,
+                      width: MediaQuery.of(context).size.width,
+                      //padding: const EdgeInsets.only(top: 20),
+                      child: const Column(
+                        children: [
+                          SizedBox(
+                            height: 260.0,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              IconInfoWidget(
+                                  imageUrl: "assets/images/berlaku.svg",
+                                  title: "Berlaku",
+                                  subtitle: "Status"),
+                              IconInfoWidget(
+                                  imageUrl: "assets/images/kalender.svg",
+                                  title: "06/12/2023",
+                                  subtitle: "Tahun Terbit"),
+                              IconInfoWidget(
+                                  imageUrl: "assets/images/view.svg",
+                                  title: "2.731 K",
+                                  subtitle: "Dilihat"),
+                              IconInfoWidget(
+                                  imageUrl: "assets/images/bahasa.svg",
+                                  title: "Indonesia",
+                                  subtitle: "Bahasa")
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const InfoDetailWidget(
+              title: "Abstrak",
+              subtitle: "-",
+            ),
+            const InfoDetailWidget(
+                title: "Tipe Dokumen", subtitle: "Peraturan"),
+            const InfoDetailWidget(
+                title: "Judul",
+                heightTitle: 130,
+                subtitle:
+                    "Keputusan Deputi Bidang Keuangan dan Manajemen Risiko tentang Petunjuk Teknis Penilaian Indeks Kematangan Risiko (Risk Maturity Index) di Lingkungan Badan Usaha Milik Negara"),
+            const InfoDetailWidget(
+                title: "T.E.U Badan/Pengarang",
+                subtitle: "Indonesia. Kementerian BUMN"),
+            const InfoDetailWidget(
+                title: "Nomor Peraturan", subtitle: "SK-8/DKU.MBU/12/2023"),
+            const InfoDetailWidget(
+                title: "Jenis Peraturan",
+                subtitle: "Peraturan Tk Eselon I Lainnya"),
+            const InfoDetailWidget(
+                title: "Singkatan Jenis/Bentuk Peraturan",
+                subtitle: "Peraturan Tk Eselon I"),
+            const InfoDetailWidget(
+                title: "Tempat Penetapan", subtitle: "JAKARTA"),
+            const InfoDetailWidget(
+                title: "Tanggal-bulan-tahun Penetapan", subtitle: "06-12-2023"),
+            const InfoDetailWidget(
+                title: "Tanggal-bulan-tahun Pengundangan",
+                subtitle: "06-12-2023"),
+            const InfoDetailWidget(title: "Sumber", subtitle: "-"),
+            const InfoDetailWidget(title: "Subjek", subtitle: "Subjek"),
+            const InfoDetailWidget(
+                title: "Detail Status Peraturan", subtitle: "Baru"),
+            const InfoDetailWidget(
+                title: "Lokasi", subtitle: "Kementerian BUMN"),
+            const InfoDetailWidget(
+                title: "Bidang Hukum", subtitle: "Hukum Administrasi Negara"),
+            const InfoDetailWidget(title: "Lampiran", subtitle: "-"),
+            const SizedBox(
+              height: 20.0,
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: SizedBox(
+        height: 100,
+        width: MediaQuery.of(context).size.width,
+        child: const Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [BagikanButtonWidget(), DownloadButtonWidget()],
+        ),
+      ),
+    );
+  }
+}

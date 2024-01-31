@@ -49,6 +49,7 @@ class _ListMonografiWidgetState extends State<ListMonografiWidget> {
             shrinkWrap: true,
             scrollDirection: Axis.vertical,
             itemCount: produkhukumList.length,
+            physics: const ScrollPhysics(), //agar bisa scroll
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisSpacing: 8,

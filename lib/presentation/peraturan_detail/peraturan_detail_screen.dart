@@ -32,6 +32,14 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
   // Show the progress status to the user.
   String progressString = 'File has not been downloaded yet.';
 
+  late ScrollController _scrollController;
+
+  @override
+  void initState() {
+    _scrollController = ScrollController();
+    super.initState();
+  }
+
   // You can update the download progress here so that the user is
   // aware of the long-running task.
   void updateProgress(done, total) {
@@ -88,171 +96,200 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
           color: Colors.black,
         ),
       ),
-      body: SingleChildScrollView(
-        controller: ScrollController(),
-        child: Column(
-          //mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              height: 350,
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(12)),
-              child: Stack(
-                children: [
-                  Container(
-                    height: 350,
-                    width: MediaQuery.of(context).size.width,
-                    margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12)
-                        // image: DecorationImage(
-                        //     image: AssetImage('assets/images/appbar-bg2.png'),
-                        //     fit: BoxFit.cover)
-                        ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: Image.asset(
-                        "assets/images/appbar-bg2.png",
-                        width: MediaQuery.of(context).size.width,
-                        height: 350,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 350,
-                    width: MediaQuery.of(context).size.width,
-                    margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 10.0,
-                        ),
-                        Text(
-                          "${widget.peraturanHukum.bentuk}",
-                          style: const TextStyle(
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10.0,
-                        ),
-                        Text(
-                          "${widget.peraturanHukum.perNo}",
-                          style: const TextStyle(
-                            fontSize: 14.0,
-                            color: Colors.white,
-                          ),
-                          overflow: TextOverflow.visible,
-                        ),
-                        const SizedBox(
-                          height: 20.0,
-                        ),
-                        Text(
-                          "${widget.peraturanHukum.tentang}",
-                          style: const TextStyle(
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                          overflow: TextOverflow.visible,
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Positioned(
-                    //bottom: -100,
-                    child: SizedBox(
+      body: Scrollbar(
+        thumbVisibility: true,
+        controller: _scrollController,
+        thickness: 10,
+        child: SingleChildScrollView(
+          controller: _scrollController,
+          child: Column(
+            //mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                height: 350,
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(12)),
+                child: Stack(
+                  children: [
+                    Container(
                       height: 350,
                       width: MediaQuery.of(context).size.width,
-                      //padding: const EdgeInsets.only(top: 20),
+                      margin:
+                          const EdgeInsets.only(left: 20, right: 20, top: 20),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12)
+                          // image: DecorationImage(
+                          //     image: AssetImage('assets/images/appbar-bg2.png'),
+                          //     fit: BoxFit.cover)
+                          ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Image.asset(
+                          "assets/images/appbar-bg2.png",
+                          width: MediaQuery.of(context).size.width,
+                          height: 350,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: 350,
+                      width: MediaQuery.of(context).size.width,
+                      margin:
+                          const EdgeInsets.only(left: 20, right: 20, top: 20),
                       child: Column(
                         children: [
                           const SizedBox(
-                            height: 260.0,
+                            height: 10.0,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              IconInfoWidget(
-                                  imageUrl: "assets/images/berlaku.svg",
-                                  title: widget.peraturanHukum.status!.isEmpty
-                                      ? '-'
-                                      : "Baru",
-                                  subtitle: "Status"),
-                              IconInfoWidget(
-                                  imageUrl: "assets/images/kalender.svg",
-                                  title: "${widget.peraturanHukum.tahun}",
-                                  subtitle: "Tahun Terbit"),
-                              IconInfoWidget(
-                                  imageUrl: "assets/images/view.svg",
-                                  title:
-                                      "${widget.peraturanHukum.readingCounter}",
-                                  subtitle: "Dilihat"),
-                              const IconInfoWidget(
-                                  imageUrl: "assets/images/bahasa.svg",
-                                  title: "Indonesia",
-                                  subtitle: "Bahasa")
-                            ],
+                          Text(
+                            "${widget.peraturanHukum.bentuk}",
+                            style: const TextStyle(
+                              fontSize: 24.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10.0,
+                          ),
+                          Text(
+                            "${widget.peraturanHukum.perNo}",
+                            style: const TextStyle(
+                              fontSize: 14.0,
+                              color: Colors.white,
+                            ),
+                            overflow: TextOverflow.visible,
+                          ),
+                          const SizedBox(
+                            height: 20.0,
+                          ),
+                          Text(
+                            "${widget.peraturanHukum.tentang}",
+                            style: const TextStyle(
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                            overflow: TextOverflow.visible,
+                            textAlign: TextAlign.center,
                           ),
                         ],
                       ),
                     ),
-                  ),
-                ],
+                    Positioned(
+                      //bottom: -100,
+                      child: SizedBox(
+                        height: 350,
+                        width: MediaQuery.of(context).size.width,
+                        //padding: const EdgeInsets.only(top: 20),
+                        child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 260.0,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                IconInfoWidget(
+                                    imageUrl: "assets/images/berlaku.svg",
+                                    title: widget.peraturanHukum.status!.isEmpty
+                                        ? '-'
+                                        : "Baru",
+                                    subtitle: "Status"),
+                                IconInfoWidget(
+                                    imageUrl: "assets/images/kalender.svg",
+                                    title: "${widget.peraturanHukum.tahun}",
+                                    subtitle: "Tahun Terbit"),
+                                IconInfoWidget(
+                                    imageUrl: "assets/images/view.svg",
+                                    title:
+                                        "${widget.peraturanHukum.readingCounter}",
+                                    subtitle: "Dilihat"),
+                                const IconInfoWidget(
+                                    imageUrl: "assets/images/bahasa.svg",
+                                    title: "Indonesia",
+                                    subtitle: "Bahasa")
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            InfoDetailWidget(
-              title: "Abstrak",
-              subtitle: widget.peraturanHukum.abstraksi ?? "-",
-              heightTitle:
-                  widget.peraturanHukum.abstraksi!.isNotEmpty ? 450 : 100,
-            ),
-            InfoDetailWidget(
-                title: "Tipe Dokumen",
-                subtitle: "${widget.peraturanHukum.bentuk}"),
-            InfoDetailWidget(
-                title: "Judul",
-                heightTitle:
-                    widget.peraturanHukum.abstraksi!.isNotEmpty ? 130 : 100,
-                subtitle: "${widget.peraturanHukum.tentang}"),
-            const InfoDetailWidget(
-                title: "T.E.U Badan/Pengarang",
-                subtitle: "Indonesia. Kementerian BUMN"),
-            InfoDetailWidget(
-                title: "Nomor Peraturan",
-                subtitle: "${widget.peraturanHukum.perNo}"),
-            InfoDetailWidget(
-                title: "Jenis Peraturan",
-                subtitle: "${widget.peraturanHukum.bentuk}"),
-            InfoDetailWidget(
-                title: "Singkatan Jenis/Bentuk Peraturan",
-                subtitle: "${widget.peraturanHukum.bentuk}"),
-            const InfoDetailWidget(
-                title: "Tempat Penetapan", subtitle: "JAKARTA"),
-            InfoDetailWidget(
-                title: "Tanggal-bulan-tahun Penetapan",
-                subtitle: "${widget.peraturanHukum.tanggal}"),
-            const InfoDetailWidget(
-                title: "Tanggal-bulan-tahun Pengundangan",
-                subtitle: "06-12-2023"),
-            const InfoDetailWidget(title: "Sumber", subtitle: "-"),
-            const InfoDetailWidget(title: "Subjek", subtitle: "Subjek"),
-            InfoDetailWidget(
-                title: "Detail Status Peraturan",
-                subtitle: widget.peraturanHukum.status!.isEmpty ? "-" : "Baru"),
-            const InfoDetailWidget(
-                title: "Lokasi", subtitle: "Kementerian BUMN"),
-            const InfoDetailWidget(
-                title: "Bidang Hukum", subtitle: "Hukum Administrasi Negara"),
-            const InfoDetailWidget(title: "Lampiran", subtitle: "-"),
-            const SizedBox(
-              height: 20.0,
-            ),
-          ],
+              // kalau diatas sama dengan 500 karakter, heightnya 1800
+              // widget.peraturanHukum.abstraksi!.length <= 200000
+              InfoDetailWidget(
+                  title: "Abstrak",
+                  subtitle: widget.peraturanHukum.abstraksi!.isEmpty
+                      ? "-"
+                      : widget.peraturanHukum.abstraksi!,
+                  heightTitle: widget.peraturanHukum.abstraksi!.isNotEmpty
+                      ? widget.peraturanHukum.abstraksi!.length >= 3180
+                          ? 1200
+                          : widget.peraturanHukum.abstraksi!.length >= 400 &&
+                                  widget.peraturanHukum.abstraksi!.length <=
+                                      2999
+                              ? 800
+                              : widget.peraturanHukum.abstraksi!.length >=
+                                          201 &&
+                                      widget.peraturanHukum.abstraksi!.length <=
+                                          399
+                                  ? 600
+                                  : widget.peraturanHukum.abstraksi!.length >=
+                                              50 &&
+                                          widget.peraturanHukum.abstraksi!
+                                                  .length <=
+                                              200
+                                      ? 400
+                                      : 200
+                      : 100),
+              InfoDetailWidget(
+                  title: "Tipe Dokumen",
+                  subtitle: "${widget.peraturanHukum.bentuk}"),
+              InfoDetailWidget(
+                  title: "Judul",
+                  heightTitle:
+                      widget.peraturanHukum.abstraksi!.isNotEmpty ? 130 : 100,
+                  subtitle: "${widget.peraturanHukum.tentang}"),
+              const InfoDetailWidget(
+                  title: "T.E.U Badan/Pengarang",
+                  subtitle: "Indonesia. Kementerian BUMN"),
+              InfoDetailWidget(
+                  title: "Nomor Peraturan",
+                  subtitle: "${widget.peraturanHukum.perNo}"),
+              InfoDetailWidget(
+                  title: "Jenis Peraturan",
+                  subtitle: "${widget.peraturanHukum.bentuk}"),
+              InfoDetailWidget(
+                  title: "Singkatan Jenis/Bentuk Peraturan",
+                  subtitle: "${widget.peraturanHukum.bentuk}"),
+              const InfoDetailWidget(
+                  title: "Tempat Penetapan", subtitle: "JAKARTA"),
+              InfoDetailWidget(
+                  title: "Tanggal-bulan-tahun Penetapan",
+                  subtitle: "${widget.peraturanHukum.tanggal}"),
+              const InfoDetailWidget(
+                  title: "Tanggal-bulan-tahun Pengundangan",
+                  subtitle: "06-12-2023"),
+              const InfoDetailWidget(title: "Sumber", subtitle: "-"),
+              const InfoDetailWidget(title: "Subjek", subtitle: "Subjek"),
+              InfoDetailWidget(
+                  title: "Detail Status Peraturan",
+                  subtitle:
+                      widget.peraturanHukum.status!.isEmpty ? "-" : "Baru"),
+              const InfoDetailWidget(
+                  title: "Lokasi", subtitle: "Kementerian BUMN"),
+              const InfoDetailWidget(
+                  title: "Bidang Hukum", subtitle: "Hukum Administrasi Negara"),
+              const InfoDetailWidget(title: "Lampiran", subtitle: "-"),
+              const SizedBox(
+                height: 20.0,
+              ),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: SizedBox(

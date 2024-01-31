@@ -13,6 +13,14 @@ class ArtikelDetailScreen extends StatefulWidget {
 }
 
 class _ArtikelDetailScreenState extends State<ArtikelDetailScreen> {
+  late ScrollController _scrollController;
+
+  @override
+  void initState() {
+    _scrollController = ScrollController();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,141 +35,148 @@ class _ArtikelDetailScreenState extends State<ArtikelDetailScreen> {
           color: Colors.black,
         ),
       ),
-      body: SingleChildScrollView(
-        controller: ScrollController(),
-        child: Column(
-          //mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              height: 2050,
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(12)),
-              child: Stack(
-                children: [
-                  Container(
-                    height: 250,
-                    width: MediaQuery.of(context).size.width,
-                    margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      // image: DecorationImage(
-                      //     image: AssetImage('assets/images/appbar-bg2.png'),
-                      //     fit: BoxFit.cover)
-                    ),
-                    child: Image.asset(
-                      "assets/images/appbar-bg2.png",
-                      width: MediaQuery.of(context).size.width,
+      body: Scrollbar(
+        controller: _scrollController,
+        thumbVisibility: true,
+        thickness: 10,
+        child: SingleChildScrollView(
+          controller: _scrollController,
+          child: Column(
+            //mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                height: 817,
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(12)),
+                child: Stack(
+                  children: [
+                    Container(
                       height: 250,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Container(
-                    height: 250,
-                    width: MediaQuery.of(context).size.width,
-                    margin: const EdgeInsets.only(
-                        left: 20, right: 20, top: 20, bottom: 10),
-                    child: const Column(
-                      children: [
-                        SizedBox(
-                          height: 40.0,
-                        ),
-                        // Text(
-                        //   "91/PUU-XVIII/2020",
-                        //   style: TextStyle(
-                        //     fontSize: 24.0,
-                        //     fontWeight: FontWeight.bold,
-                        //     color: Colors.white,
-                        //   ),
-                        // ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        Text(
-                          "Pertanggungjawaban Direksi BUMN atas Kerugian yang Dialami Negara dalam Penerapan Prinsip Business Judgement Rule",
-                          style: TextStyle(
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.white,
-                          ),
-                          overflow: TextOverflow.visible,
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                      height: 2050,
                       width: MediaQuery.of(context).size.width,
-                      margin: const EdgeInsets.only(left: 20),
+                      margin:
+                          const EdgeInsets.only(left: 20, right: 20, top: 20),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        // image: DecorationImage(
+                        //     image: AssetImage('assets/images/appbar-bg2.png'),
+                        //     fit: BoxFit.cover)
+                      ),
+                      child: Image.asset(
+                        "assets/images/appbar-bg2.png",
+                        width: MediaQuery.of(context).size.width,
+                        height: 250,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Container(
+                      height: 250,
+                      width: MediaQuery.of(context).size.width,
+                      margin: const EdgeInsets.only(
+                          left: 20, right: 20, top: 20, bottom: 10),
                       child: const Column(
                         children: [
                           SizedBox(
-                            height: 210.0,
+                            height: 40.0,
                           ),
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "Detail Peraturan",
-                              style: TextStyle(
-                                  fontSize: 12.0,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          // Align(
-                          //   alignment: Alignment.topLeft,
-                          //   child: Container(
-                          //     height: 20,
-                          //     width: 20,
-                          //     color: Colors.red, \n = enter
+                          // Text(
+                          //   "91/PUU-XVIII/2020",
+                          //   style: TextStyle(
+                          //     fontSize: 24.0,
+                          //     fontWeight: FontWeight.bold,
+                          //     color: Colors.white,
                           //   ),
-                          // )
-                          InfoDetailArtikelWidget(
-                            partOf: "Jenis Artikel",
-                            title: "Artikel Hukum",
+                          // ),
+                          SizedBox(
+                            height: 10.0,
                           ),
-                          InfoDetailJudulArtikelWidget(
-                            partOf: "Judul",
-                            title:
-                                "Pertanggungjawaban Direksi BUMN atas Kerugian yang Dialami Negara dalam Penerapan Prinsip Business Judgement Rule",
+                          Text(
+                            "Pertanggungjawaban Direksi BUMN atas Kerugian yang Dialami Negara dalam Penerapan Prinsip Business Judgement Rule",
+                            style: TextStyle(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.white,
+                            ),
+                            overflow: TextOverflow.visible,
+                            textAlign: TextAlign.center,
                           ),
-                          InfoDetailArtikelWidget(
-                              partOf: "T.E.U Badan/\nPengarang",
-                              title: "Amiliya Handayan"),
-                          InfoDetailArtikelWidget(
-                              partOf: "Tempat Terbit", title: "JAKARTA"),
-                          InfoDetailArtikelWidget(
-                              partOf: "Tahun", title: "2022"),
-                          InfoDetailArtikelWidget(partOf: "Subjek", title: "-"),
-                          InfoDetailArtikelWidget(
-                              partOf: "Bahasa", title: "Indonesia"),
-                          InfoDetailArtikelWidget(
-                              partOf: "Bidang Hukum", title: "Hukum Umum"),
-                          InfoDetailArtikelWidget(
-                              partOf: "Sumber", title: "2022; 14"),
-                          InfoDetailArtikelWidget(
-                              partOf: "Lokasi",
-                              title:
-                                  "Asisten Deputi Bidang Peraturan\nPerundang-undangan"),
-                          InfoDetailArtikelWidget(
-                              partOf: "Lampiran", title: "-")
                         ],
-                      ))
-                ],
+                      ),
+                    ),
+                    Container(
+                        height: 2050,
+                        width: MediaQuery.of(context).size.width,
+                        margin: const EdgeInsets.only(left: 20),
+                        child: const Column(
+                          children: [
+                            SizedBox(
+                              height: 210.0,
+                            ),
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                "Detail Peraturan",
+                                style: TextStyle(
+                                    fontSize: 12.0,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            // Align(
+                            //   alignment: Alignment.topLeft,
+                            //   child: Container(
+                            //     height: 20,
+                            //     width: 20,
+                            //     color: Colors.red, \n = enter
+                            //   ),
+                            // )
+                            InfoDetailArtikelWidget(
+                              partOf: "Jenis Artikel",
+                              title: "Artikel Hukum",
+                            ),
+                            InfoDetailJudulArtikelWidget(
+                              partOf: "Judul",
+                              title:
+                                  "Pertanggungjawaban Direksi BUMN atas Kerugian yang Dialami Negara dalam Penerapan Prinsip Business Judgement Rule",
+                            ),
+                            InfoDetailArtikelWidget(
+                                partOf: "T.E.U Badan/\nPengarang",
+                                title: "Amiliya Handayan"),
+                            InfoDetailArtikelWidget(
+                                partOf: "Tempat Terbit", title: "JAKARTA"),
+                            InfoDetailArtikelWidget(
+                                partOf: "Tahun", title: "2022"),
+                            InfoDetailArtikelWidget(
+                                partOf: "Subjek", title: "-"),
+                            InfoDetailArtikelWidget(
+                                partOf: "Bahasa", title: "Indonesia"),
+                            InfoDetailArtikelWidget(
+                                partOf: "Bidang Hukum", title: "Hukum Umum"),
+                            InfoDetailArtikelWidget(
+                                partOf: "Sumber", title: "2022; 14"),
+                            InfoDetailArtikelWidget(
+                                partOf: "Lokasi",
+                                title:
+                                    "Asisten Deputi Bidang Peraturan\nPerundang-undangan"),
+                            InfoDetailArtikelWidget(
+                                partOf: "Lampiran", title: "-")
+                          ],
+                        ))
+                  ],
+                ),
               ),
-            ),
-            // const Align(
-            //   alignment: Alignment.topLeft,
-            //   child: Text(
-            //     "Detail Peraturan",
-            //     style: TextStyle(
-            //       fontSize: 12.0,
-            //       color: Colors.black,
-            //     ),
-            //   ),
-            // ),
-            // const InfoDetailWidget(title: "Tipe Dokumen", subtitle: "Putusan"),
-          ],
+              // const Align(
+              //   alignment: Alignment.topLeft,
+              //   child: Text(
+              //     "Detail Peraturan",
+              //     style: TextStyle(
+              //       fontSize: 12.0,
+              //       color: Colors.black,
+              //     ),
+              //   ),
+              // ),
+              // const InfoDetailWidget(title: "Tipe Dokumen", subtitle: "Putusan"),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: SizedBox(

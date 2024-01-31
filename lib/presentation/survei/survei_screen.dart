@@ -223,15 +223,15 @@ class _SurveiScreenState extends State<SurveiScreen> {
                                         this.rating = rating;
                                       })),
                             ),
-                            const SizedBox(
-                              height: 8.0,
-                            ),
-                            Text(
-                              "Rating $rating",
-                              style: const TextStyle(
-                                fontSize: 12.0,
-                              ),
-                            ),
+                            // const SizedBox(
+                            //   height: 8.0,
+                            // ),
+                            // Text(
+                            //   "Rating $rating",
+                            //   style: const TextStyle(
+                            //     fontSize: 12.0,
+                            //   ),
+                            // ),
                             const SizedBox(
                               height: 10.0,
                             ),

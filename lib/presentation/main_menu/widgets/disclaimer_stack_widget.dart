@@ -60,7 +60,7 @@ class _DisclaimerStackWidgetState extends State<DisclaimerStackWidget> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "Semua yang disajikan dalam website JDIH \nKementerian BUMN dimaksudkan sebagai \ninformasi yang dikeluarkan oleh Kementerian\nBUMN. Apabila terdapat kekeliruan atau \nperbedaan antara informasi yang disajikan\ndalam website ini dengan dokumen resmi di Kementerian BUMN,\n maka yang berlaku adalah dokumen resmi pada  Kementerian BUMN.",
+                    "Semua yang disajikan dalam website JDIH \nKementerian BUMN dimaksudkan sebagai \ninformasi yang dikeluarkan oleh \nKementerian BUMN. Apabila terdapat\nkekeliruan atau perbedaan antara informasi\nyang disajikan dalam website ini dengan dokumen resmi di Kementerian BUMN, maka yang berlaku adalah dokumen resmi pada  Kementerian BUMN.",
                     style: TextStyle(
                         fontSize: 10.0,
                         color: Colors.white,

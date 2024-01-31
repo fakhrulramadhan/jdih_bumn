@@ -16,9 +16,9 @@ class _InfoDetailWidgetState extends State<InfoDetailWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: widget.heightTitle ?? 100,
+      height: widget.heightTitle ?? 110,
       width: MediaQuery.of(context).size.width,
-      margin: const EdgeInsets.only(left: 20),
+      margin: const EdgeInsets.only(left: 20, right: 20),
       child: Column(
         children: [
           Align(
@@ -41,7 +41,7 @@ class _InfoDetailWidgetState extends State<InfoDetailWidget> {
               style: const TextStyle(
                 fontSize: 12.0,
               ),
-              overflow: TextOverflow.fade,
+              overflow: TextOverflow.visible,
             ),
           ),
           const SizedBox(
@@ -55,9 +55,9 @@ class _InfoDetailWidgetState extends State<InfoDetailWidget> {
           const Divider(
             color: Color(0xff8BCBDA),
           ),
-          const SizedBox(
-            height: 2.0,
-          ),
+          // const SizedBox(
+          //   height: 2.0,
+          // ),
         ],
       ),
     );

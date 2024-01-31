@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jdih_bumn/presentation/berita/widget/berita_widget.dart';
+import 'package:jdih_bumn/presentation/berita_detail/berita_detail_screen.dart';
 
 class ListBeritaWidget extends StatefulWidget {
   const ListBeritaWidget({super.key});
@@ -32,7 +33,14 @@ class _ListBeritaWidgetState extends State<ListBeritaWidget> {
       shrinkWrap: true,
       physics: const ScrollPhysics(),
       itemBuilder: (BuildContext context, int index) {
-        return const BeritaWidget();
+        return BeritaWidget(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const BeritaDetailScreen()),
+            );
+          },
+        );
       },
     );
   }

@@ -158,7 +158,7 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
                       // pakai pageview nuilder
                       const TitleKamusWidget(),
                       SizedBox(
-                        height: 800,
+                        height: 730,
                         width: MediaQuery.of(context).size.width,
                         child: PageView(
                           controller: page,

@@ -209,7 +209,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
               title: "Abstrak",
               subtitle: widget.peraturanHukum.abstraksi ?? "-",
               heightTitle:
-                  widget.peraturanHukum.abstraksi!.isNotEmpty ? 350 : 100,
+                  widget.peraturanHukum.abstraksi!.isNotEmpty ? 450 : 100,
             ),
             InfoDetailWidget(
                 title: "Tipe Dokumen",

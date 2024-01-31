@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jdih_bumn/bloc/get_peraturan_hukum/get_peraturan_hukum_bloc.dart';
 import 'package:jdih_bumn/bloc/get_produk_hukum/get_produk_hukum_bloc.dart';
@@ -14,8 +15,14 @@ void main() {
   //https://www.youtube.com/watch?v=CNUBhb_cM6E
   //https://pub.dev/packages/flutter_launcher_icons
 
+  WidgetsFlutterBinding.ensureInitialized();
+
+  //lock potrait only
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((value) => runApp(const MyApp()));
+
   Bloc.observer = GlobalBlocObserver();
-  runApp(const MyApp());
+  //runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

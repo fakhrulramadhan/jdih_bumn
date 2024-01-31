@@ -143,7 +143,7 @@ class _InfografisScreenState extends State<InfografisScreen> {
                         top: 270,
                         child: InkWell(
                           onTap: () => controller1.animateToPage(1,
-                              duration: Duration(milliseconds: 500)),
+                              duration: const Duration(milliseconds: 500)),
                           child: Container(
                             width: 60,
                             height: 60.0,
@@ -161,11 +161,11 @@ class _InfografisScreenState extends State<InfografisScreen> {
                         ),
                       ),
                       Positioned(
-                        left: 20,
+                        left: 18,
                         top: 270,
                         child: InkWell(
                           onTap: () => controller1.animateToPage(0,
-                              duration: Duration(milliseconds: 500)),
+                              duration: const Duration(milliseconds: 500)),
                           child: Container(
                             width: 60,
                             height: 60.0,
@@ -191,13 +191,15 @@ class _InfografisScreenState extends State<InfografisScreen> {
                   // )
                   Container(
                     height: 118,
-                    width: width * 0.8,
+                    width: width,
+                    color: Colors.white,
                     child: Align(
                       alignment: Alignment.bottomRight,
                       child: SvgPicture.asset(
                         "assets/images/BUMN Background.svg",
-                        height: 118,
-                        width: width * 0.8,
+                        //height: 118,
+                        // width: width,
+                        fit: BoxFit.cover,
                       ),
                     ),
                   )

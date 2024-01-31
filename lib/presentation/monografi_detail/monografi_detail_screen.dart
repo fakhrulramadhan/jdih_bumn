@@ -99,8 +99,8 @@ class _MonografiDetailScreenState extends State<MonografiDetailScreen> {
                       Container(
                         height: 450,
                         width: MediaQuery.of(context).size.width,
-                        margin:
-                            const EdgeInsets.only(left: 20, right: 20, top: 20),
+                        // margin:
+                        //     const EdgeInsets.only(left: 20, right: 20, top: 20),
                         // decoration: const BoxDecoration(
                         //     borderRadius: BorderRadius.all(
                         //       Radius.circular(
@@ -121,20 +121,35 @@ class _MonografiDetailScreenState extends State<MonografiDetailScreen> {
                         height: 500,
                         width: MediaQuery.of(context).size.width,
                         margin:
-                            const EdgeInsets.only(left: 20, right: 20, top: 20),
+                            const EdgeInsets.only(left: 10, right: 10, top: 20),
                         child: Column(
                           children: [
                             const SizedBox(
                               height: 10.0,
                             ),
-                            const Text(
-                              "Monografi",
-                              style: TextStyle(
-                                fontSize: 24.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                              overflow: TextOverflow.visible,
+                            Row(
+                              children: [
+                                BackButton(
+                                  color: Colors.white,
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                                SizedBox(
+                                  width:
+                                      0.165 * MediaQuery.of(context).size.width,
+                                ),
+                                const Text(
+                                  "Monografi",
+                                  style: TextStyle(
+                                    fontSize: 24.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                  overflow: TextOverflow.visible,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
                             ),
                             const SizedBox(
                               height: 10.0,
@@ -146,6 +161,7 @@ class _MonografiDetailScreenState extends State<MonografiDetailScreen> {
                                 color: Colors.white,
                               ),
                               overflow: TextOverflow.visible,
+                              textAlign: TextAlign.center,
                             ),
                             const SizedBox(
                               height: 20.0,

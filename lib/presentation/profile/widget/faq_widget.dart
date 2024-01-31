@@ -1,9 +1,7 @@
 // ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:draggable_scrollbar/draggable_scrollbar.dart';
 
 class FaqWidget extends StatefulWidget {
   const FaqWidget({Key? key}) : super(key: key);
@@ -34,7 +32,7 @@ class _FaqWidgetState extends State<FaqWidget> {
     return WillPopScope(
         child: Scaffold(
           body: Scrollbar(
-            thumbVisibility: true,
+            thumbVisibility: false,
             controller: _scrollController,
             thickness: 10,
             child: SingleChildScrollView(

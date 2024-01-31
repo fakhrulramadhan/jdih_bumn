@@ -70,7 +70,7 @@ class _ListMonografiWidgetState extends State<ListMonografiWidget> {
                   );
                 },
                 child: Container(
-                  height: 230,
+                  height: 240,
                   width: 170,
                   //padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
                   decoration: BoxDecoration(
@@ -108,7 +108,7 @@ class _ListMonografiWidgetState extends State<ListMonografiWidget> {
                         child: Image.asset(
                           "assets/images/lorem-book-ori-removebg.png",
                           width: 127.0,
-                          height: 170.0,
+                          height: 160.0,
                           fit: BoxFit.fill,
                         ),
                       ),

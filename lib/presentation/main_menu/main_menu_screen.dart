@@ -219,7 +219,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                           );
                         },
                         menuText: "Peraturan \n  BUMN"),
-                    //gbr iconnya enggak
+                    //gbr iconnya enggak muncul
                     // ListMenuWidget(
                     //     onTap: () {},
                     //     assetUrl: "assets/images/Peraturan BUMN.svg",

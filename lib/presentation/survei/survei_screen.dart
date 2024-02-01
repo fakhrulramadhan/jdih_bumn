@@ -166,7 +166,7 @@ class _SurveiScreenState extends State<SurveiScreen> {
                                           color: Colors.amber,
                                         ),
                                         itemCount: 5,
-                                        itemSize: 50.0,
+                                        itemSize: 23.0,
                                         unratedColor:
                                             Colors.amber.withAlpha(50),
                                         direction: Axis.horizontal,

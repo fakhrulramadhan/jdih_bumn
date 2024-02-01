@@ -12,11 +12,11 @@ class TentangJdihWidget extends StatefulWidget {
 }
 
 class _TentangJdihWidgetState extends State<TentangJdihWidget> {
-  late ScrollController _scrollController;
+  //late ScrollController _scrollController;
 
   @override
   void initState() {
-    _scrollController = ScrollController();
+    // _scrollController = ScrollController();
     super.initState();
   }
 
@@ -24,146 +24,140 @@ class _TentangJdihWidgetState extends State<TentangJdihWidget> {
   Widget build(BuildContext context) {
     return WillPopScope(
         child: Scaffold(
-          body: Scrollbar(
-            thumbVisibility: false,
-            controller: _scrollController,
-            thickness: 10,
-            child: SingleChildScrollView(
-              controller: _scrollController,
-              child: Container(
-                color: Colors.white,
-                padding:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Tentang JDIH",
-                      style: TextStyle(
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+          body: SingleChildScrollView(
+            controller: ScrollController(),
+            child: Container(
+              color: Colors.white,
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Tentang JDIH",
+                    style: TextStyle(
+                      fontSize: 15.0,
+                      fontWeight: FontWeight.bold,
                     ),
-                    const SizedBox(
-                      height: 8.0,
+                  ),
+                  const SizedBox(
+                    height: 8.0,
+                  ),
+                  const Text(
+                    "JDIH Kementerian BUMN adalah wadah pendayagunaan bersama atas dokumen hukum terkait Kementerian BUMN, BUMN, dan dokumen hukum lainnya yang dikelola secara tertib, terpadu, dan berkesinambungan, serta merupakan sarana pemberian pelayanan informasi hukum secara lengkap, akurat, mudah, dan cepat.",
+                    style: TextStyle(
+                      fontSize: 12.0,
                     ),
-                    const Text(
-                      "JDIH Kementerian BUMN adalah wadah pendayagunaan bersama atas dokumen hukum terkait Kementerian BUMN, BUMN, dan dokumen hukum lainnya yang dikelola secara tertib, terpadu, dan berkesinambungan, serta merupakan sarana pemberian pelayanan informasi hukum secara lengkap, akurat, mudah, dan cepat.",
-                      style: TextStyle(
-                        fontSize: 12.0,
-                      ),
-                      overflow: TextOverflow.visible,
-                    ),
-                    const SizedBox(
-                      height: 14.0,
-                    ),
-                    SizedBox(
-                      height: 1000,
-                      width: 344,
-                      child: Stack(
-                        children: [
-                          Container(
-                            height: 1000,
-                            width: MediaQuery.of(context).size.width,
-                            decoration: const BoxDecoration(
-                                //color: Colors.orange,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                    12.0,
+                    overflow: TextOverflow.visible,
+                  ),
+                  const SizedBox(
+                    height: 14.0,
+                  ),
+                  SizedBox(
+                    height: 1000,
+                    width: 344,
+                    child: Stack(
+                      children: [
+                        Container(
+                          height: 1000,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: const BoxDecoration(
+                              //color: Colors.orange,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(
+                                  12.0,
+                                ),
+                              ),
+                              image: DecorationImage(
+                                  image: AssetImage(
+                                      'assets/images/appbar-bg2.png'),
+                                  fit: BoxFit.cover)),
+                        ),
+                        Container(
+                          height: 825,
+                          width: 344,
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 20, horizontal: 10),
+                          child: Center(
+                            child: Column(
+                              children: [
+                                const Text(
+                                  "VISI",
+                                  style: TextStyle(
+                                    fontSize: 24.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
                                   ),
                                 ),
-                                image: DecorationImage(
-                                    image: AssetImage(
-                                        'assets/images/appbar-bg2.png'),
-                                    fit: BoxFit.cover)),
-                          ),
-                          Container(
-                            height: 825,
-                            width: 344,
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 20, horizontal: 10),
-                            child: Center(
-                              child: Column(
-                                children: [
-                                  const Text(
-                                    "VISI",
-                                    style: TextStyle(
-                                      fontSize: 24.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
+                                const SizedBox(
+                                  height: 8.0,
+                                ),
+                                const Text(
+                                  "Menjadikan JDIH Kementerian BUMN sebagai penyedia dokumentasi dan informasi hukum yang lengkap, akurat, dan terintegrasi, serta dapat diakses secara cepat dan mudah.",
+                                  style: TextStyle(
+                                    fontSize: 14.0,
+                                    color: Colors.white,
                                   ),
-                                  const SizedBox(
-                                    height: 8.0,
+                                  overflow: TextOverflow.visible,
+                                ),
+                                const SizedBox(
+                                  height: 20.0,
+                                ),
+                                const Text(
+                                  "MISI",
+                                  style: TextStyle(
+                                    fontSize: 24.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
                                   ),
-                                  const Text(
-                                    "Menjadikan JDIH Kementerian BUMN sebagai penyedia dokumentasi dan informasi hukum yang lengkap, akurat, dan terintegrasi, serta dapat diakses secara cepat dan mudah.",
-                                    style: TextStyle(
-                                      fontSize: 14.0,
-                                      color: Colors.white,
-                                    ),
-                                    overflow: TextOverflow.visible,
-                                  ),
-                                  const SizedBox(
-                                    height: 20.0,
-                                  ),
-                                  const Text(
-                                    "MISI",
-                                    style: TextStyle(
-                                      fontSize: 24.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 8.0,
-                                  ),
-                                  // UnorderedListItem(
-                                  //     "Menjamin terciptanya pengelolaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN yang terpadu dan terintegrasi")
-                                  // UnorderedListWidget([
-                                  //   "Menjamin terciptanya pengelolaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN yang terpadu dan terintegrasi",
-                                  //   "Menjamin ketersediaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN yang lengkap dan akurat, serta dapat diakses secara cepat dan mudah",
-                                  //   "Mengembangkan kerja sama yang efektif antara Pusat JDIH dan Anggota JDIH serta antar sesama Anggota JDIH dalam rangka penyediaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN",
-                                  //   "Mengembangkan kerja sama yang efektif antara Pusat JDIH dan Anggota JDIH serta antar sesama Anggota JDIH dalam rangka penyediaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN"
-                                  // ]
-                                  // )
+                                ),
+                                const SizedBox(
+                                  height: 8.0,
+                                ),
+                                // UnorderedListItem(
+                                //     "Menjamin terciptanya pengelolaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN yang terpadu dan terintegrasi")
+                                // UnorderedListWidget([
+                                //   "Menjamin terciptanya pengelolaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN yang terpadu dan terintegrasi",
+                                //   "Menjamin ketersediaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN yang lengkap dan akurat, serta dapat diakses secara cepat dan mudah",
+                                //   "Mengembangkan kerja sama yang efektif antara Pusat JDIH dan Anggota JDIH serta antar sesama Anggota JDIH dalam rangka penyediaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN",
+                                //   "Mengembangkan kerja sama yang efektif antara Pusat JDIH dan Anggota JDIH serta antar sesama Anggota JDIH dalam rangka penyediaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN"
+                                // ]
+                                // )
 
-                                  const UnorderedListItem(
-                                      "Menjamin terciptanya pengelolaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN yang terpadu dan terintegrasi"),
-                                  const SizedBox(
-                                    height: 5.0,
+                                const UnorderedListItem(
+                                    "Menjamin terciptanya pengelolaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN yang terpadu dan terintegrasi"),
+                                const SizedBox(
+                                  height: 5.0,
+                                ),
+                                const UnorderedListItem(
+                                    "Menjamin ketersediaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN yang lengkap dan akurat, serta dapat diakses secara cepat dan mudah"
+                                    "Menjamin ketersediaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN yang lengkap dan akurat, serta dapat diakses secara cepat dan mudah"),
+                                const SizedBox(
+                                  height: 5.0,
+                                ),
+                                const UnorderedListItem(
+                                    "Mengembangkan kerja sama yang efektif antara Pusat JDIH dan Anggota JDIH serta antar sesama Anggota JDIH dalam rangka penyediaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN"),
+                                const SizedBox(
+                                  height: 5.0,
+                                ),
+                                const UnorderedListItem(
+                                    "Mengembangkan kerja sama yang efektif antara Pusat JDIH dan Anggota JDIH serta antar sesama Anggota JDIH dalam rangka penyediaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN"),
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 10),
+                                  child: SvgPicture.asset(
+                                    "assets/images/BUMN Background.svg",
+                                    height: 153,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.8,
                                   ),
-                                  const UnorderedListItem(
-                                      "Menjamin ketersediaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN yang lengkap dan akurat, serta dapat diakses secara cepat dan mudah"
-                                      "Menjamin ketersediaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN yang lengkap dan akurat, serta dapat diakses secara cepat dan mudah"),
-                                  const SizedBox(
-                                    height: 5.0,
-                                  ),
-                                  const UnorderedListItem(
-                                      "Mengembangkan kerja sama yang efektif antara Pusat JDIH dan Anggota JDIH serta antar sesama Anggota JDIH dalam rangka penyediaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN"),
-                                  const SizedBox(
-                                    height: 5.0,
-                                  ),
-                                  const UnorderedListItem(
-                                      "Mengembangkan kerja sama yang efektif antara Pusat JDIH dan Anggota JDIH serta antar sesama Anggota JDIH dalam rangka penyediaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN"),
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 10),
-                                    child: SvgPicture.asset(
-                                      "assets/images/BUMN Background.svg",
-                                      height: 153,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.8,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
               ),
             ),
           ),

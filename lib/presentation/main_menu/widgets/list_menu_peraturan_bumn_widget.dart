@@ -32,9 +32,9 @@ class _ListMenuPeraturanBumnWidgetState
               width: 70,
               child: Image.asset(
                 "assets/images/peraturan_bumnd.png",
-                width: 72.0,
-                height: 65.0,
-                fit: BoxFit.cover,
+                width: 67.0,
+                height: 67.0,
+                fit: BoxFit.contain,
               ),
             ),
             const SizedBox(

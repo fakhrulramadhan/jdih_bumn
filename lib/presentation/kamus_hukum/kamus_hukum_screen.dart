@@ -20,7 +20,10 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
-    PageController page = PageController(initialPage: 0);
+    PageController page = PageController(
+      initialPage: 0,
+      viewportFraction: 1,
+    );
 
     @override
     void initState() {
@@ -162,6 +165,7 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
                         width: MediaQuery.of(context).size.width,
                         child: PageView(
                           controller: page,
+                          physics: const NeverScrollableScrollPhysics(),
                           scrollDirection: Axis.horizontal,
                           pageSnapping: true,
                           // on page changed (ketika halamannya berubah)
@@ -199,15 +203,15 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
                     print(page);
                     print(pageIndex);
                     page.animateToPage(pageIndex - 1,
-                        duration: const Duration(milliseconds: 400),
-                        curve: Curves.bounceInOut);
+                        duration: const Duration(milliseconds: 200),
+                        curve: Curves.easeOut);
                   },
                 ),
                 KamusSelanjutnyaButtonWidget(
                   onTap: () {
                     page.animateToPage(pageIndex + 1,
-                        duration: const Duration(milliseconds: 400),
-                        curve: Curves.bounceIn);
+                        duration: const Duration(milliseconds: 200),
+                        curve: Curves.easeOut);
                     print(pageIndex);
                     // page.animateToPage(pageIndex--,
                     //     duration: const Duration(milliseconds: 400),

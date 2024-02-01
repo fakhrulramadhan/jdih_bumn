@@ -82,6 +82,12 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
     }
   }
 
+  String removeAllHtmlTags(String htmlText) {
+    RegExp exp = RegExp(r"<[^>]*>", multiLine: true, caseSensitive: true);
+
+    return htmlText.replaceAll(exp, '');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -149,6 +155,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
                             ),
+                            textAlign: TextAlign.justify,
                           ),
                           const SizedBox(
                             height: 10.0,
@@ -189,7 +196,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                               height: 260.0,
                             ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 IconInfoWidget(
                                     imageUrl: "assets/images/berlaku.svg",
@@ -225,30 +232,39 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                   title: "Abstrak",
                   subtitle: widget.peraturanHukum.abstraksi!.isEmpty
                       ? "-"
-                      : widget.peraturanHukum.abstraksi!,
+                      : removeAllHtmlTags(widget.peraturanHukum.abstraksi!),
                   heightTitle: widget.peraturanHukum.abstraksi!.isNotEmpty
                       ? widget.peraturanHukum.abstraksi!.length >= 3180
-                          ? 1200
-                          : widget.peraturanHukum.abstraksi!.length >= 400 &&
+                          ? 1150
+                          : widget.peraturanHukum.abstraksi!.length >= 1065 &&
                                   widget.peraturanHukum.abstraksi!.length <=
                                       2999
-                              ? 800
+                              ? 560
                               : widget.peraturanHukum.abstraksi!.length >=
-                                          201 &&
+                                          400 &&
                                       widget.peraturanHukum.abstraksi!.length <=
-                                          399
-                                  ? 600
+                                          1064
+                                  ? 470
                                   : widget.peraturanHukum.abstraksi!.length >=
-                                              50 &&
+                                              201 &&
                                           widget.peraturanHukum.abstraksi!
                                                   .length <=
-                                              200
-                                      ? 400
-                                      : 200
+                                              399
+                                      ? 600
+                                      : widget.peraturanHukum.abstraksi!
+                                                      .length >=
+                                                  5 &&
+                                              widget.peraturanHukum.abstraksi!
+                                                      .length <=
+                                                  30
+                                          ? 100
+                                          : 70
                       : 100),
               InfoDetailWidget(
-                  title: "Tipe Dokumen",
-                  subtitle: "${widget.peraturanHukum.bentuk}"),
+                title: "Tipe Dokumen",
+                subtitle: "${widget.peraturanHukum.bentuk}",
+                heightTitle: 90,
+              ),
               InfoDetailWidget(
                   title: "Judul",
                   heightTitle:
@@ -256,35 +272,67 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                   subtitle: "${widget.peraturanHukum.tentang}"),
               const InfoDetailWidget(
                   title: "T.E.U Badan/Pengarang",
-                  subtitle: "Indonesia. Kementerian BUMN"),
+                  subtitle: "Indonesia. Kementerian BUMN",
+                  heightTitle: 90),
               InfoDetailWidget(
-                  title: "Nomor Peraturan",
-                  subtitle: "${widget.peraturanHukum.perNo}"),
+                title: "Nomor Peraturan",
+                subtitle: "${widget.peraturanHukum.perNo}",
+                heightTitle: 90,
+              ),
               InfoDetailWidget(
-                  title: "Jenis Peraturan",
-                  subtitle: "${widget.peraturanHukum.bentuk}"),
+                title: "Jenis Peraturan",
+                subtitle: "${widget.peraturanHukum.bentuk}",
+                heightTitle: 90,
+              ),
               InfoDetailWidget(
-                  title: "Singkatan Jenis/Bentuk Peraturan",
-                  subtitle: "${widget.peraturanHukum.bentuk}"),
+                title: "Singkatan Jenis/Bentuk Peraturan",
+                subtitle: "${widget.peraturanHukum.bentuk}",
+                heightTitle: 90,
+              ),
               const InfoDetailWidget(
-                  title: "Tempat Penetapan", subtitle: "JAKARTA"),
+                title: "Tempat Penetapan",
+                subtitle: "JAKARTA",
+                heightTitle: 90,
+              ),
               InfoDetailWidget(
-                  title: "Tanggal-bulan-tahun Penetapan",
-                  subtitle: "${widget.peraturanHukum.tanggal}"),
+                title: "Tanggal-bulan-tahun Penetapan",
+                subtitle: "${widget.peraturanHukum.tanggal}",
+                heightTitle: 90,
+              ),
               const InfoDetailWidget(
-                  title: "Tanggal-bulan-tahun Pengundangan",
-                  subtitle: "06-12-2023"),
-              const InfoDetailWidget(title: "Sumber", subtitle: "-"),
-              const InfoDetailWidget(title: "Subjek", subtitle: "Subjek"),
+                title: "Tanggal-bulan-tahun Pengundangan",
+                subtitle: "06-12-2023",
+              ),
+              const InfoDetailWidget(
+                title: "Sumber",
+                subtitle: "-",
+                heightTitle: 90,
+              ),
+              const InfoDetailWidget(
+                title: "Subjek",
+                subtitle: "Subjek",
+                heightTitle: 90,
+              ),
               InfoDetailWidget(
-                  title: "Detail Status Peraturan",
-                  subtitle:
-                      widget.peraturanHukum.status!.isEmpty ? "-" : "Baru"),
+                title: "Detail Status Peraturan",
+                subtitle: widget.peraturanHukum.status!.isEmpty ? "-" : "Baru",
+                heightTitle: 90,
+              ),
               const InfoDetailWidget(
-                  title: "Lokasi", subtitle: "Kementerian BUMN"),
+                title: "Lokasi",
+                subtitle: "Kementerian BUMN",
+                heightTitle: 90,
+              ),
               const InfoDetailWidget(
-                  title: "Bidang Hukum", subtitle: "Hukum Administrasi Negara"),
-              const InfoDetailWidget(title: "Lampiran", subtitle: "-"),
+                title: "Bidang Hukum",
+                subtitle: "Hukum Administrasi Negara",
+                heightTitle: 90,
+              ),
+              const InfoDetailWidget(
+                title: "Lampiran",
+                subtitle: "-",
+                heightTitle: 90,
+              ),
               const SizedBox(
                 height: 20.0,
               ),

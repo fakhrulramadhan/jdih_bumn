@@ -227,9 +227,24 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                       ? "-"
                       : widget.peraturanHukum.abstraksi!,
                   heightTitle: widget.peraturanHukum.abstraksi!.isNotEmpty
-                      ? widget.peraturanHukum.abstraksi!.length >= 1452
-                          ? 1100
-                          : 300
+                      ? widget.peraturanHukum.abstraksi!.length >= 3180
+                          ? 1200
+                          : widget.peraturanHukum.abstraksi!.length >= 400 &&
+                                  widget.peraturanHukum.abstraksi!.length <=
+                                      2999
+                              ? 800
+                              : widget.peraturanHukum.abstraksi!.length >=
+                                          201 &&
+                                      widget.peraturanHukum.abstraksi!.length <=
+                                          399
+                                  ? 600
+                                  : widget.peraturanHukum.abstraksi!.length >=
+                                              50 &&
+                                          widget.peraturanHukum.abstraksi!
+                                                  .length <=
+                                              200
+                                      ? 400
+                                      : 200
                       : 100),
               InfoDetailWidget(
                   title: "Tipe Dokumen",

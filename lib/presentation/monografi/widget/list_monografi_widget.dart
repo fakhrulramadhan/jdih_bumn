@@ -54,7 +54,7 @@ class _ListMonografiWidgetState extends State<ListMonografiWidget> {
                 crossAxisCount: 2,
                 mainAxisSpacing: 8,
                 crossAxisSpacing: 8,
-                childAspectRatio: 0.77), //170 : 200 = 0.85
+                childAspectRatio: 0.76), //170 w : 200 = 0.85 h
             itemBuilder: (context, index) {
               ProdukHukumResponseModel produkhukum = produkhukumList[index];
               print("ini datanya");
@@ -71,34 +71,41 @@ class _ListMonografiWidgetState extends State<ListMonografiWidget> {
                   );
                 },
                 child: Container(
-                  height: 240,
-                  width: 170,
+                  // height: 270,
+                  // width: 170,
                   //padding: const EdgeInsets.only(left: 10, top: 10, right: 10),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       color: const Color(0xffEBEBF9)),
                   child: Column(
                     children: [
-                      Text(
-                        "${produkhukum.judul}",
-                        style: const TextStyle(
-                          fontSize: 12.0,
-                          fontWeight: FontWeight.bold,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text(
+                          "${produkhukum.judul}",
+                          style: const TextStyle(
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.justify,
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: false,
                         ),
-                        textAlign: TextAlign.justify,
-                        overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(
                         height: 5.0,
                       ),
                       Align(
                         alignment: Alignment.centerLeft,
-                        child: Text(
-                          "${produkhukum.penerbit}",
-                          style: const TextStyle(
-                            fontSize: 10.0,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                            "${produkhukum.penerbit}",
+                            style: const TextStyle(
+                              fontSize: 10.0,
+                            ),
+                            textAlign: TextAlign.left,
                           ),
-                          textAlign: TextAlign.left,
                         ),
                       ),
                       const SizedBox(
@@ -108,8 +115,8 @@ class _ListMonografiWidgetState extends State<ListMonografiWidget> {
                         alignment: Alignment.bottomLeft,
                         child: Image.asset(
                           "assets/images/lorem-book-ori-removebg.png",
-                          width: 127.0,
-                          height: 160.0,
+                          width: 140.0,
+                          height: 170.0,
                           fit: BoxFit.fill,
                         ),
                       ),

@@ -65,7 +65,15 @@ class _ArtikelDetailScreenState extends State<ArtikelDetailScreen> {
                             image: DecorationImage(
                                 image:
                                     AssetImage('assets/images/appbar-bg2.png'),
-                                fit: BoxFit.cover)),
+                                fit: BoxFit.cover),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey,
+                                spreadRadius: 3,
+                                blurRadius: 3,
+                                offset: Offset(0, 3),
+                              )
+                            ]),
                       ),
                     ),
                     Container(
@@ -74,10 +82,8 @@ class _ArtikelDetailScreenState extends State<ArtikelDetailScreen> {
                       margin: const EdgeInsets.only(
                           left: 20, right: 20, top: 20, bottom: 10),
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25),
-                          image: DecorationImage(
-                              image: AssetImage('assets/images/appbar-bg2.png'),
-                              fit: BoxFit.cover)),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
                       child: const Column(
                         children: [
                           SizedBox(

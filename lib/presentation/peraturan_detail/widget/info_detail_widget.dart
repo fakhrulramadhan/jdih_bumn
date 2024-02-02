@@ -42,6 +42,7 @@ class _InfoDetailWidgetState extends State<InfoDetailWidget> {
                 fontSize: 12.0,
               ),
               overflow: TextOverflow.visible,
+              textAlign: TextAlign.justify,
             ),
           ),
           const SizedBox(

@@ -189,7 +189,14 @@ class _PutusanScreenState extends State<PutusanScreen> {
                           date: "06-12-2023",
                           readCount: "2.731 K"),
 
-                      const ListPutusanWidget(
+                      ListPutusanWidget(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const PutusanDetailScreen()),
+                            );
+                          },
                           title: "Putusan MA Nomor 7 P/HUM/2018",
                           subtitle: "T.E.U Badan/Orang : Mahkamah Agung",
                           detail: "Putusan MA Nomor 7 P/HUM/2018",

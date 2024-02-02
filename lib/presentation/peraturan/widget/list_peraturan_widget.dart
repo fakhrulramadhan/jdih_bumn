@@ -62,12 +62,12 @@ class _ListPeraturanWidgetState extends State<ListPeraturanWidget> {
                   );
                 },
                 child: SizedBox(
-                  height: 330,
+                  height: 260,
                   width: 361,
                   child: Column(
                     children: [
                       Container(
-                        height: 260,
+                        height: 220,
                         width: 361,
                         //color: Colors.brown,
                         padding: const EdgeInsets.only(
@@ -75,7 +75,7 @@ class _ListPeraturanWidgetState extends State<ListPeraturanWidget> {
                         child: Stack(
                           children: [
                             Container(
-                              height: 260,
+                              height: 220,
                               width: 341,
                               //color: Colors.yellow,
                               padding: const EdgeInsets.all(20),

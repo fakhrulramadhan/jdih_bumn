@@ -48,49 +48,28 @@ class _ArtikelDetailScreenState extends State<ArtikelDetailScreen> {
                 height: 817,
                 child: Stack(
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadiusDirectional.circular(25),
-                      clipBehavior: Clip.hardEdge,
-                      child: Container(
-                        height: 250,
-                        width: MediaQuery.of(context).size.width,
-                        margin:
-                            const EdgeInsets.only(left: 20, right: 20, top: 20),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(25),
-                                bottomRight: Radius.circular(25),
-                                topLeft: Radius.circular(25),
-                                topRight: Radius.circular(25)),
-                            image: DecorationImage(
-                                image:
-                                    AssetImage('assets/images/appbar-bg2.png'),
-                                fit: BoxFit.cover)),
-                      ),
-                    ),
                     Container(
-                      height: 250,
+                      height: 150,
                       width: MediaQuery.of(context).size.width,
-                      margin: const EdgeInsets.only(
-                          left: 20, right: 20, top: 20, bottom: 10),
+                      // margin:
+                      //     const EdgeInsets.only(left: 20, right: 20, top: 20),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(25),
                           image: DecorationImage(
                               image: AssetImage('assets/images/appbar-bg2.png'),
-                              fit: BoxFit.cover)),
+                              fit: BoxFit.contain),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey,
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset: Offset(3, 0))
+                          ]),
                       child: const Column(
                         children: [
                           SizedBox(
                             height: 40.0,
                           ),
-                          // Text(
-                          //   "91/PUU-XVIII/2020",
-                          //   style: TextStyle(
-                          //     fontSize: 24.0,
-                          //     fontWeight: FontWeight.bold,
-                          //     color: Colors.white,
-                          //   ),
-                          // ),
                           SizedBox(
                             height: 10.0,
                           ),

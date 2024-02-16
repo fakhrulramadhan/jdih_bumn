@@ -1,0 +1,47 @@
+import 'package:flutter/material.dart';
+import 'package:jdih_bumn/presentation/monografi/widget/monografi_widget.dart';
+import 'package:jdih_bumn/presentation/monografi_detail/monografi_detail_screen.dart';
+
+class ListMonografiWidget extends StatefulWidget {
+  const ListMonografiWidget({super.key});
+
+  @override
+  State<ListMonografiWidget> createState() => _ListMonografiWidgetState();
+}
+
+class _ListMonografiWidgetState extends State<ListMonografiWidget> {
+  @override
+  void initState() {
+    //context.read<GetProdukHukumBloc>().add(DoGetProdukHukumEvent());
+
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        childAspectRatio: 0.65,
+        crossAxisCount: 2,
+        mainAxisSpacing: 8,
+        crossAxisSpacing: 8,
+      ),
+      itemCount: 8,
+      shrinkWrap: true,
+      physics: const ScrollPhysics(),
+      itemBuilder: (BuildContext context, int index) {
+        return MonografiWidget(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const MonografiDetailScreen()),
+            );
+          },
+        );
+      },
+    );
+  }
+}

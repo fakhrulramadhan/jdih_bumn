@@ -1,0 +1,84 @@
+import 'package:dyn_mouse_scroll/dyn_mouse_scroll.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import './widget/list_monografi_widget.dart';
+
+class MonografiScreen extends StatefulWidget {
+  const MonografiScreen({super.key});
+
+  @override
+  State<MonografiScreen> createState() => _MonografiScreenState();
+}
+
+class _MonografiScreenState extends State<MonografiScreen> {
+  final _scrollController = ScrollController();
+
+  // void _onScroll() {
+  //   final maxScroll = _scrollController.position.maxScrollExtent;
+  //   final currentScroll = _scrollController.offset;
+  //   if (currentScroll >= (maxScroll * 0.9)) {
+  //     context.read<PostsBloc>().add(GetPostsEvent());
+  //   }
+  // }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
+    // monografi ambil apinya dari service-jdihn (produkhukum)
+
+    @override
+    void initState() {
+      // context.read<GetProdukHukumBloc>().add(DoGetProdukHukumEvent());
+      // TODO: implement initState
+      super.initState();
+    }
+
+    final TextEditingController searchController = TextEditingController();
+    return Scaffold(
+        // appBar: AppBar(
+        //   toolbarHeight: 90,
+        //   leading: const BackButton(
+        //     color: Colors.white,
+        //   ),
+        //   actions: const [],
+        //   flexibleSpace: Container(
+        //     decoration: const BoxDecoration(
+        //         image: DecorationImage(
+        //       image: AssetImage(
+        //         'assets/images/appbar-bg2.png',
+        //       ),
+        //       fit: BoxFit.fill,
+        //     )),
+        //     child: const Center(
+        //       child: Text(
+        //         "Peraturan",
+        //         style: TextStyle(
+        //           fontSize: 20.0,
+        //           fontWeight: FontWeight.bold,
+        //           color: Colors.white,
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        // ),
+        body: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              pinned: false,
+              expandedHeight: 100,
+              flexibleSpace: FlexibleSpaceBar(
+                
+              ),
+            )
+          ],
+        )
+    );
+  }
+}

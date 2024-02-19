@@ -5,10 +5,10 @@ import 'package:jdih_bumn/data/model/response/stage/tentang_jdih_response_model.
 part 'get_tentang_jdih_event.dart';
 part 'get_tentang_jdih_state.dart';
 
-class GetFilterHukumBloc
+class GetTentangJdihBloc
     extends Bloc<GetTentangJdihEvent, GetTentangJdihState> {
   final TentangJdihDatasource datasource;
-  GetFilterHukumBloc(this.datasource) : super(GetTentangJdihInitial()) {
+  GetTentangJdihBloc(this.datasource) : super(GetTentangJdihInitial()) {
     on<GetTentangJdihEvent>((event, emit) {
       // TODO: implement event handler
     });

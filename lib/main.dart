@@ -6,8 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:jdih_bumn/bloc/get_peraturan_hukum/get_peraturan_hukum_bloc.dart';
 import 'package:jdih_bumn/bloc/get_produk_hukum/get_produk_hukum_bloc.dart';
+import 'package:jdih_bumn/bloc/stage/get_tentang_jdih/get_tentang_jdih_bloc.dart';
 import 'package:jdih_bumn/data/datasources/peraturan_hukum_datasource.dart';
 import 'package:jdih_bumn/data/datasources/produk_hukum_datasource.dart';
+import 'package:jdih_bumn/data/datasources/stage/tentang_jdih_datasource.dart';
 import 'package:jdih_bumn/presentation/splash_screen_lottie/splash_screen_lottie.dart';
 import 'package:intl/intl.dart';
 
@@ -45,6 +47,9 @@ class MyApp extends StatelessWidget {
         //pasang blocprovidernya
         BlocProvider(
           create: (context) => GetProdukHukumBloc(ProdukHukumDataSource()),
+        ),
+        BlocProvider(
+          create: (context) => GetTentangJdihBloc(TentangJdihDatasource()),
         )
       ],
       child: MaterialApp(

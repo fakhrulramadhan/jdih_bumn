@@ -55,6 +55,10 @@ dependencies:
   draggable_scrollbar: ^0.1.0
   dyn_mouse_scroll: ^1.0.7
   intl: ^0.19.0
+  flutter_html: ^3.0.0-beta.2
+  html: ^0.15.4
+  flutter_widget_from_html: ^0.14.11
+  flutter_switch: ^0.3.2
   
 dev_dependencies:
   flutter_test:

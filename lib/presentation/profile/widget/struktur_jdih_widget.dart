@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_switch/flutter_switch.dart';
+import 'package:jdih_bumn/presentation/profile/widget/button_next_widget.dart';
+import 'package:jdih_bumn/presentation/profile/widget/organisasi_widget.dart';
+import 'package:jdih_bumn/presentation/profile/widget/pengelolaan_widget.dart';
 
 class StrukturJdihWidget extends StatefulWidget {
   const StrukturJdihWidget({super.key});
@@ -9,64 +13,170 @@ class StrukturJdihWidget extends StatefulWidget {
 }
 
 class _StrukturJdihWidgetState extends State<StrukturJdihWidget> {
+  int pageIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    bool isToggled = false;
+
+    PageController page = PageController(
+      initialPage: 0,
+      viewportFraction: 1,
+    );
 
     return WillPopScope(
         child: Scaffold(
           body: SingleChildScrollView(
             controller: ScrollController(),
             child: Container(
-              height: 550,
+              height: 1000, //550 :770
               width: width,
               color: Colors.white,
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // FlutterSwitch(
+                  //   height: 20.0,
+                  //   width: 40.0,
+                  //   padding: 4.0,
+                  //   toggleSize: 20,
+                  //   borderRadius: 10.0,
+                  //   activeColor: Colors.cyan,
+                  //   value: isToggled,
+                  //   //showOnOff: true,
+                  //   onToggle: (value) {
+                  //     setState(() {
+                  //       isToggled = !value;
+                  //     });
+                  //   },
+                  // ),
+                  //ButtonNextWidget(),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: Container(
+                        width: 202,
+                        height: 40,
+                        // padding:
+                        //     EdgeInsetsDirectional.symmetric(horizontal: 10),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(
+                            color: Colors.white,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey,
+                                spreadRadius: 1,
+                                offset: Offset(2, 2),
+                                blurRadius: 1)
+                          ],
+                          borderRadius: BorderRadius.circular(49),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                print(page);
+                                print(pageIndex);
+                                page.animateToPage(pageIndex - 1,
+                                    duration: Duration(milliseconds: 200),
+                                    curve: Curves.easeOut);
+
+                                print(pageIndex);
+                              },
+                              child: Container(
+                                height: 90,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(40),
+                                  //awal pageindexnya 0,
+                                  //berari ada di halaman 1
+                                  color: pageIndex == 0
+                                      ? Colors.cyan
+                                      : Colors.white,
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    "Organisasi",
+                                    style: TextStyle(
+                                      fontSize: 10.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: pageIndex == 0
+                                          ? Colors.white
+                                          : Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 20.0,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                page.animateToPage(pageIndex + 1,
+                                    duration: Duration(milliseconds: 200),
+                                    curve: Curves.easeOut);
+
+                                print(pageIndex);
+                              },
+                              child: Container(
+                                height: 90,
+                                width: 100,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(40),
+                                  color: pageIndex == 1
+                                      ? Colors.cyan
+                                      : Colors.white,
+                                  //untuk kasih warna border
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    "Pengelolaan",
+                                    style: TextStyle(
+                                      fontSize: 10.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: pageIndex == 1
+                                          ? Colors.white
+                                          : Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )),
+                  ),
+                  // const SizedBox(
+                  //   height: 5.0,
+                  // ),
+                  // Center(
+                  //     child: Text(
+                  //   "${pageIndex + 1}",
+                  //   textAlign: TextAlign.center,
+                  //   style: const TextStyle(fontSize: 11),
+                  // )),
                   const SizedBox(
                     height: 15.0,
                   ),
-                  const Center(
-                    child: Text(
-                      "Struktur Organisiasi JDIH Kementerian BUMN",
-                      style: TextStyle(
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black,
-                      ),
+                  Container(
+                    height: 770,
+                    child: PageView(
+                      controller: page,
+                      physics: NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      pageSnapping: true,
+                      onPageChanged: (newpage) {
+                        setState(() {
+                          pageIndex = newpage;
+                        });
+                      },
+                      children: [OrgansisasiWidget(), PengelolaanWidget()],
                     ),
-                  ),
-                  const SizedBox(
-                    height: 25.0,
-                  ),
-                  SizedBox(
-                    child: Column(
-                      children: [
-                        Center(
-                          child: SizedBox(
-                            width: 344,
-                            height: 210,
-                            child: Image.asset(
-                              "assets/images/struktur_jdih_final.png",
-                              width: 340,
-                              height: 205,
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 37.0,
-                        ),
-                        SvgPicture.asset(
-                          "assets/images/BUMN Background.svg",
-                          height: 153,
-                          width: MediaQuery.of(context).size.width * 0.8,
-                        ),
-                      ],
-                    ),
-                  ),
+                  )
                 ],
               ),
             ),

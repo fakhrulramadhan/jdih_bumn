@@ -10,7 +10,6 @@ import '../../../data/model/response/stage/tentang_jdih_response_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' as parser;
 import 'package:html/dom.dart' as dom;
-// import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 class TentangJdihWidget extends StatefulWidget {
   const TentangJdihWidget({Key? key}) : super(key: key);
@@ -63,7 +62,7 @@ class _TentangJdihWidgetState extends State<TentangJdihWidget> {
           body: SingleChildScrollView(
             controller: ScrollController(),
             child: Container(
-              height: 1100,
+              height: 1185,
               color: Colors.white,
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
               child: BlocBuilder<GetTentangJdihBloc, GetTentangJdihState>(
@@ -119,13 +118,13 @@ class _TentangJdihWidgetState extends State<TentangJdihWidget> {
                               height: 14.0,
                             ),
                             Container(
-                              height: 1143,
+                              height: 1000,
                               width: 344,
                               color: Colors.yellow,
                               child: Stack(
                                 children: [
                                   Container(
-                                    height: 1143,
+                                    height: 1000,
                                     width: MediaQuery.of(context).size.width,
                                     decoration: const BoxDecoration(
                                       color: Colors.white,
@@ -147,7 +146,7 @@ class _TentangJdihWidgetState extends State<TentangJdihWidget> {
                                     ),
                                   ),
                                   Container(
-                                    height: 1143,
+                                    height: 882,
                                     width: 344,
                                     //color: Colors.white,
                                     padding: const EdgeInsets.symmetric(
@@ -190,28 +189,21 @@ class _TentangJdihWidgetState extends State<TentangJdihWidget> {
                                           const SizedBox(
                                             height: 8.0,
                                           ),
-                                          Html(
-                                            data: "${tentang_jdih.misi}",
-                                            style: {
-                                              "li": Style(
-                                                  fontSize: FontSize(12),
-                                                  margin: Margins.all(0),
-                                                  padding:
-                                                      HtmlPaddings.symmetric(
-                                                          vertical: 0,
-                                                          horizontal: 0),
-                                                  fontStyle: FontStyle.normal,
-                                                  color: Colors.white)
-                                            },
+                                          Container(
+                                            height: 200,
+                                            child: _isLoading
+                                                ? Center(
+                                                    child:
+                                                        CircularProgressIndicator())
+                                                : ListView.builder(
+                                                    itemCount: _items.length,
+                                                    itemBuilder:
+                                                        (context, index) {
+                                                      return UnorderedListItem(
+                                                          "${removeAllHtmlTags(_items[index])}");
+                                                    },
+                                                  ),
                                           ),
-                                          // HtmlWidget(
-                                          //   "${tentang_jdih.misi}",
-
-                                          //   textStyle: TextStyle(
-                                          //       color: Colors.white,
-                                          //       fontSize: 8),
-
-                                          // ),
                                           // UnorderedListWidget([
                                           //   "Menjamin terciptanya pengelolaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN yang terpadu dan terintegrasi",
                                           //   "Menjamin ketersediaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN yang lengkap dan akurat, serta dapat diakses secara cepat dan mudah",

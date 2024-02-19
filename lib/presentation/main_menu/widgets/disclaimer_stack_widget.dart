@@ -16,76 +16,78 @@ class _DisclaimerStackWidgetState extends State<DisclaimerStackWidget> {
         Center(
           child: Container(
             width: MediaQuery.of(context).size.width * 0.95,
-            height: 200,
+            height: 430,
             decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 0, 9, 85),
-                borderRadius: BorderRadius.circular(12)),
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(8),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey,
+                    spreadRadius: 2,
+                    offset: Offset(0, 3),
+                    blurRadius: 2)
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Center(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              clipBehavior: Clip.hardEdge,
+              child: Image.asset(
+                "assets/images/appbar-bg2.png",
+                width: MediaQuery.of(context).size.width * 0.95,
+                height: 195.0,
+                fit: BoxFit.none,
+              ),
+            ),
           ),
         ),
         Center(
           child: Container(
             width: MediaQuery.of(context).size.width * 0.95,
-            height: 200,
-            padding: const EdgeInsets.only(left: 20, top: 10),
+            height: 430,
+            padding: EdgeInsets.all(25),
             decoration: BoxDecoration(
-                color: Colors.transparent,
-                borderRadius: BorderRadius.circular(12)),
-            child: const Column(
+              color: Colors.transparent,
+            ),
+            child: Column(
               children: [
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    "DISCLAIMER",
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+                Text(
+                  "DISCLAIMER",
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10.0,
                 ),
-                //RichText(text: "ss")
-                // Align(
-                //   alignment: Alignment.centerLeft,
-                //   child: Text(
-                //     "Semua yang disajikan dalam website JDIH Kementerian BUMN dimaksudkan sebagaiinformasi yang dikeluarkan oleh KementerianBUMN. Apabila  terdapat kekeliruan atauperbedaan antara informasi yang disajikandalam website ini dengan dokumen resmi di Kementerian BUMN, maka yang berlaku adalah dokumen resmi pada  Kementerian BUMN.",
-                //     style: TextStyle(
-                //         fontSize: 10.0,
-                //         color: Colors.white,
-                //         fontWeight: FontWeight.w200),
-                //   ),
-                // ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "Semua yang disajikan dalam website JDIH \nKementerian BUMN dimaksudkan sebagai \ninformasi yang dikeluarkan oleh \nKementerian BUMN. Apabila terdapat\nkekeliruan atau perbedaan antara informasi\nyang disajikan dalam website ini dengan dokumen resmi di Kementerian BUMN, maka yang berlaku adalah dokumen resmi pada  Kementerian BUMN.",
-                    style: TextStyle(
-                        fontSize: 10.0,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w200),
-                    overflow: TextOverflow.visible,
-                  ),
+                SvgPicture.asset(
+                  "assets/images/Disclaimer.svg",
+                  alignment: Alignment.center,
+                  height: 189,
+                  width: 159,
+                ),
+                const SizedBox(
+                  height: 8.0,
+                ),
+                Text(
+                  "Semua yang disajikan dalam website JDIH \nKementerian BUMN dimaksudkan sebagai \ninformasi yang dikeluarkan oleh \nKementerian BUMN. Apabila terdapat\nkekeliruan atau perbedaan antara informasi\nyang disajikan dalam website ini dengan dokumen resmi di Kementerian BUMN, maka yang berlaku adalah dokumen resmi pada  Kementerian BUMN.",
+                  style: TextStyle(
+                      fontSize: 12.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.normal),
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.visible,
                 ),
               ],
             ),
           ),
         ),
-        Center(
-          child: SizedBox(
-              width: MediaQuery.of(context).size.width * 0.95,
-              height: 126,
-              child: Align(
-                alignment: Alignment.topRight,
-                child: SvgPicture.asset(
-                  "assets/images/Disclaimer.svg",
-                  alignment: Alignment.topRight,
-                  height: 110,
-                  width: 131,
-                ),
-              )),
-        )
       ],
     );
   }

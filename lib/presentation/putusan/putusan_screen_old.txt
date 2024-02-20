@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
-import 'package:jdih_bumn/bloc/stage/get_putusan/get_putusan_bloc.dart';
-import 'package:jdih_bumn/data/model/response/stage/putusan_response_model.dart';
 import 'package:jdih_bumn/presentation/putusan/widget/list_putusan_widget.dart';
 import 'package:jdih_bumn/presentation/putusan_detail/putusan_detail_screen.dart';
 
@@ -22,8 +18,6 @@ class _PutusanScreenState extends State<PutusanScreen> {
     @override
     void initState() {
       //context.read<GetPeraturanHukumBloc>().add(DoGetPeraturanHukumEvent());
-      //konekin dulu datasourcenya
-      //context.read<GetPutusanBloc>().add(DoGetPutusanEvent());
       // TODO: implement initState
       super.initState();
     }
@@ -163,7 +157,39 @@ class _PutusanScreenState extends State<PutusanScreen> {
                         const SizedBox(
                           height: 20.0,
                         ),
-                        const ListPutusanWidget(),
+                        //const ListPutusanWidget(),
+                        ListPutusanWidget(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const PutusanDetailScreen()),
+                              );
+                            },
+                            title: "91/PUU-XVIII/2020",
+                            subtitle: "T.E.U Badan/Orang : Mahkamah Konstitusi",
+                            detail:
+                                "Pengujian Formil Undang-Undang Nomor 11 Tahun 2020 tentang Cipta Kerja terhadap Undang-Undang Dasar Negara Republik Indonesia Tahun 1945",
+                            date: "06-12-2023",
+                            readCount: "2.731 K"),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+                        ListPutusanWidget(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const PutusanDetailScreen()),
+                              );
+                            },
+                            title: "Putusan MA Nomor 7 P/HUM/2018",
+                            subtitle: "T.E.U Badan/Orang : Mahkamah Agung",
+                            detail: "Putusan MA Nomor 7 P/HUM/2018",
+                            date: "06-12-2023",
+                            readCount: "2.731 K")
                       ],
                     ),
                   ),

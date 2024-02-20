@@ -1,11 +1,18 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_file_downloader/flutter_file_downloader.dart';
+import 'package:jdih_bumn/data/model/response/stage/putusan_response_model.dart';
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/bagikan_button_widget.dart';
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/download_button_widget.dart';
 import 'package:jdih_bumn/presentation/putusan_detail/widget/info_detail_no_margin_widget.dart';
 import 'package:share_plus/share_plus.dart';
 
 class PutusanDetailScreen extends StatefulWidget {
-  const PutusanDetailScreen({super.key});
+  final Item putusan;
+
+  const PutusanDetailScreen({super.key, required this.putusan});
 
   @override
   State<PutusanDetailScreen> createState() => _PutusanDetailScreenState();
@@ -13,6 +20,54 @@ class PutusanDetailScreen extends StatefulWidget {
 
 class _PutusanDetailScreenState extends State<PutusanDetailScreen> {
   late ScrollController _scrollController;
+
+  // Track the progress of a downloaded file here.
+  double progress = 0;
+  double? _progress;
+
+  // Track if the PDF was downloaded here.
+  bool didDownloadPDF = false;
+
+  // Show the progress status to the user.
+  String progressString = 'File has not been downloaded yet.';
+
+  void updateProgress(done, total) {
+    progress = done / total;
+    setState(() {
+      if (progress >= 1) {
+        progressString =
+            '✅ File has finished downloading. Try opening the file.';
+        didDownloadPDF = true;
+      } else {
+        progressString =
+            'Download progress: ${(progress * 100).toStringAsFixed(0)}% done.';
+      }
+    });
+  }
+
+  Future download(Dio dio, String url, String savePath) async {
+    try {
+      Response response = await dio.get(
+        url,
+        onReceiveProgress: updateProgress,
+        options: Options(
+            responseType: ResponseType.bytes,
+            followRedirects: false,
+            validateStatus: (status) {
+              return status! < 500;
+            }),
+      );
+      var file = File(savePath).openSync(mode: FileMode.write);
+      file.writeFromSync(response.data);
+      await file.close();
+
+      // Here, you're catching an error and printing it. For production
+      // apps, you should display the warning to the user and give them a
+      // way to restart the download.
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   void initState() {
@@ -98,7 +153,7 @@ class _PutusanDetailScreenState extends State<PutusanDetailScreen> {
                       height: 2050,
                       width: MediaQuery.of(context).size.width,
                       margin: const EdgeInsets.only(left: 20),
-                      child: const Column(
+                      child: Column(
                         children: [
                           SizedBox(
                             height: 280.0,
@@ -121,45 +176,54 @@ class _PutusanDetailScreenState extends State<PutusanDetailScreen> {
                           InfoDetailMarginNoWidget(
                               title: "Judul",
                               heightTitle: 130,
-                              subtitle:
-                                  "Pengujian Formil Undang-Undang Nomor 11 Tahun 2020 tentang Cipta Kerja terhadap Undang-Undang Dasar Negara Republik Indonesia Tahun 1945"),
+                              subtitle: "${widget.putusan.judul}"),
                           InfoDetailMarginNoWidget(
                               title: "T.E.U Badan/Pengarang",
-                              subtitle: "Mahkamah Konstitusi"),
+                              subtitle: widget.putusan.teuBadan ?? "-"),
                           InfoDetailMarginNoWidget(
                               title: "Singkatan Jenis/Bentuk Peraturan",
-                              subtitle: "MK"),
+                              subtitle:
+                                  widget.putusan.singkatanPeradilan ?? "-"),
                           InfoDetailMarginNoWidget(
                               title: "Bidang Hukum",
-                              subtitle: "Putusan Pengadilan"),
+                              subtitle: widget.putusan.bidangHukum ?? "-"),
                           InfoDetailMarginNoWidget(
-                              title: "Sumber", subtitle: "Lembaran Lepas (LL)"),
+                              title: "Sumber",
+                              subtitle: widget.putusan.namaSumber ?? "-"),
                           InfoDetailMarginNoWidget(
                               title: "Subjek",
-                              subtitle: "UJI FORMIL - UU CIPTAKER"),
+                              subtitle: widget.putusan.namaSubjek ?? "-"),
                           InfoDetailMarginNoWidget(
                               title: "Tanggal Dibacakan",
                               subtitle: "25 November 2021"),
                           InfoDetailMarginNoWidget(
                               title: "Nomor Perkara",
-                              subtitle: "91/PUU-XVIII/2020"),
+                              subtitle: widget.putusan.nomorPerkara ?? "-"),
                           InfoDetailMarginNoWidget(
                               title: "Penggugat",
-                              subtitle: "Hakimi Irwan Bangkid Pamungkas dkk"),
+                              subtitle: widget.putusan.penggugat ?? "-"),
                           InfoDetailMarginNoWidget(
-                              title: "Tergugat", subtitle: "-"),
+                              title: "Tergugat",
+                              subtitle: widget.putusan.tergugat ?? "-"),
                           InfoDetailMarginNoWidget(
-                              title: "Objek Gugatan", subtitle: "-"),
+                              title: "Objek Gugatan",
+                              subtitle: widget.putusan.objekGugatan ?? "-"),
                           InfoDetailMarginNoWidget(
-                              title: "Petitum", subtitle: "-"),
+                              title: "Petitum",
+                              subtitle: widget.putusan.petitum ?? "-"),
                           InfoDetailMarginNoWidget(
-                              title: "Lokasi", subtitle: "Jakarta"),
+                              title: "Lokasi",
+                              subtitle: widget.putusan.lokasi ?? "-"),
                           InfoDetailMarginNoWidget(
-                              title: "Bahasa", subtitle: "Indonesia"),
+                              title: "Bahasa",
+                              subtitle: widget.putusan.bahasa ?? "-"),
                           InfoDetailMarginNoWidget(
-                              title: "Status Putusan", subtitle: "Tetap"),
+                              title: "Status Putusan",
+                              subtitle: widget.putusan.statusPutusan ?? "-"),
                           InfoDetailMarginNoWidget(
-                              title: "Lampiran", subtitle: "Dokumen Lampiran"),
+                              title: "Lampiran",
+                              subtitle:
+                                  widget.putusan.deskripsiLampiran ?? "-"),
                         ],
                       ))
                 ],
@@ -196,14 +260,58 @@ class _PutusanDetailScreenState extends State<PutusanDetailScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            BagikanButtonWidget(
-              onPressed: () async {
-                const urlLink = "https://www.youtube.com/watch?v=CNUBhb_cM6E";
+            Container(
+              width: MediaQuery.of(context).size.width * 0.45,
+              child: BagikanButtonWidget(
+                onPressed: () async {
+                  String urlLink = widget.putusan.urlDetailPutusan ?? "-";
 
-                await Share.share("This cat is cute $urlLink");
-              },
+                  //masukkin kata katanya di tanda kutip
+                  await Share.share("$urlLink");
+
+                  print("${widget.putusan.urlDetailFilePutusan}");
+                },
+              ),
             ),
-            const DownloadButtonWidget()
+            widget.putusan.urlDetailFilePutusan ==
+                    "https://jdihstage.bumn.go.id/storage/putusan/"
+                ? Container(
+                    width: MediaQuery.of(context).size.width * 0.45,
+                  )
+                : Container(
+                    width: MediaQuery.of(context).size.width * 0.45,
+                    child: _progress != null
+                        ? Center(child: CircularProgressIndicator())
+                        : DownloadButtonWidget(
+                            onTap: () async {
+                              // await download(Dio(), "${widget.putusan.urlDetailFilePutusan}",
+                              //     '/storage/emulated/0/Download');
+
+                              print("${widget.putusan.urlDetailFilePutusan}");
+
+                              await FileDownloader.downloadFile(
+                                url: "${widget.putusan.urlDetailFilePutusan}",
+                                onProgress: (fileName, progresz) {
+                                  setState(() {
+                                    _progress = progresz;
+                                  });
+                                },
+                                onDownloadCompleted: (path) {
+                                  print('Path: $path');
+
+                                  setState(() {
+                                    _progress = null;
+                                  });
+                                },
+                              );
+                            },
+                          ),
+                  )
+            // DownloadButtonWidget(
+            //   onTap: () async {
+            //     await download(Dio(), url, savePath);
+            //   },
+            // )
           ],
         ),
       ),

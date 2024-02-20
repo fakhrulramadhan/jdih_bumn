@@ -65,7 +65,7 @@ class _TentangJdihWidgetState extends State<TentangJdihWidget> {
             child: Container(
               height: 1100,
               color: Colors.white,
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
               child: BlocBuilder<GetTentangJdihBloc, GetTentangJdihState>(
                 builder: (context, state) {
                   if (state is GetTentangJdihLoading) {
@@ -176,57 +176,85 @@ class _TentangJdihWidgetState extends State<TentangJdihWidget> {
                                             overflow: TextOverflow.visible,
                                             textAlign: TextAlign.center,
                                           ),
+                                          const SizedBox(
+                                            height: 20.0,
+                                          ),
+                                          const Text(
+                                            "MISI",
+                                            style: TextStyle(
+                                              fontSize: 24.0,
+                                              fontWeight: FontWeight.w700,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 8.0,
+                                          ),
+                                          Html(
+                                            data: "${tentang_jdih.misi}",
+                                            style: {
+                                              "li": Style(
+                                                  fontSize: FontSize(12),
+                                                  margin: Margins.all(0),
+                                                  padding:
+                                                      HtmlPaddings.symmetric(
+                                                          vertical: 0,
+                                                          horizontal: 0),
+                                                  fontStyle: FontStyle.normal,
+                                                  color: Colors.white,
+                                                  textAlign: TextAlign.justify)
+                                            },
+                                          ),
+                                          // HtmlWidget(
+                                          //   "${tentang_jdih.misi}",
+
+                                          //   textStyle: TextStyle(
+                                          //       color: Colors.white,
+                                          //       fontSize: 8),
+
+                                          // ),
+                                          // UnorderedListWidget([
+                                          //   "Menjamin terciptanya pengelolaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN yang terpadu dan terintegrasi",
+                                          //   "Menjamin ketersediaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN yang lengkap dan akurat, serta dapat diakses secara cepat dan mudah",
+                                          //   "Mengembangkan kerja sama yang efektif antara Pusat JDIH dan Anggota JDIH serta antar sesama Anggota JDIH dalam rangka penyediaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN",
+                                          //   "Mengembangkan kerja sama yang efektif antara Pusat JDIH dan Anggota JDIH serta antar sesama Anggota JDIH dalam rangka penyediaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN"
+                                          // ]
+                                          // )
+
+                                          //  UnorderedListItem(
+                                          //     "Menjamin terciptanya pengelolaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN yang terpadu dan terintegrasi"),
+                                          // const SizedBox(
+                                          //   height: 5.0,
+                                          // ),
+                                          // const UnorderedListItem(
+                                          //     "Menjamin ketersediaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN yang lengkap dan akurat, serta dapat diakses secara cepat dan mudah"
+                                          //     "Menjamin ketersediaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN yang lengkap dan akurat, serta dapat diakses secara cepat dan mudah"),
+                                          // const SizedBox(
+                                          //   height: 5.0,
+                                          // ),
+                                          // const UnorderedListItem(
+                                          //     "Mengembangkan kerja sama yang efektif antara Pusat JDIH dan Anggota JDIH serta antar sesama Anggota JDIH dalam rangka penyediaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN"),
+                                          // const SizedBox(
+                                          //   height: 5.0,
+                                          // ),
+                                          // const UnorderedListItem(
+                                          //     "Mengembangkan kerja sama yang efektif antara Pusat JDIH dan Anggota JDIH serta antar sesama Anggota JDIH dalam rangka penyediaan dokumentasi dan informasi hukum terkait Kementerian BUMN dan BUMN"),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 10),
+                                            child: SvgPicture.asset(
+                                              "assets/images/BUMN Background.svg",
+                                              height: 153,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.8,
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     ),
                                   ),
-                                  Container(
-                                    height: 1143,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Column(
-                                      children: [
-                                        const SizedBox(
-                                          height: 170.0,
-                                        ),
-                                        const Text(
-                                          "MISI",
-                                          style: TextStyle(
-                                            fontSize: 24.0,
-                                            fontWeight: FontWeight.w700,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 8.0,
-                                        ),
-                                        Html(
-                                          data: "${tentang_jdih.misi}",
-                                          style: {
-                                            "li": Style(
-                                                fontSize: FontSize(12),
-                                                margin: Margins.all(0),
-                                                padding: HtmlPaddings.symmetric(
-                                                    vertical: 0, horizontal: 0),
-                                                fontStyle: FontStyle.normal,
-                                                color: Colors.white,
-                                                textAlign: TextAlign.justify)
-                                          },
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(bottom: 10),
-                                          child: SvgPicture.asset(
-                                            "assets/images/BUMN Background.svg",
-                                            height: 153,
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.8,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
                                 ],
                               ),
                             )

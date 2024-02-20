@@ -431,53 +431,17 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                   //   width: 80,
                   //   color: Colors.purple,
                   // )
-                  SingleChildScrollView(
-                    //controller: controller,
-                    controller: controller,
-                    physics: physics,
-                    scrollDirection: Axis.horizontal,
-
-                    child: Row(
-                      children: [
-                        InfoGrafisWidgetNew(
-                          text:
-                              "Prinsip Tata Kelola \nPerusahaan yang Baik \nBUMN",
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const InfografisScreen()),
-                            );
-                          },
+                  Container(
+                      height: 200,
+                      width: MediaQuery.of(context).size.width,
+                      child: SingleChildScrollView(
+                        controller: controller,
+                        physics: physics,
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [InfoGrafisWidgetNew()],
                         ),
-                        InfoGrafisWidgetNew(
-                          text:
-                              "Prinsip Tata Kelola \nPerusahaan yang Baik \nBUMN",
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const InfografisScreen()),
-                            );
-                          },
-                        ),
-                        InfoGrafisWidgetNew(
-                          text:
-                              "Prinsip Tata Kelola \nPerusahaan yang Baik \nBUMN",
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const InfografisScreen()),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
+                      )),
                   const SizedBox(
                     height: 20.0,
                   ),

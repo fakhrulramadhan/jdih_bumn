@@ -24,33 +24,37 @@ class _OrgansisasiWidgetState extends State<PengelolaanWidget> {
               ),
             ),
           ),
+
+          // width: 340,
+          //height: 431,
           const SizedBox(
             height: 25.0,
           ),
           SizedBox(
-            child: Column(
-              children: [
-                Center(
-                  child: SizedBox(
-                    width: 344,
-                    height: 431,
-                    child: Image.asset(
-                      "assets/images/pengelolaan.png",
-                      width: 340,
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Center(
+                    child: SizedBox(
+                      width: 344,
                       height: 431,
-                      fit: BoxFit.none,
+                      child: SvgPicture.asset(
+                        "assets/images/pengelolaans.svg",
+                        fit: BoxFit.fill,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 37.0,
-                ),
-                SvgPicture.asset(
-                  "assets/images/BUMN Background.svg",
-                  height: 153,
-                  width: MediaQuery.of(context).size.width * 0.8,
-                ),
-              ],
+                  const SizedBox(
+                    height: 37.0,
+                  ),
+                  SvgPicture.asset(
+                    "assets/images/BUMN Background.svg",
+                    height: 153,
+                    width: MediaQuery.of(context).size.width * 0.8,
+                  ),
+                ],
+              ),
             ),
           ),
         ],

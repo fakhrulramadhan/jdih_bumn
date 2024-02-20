@@ -26,7 +26,10 @@ class _DownloadButtonWidgetState extends State<DownloadButtonWidget> {
             style: ButtonStyle(
                 shape: MaterialStateProperty.all<OutlinedBorder>(
                     RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12)))),
+                  borderRadius: BorderRadius.circular(12),
+                )),
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(Color(0xff0093AD))),
             child: const Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,

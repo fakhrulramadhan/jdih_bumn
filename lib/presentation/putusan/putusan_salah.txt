@@ -163,7 +163,60 @@ class _PutusanScreenState extends State<PutusanScreen> {
                         const SizedBox(
                           height: 20.0,
                         ),
-                        const ListPutusanWidget(),
+                        //const ListPutusanWidget(),
+                        BlocBuilder<GetPutusanBloc, GetPutusanState>(
+                          builder: (context, state) {
+                            if (state is GetPutusanLoading) {
+                              return Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+
+                            if (state is GetPutusanError) {
+                              return Center(
+                                child: Text("Data Error"),
+                              );
+                            }
+
+                            if (state is GetPutusanLoaded) {
+                              if (state.data.items!.isEmpty) {
+                                return Center(
+                                  child: Text("Data Kosong"),
+                                );
+                              }
+
+                              return ListView.builder(
+                                itemCount: state.data.items!.length,
+                                physics: NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemBuilder: (BuildContext context, index) {
+                                  final Item putusan = state.data.items![index];
+
+                                  var parsedDate =
+                                      DateTime.parse('${putusan.tglPenetapan}');
+
+                                  String tgl_penetapan =
+                                      new DateFormat("dd-MM-yyyy")
+                                          .format(parsedDate);
+
+                                  print(
+                                      "ini jumlah datanya ${state.data.items!.length}");
+
+                                  return ListPutusanWidget(
+                                      title: "${putusan.nomorPutusan}",
+                                      subtitle: "${putusan.nomorPerkara}",
+                                      detail: "${putusan.judul}",
+                                      date: "${putusan.tglPenetapan}",
+                                      readCount: "3000");
+                                },
+                              );
+                            }
+
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          },
+                        )
                       ],
                     ),
                   ),

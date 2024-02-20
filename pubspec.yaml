@@ -59,6 +59,8 @@ dependencies:
   html: ^0.15.4
   flutter_widget_from_html: ^0.14.11
   flutter_switch: ^0.3.2
+  flutter_file_downloader: ^1.2.1
+  path_provider: ^2.1.2
   
 dev_dependencies:
   flutter_test:

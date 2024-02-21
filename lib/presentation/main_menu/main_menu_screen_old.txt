@@ -434,49 +434,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                   SingleChildScrollView(
                     //controller: controller,
                     controller: controller,
-                    physics: physics,
-                    scrollDirection: Axis.horizontal,
-
-                    child: Row(
-                      children: [
-                        InfoGrafisWidgetNew(
-                          text:
-                              "Prinsip Tata Kelola \nPerusahaan yang Baik \nBUMN",
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const InfografisScreen()),
-                            );
-                          },
-                        ),
-                        InfoGrafisWidgetNew(
-                          text:
-                              "Prinsip Tata Kelola \nPerusahaan yang Baik \nBUMN",
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const InfografisScreen()),
-                            );
-                          },
-                        ),
-                        InfoGrafisWidgetNew(
-                          text:
-                              "Prinsip Tata Kelola \nPerusahaan yang Baik \nBUMN",
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const InfografisScreen()),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
+                    physics: Padding(padding: EdgeInsets.all(8.0),child: physics,                    scrollDirection: Axis.horizontal,                    child: Row(                      children: [                        InfoGrafisWidgetNew(                          text:                              "Prinsip Tata Kelola \nPerusahaan yang Baik \nBUMN",                          onTap: () {                            Navigator.push(                              context,                              MaterialPageRoute(                                  builder: (context) =>                                      const InfografisScreen()),                            );                          },                        ),                        InfoGrafisWidgetNew(                          text:                              "Prinsip Tata Kelola \nPerusahaan yang Baik \nBUMN",                          onTap: () {                            Navigator.push(                              context,                              MaterialPageRoute(                                  builder: (context) =>                                      const InfografisScreen()),                            );                          },                        ),                        InfoGrafisWidgetNew(                          text:                              "Prinsip Tata Kelola \nPerusahaan yang Baik \nBUMN",                          onTap: () {                            Navigator.push(                              context,                              MaterialPageRoute(                                  builder: (context) =>                                      const InfografisScreen()),                            );                          },                        ),                      ],                    ),),
                   ),
                   const SizedBox(
                     height: 20.0,

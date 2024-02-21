@@ -88,17 +88,21 @@ class _InfografisScreenState extends State<InfografisScreen> {
                               ],
                             ),
                           ),
-                          const SizedBox(
-                            height: 2.0,
-                          ),
+                          // const SizedBox(
+                          //   height: 2.0,
+                          // ),
                           Center(
-                            child: Text(
-                              "${widget.infografis.judul}",
-                              style: TextStyle(
-                                  fontSize: 14.0,
-                                  color: Colors.white,
-                                  overflow: TextOverflow.visible),
-                              textAlign: TextAlign.center,
+                            child: Container(
+                              height: 60,
+                              padding: EdgeInsets.all(10),
+                              child: Text(
+                                "${widget.infografis.judul}",
+                                style: TextStyle(
+                                    fontSize: 14.0,
+                                    color: Colors.white,
+                                    overflow: TextOverflow.visible),
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                           ),
                           const SizedBox(
@@ -110,17 +114,17 @@ class _InfografisScreenState extends State<InfografisScreen> {
                             items: widget.infografis.details!.map((i) {
                               return Builder(
                                 builder: (BuildContext context) => Container(
-                                  height: 200,
-                                  width: 260,
+                                  height: 336,
+                                  width: 346,
                                   decoration: BoxDecoration(
-                                      color: Colors.brown,
+                                      color: Colors.white.withOpacity(0.1),
                                       borderRadius: BorderRadius.circular(20)),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
                                     clipBehavior: Clip.hardEdge,
                                     child: Image.network(
-                                      "${i}",
-                                      fit: BoxFit.cover,
+                                      "${i.imagePath}",
+                                      fit: BoxFit.fill,
                                       // height: 300,
                                       // width: 280,
                                     ),
@@ -145,23 +149,29 @@ class _InfografisScreenState extends State<InfografisScreen> {
                           const SizedBox(
                             height: 20.0,
                           ),
+                          //dotsCount: Constants.sliderImages.length,
+                          // dotsCount:widget.infografis.details!.length,
                           DotsIndicator(
-                            dotsCount: Constants.sliderImages.length,
+                            dotsCount: widget.infografis.details!.length,
                             position: currentIndex,
                             decorator: DotsDecorator(
-                                shape: const Border(),
-                                activeColor: Colors.black.withOpacity(0.5),
-                                color: Colors.grey.withOpacity(0.5),
-                                sizes: [const Size(40, 6), const Size(40, 6)],
-                                activeSize: const Size(40, 6),
-                                activeShape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12)),
-                                shapes: [
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12)),
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12))
-                                ]),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12)),
+                              activeColor: Colors.black.withOpacity(0.5),
+                              color: Colors.grey.withOpacity(0.5),
+                              size: Size(35, 6),
+                              activeSize: const Size(35, 6),
+                              activeShape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12)),
+                              // sizes: [const Size(40, 6), const Size(40, 6)],
+
+                              // shapes: [
+                              //   RoundedRectangleBorder(
+                              //       borderRadius: BorderRadius.circular(12)),
+                              //   RoundedRectangleBorder(
+                              //       borderRadius: BorderRadius.circular(12))
+                              // ]
+                            ),
                           )
                         ],
                       ),

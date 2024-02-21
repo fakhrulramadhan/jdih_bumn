@@ -6,15 +6,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:jdih_bumn/bloc/get_peraturan_hukum/get_peraturan_hukum_bloc.dart';
 import 'package:jdih_bumn/bloc/get_produk_hukum/get_produk_hukum_bloc.dart';
+import 'package:jdih_bumn/bloc/stage/get_disclaimer/get_disclaimer_bloc.dart';
 import 'package:jdih_bumn/bloc/stage/get_faq/get_faq_bloc.dart';
 import 'package:jdih_bumn/bloc/stage/get_infografis/get_infografis_bloc.dart';
 import 'package:jdih_bumn/bloc/stage/get_putusan/get_putusan_bloc.dart';
+import 'package:jdih_bumn/bloc/stage/get_struktur_jdih/get_struktur_jdih_bloc.dart';
 import 'package:jdih_bumn/bloc/stage/get_tentang_jdih/get_tentang_jdih_bloc.dart';
 import 'package:jdih_bumn/data/datasources/peraturan_hukum_datasource.dart';
 import 'package:jdih_bumn/data/datasources/produk_hukum_datasource.dart';
+import 'package:jdih_bumn/data/datasources/stage/disclaimer_datasource.dart';
 import 'package:jdih_bumn/data/datasources/stage/faq_datasource.dart';
 import 'package:jdih_bumn/data/datasources/stage/infografis_datasource.dart';
 import 'package:jdih_bumn/data/datasources/stage/putusan_datasource.dart';
+import 'package:jdih_bumn/data/datasources/stage/struktur_jdih_datasource.dart';
 import 'package:jdih_bumn/data/datasources/stage/tentang_jdih_datasource.dart';
 import 'package:jdih_bumn/presentation/splash_screen_lottie/splash_screen_lottie.dart';
 import 'package:intl/intl.dart';
@@ -63,6 +67,12 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => GetInfografisBloc(InfografisDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => GetStrukturJdihBloc(StrukturJdihDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => GetDisclaimerBloc(DisclaimerDatasource()),
         )
       ],
       child: MaterialApp(

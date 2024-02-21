@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jdih_bumn/bloc/stage/get_struktur_jdih/get_struktur_jdih_bloc.dart';
 
 class PengelolaanWidget extends StatefulWidget {
   const PengelolaanWidget({super.key});
@@ -9,6 +11,13 @@ class PengelolaanWidget extends StatefulWidget {
 }
 
 class _OrgansisasiWidgetState extends State<PengelolaanWidget> {
+  @override
+  void initState() {
+    context.read<GetStrukturJdihBloc>().add(DoGetStrukturJdihEvent());
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,13 +46,55 @@ class _OrgansisasiWidgetState extends State<PengelolaanWidget> {
                 children: [
                   Center(
                     child: SizedBox(
-                      width: 344,
-                      height: 431,
-                      child: SvgPicture.asset(
-                        "assets/images/pengelolaans.svg",
-                        fit: BoxFit.fill,
-                      ),
-                    ),
+                        width: 344,
+                        height: 431,
+                        child: BlocBuilder<GetStrukturJdihBloc,
+                            GetStrukturJdihState>(
+                          builder: (context, state) {
+                            if (state is GetStrukturJdihError) {
+                              return Center(
+                                child: Text("Data Error"),
+                              );
+                            }
+
+                            if (state is GetStrukturJdihLoading) {
+                              return Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+
+                            if (state is GetStrukturJdihLoaded) {
+                              if (state.data.items!.isEmpty) {
+                                return Center(
+                                  child: Text("Data Empty"),
+                                );
+                              }
+                              return ListView.builder(
+                                itemCount: state.data.items!.length,
+                                physics: NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemBuilder: (context, index) {
+                                  final struktur_jdih =
+                                      state.data.items![index];
+
+                                  print(
+                                      "ini jumlah datanya ${state.data.items!.length}");
+
+                                  return Image.network(
+                                    "${struktur_jdih.pengelola}",
+                                    width: 344,
+                                    height: 431,
+                                    fit: BoxFit.fill,
+                                  );
+                                },
+                              );
+                            }
+
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          },
+                        )),
                   ),
                   const SizedBox(
                     height: 37.0,
@@ -62,3 +113,8 @@ class _OrgansisasiWidgetState extends State<PengelolaanWidget> {
     );
   }
 }
+
+// SvgPicture.asset(
+//                         "assets/images/pengelolaans.svg",
+//                         fit: BoxFit.fill,
+//                       ),

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jdih_bumn/bloc/stage/get_disclaimer/get_disclaimer_bloc.dart';
+import 'package:jdih_bumn/data/model/response/stage/disclaimer_response_model.dart';
 
 class DisclaimerStackWidget extends StatefulWidget {
   const DisclaimerStackWidget({super.key});
@@ -9,6 +12,15 @@ class DisclaimerStackWidget extends StatefulWidget {
 }
 
 class _DisclaimerStackWidgetState extends State<DisclaimerStackWidget> {
+  @override
+  void initState() {
+    //load data dari api dulu ketika (awal) halaman
+    //dibuka
+    context.read<GetDisclaimerBloc>().add(DoGetDisclaimerEvent());
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -45,49 +57,84 @@ class _DisclaimerStackWidgetState extends State<DisclaimerStackWidget> {
             ),
           ),
         ),
-        Center(
-          child: Container(
-            width: MediaQuery.of(context).size.width * 0.95,
-            height: 430,
-            padding: EdgeInsets.all(25),
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-            ),
-            child: Column(
-              children: [
-                Text(
-                  "DISCLAIMER",
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(
-                  height: 10.0,
-                ),
-                SvgPicture.asset(
-                  "assets/images/Disclaimer.svg",
-                  alignment: Alignment.center,
-                  height: 189,
-                  width: 159,
-                ),
-                const SizedBox(
-                  height: 8.0,
-                ),
-                Text(
-                  "Semua yang disajikan dalam website JDIH \nKementerian BUMN dimaksudkan sebagai \ninformasi yang dikeluarkan oleh \nKementerian BUMN. Apabila terdapat\nkekeliruan atau perbedaan antara informasi\nyang disajikan dalam website ini dengan dokumen resmi di Kementerian BUMN, maka yang berlaku adalah dokumen resmi pada  Kementerian BUMN.",
-                  style: TextStyle(
-                      fontSize: 12.0,
-                      color: Colors.black,
-                      fontWeight: FontWeight.normal),
-                  textAlign: TextAlign.center,
-                  overflow: TextOverflow.visible,
-                ),
-              ],
-            ),
-          ),
-        ),
+        Center(child: BlocBuilder<GetDisclaimerBloc, GetDisclaimerState>(
+          builder: (context, state) {
+            if (state is GetDisclaimerLoading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
+            if (state is GetDisclaimerError) {
+              return Center(
+                child: Text("Data Error"),
+              );
+            }
+
+            if (state is GetDisclaimerLoaded) {
+              if (state.data.items!.isEmpty) {
+                return Center(
+                  child: Text("Data Kosong"),
+                );
+              }
+
+              return ListView.builder(
+                itemCount: state.data.items!.length,
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemBuilder: (BuildContext context, index) {
+                  final Item disclaimer = state.data.items![index];
+
+                  return Container(
+                    width: MediaQuery.of(context).size.width * 0.95,
+                    height: 430,
+                    padding: EdgeInsets.all(25),
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          "${disclaimer.judul}",
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        SvgPicture.asset(
+                          "assets/images/Disclaimer.svg",
+                          alignment: Alignment.center,
+                          height: 189,
+                          width: 159,
+                        ),
+                        const SizedBox(
+                          height: 8.0,
+                        ),
+                        Text(
+                          "${disclaimer.deskripsi}",
+                          style: TextStyle(
+                              fontSize: 12.0,
+                              color: Colors.black,
+                              fontWeight: FontWeight.normal),
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.visible,
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            }
+
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+        )),
       ],
     );
   }

@@ -1,13 +1,13 @@
 // To parse this JSON data, do
 //
-//     final BeritaResponseModel = BeritaResponseModelFromJson(jsonString);
+//     final beritaResponseModel = beritaResponseModelFromJson(jsonString);
 
 import 'dart:convert';
 
-BeritaResponseModel BeritaResponseModelFromJson(String str) =>
+BeritaResponseModel beritaResponseModelFromJson(String str) =>
     BeritaResponseModel.fromJson(json.decode(str));
 
-String BeritaResponseModelToJson(BeritaResponseModel data) =>
+String beritaResponseModelToJson(BeritaResponseModel data) =>
     json.encode(data.toJson());
 
 class BeritaResponseModel {
@@ -48,6 +48,7 @@ class Item {
   final String? slug;
   final String? imagePathOri;
   final bool? status;
+  final String? urlDetailBerita;
   final String? imagePathFull;
   final String? imagePathOriFull;
 
@@ -61,6 +62,7 @@ class Item {
     this.slug,
     this.imagePathOri,
     this.status,
+    this.urlDetailBerita,
     this.imagePathFull,
     this.imagePathOriFull,
   });
@@ -75,6 +77,7 @@ class Item {
     String? slug,
     String? imagePathOri,
     bool? status,
+    String? urlDetailBerita,
     String? imagePathFull,
     String? imagePathOriFull,
   }) =>
@@ -88,6 +91,7 @@ class Item {
         slug: slug ?? this.slug,
         imagePathOri: imagePathOri ?? this.imagePathOri,
         status: status ?? this.status,
+        urlDetailBerita: urlDetailBerita ?? this.urlDetailBerita,
         imagePathFull: imagePathFull ?? this.imagePathFull,
         imagePathOriFull: imagePathOriFull ?? this.imagePathOriFull,
       );
@@ -103,6 +107,7 @@ class Item {
         slug: json["slug"],
         imagePathOri: json["image_path_ori"],
         status: json["status"],
+        urlDetailBerita: json["urlDetailBerita"],
         imagePathFull: json["image_path_full"],
         imagePathOriFull: json["image_path_ori_full"],
       );
@@ -118,6 +123,7 @@ class Item {
         "slug": slug,
         "image_path_ori": imagePathOri,
         "status": status,
+        "urlDetailBerita": urlDetailBerita,
         "image_path_full": imagePathFull,
         "image_path_ori_full": imagePathOriFull,
       };

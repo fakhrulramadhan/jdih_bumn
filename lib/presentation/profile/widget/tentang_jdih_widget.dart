@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:html/parser.dart';
 import 'package:jdih_bumn/bloc/stage/get_tentang_jdih/get_tentang_jdih_bloc.dart';
 import 'package:jdih_bumn/constants/constants.dart';
 import './unordered_list_widget.dart';
@@ -32,6 +33,14 @@ class _TentangJdihWidgetState extends State<TentangJdihWidget> {
     // _scrollController = ScrollController();
 
     super.initState();
+  }
+
+  String _parseHtmlString(String? htmlString) {
+    final document = parse(htmlString);
+    final String parsedString =
+        parse(document.body!.text).documentElement!.text;
+
+    return parsedString;
   }
 
   String removeAllHtmlTags(String? htmlText) {
@@ -108,8 +117,9 @@ class _TentangJdihWidgetState extends State<TentangJdihWidget> {
                             const SizedBox(
                               height: 8.0,
                             ),
+                            //"${removeAllHtmlTags(tentang_jdih.deskripsi)}"
                             Text(
-                              "${removeAllHtmlTags(tentang_jdih.deskripsi)}",
+                              _parseHtmlString(tentang_jdih.deskripsi),
                               style: const TextStyle(
                                   fontSize: 12.0, fontWeight: FontWeight.w400),
                               textAlign: TextAlign.justify,
@@ -151,7 +161,7 @@ class _TentangJdihWidgetState extends State<TentangJdihWidget> {
                                     width: 344,
                                     //color: Colors.white,
                                     padding: const EdgeInsets.symmetric(
-                                        vertical: 20, horizontal: 10),
+                                        vertical: 20, horizontal: 20),
                                     child: Center(
                                       child: Column(
                                         children: [
@@ -174,7 +184,7 @@ class _TentangJdihWidgetState extends State<TentangJdihWidget> {
                                               fontWeight: FontWeight.w400,
                                             ),
                                             overflow: TextOverflow.visible,
-                                            textAlign: TextAlign.center,
+                                            textAlign: TextAlign.justify,
                                           ),
                                         ],
                                       ),
@@ -199,17 +209,28 @@ class _TentangJdihWidgetState extends State<TentangJdihWidget> {
                                         const SizedBox(
                                           height: 8.0,
                                         ),
+                                        //semua tag html yang ada
+                                        //di api, harus dimasukkin
+                                        //ke style buat diatur styling
+                                        //nya (margin / padding),
+                                        //ternyata atur padding di ul nya
                                         Html(
                                           data: "${tentang_jdih.misi}",
                                           style: {
                                             "li": Style(
                                                 fontSize: FontSize(12),
-                                                margin: Margins.all(0),
-                                                padding: HtmlPaddings.symmetric(
-                                                    vertical: 0, horizontal: 0),
+                                                margin: Margins.zero,
+                                                padding: HtmlPaddings.zero,
                                                 fontStyle: FontStyle.normal,
                                                 color: Colors.white,
-                                                textAlign: TextAlign.justify)
+                                                textAlign: TextAlign.justify),
+                                            "ul": Style(
+                                                margin: Margins.symmetric(
+                                                    horizontal: 20),
+                                                padding: HtmlPaddings.zero),
+                                            "span": Style(
+                                                margin: Margins.zero,
+                                                padding: HtmlPaddings.zero)
                                           },
                                         ),
                                         Padding(

@@ -13,6 +13,17 @@ class Constants {
     {'title': 'Survei', 'image': 'assets/images/Survei.svg'}
   ];
 
+  static const List<Map<String, dynamic>> slidersImages = [
+    {'title': 'Peraturan', 'image': 'assets/images/Peraturan.svg'},
+    {'title': 'Peraturan BUMN', 'image': 'assets/images/Peraturan BUMN.svg'},
+    {'title': 'Putusan', 'image': 'assets/images/Putusan.svg'},
+    {'title': 'Monografi', 'image': 'assets/images/Monografi.svg'},
+    {'title': 'Berita', 'image': 'assets/images/Berita.svg'},
+    {'title': 'Artikel', 'image': 'assets/images/Artikel.svg'},
+    {'title': 'Kamus Hukum', 'image': 'assets/images/Kamus Hukum.svg'},
+    {'title': 'Survei', 'image': 'assets/images/Survei.svg'}
+  ];
+
   //"assets/images/logo-bumn.jpg"
   static const List<String> sliderImages = [
     "assets/images/prinsip_jdih.png",

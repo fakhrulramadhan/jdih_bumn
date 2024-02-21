@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jdih_bumn/presentation/populer/widget/populer_widget.dart';
 
@@ -14,6 +15,12 @@ class PopulerScreen extends StatefulWidget {
 }
 
 class _PopulerScreenState extends State<PopulerScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -65,21 +72,22 @@ class _PopulerScreenState extends State<PopulerScreen> {
             const SizedBox(
               height: 28.0,
             ),
-            const PopulerWidget(
-              judul: "SEMENBUMN",
-              nosk: "SK-8/DKU.MBU/12/2023",
-              isi:
-                  "Nilai-nilai Utama (Core Values) Sumber Daya Manusia Badan Usaha Milik Negara",
-              tgl_publikasi: "06-12-2023",
-              jml_dilihat: "2.731 K",
-            ),
-            const PopulerWidget(
-              judul: "Undang - Undang",
-              nosk: "UU Nomor 31 Tahun 1999",
-              isi: "Pemberantasan Tindak Pidana Korupsi",
-              tgl_publikasi: "06-12-2023",
-              jml_dilihat: "2.731 K",
-            ),
+            PopulerWidget(),
+            // const PopulerWidget(
+            //   judul: "SEMENBUMN",
+            //   nosk: "SK-8/DKU.MBU/12/2023",
+            //   isi:
+            //       "Nilai-nilai Utama (Core Values) Sumber Daya Manusia Badan Usaha Milik Negara",
+            //   tgl_publikasi: "06-12-2023",
+            //   jml_dilihat: "2.731 K",
+            // ),
+            // const PopulerWidget(
+            //   judul: "Undang - Undang",
+            //   nosk: "UU Nomor 31 Tahun 1999",
+            //   isi: "Pemberantasan Tindak Pidana Korupsi",
+            //   tgl_publikasi: "06-12-2023",
+            //   jml_dilihat: "2.731 K",
+            // ),
             const SizedBox(
               height: 20.0,
             ),

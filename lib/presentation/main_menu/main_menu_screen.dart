@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:jdih_bumn/presentation/artikel/artikel_screen.dart';
 import 'package:jdih_bumn/presentation/berita/berita_screen.dart';
 import 'package:jdih_bumn/presentation/berita_detail/berita_detail_screen.dart';
+import 'package:jdih_bumn/presentation/berita_detail/berita_detailz_screen.dart';
 import 'package:jdih_bumn/presentation/infografis/infografis_screen.dart';
 import 'package:jdih_bumn/presentation/kamus_hukum/kamus_hukum_screen.dart';
 import 'package:jdih_bumn/presentation/main_menu/widgets/berita_dan_info_widget.dart';
@@ -34,6 +35,9 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
     _scrollController = ScrollController();
     super.initState();
   }
+
+  //skeleton utk menampilkan layout ui
+  //ketika dalam keadaan masih loading
 
   @override
   Widget build(BuildContext context) {
@@ -465,7 +469,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const BeritaDetailScreen()),
+                            builder: (context) => const BeritaDetailzScreen()),
                       );
                     },
                   ),

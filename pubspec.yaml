@@ -61,6 +61,7 @@ dependencies:
   flutter_switch: ^0.3.2
   flutter_file_downloader: ^1.2.1
   path_provider: ^2.1.2
+  skeletonizer: ^1.0.1
   
 dev_dependencies:
   flutter_test:

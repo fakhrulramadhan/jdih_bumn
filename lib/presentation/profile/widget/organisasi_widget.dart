@@ -73,11 +73,15 @@ class _OrgansisasiWidgetState extends State<OrgansisasiWidget> {
 
                                 print(
                                     "ini jumlah datanya ${state.data.items!.length}");
-                                return Image.network(
-                                  "${struktur_jdih.organisasi}",
+                                return Container(
                                   width: 350,
                                   height: 205,
-                                  fit: BoxFit.fill,
+                                  child: Image.network(
+                                    "${struktur_jdih.organisasi}",
+                                    // width: 350,
+                                    // height: 205,
+                                    fit: BoxFit.fill,
+                                  ),
                                 );
                               },
                             );

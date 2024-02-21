@@ -13,12 +13,13 @@ class GetBeritaBloc extends Bloc<GetBeritaEvent, GetBeritaState> {
     on<GetBeritaEvent>((event, emit) {});
 
     on<DoGetBeritaEvent>((event, emit) async {
+      //jangan lupa diemit untuk update uinya
       emit(GetBeritaLoading());
 
       final result = await datasource.getBerita();
 
       result.fold(
-          (l) => emit(GetBeritaError()), (r) => GetBeritaLoaded(data: r));
+          (l) => emit(GetBeritaError()), (r) => emit(GetBeritaLoaded(data: r)));
     });
   }
 }

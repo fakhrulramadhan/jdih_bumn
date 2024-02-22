@@ -65,22 +65,7 @@ class _TerbaruScreenState extends State<TerbaruScreen> {
             const SizedBox(
               height: 28.0,
             ),
-            const BeritaTerbaruWidget(
-              judul: "Peraturan Tk Eselon I",
-              nosk: "SK-8/DKU.MBU/12/2023",
-              isi:
-                  "Keputusan Deputi Bidang Keuangan dan Manajemen Risiko tentang Petunjuk Teknis Penilaian Indeks Kematangan Risiko (Risk Maturity Index) di Lingkungan Badan Usaha Milik Negara",
-              tgl_publikasi: "06-12-2023",
-              jml_dilihat: "2.731 K",
-            ),
-            const BeritaTerbaruWidget(
-              judul: "Keputusan Menteri BUMN",
-              nosk: "SK-306/MBU/11/2023",
-              isi:
-                  "Keputusan Menteri Badan Usaha Milik Negara Tentang Petunjuk Teknis Penyusunan Indikator Kinerja Utama (Key Performance Indicator) pada Badan Usaha Milik Negara",
-              tgl_publikasi: "06-12-2023",
-              jml_dilihat: "2.731 K",
-            ),
+            const BeritaTerbaruWidget(),
             const SizedBox(
               height: 20,
             ),

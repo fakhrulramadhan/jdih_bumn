@@ -1,7 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:jdih_bumn/data/model/response/peraturan_hukum_response_model.dart';
+import 'package:flutter_file_downloader/flutter_file_downloader.dart';
+import 'package:intl/intl.dart';
+// import 'package:jdih_bumn/data/model/response/peraturan_hukum_response_model.dart';
+import 'package:jdih_bumn/data/model/response/stage/peraturan_response_model.dart';
 
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/bagikan_button_widget.dart';
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/download_button_widget.dart';
@@ -12,10 +15,10 @@ import 'package:dio/dio.dart';
 import 'package:share_plus/share_plus.dart';
 
 class PeraturanDetailScreen extends StatefulWidget {
-  final Item peraturanHukum;
+  final Item peraturan;
   const PeraturanDetailScreen({
     Key? key,
-    required this.peraturanHukum,
+    required this.peraturan,
   }) : super(key: key);
 
   @override
@@ -33,6 +36,11 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
   String progressString = 'File has not been downloaded yet.';
 
   late ScrollController _scrollController;
+
+  //  var parsedDate = DateTime.parse('${widget.peraturan.}');
+
+  //             String convertedDate =
+  //                 DateFormat("dd-MM-yyyy").format(parsedDate);
 
   @override
   void initState() {
@@ -90,9 +98,16 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // var parsedDate = DateTime.parse('${widget.peraturanHukum.tanggal}');
+    var parsedDate = DateTime.parse('${widget.peraturan.tglPenetapan}');
+    var parsedDatePerngundangan =
+        DateTime.parse('${widget.peraturan.tanggalPengundangan}');
 
-    // String convertedDate = new DateFormat("dd-MM-yyyy").format(parsedDate);
+    String convertedDate = new DateFormat("dd-MM-yyyy").format(parsedDate);
+
+    String convertedDateUndang =
+        new DateFormat("dd-MM-yyyy").format(parsedDatePerngundangan);
+
+    double? _progress;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(45),
@@ -152,7 +167,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                           height: 10.0,
                         ),
                         Text(
-                          "${widget.peraturanHukum.bentuk}",
+                          "${widget.peraturan.teuBadan}",
                           style: const TextStyle(
                             fontSize: 24.0,
                             fontWeight: FontWeight.bold,
@@ -164,7 +179,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                           height: 10.0,
                         ),
                         Text(
-                          "${widget.peraturanHukum.perNo}",
+                          "${widget.peraturan.perNoBaru}",
                           style: const TextStyle(
                             fontSize: 14.0,
                             color: Colors.white,
@@ -175,7 +190,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                           height: 20.0,
                         ),
                         Text(
-                          "${widget.peraturanHukum.tentang}",
+                          "${widget.peraturan.judul}",
                           style: const TextStyle(
                             fontSize: 14.0,
                             fontWeight: FontWeight.bold,
@@ -203,22 +218,22 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                             children: [
                               IconInfoWidget(
                                   imageUrl: "assets/images/berlaku.svg",
-                                  title: widget.peraturanHukum.status!.isEmpty
+                                  title: widget.peraturan.status!.isEmpty
                                       ? '-'
                                       : "Baru",
                                   subtitle: "Status"),
                               IconInfoWidget(
                                   imageUrl: "assets/images/kalender.svg",
-                                  title: "${widget.peraturanHukum.tahun}",
+                                  title:
+                                      "${widget.peraturan.tahunPengundangan}",
                                   subtitle: "Tahun Terbit"),
                               IconInfoWidget(
                                   imageUrl: "assets/images/view.svg",
-                                  title:
-                                      "${widget.peraturanHukum.readingCounter}",
+                                  title: "${widget.peraturan.countReader}",
                                   subtitle: "Dilihat"),
-                              const IconInfoWidget(
+                              IconInfoWidget(
                                   imageUrl: "assets/images/bahasa.svg",
-                                  title: "Indonesia",
+                                  title: "${widget.peraturan.bahasa}",
                                   subtitle: "Bahasa")
                             ],
                           ),
@@ -230,7 +245,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
               ),
             ),
             // kalau diatas sama dengan 500 karakter, heightnya 1800
-            // widget.peraturanHukum.abstraksi!.length <= 200000
+            // widget.peraturan.abstraksi!.length <= 200000
             const Padding(
               padding: EdgeInsets.only(left: 17),
               child: Align(
@@ -249,114 +264,99 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
             ),
             InfoDetailWidget(
                 title: "Abstrak",
-                subtitle: widget.peraturanHukum.abstraksi!.isEmpty
+                subtitle: widget.peraturan.urlFileAbstrak!.isEmpty
                     ? "-"
-                    : removeAllHtmlTags(widget.peraturanHukum.abstraksi!),
-                heightTitle: widget.peraturanHukum.abstraksi!.isNotEmpty
-                    ? widget.peraturanHukum.abstraksi!.length >= 3180
-                        ? 1140 //1150
-                        : widget.peraturanHukum.abstraksi!.length >= 1065 &&
-                                widget.peraturanHukum.abstraksi!.length <= 2999
-                            ? 560
-                            : widget.peraturanHukum.abstraksi!.length >= 400 &&
-                                    widget.peraturanHukum.abstraksi!.length <=
-                                        1064
-                                ? 470
-                                : widget.peraturanHukum.abstraksi!.length >=
-                                            201 &&
-                                        widget.peraturanHukum.abstraksi!
-                                                .length <=
-                                            399
-                                    ? 600
-                                    : widget.peraturanHukum.abstraksi!.length >=
-                                                5 &&
-                                            widget.peraturanHukum.abstraksi!
-                                                    .length <=
-                                                30
-                                        ? 70
-                                        : 70
-                    : 70),
+                    : widget.peraturan.urlFileAbstrak!,
+                heightTitle: 70),
             InfoDetailWidget(
               title: "Tipe Dokumen",
-              subtitle: "${widget.peraturanHukum.bentuk}",
+              subtitle: "Peraturan",
               heightTitle: 80,
             ),
             InfoDetailWidget(
                 title: "Judul",
-                heightTitle: widget.peraturanHukum.tentang!.isNotEmpty
-                    ? widget.peraturanHukum.tentang!.length >= 85
-                        ? 120
-                        : widget.peraturanHukum.tentang!.length >= 45 &&
-                                widget.peraturanHukum.tentang!.length <= 84
-                            ? 100
-                            : widget.peraturanHukum.tentang!.isNotEmpty &&
-                                    widget.peraturanHukum.tentang!.length <= 44
-                                ? 80
-                                : 100
-                    : 100,
-                subtitle: "${widget.peraturanHukum.tentang}"),
-            const InfoDetailWidget(
+                heightTitle: widget.peraturan.judul!.isEmpty
+                    ? widget.peraturan.judul!.length >= 3180
+                        ? 1140 //1150
+                        : widget.peraturan.judul!.length >= 1065 &&
+                                widget.peraturan.judul!.length <= 2999
+                            ? 560
+                            : widget.peraturan.judul!.length >= 400 &&
+                                    widget.peraturan.judul!.length <= 1064
+                                ? 470
+                                : widget.peraturan.judul!.length >= 201 &&
+                                        widget.peraturan.judul!.length <= 399
+                                    ? 600
+                                    : widget.peraturan.judul!.length >= 5 &&
+                                            widget.peraturan.judul!.length <= 30
+                                        ? 70
+                                        : 70
+                    : 70,
+                subtitle: "${widget.peraturan.judul}"),
+            InfoDetailWidget(
                 title: "T.E.U Badan/Pengarang",
-                subtitle: "Indonesia. Kementerian BUMN",
+                subtitle: "${widget.peraturan.teuBadan}",
                 heightTitle: 80),
             InfoDetailWidget(
               title: "Nomor Peraturan",
-              subtitle: "${widget.peraturanHukum.perNo}",
+              subtitle: "${widget.peraturan.nomorPeraturanBaru}",
               heightTitle: 80,
             ),
             InfoDetailWidget(
               title: "Jenis Peraturan",
-              subtitle: "${widget.peraturanHukum.bentuk}",
+              subtitle: "${widget.peraturan.jenis}",
               heightTitle: 80,
             ),
             InfoDetailWidget(
               title: "Singkatan Jenis/Bentuk Peraturan",
-              subtitle: "${widget.peraturanHukum.bentuk}",
+              subtitle: "${widget.peraturan.singkatanJenis}",
               heightTitle: 80,
             ),
-            const InfoDetailWidget(
+            InfoDetailWidget(
               title: "Tempat Penetapan",
-              subtitle: "JAKARTA",
+              subtitle: "${widget.peraturan.tempatTerbit}",
               heightTitle: 80,
             ),
             //"${widget.peraturanHukum.tanggal}"
             InfoDetailWidget(
               title: "Tanggal-bulan-tahun Penetapan",
-              subtitle: "${widget.peraturanHukum.tanggal}",
-              heightTitle: 80,
-            ),
-            const InfoDetailWidget(
-              title: "Tanggal-bulan-tahun Pengundangan",
-              subtitle: "06-12-2023",
-            ),
-            const InfoDetailWidget(
-              title: "Sumber",
-              subtitle: "-",
-              heightTitle: 80,
-            ),
-            const InfoDetailWidget(
-              title: "Subjek",
-              subtitle: "Subjek",
+              subtitle: "${convertedDate}",
               heightTitle: 80,
             ),
             InfoDetailWidget(
-              title: "Detail Status Peraturan",
-              subtitle: widget.peraturanHukum.status!.isEmpty ? "-" : "Baru",
+              title: "Tanggal-bulan-tahun Pengundangan",
+              subtitle: "${convertedDateUndang}",
+            ),
+            InfoDetailWidget(
+              title: "Sumber",
+              subtitle: "${widget.peraturan.sumber}",
               heightTitle: 80,
             ),
-            const InfoDetailWidget(
+            InfoDetailWidget(
+              title: "Subjek",
+              subtitle: "${widget.peraturan.subjek}",
+              heightTitle: 80,
+            ),
+            // InfoDetailWidget(
+            //   title: "Detail Status Peraturan",
+            //   subtitle: widget.peraturan.detailStatusPeraturan!.isEmpty
+            //       ? "-"
+            //       : "Baru",
+            //   heightTitle: 80,
+            // ),
+            InfoDetailWidget(
               title: "Lokasi",
-              subtitle: "Kementerian BUMN",
+              subtitle: "${widget.peraturan.tempatTerbit}",
               heightTitle: 80,
             ),
-            const InfoDetailWidget(
+            InfoDetailWidget(
               title: "Bidang Hukum",
-              subtitle: "Hukum Administrasi Negara",
+              subtitle: "${widget.peraturan.bidangHukum}",
               heightTitle: 80,
             ),
-            const InfoDetailWidget(
+            InfoDetailWidget(
               title: "Lampiran",
-              subtitle: "-",
+              subtitle: "${widget.peraturan.fileLampiran ?? "-"}",
               heightTitle: 80,
             ),
             const SizedBox(
@@ -366,7 +366,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
         ),
       ),
       bottomNavigationBar: Container(
-        height: 80,
+        height: 100,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             color: Colors.white,
@@ -382,38 +382,58 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            BagikanButtonWidget(
-              onPressed: () async {
-                const urlLink = "https://www.youtube.com/watch?v=CNUBhb_cM6E";
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.45,
+              child: BagikanButtonWidget(
+                onPressed: () async {
+                  String urlLink = widget.peraturan.urlDetailPeraturan ?? "-";
 
-                await Share.share("This Cat is cute $urlLink");
+                  //masukkin kata katanya di tanda kutip
+                  await Share.share(urlLink);
 
-                // showModalBottomSheet<void>(
-                //   context: context,
-                //   builder: (BuildContext context) {
-                //     return Container(
-                //       height: 200,
-                //       color: Colors.white,
-                //       child: Row(
-                //       children: [
-
-                //       ],
-                //       ),
-                //     );
-
-                //   },
-                // );
-              },
+                  print("${widget.peraturan.urlDetailPeraturan}");
+                },
+              ),
             ),
-            const DownloadButtonWidget()
-            // const DownloadButtonWidget(
-            //     onTap: didDownloadPDF
-            //         ? null
-            //         : () async {
-            //             var tempDir = await getTemporaryDirectory();
-            //             download(Dio(), ${widget.peraturanHukum.fileId}, tempDir.path + fileName);
-            //           },
-            //     ),
+            widget.peraturan.urlDownload ==
+                    "https://jdihstage.bumn.go.id/storage/peraturan/"
+                ? Container(
+                    width: MediaQuery.of(context).size.width * 0.45,
+                  )
+                : SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.45,
+                    child: _progress != null
+                        ? const Center(child: CircularProgressIndicator())
+                        : DownloadButtonWidget(
+                            onTap: () async {
+                              // await download(Dio(), "${widget.putusan.urlDetailFilePutusan}",
+                              //     '/storage/emulated/0/Download');
+
+                              print("${widget.peraturan.urlDownload}");
+
+                              await FileDownloader.downloadFile(
+                                url: "${widget.peraturan.urlDownload}",
+                                onProgress: (fileName, progresz) {
+                                  setState(() {
+                                    _progress = progresz;
+                                  });
+                                },
+                                onDownloadCompleted: (path) {
+                                  print('Path: $path');
+
+                                  setState(() {
+                                    _progress = null;
+                                  });
+                                },
+                              );
+                            },
+                          ),
+                  )
+            // DownloadButtonWidget(
+            //   onTap: () async {
+            //     await download(Dio(), url, savePath);
+            //   },
+            // )
           ],
         ),
       ),

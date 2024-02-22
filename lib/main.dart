@@ -10,7 +10,9 @@ import 'package:jdih_bumn/bloc/stage/get_berita/get_berita_bloc.dart';
 import 'package:jdih_bumn/bloc/stage/get_disclaimer/get_disclaimer_bloc.dart';
 import 'package:jdih_bumn/bloc/stage/get_faq/get_faq_bloc.dart';
 import 'package:jdih_bumn/bloc/stage/get_infografis/get_infografis_bloc.dart';
+import 'package:jdih_bumn/bloc/stage/get_peraturan/get_peraturan_bloc.dart';
 import 'package:jdih_bumn/bloc/stage/get_peraturan_populer.dart/get_peraturan_populer_bloc.dart';
+import 'package:jdih_bumn/bloc/stage/get_peraturan_terbaru/get_peraturan_terbaru_bloc.dart';
 
 import 'package:jdih_bumn/bloc/stage/get_putusan/get_putusan_bloc.dart';
 import 'package:jdih_bumn/bloc/stage/get_struktur_jdih/get_struktur_jdih_bloc.dart';
@@ -21,7 +23,9 @@ import 'package:jdih_bumn/data/datasources/stage/berita_datasource.dart';
 import 'package:jdih_bumn/data/datasources/stage/disclaimer_datasource.dart';
 import 'package:jdih_bumn/data/datasources/stage/faq_datasource.dart';
 import 'package:jdih_bumn/data/datasources/stage/infografis_datasource.dart';
+import 'package:jdih_bumn/data/datasources/stage/peraturan_datasource.dart';
 import 'package:jdih_bumn/data/datasources/stage/peraturan_populer_datasource.dart';
+import 'package:jdih_bumn/data/datasources/stage/peraturan_terbaru_datasource.dart';
 import 'package:jdih_bumn/data/datasources/stage/putusan_datasource.dart';
 import 'package:jdih_bumn/data/datasources/stage/struktur_jdih_datasource.dart';
 import 'package:jdih_bumn/data/datasources/stage/tentang_jdih_datasource.dart';
@@ -35,7 +39,8 @@ void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
 
-  await initializeDateFormatting('id_ID', null).then((_) => runApp(const MyApp()));
+  await initializeDateFormatting('id_ID', null)
+      .then((_) => runApp(const MyApp()));
   //lock potrait only
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((value) => runApp(const MyApp()));
@@ -84,6 +89,13 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) =>
               GetPeraturanPopulerBloc(PeraturanPopulerDatasource()),
+        ),
+        BlocProvider(
+          create: (context) => GetPeraturanBloc(PeraturanDatasource()),
+        ),
+        BlocProvider(
+          create: (context) =>
+              GetPeraturanTerbaruBloc(PeraturanTerbaruDatasource()),
         )
       ],
       child: MaterialApp(

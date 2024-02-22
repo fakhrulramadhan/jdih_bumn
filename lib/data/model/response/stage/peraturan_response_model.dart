@@ -39,27 +39,23 @@ class PeraturanResponseModel {
 }
 
 class Item {
-  final String? noPeraturan;
+  final String? nomorPeraturanBaru;
   final int? id;
   final String? tahunPengundangan;
   final DateTime? tanggalPengundangan;
-  final String? jenis;
+  final Jenis? jenis;
   final String? judul;
-  final BidangHukum? noPanggil;
   final SingkatanJenis? singkatanJenis;
   final TempatTerbit? tempatTerbit;
-  final BidangHukum? penerbit;
-  final BidangHukum? deskripsiFisik;
-  final BidangHukum? isbn;
-  final Status? status;
+  final SubjekEnum? sumber;
+  final dynamic subjek;
+  final dynamic status;
   final Bahasa? bahasa;
   final BidangHukum? bidangHukum;
   final TeuBadan? teuBadan;
-  final BidangHukum? nomorIndukBuku;
   final String? fileDownload;
   final String? urlDownload;
   final String? urlDetailPeraturan;
-  final int? idOriginData;
   final String? slug;
   final int? countReader;
   final String? fileLampiran;
@@ -75,27 +71,23 @@ class Item {
   final List<DetailStatusPeraturan>? detailStatusPeraturan;
 
   Item({
-    this.noPeraturan,
+    this.nomorPeraturanBaru,
     this.id,
     this.tahunPengundangan,
     this.tanggalPengundangan,
     this.jenis,
     this.judul,
-    this.noPanggil,
     this.singkatanJenis,
     this.tempatTerbit,
-    this.penerbit,
-    this.deskripsiFisik,
-    this.isbn,
+    this.sumber,
+    this.subjek,
     this.status,
     this.bahasa,
     this.bidangHukum,
     this.teuBadan,
-    this.nomorIndukBuku,
     this.fileDownload,
     this.urlDownload,
     this.urlDetailPeraturan,
-    this.idOriginData,
     this.slug,
     this.countReader,
     this.fileLampiran,
@@ -112,27 +104,23 @@ class Item {
   });
 
   Item copyWith({
-    String? noPeraturan,
+    String? nomorPeraturanBaru,
     int? id,
     String? tahunPengundangan,
     DateTime? tanggalPengundangan,
-    String? jenis,
+    Jenis? jenis,
     String? judul,
-    BidangHukum? noPanggil,
     SingkatanJenis? singkatanJenis,
     TempatTerbit? tempatTerbit,
-    BidangHukum? penerbit,
-    BidangHukum? deskripsiFisik,
-    BidangHukum? isbn,
-    Status? status,
+    SubjekEnum? sumber,
+    dynamic subjek,
+    dynamic status,
     Bahasa? bahasa,
     BidangHukum? bidangHukum,
     TeuBadan? teuBadan,
-    BidangHukum? nomorIndukBuku,
     String? fileDownload,
     String? urlDownload,
     String? urlDetailPeraturan,
-    int? idOriginData,
     String? slug,
     int? countReader,
     String? fileLampiran,
@@ -148,27 +136,23 @@ class Item {
     List<DetailStatusPeraturan>? detailStatusPeraturan,
   }) =>
       Item(
-        noPeraturan: noPeraturan ?? this.noPeraturan,
+        nomorPeraturanBaru: nomorPeraturanBaru ?? this.nomorPeraturanBaru,
         id: id ?? this.id,
         tahunPengundangan: tahunPengundangan ?? this.tahunPengundangan,
         tanggalPengundangan: tanggalPengundangan ?? this.tanggalPengundangan,
         jenis: jenis ?? this.jenis,
         judul: judul ?? this.judul,
-        noPanggil: noPanggil ?? this.noPanggil,
         singkatanJenis: singkatanJenis ?? this.singkatanJenis,
         tempatTerbit: tempatTerbit ?? this.tempatTerbit,
-        penerbit: penerbit ?? this.penerbit,
-        deskripsiFisik: deskripsiFisik ?? this.deskripsiFisik,
-        isbn: isbn ?? this.isbn,
+        sumber: sumber ?? this.sumber,
+        subjek: subjek ?? this.subjek,
         status: status ?? this.status,
         bahasa: bahasa ?? this.bahasa,
         bidangHukum: bidangHukum ?? this.bidangHukum,
         teuBadan: teuBadan ?? this.teuBadan,
-        nomorIndukBuku: nomorIndukBuku ?? this.nomorIndukBuku,
         fileDownload: fileDownload ?? this.fileDownload,
         urlDownload: urlDownload ?? this.urlDownload,
         urlDetailPeraturan: urlDetailPeraturan ?? this.urlDetailPeraturan,
-        idOriginData: idOriginData ?? this.idOriginData,
         slug: slug ?? this.slug,
         countReader: countReader ?? this.countReader,
         fileLampiran: fileLampiran ?? this.fileLampiran,
@@ -186,29 +170,25 @@ class Item {
       );
 
   factory Item.fromJson(Map<String, dynamic> json) => Item(
-        noPeraturan: json["noPeraturan"],
+        nomorPeraturanBaru: json["nomor_peraturan_baru"],
         id: json["id"],
         tahunPengundangan: json["tahun_pengundangan"],
         tanggalPengundangan: json["tanggal_pengundangan"] == null
             ? null
             : DateTime.parse(json["tanggal_pengundangan"]),
-        jenis: json["jenis"],
+        jenis: jenisValues.map[json["jenis"]]!,
         judul: json["judul"],
-        noPanggil: bidangHukumValues.map[json["noPanggil"]]!,
         singkatanJenis: singkatanJenisValues.map[json["singkatanJenis"]]!,
         tempatTerbit: tempatTerbitValues.map[json["tempatTerbit"]]!,
-        penerbit: bidangHukumValues.map[json["penerbit"]]!,
-        deskripsiFisik: bidangHukumValues.map[json["deskripsiFisik"]]!,
-        isbn: bidangHukumValues.map[json["isbn"]]!,
-        status: statusValues.map[json["status"]]!,
+        sumber: subjekEnumValues.map[json["sumber"]]!,
+        subjek: json["subjek"],
+        status: json["status"],
         bahasa: bahasaValues.map[json["bahasa"]]!,
         bidangHukum: bidangHukumValues.map[json["bidangHukum"]]!,
         teuBadan: teuBadanValues.map[json["teuBadan"]]!,
-        nomorIndukBuku: bidangHukumValues.map[json["nomorIndukBuku"]]!,
         fileDownload: json["fileDownload"],
         urlDownload: json["urlDownload"],
         urlDetailPeraturan: json["urlDetailPeraturan"],
-        idOriginData: json["id_origin_data"],
         slug: json["slug"],
         countReader: json["count_reader"],
         fileLampiran: json["file_lampiran"],
@@ -234,28 +214,24 @@ class Item {
       );
 
   Map<String, dynamic> toJson() => {
-        "noPeraturan": noPeraturan,
+        "nomor_peraturan_baru": nomorPeraturanBaru,
         "id": id,
         "tahun_pengundangan": tahunPengundangan,
         "tanggal_pengundangan":
             "${tanggalPengundangan!.year.toString().padLeft(4, '0')}-${tanggalPengundangan!.month.toString().padLeft(2, '0')}-${tanggalPengundangan!.day.toString().padLeft(2, '0')}",
-        "jenis": jenis,
+        "jenis": jenisValues.reverse[jenis],
         "judul": judul,
-        "noPanggil": bidangHukumValues.reverse[noPanggil],
         "singkatanJenis": singkatanJenisValues.reverse[singkatanJenis],
         "tempatTerbit": tempatTerbitValues.reverse[tempatTerbit],
-        "penerbit": bidangHukumValues.reverse[penerbit],
-        "deskripsiFisik": bidangHukumValues.reverse[deskripsiFisik],
-        "isbn": bidangHukumValues.reverse[isbn],
-        "status": statusValues.reverse[status],
+        "sumber": subjekEnumValues.reverse[sumber],
+        "subjek": subjek,
+        "status": status,
         "bahasa": bahasaValues.reverse[bahasa],
         "bidangHukum": bidangHukumValues.reverse[bidangHukum],
         "teuBadan": teuBadanValues.reverse[teuBadan],
-        "nomorIndukBuku": bidangHukumValues.reverse[nomorIndukBuku],
         "fileDownload": fileDownload,
         "urlDownload": urlDownload,
         "urlDetailPeraturan": urlDetailPeraturan,
-        "id_origin_data": idOriginData,
         "slug": slug,
         "count_reader": countReader,
         "file_lampiran": fileLampiran,
@@ -283,9 +259,33 @@ final bahasaValues = EnumValues({
   "Indonesia,English": Bahasa.INDONESIA_ENGLISH
 });
 
-enum BidangHukum { EMPTY }
+enum BidangHukum {
+  HUKUM_ADMINISTRASI_NEGARA,
+  HUKUM_AGRARIA,
+  HUKUM_DAGANG,
+  HUKUM_INTERNASIONAL,
+  HUKUM_ISLAM,
+  HUKUM_LINGKUNGAN,
+  HUKUM_PERBURUHAN,
+  HUKUM_PERDATA,
+  HUKUM_PIDANA,
+  HUKUM_TATA_NEGARA,
+  HUKUM_UMUM
+}
 
-final bidangHukumValues = EnumValues({"-": BidangHukum.EMPTY});
+final bidangHukumValues = EnumValues({
+  "Hukum Administrasi Negara": BidangHukum.HUKUM_ADMINISTRASI_NEGARA,
+  "Hukum Agraria": BidangHukum.HUKUM_AGRARIA,
+  "Hukum Dagang": BidangHukum.HUKUM_DAGANG,
+  "Hukum Internasional": BidangHukum.HUKUM_INTERNASIONAL,
+  "Hukum Islam": BidangHukum.HUKUM_ISLAM,
+  "Hukum Lingkungan": BidangHukum.HUKUM_LINGKUNGAN,
+  "Hukum Perburuhan": BidangHukum.HUKUM_PERBURUHAN,
+  "Hukum Perdata": BidangHukum.HUKUM_PERDATA,
+  "Hukum Pidana": BidangHukum.HUKUM_PIDANA,
+  "Hukum Tata Negara": BidangHukum.HUKUM_TATA_NEGARA,
+  "Hukum Umum": BidangHukum.HUKUM_UMUM
+});
 
 class DetailStatusPeraturan {
   final DetailNamaStatus? detailNamaStatus;
@@ -318,51 +318,129 @@ class DetailStatusPeraturan {
       };
 }
 
-enum DetailNamaStatus { DICABUT, DIUBAH, MENCABUT, MENGUBAH }
+enum DetailNamaStatus { BARU, DICABUT, DIUBAH, MENCABUT, MENGUBAH }
 
 final detailNamaStatusValues = EnumValues({
+  "Baru": DetailNamaStatus.BARU,
   "Dicabut": DetailNamaStatus.DICABUT,
   "Diubah": DetailNamaStatus.DIUBAH,
   "Mencabut": DetailNamaStatus.MENCABUT,
   "Mengubah": DetailNamaStatus.MENGUBAH
 });
 
+enum Jenis {
+  INSTRUKSI_PRESIDEN,
+  KEPUTUSAN_MENTERI_BUMN,
+  KEPUTUSAN_MENTERI_LAINNYA,
+  KEPUTUSAN_PRESIDEN,
+  PERATURAN_DIREKSI,
+  PERATURAN_GUBERNUR,
+  PERATURAN_MAHKAMAH_AGUNG,
+  PERATURAN_MENTERI_BUMN,
+  PERATURAN_MENTERI_LAINNYA,
+  PERATURAN_PEMERINTAH,
+  PERATURAN_PEMERINTAH_PENGGANTI_UNDANG_UNDANG,
+  PERATURAN_PRESIDEN,
+  PERATURAN_TK_ESELON_I_LAINNYA,
+  PUTUSAN_MAHKAMAH_KONSTITUSI,
+  SURAT_EDARAN_LAINNYA,
+  SURAT_EDARAN_MENTERI_BUMN,
+  SURAT_EDARAN_SEKRETARIS_KEMENTERIAN_BUMN,
+  UNDANG_UNDANG
+}
+
+final jenisValues = EnumValues({
+  "Instruksi Presiden": Jenis.INSTRUKSI_PRESIDEN,
+  "Keputusan Menteri BUMN": Jenis.KEPUTUSAN_MENTERI_BUMN,
+  "Keputusan Menteri Lainnya": Jenis.KEPUTUSAN_MENTERI_LAINNYA,
+  "Keputusan Presiden": Jenis.KEPUTUSAN_PRESIDEN,
+  "Peraturan Direksi": Jenis.PERATURAN_DIREKSI,
+  "Peraturan Gubernur": Jenis.PERATURAN_GUBERNUR,
+  "Peraturan Mahkamah Agung": Jenis.PERATURAN_MAHKAMAH_AGUNG,
+  "Peraturan Menteri BUMN": Jenis.PERATURAN_MENTERI_BUMN,
+  "Peraturan Menteri Lainnya": Jenis.PERATURAN_MENTERI_LAINNYA,
+  "Peraturan Pemerintah": Jenis.PERATURAN_PEMERINTAH,
+  "Peraturan Pemerintah Pengganti Undang-Undang":
+      Jenis.PERATURAN_PEMERINTAH_PENGGANTI_UNDANG_UNDANG,
+  "Peraturan Presiden": Jenis.PERATURAN_PRESIDEN,
+  "Peraturan Tk Eselon I Lainnya": Jenis.PERATURAN_TK_ESELON_I_LAINNYA,
+  "Putusan Mahkamah Konstitusi": Jenis.PUTUSAN_MAHKAMAH_KONSTITUSI,
+  "Surat Edaran Lainnya": Jenis.SURAT_EDARAN_LAINNYA,
+  "Surat Edaran Menteri BUMN": Jenis.SURAT_EDARAN_MENTERI_BUMN,
+  "Surat Edaran Sekretaris Kementerian BUMN":
+      Jenis.SURAT_EDARAN_SEKRETARIS_KEMENTERIAN_BUMN,
+  "Undang-Undang": Jenis.UNDANG_UNDANG
+});
+
 enum SingkatanJenis {
+  INPRES,
+  KEPDIR,
   KEPMEN,
   KEPMENBUMN,
   KEPPRES,
   PERATURAN_TK_ESELON_I,
+  PERDIR,
   PERGUB,
+  PERMA,
   PERMEN,
   PERMENBUMN,
   PERPRES,
   PERPU,
   PP,
+  PUTUSAN_MK,
   SEMENBUMN,
+  SESMEN,
   SE_LAIN,
   UU
 }
 
 final singkatanJenisValues = EnumValues({
+  "INPRES": SingkatanJenis.INPRES,
+  "KEPDIR": SingkatanJenis.KEPDIR,
   "KEPMEN": SingkatanJenis.KEPMEN,
   "KEPMENBUMN": SingkatanJenis.KEPMENBUMN,
   "KEPPRES": SingkatanJenis.KEPPRES,
   "Peraturan Tk Eselon I": SingkatanJenis.PERATURAN_TK_ESELON_I,
+  "PERDIR": SingkatanJenis.PERDIR,
   "PERGUB": SingkatanJenis.PERGUB,
+  "PERMA": SingkatanJenis.PERMA,
   "PERMEN": SingkatanJenis.PERMEN,
   "PERMENBUMN": SingkatanJenis.PERMENBUMN,
   "PERPRES": SingkatanJenis.PERPRES,
   "PERPU": SingkatanJenis.PERPU,
   "PP": SingkatanJenis.PP,
+  "Putusan MK": SingkatanJenis.PUTUSAN_MK,
   "SEMENBUMN": SingkatanJenis.SEMENBUMN,
+  "SESMEN": SingkatanJenis.SESMEN,
   "SE LAIN": SingkatanJenis.SE_LAIN,
   "UU": SingkatanJenis.UU
 });
 
-enum Status { BERLAKU, TIDAK_BERLAKU }
+enum SubjekEnum {
+  BN,
+  BN_LL_KBUMN,
+  EMPTY,
+  LL,
+  LL_BN,
+  LL_KBUMN,
+  LL_KBUMN_BN,
+  LN,
+  LN_LL,
+  TLN_LN
+}
 
-final statusValues = EnumValues(
-    {"Berlaku": Status.BERLAKU, "Tidak Berlaku": Status.TIDAK_BERLAKU});
+final subjekEnumValues = EnumValues({
+  "BN": SubjekEnum.BN,
+  "BN, LL KBUMN": SubjekEnum.BN_LL_KBUMN,
+  "-": SubjekEnum.EMPTY,
+  "LL": SubjekEnum.LL,
+  "LL, BN": SubjekEnum.LL_BN,
+  "LL KBUMN": SubjekEnum.LL_KBUMN,
+  "LL KBUMN, BN": SubjekEnum.LL_KBUMN_BN,
+  "LN": SubjekEnum.LN,
+  "LN, LL": SubjekEnum.LN_LL,
+  "TLN, LN": SubjekEnum.TLN_LN
+});
 
 enum TempatTerbit { JAKARTA }
 
@@ -372,7 +450,6 @@ enum TeuBadan {
   KEMENTERIAN_AGRARIA_DAN_TATA_RUANG_BADAN_PERTANAHAN_NASIONAL,
   KEMENTERIAN_BADAN_USAHA_MILIK_NEGARA,
   KEMENTERIAN_BUMN,
-  KEMENTERIAN_DALAM_NEGERI,
   KEMENTERIAN_KETENAGAKERJAAN,
   KEMENTERIAN_KEUANGAN,
   KEMENTERIAN_PEKERJAAN_UMUM_DAN_PERUMAHAN_RAKYAT,
@@ -389,7 +466,6 @@ final teuBadanValues = EnumValues({
   "Kementerian Badan Usaha Milik Negara":
       TeuBadan.KEMENTERIAN_BADAN_USAHA_MILIK_NEGARA,
   "Kementerian BUMN": TeuBadan.KEMENTERIAN_BUMN,
-  "Kementerian Dalam Negeri": TeuBadan.KEMENTERIAN_DALAM_NEGERI,
   "Kementerian Ketenagakerjaan": TeuBadan.KEMENTERIAN_KETENAGAKERJAAN,
   "Kementerian Keuangan": TeuBadan.KEMENTERIAN_KEUANGAN,
   "Kementerian Pekerjaan Umum dan Perumahan Rakyat":

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jdih_bumn/data/model/response/stage/berita_response_model.dart';
 import 'package:jdih_bumn/presentation/berita_detail/widget/bagikan_button_berita_widget.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -112,10 +111,10 @@ Para peserta sosialisasi terlihat antusias dengan adanya sosialisasi tersebut, y
               BoxShadow(
                   color: Colors.grey.withOpacity(0.05),
                   spreadRadius: 1,
-                  offset: Offset(0, -10),
+                  offset: const Offset(0, -10),
                   blurRadius: 1),
             ],
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

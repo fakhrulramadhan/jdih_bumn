@@ -132,7 +132,7 @@ class _PeraturanScreenState extends State<PeraturanScreen> {
                           const SizedBox(
                             height: 20.0,
                           ),
-                          ListPeraturanWidget(),
+                          const ListPeraturanWidget(),
                         ],
                       ),
                     ),

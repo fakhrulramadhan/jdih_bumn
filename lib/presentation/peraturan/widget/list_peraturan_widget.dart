@@ -216,7 +216,7 @@ class _ListPeraturanWidgetState extends State<ListPeraturanWidget> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Container(
+                                  SizedBox(
                                     width: 0.38 * width,
                                     child: Row(
                                       children: [

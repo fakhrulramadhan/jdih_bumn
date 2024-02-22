@@ -37,29 +37,29 @@ class _PopulerWidgetState extends State<PopulerWidget> {
     return BlocBuilder<GetPeraturanPopulerBloc, GetPeraturanPopulerState>(
       builder: (context, state) {
         if (state is GetPeraturanPopulerStateLoading) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         }
 
         if (state is GetPeraturanPopulerStateError) {
-          return Center(
+          return const Center(
             child: Text("Data Error"),
           );
         }
 
         if (state is GetPeraturanPopulerStateLoaded) {
           if (state.data.items!.isEmpty) {
-            return Center(
+            return const Center(
               child: Text("Data Kosong"),
             );
           }
           return ListView.builder(
             itemCount: state.data.items!.length,
-            physics: ScrollPhysics(),
+            physics: const ScrollPhysics(),
             shrinkWrap: true,
             itemBuilder: (BuildContext context, index) {
-              final Item peraturan_populer = state.data.items![index];
+              final Item peraturanPopuler = state.data.items![index];
 
               print("ini jumlah datanya ${state.data.items!.length}");
 
@@ -110,7 +110,7 @@ class _PopulerWidgetState extends State<PopulerWidget> {
                                       SizedBox(
                                         width: 260,
                                         child: Text(
-                                          "${peraturan_populer.jenisPeraturanShort}",
+                                          "${peraturanPopuler.jenisPeraturanShort}",
                                           style: const TextStyle(
                                             fontSize: 14.0,
                                             fontWeight: FontWeight.w600,
@@ -123,7 +123,7 @@ class _PopulerWidgetState extends State<PopulerWidget> {
                                         height: 8.0,
                                       ),
                                       Text(
-                                        "${peraturan_populer.nomorPeraturanBaru}",
+                                        "${peraturanPopuler.nomorPeraturanBaru}",
                                         style: const TextStyle(
                                           fontSize: 12.0,
                                           fontWeight: FontWeight.w300,
@@ -135,7 +135,7 @@ class _PopulerWidgetState extends State<PopulerWidget> {
                                         height: 8.0,
                                       ),
                                       Text(
-                                        "${peraturan_populer.deskripsiTentang}",
+                                        "${peraturanPopuler.deskripsiTentang}",
                                         style: const TextStyle(
                                           fontSize: 12.0,
                                           fontWeight: FontWeight.w500,
@@ -152,8 +152,8 @@ class _PopulerWidgetState extends State<PopulerWidget> {
                           Container(
                             height: 30,
                             width: 341,
-                            decoration: BoxDecoration(
-                                color: const Color(0xFFECF0F1),
+                            decoration: const BoxDecoration(
+                                color: Color(0xFFECF0F1),
                                 borderRadius: BorderRadius.only(
                                     bottomLeft: Radius.circular(12),
                                     bottomRight: Radius.circular(12))),
@@ -168,7 +168,7 @@ class _PopulerWidgetState extends State<PopulerWidget> {
                                   width: 2.0,
                                 ),
                                 Text(
-                                  "${peraturan_populer.tglPenetapanMigrasi}",
+                                  "${peraturanPopuler.tglPenetapanMigrasi}",
                                   style: const TextStyle(
                                     fontSize: 9.0,
                                     color: Colors.black,
@@ -185,7 +185,7 @@ class _PopulerWidgetState extends State<PopulerWidget> {
                                   width: 2.0,
                                 ),
                                 Text(
-                                  "${peraturan_populer.countReader}",
+                                  "${peraturanPopuler.countReader}",
                                   style: const TextStyle(
                                     fontSize: 9.0,
                                   ),
@@ -205,7 +205,7 @@ class _PopulerWidgetState extends State<PopulerWidget> {
             },
           );
         }
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(),
         );
       },

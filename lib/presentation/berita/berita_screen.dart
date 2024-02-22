@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jdih_bumn/bloc/stage/get_berita/get_berita_bloc.dart';
 import 'package:jdih_bumn/presentation/berita/widget/list_berita_widget.dart';
 
 class BeritaScreen extends StatefulWidget {

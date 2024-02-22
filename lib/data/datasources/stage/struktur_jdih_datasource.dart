@@ -20,7 +20,7 @@ class StrukturJdihDatasource {
     } else {
       print(response.body);
       print("server error");
-      return Left("Server Error");
+      return const Left("Server Error");
     }
   }
 }

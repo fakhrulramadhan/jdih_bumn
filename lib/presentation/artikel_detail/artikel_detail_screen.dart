@@ -25,7 +25,7 @@ class _ArtikelDetailScreenState extends State<ArtikelDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(40),
+        preferredSize: const Size.fromHeight(40),
         child: AppBar(
           title: const Text("Artikel"),
           centerTitle: true,
@@ -189,10 +189,10 @@ class _ArtikelDetailScreenState extends State<ArtikelDetailScreen> {
               BoxShadow(
                   color: Colors.grey.withOpacity(0.05),
                   spreadRadius: 1,
-                  offset: Offset(0, -10),
+                  offset: const Offset(0, -10),
                   blurRadius: 1),
             ],
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

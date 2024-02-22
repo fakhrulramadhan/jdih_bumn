@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:jdih_bumn/constants/constants.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:jdih_bumn/data/model/response/stage/infografis_response_model.dart';
 
@@ -94,10 +93,10 @@ class _InfografisScreenState extends State<InfografisScreen> {
                           Center(
                             child: Container(
                               height: 60,
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               child: Text(
                                 "${widget.infografis.judul}",
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 14.0,
                                     color: Colors.white,
                                     overflow: TextOverflow.visible),
@@ -159,7 +158,7 @@ class _InfografisScreenState extends State<InfografisScreen> {
                                   borderRadius: BorderRadius.circular(12)),
                               activeColor: Colors.black.withOpacity(0.5),
                               color: Colors.grey.withOpacity(0.5),
-                              size: Size(35, 6),
+                              size: const Size(35, 6),
                               activeSize: const Size(35, 6),
                               activeShape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12)),

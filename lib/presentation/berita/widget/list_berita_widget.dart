@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jdih_bumn/bloc/stage/get_berita/get_berita_bloc.dart';
-import 'package:jdih_bumn/bloc/stage/get_disclaimer/get_disclaimer_bloc.dart';
 import 'package:jdih_bumn/data/model/response/stage/berita_response_model.dart';
-import 'package:jdih_bumn/presentation/berita/widget/berita_widget.dart';
 import 'package:jdih_bumn/presentation/berita_detail/berita_detail_screen.dart';
 
 class ListBeritaWidget extends StatefulWidget {
@@ -27,20 +25,20 @@ class _ListBeritaWidgetState extends State<ListBeritaWidget> {
     return BlocBuilder<GetBeritaBloc, GetBeritaState>(
       builder: (context, state) {
         if (state is GetBeritaError) {
-          return Center(
+          return const Center(
             child: Text("Data Error"),
           );
         }
 
         if (state is GetBeritaLoading) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         }
 
         if (state is GetBeritaLoaded) {
           if (state.data.items!.isEmpty) {
-            return Center(
+            return const Center(
               child: Text("Data Kosong"),
             );
           }
@@ -64,7 +62,7 @@ class _ListBeritaWidgetState extends State<ListBeritaWidget> {
               final Item berita = state.data.items![index];
 
               print("ini beritanya");
-              print("${berita}");
+              print("$berita");
 
               // return BeritaWidget(
               //   onTap: () {
@@ -125,17 +123,17 @@ class _ListBeritaWidgetState extends State<ListBeritaWidget> {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           "${berita.tanggal}",
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 8.0,
                           ),
                           textAlign: TextAlign.left,
                         ),
                       ),
-                      Container(
+                      SizedBox(
                         height: 36,
                         child: Text(
                           "${berita.judul}",
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 12.0,
                             fontWeight: FontWeight.bold,
                           ),
@@ -167,7 +165,7 @@ class _ListBeritaWidgetState extends State<ListBeritaWidget> {
           );
         }
 
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(),
         );
       },

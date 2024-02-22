@@ -3,11 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:jdih_bumn/presentation/artikel/artikel_screen.dart';
 import 'package:jdih_bumn/presentation/berita/berita_screen.dart';
-import 'package:jdih_bumn/presentation/berita_detail/berita_detail_screen.dart';
-import 'package:jdih_bumn/presentation/berita_detail/berita_detailz_screen.dart';
-import 'package:jdih_bumn/presentation/infografis/infografis_screen.dart';
 import 'package:jdih_bumn/presentation/kamus_hukum/kamus_hukum_screen.dart';
 import 'package:jdih_bumn/presentation/main_menu/widgets/berita_dan_info_widget.dart';
+import 'package:jdih_bumn/presentation/main_menu/widgets/berita_dan_info_widget_sort.dart';
 import 'package:jdih_bumn/presentation/main_menu/widgets/disclaimer_stack_widget.dart';
 import 'package:jdih_bumn/presentation/main_menu/widgets/infografis_widget_new.dart';
 import 'package:jdih_bumn/presentation/main_menu/widgets/list_menu_peraturan_bumn_widget.dart';
@@ -435,14 +433,14 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                   //   width: 80,
                   //   color: Colors.purple,
                   // )
-                  Container(
+                  SizedBox(
                       height: 200,
                       width: MediaQuery.of(context).size.width,
                       child: SingleChildScrollView(
                         controller: controller,
                         physics: physics,
                         scrollDirection: Axis.horizontal,
-                        child: Row(
+                        child: const Row(
                           children: [InfoGrafisWidgetNew()],
                         ),
                       )),
@@ -462,17 +460,19 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                   const SizedBox(
                     height: 8.0,
                   ),
-                  BeritaDanInfoWidget(
-                    title: "Seminar Merger Dan Akuisisi BUMN",
-                    waktu: "Jakarta, 30 November 2023",
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const BeritaDetailzScreen()),
-                      );
-                    },
-                  ),
+                  const BeritaDanInfoWidget(),
+                  //BeritaDanInfoWidgetSort(),
+                  // BeritaDanInfoWidget(
+                  //   title: "Seminar Merger Dan Akuisisi BUMN",
+                  //   waktu: "Jakarta, 30 November 2023",
+                  //   onTap: () {
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //           builder: (context) => const BeritaDetailzScreen()),
+                  //     );
+                  //   },
+                  // ),
                   const SizedBox(
                     height: 20.0,
                   ),

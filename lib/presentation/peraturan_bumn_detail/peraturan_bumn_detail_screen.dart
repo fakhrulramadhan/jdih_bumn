@@ -212,8 +212,8 @@ class _PeraturanBumnDetailScreenState extends State<PeraturanBumnDetailScreen> {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
+            const Padding(
+              padding: EdgeInsets.only(left: 20),
               child: Align(
                 alignment: Alignment.topLeft,
                 child: Text(
@@ -283,10 +283,10 @@ class _PeraturanBumnDetailScreenState extends State<PeraturanBumnDetailScreen> {
               BoxShadow(
                   color: Colors.grey.withOpacity(0.05),
                   spreadRadius: 1,
-                  offset: Offset(0, -10),
+                  offset: const Offset(0, -10),
                   blurRadius: 1)
             ],
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

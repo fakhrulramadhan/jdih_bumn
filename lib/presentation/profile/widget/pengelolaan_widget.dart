@@ -41,7 +41,7 @@ class _OrgansisasiWidgetState extends State<PengelolaanWidget> {
           ),
           SizedBox(
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
                   Center(
@@ -52,39 +52,39 @@ class _OrgansisasiWidgetState extends State<PengelolaanWidget> {
                             GetStrukturJdihState>(
                           builder: (context, state) {
                             if (state is GetStrukturJdihError) {
-                              return Center(
+                              return const Center(
                                 child: Text("Data Error"),
                               );
                             }
 
                             if (state is GetStrukturJdihLoading) {
-                              return Center(
+                              return const Center(
                                 child: CircularProgressIndicator(),
                               );
                             }
 
                             if (state is GetStrukturJdihLoaded) {
                               if (state.data.items!.isEmpty) {
-                                return Center(
+                                return const Center(
                                   child: Text("Data Empty"),
                                 );
                               }
                               return ListView.builder(
                                 itemCount: state.data.items!.length,
-                                physics: NeverScrollableScrollPhysics(),
+                                physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 itemBuilder: (context, index) {
-                                  final struktur_jdih =
+                                  final strukturJdih =
                                       state.data.items![index];
 
                                   print(
                                       "ini jumlah datanya ${state.data.items!.length}");
 
-                                  return Container(
+                                  return SizedBox(
                                     width: 340,
                                     height: 431,
                                     child: Image.network(
-                                      "${struktur_jdih.pengelola}",
+                                      "${strukturJdih.pengelola}",
                                       // width: 340,
                                       // height: 431,
                                       fit: BoxFit.fill,
@@ -94,7 +94,7 @@ class _OrgansisasiWidgetState extends State<PengelolaanWidget> {
                               );
                             }
 
-                            return Center(
+                            return const Center(
                               child: CircularProgressIndicator(),
                             );
                           },

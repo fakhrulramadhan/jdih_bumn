@@ -47,7 +47,7 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
           ),
           SingleChildScrollView(
             controller: ScrollController(),
-            child: Container(
+            child: SizedBox(
               width: MediaQuery.of(context).size.width,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

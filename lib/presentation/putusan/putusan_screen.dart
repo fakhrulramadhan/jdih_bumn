@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
-import 'package:jdih_bumn/bloc/stage/get_putusan/get_putusan_bloc.dart';
-import 'package:jdih_bumn/data/model/response/stage/putusan_response_model.dart';
 import 'package:jdih_bumn/presentation/putusan/widget/list_putusan_widget.dart';
-import 'package:jdih_bumn/presentation/putusan_detail/putusan_detail_screen.dart';
 
 class PutusanScreen extends StatefulWidget {
   const PutusanScreen({super.key});

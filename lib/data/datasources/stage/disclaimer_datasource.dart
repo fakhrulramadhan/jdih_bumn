@@ -17,7 +17,7 @@ class DisclaimerDatasource {
     } else {
       print(response.body);
       print("Server Error");
-      return Left("Server Error");
+      return const Left("Server Error");
     }
   }
 }

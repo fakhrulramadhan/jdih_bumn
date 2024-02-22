@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_switch/flutter_switch.dart';
-import 'package:jdih_bumn/presentation/profile/widget/button_next_widget.dart';
 import 'package:jdih_bumn/presentation/profile/widget/organisasi_widget.dart';
 import 'package:jdih_bumn/presentation/profile/widget/pengelolaan_widget.dart';
 
@@ -65,7 +62,7 @@ class _StrukturJdihWidgetState extends State<StrukturJdihWidget> {
                           border: Border.all(
                             color: Colors.white,
                           ),
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
                                 color: Colors.grey,
                                 spreadRadius: 1,
@@ -82,7 +79,7 @@ class _StrukturJdihWidgetState extends State<StrukturJdihWidget> {
                                 print(page);
                                 print(pageIndex);
                                 page.animateToPage(pageIndex - 1,
-                                    duration: Duration(milliseconds: 200),
+                                    duration: const Duration(milliseconds: 200),
                                     curve: Curves.easeOut);
 
                                 print(pageIndex);
@@ -112,13 +109,13 @@ class _StrukturJdihWidgetState extends State<StrukturJdihWidget> {
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 20.0,
                             ),
                             InkWell(
                               onTap: () {
                                 page.animateToPage(pageIndex + 1,
-                                    duration: Duration(milliseconds: 200),
+                                    duration: const Duration(milliseconds: 200),
                                     curve: Curves.easeOut);
 
                                 print(pageIndex);
@@ -162,11 +159,11 @@ class _StrukturJdihWidgetState extends State<StrukturJdihWidget> {
                   const SizedBox(
                     height: 15.0,
                   ),
-                  Container(
+                  SizedBox(
                     height: 770,
                     child: PageView(
                       controller: page,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       pageSnapping: true,
                       onPageChanged: (newpage) {
@@ -174,7 +171,7 @@ class _StrukturJdihWidgetState extends State<StrukturJdihWidget> {
                           pageIndex = newpage;
                         });
                       },
-                      children: [OrgansisasiWidget(), PengelolaanWidget()],
+                      children: const [OrgansisasiWidget(), PengelolaanWidget()],
                     ),
                   )
                 ],

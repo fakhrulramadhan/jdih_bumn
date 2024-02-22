@@ -32,7 +32,7 @@ class _DisclaimerStackWidgetState extends State<DisclaimerStackWidget> {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(8),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                     color: Colors.grey,
                     spreadRadius: 2,
@@ -60,27 +60,27 @@ class _DisclaimerStackWidgetState extends State<DisclaimerStackWidget> {
         Center(child: BlocBuilder<GetDisclaimerBloc, GetDisclaimerState>(
           builder: (context, state) {
             if (state is GetDisclaimerLoading) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }
 
             if (state is GetDisclaimerError) {
-              return Center(
+              return const Center(
                 child: Text("Data Error"),
               );
             }
 
             if (state is GetDisclaimerLoaded) {
               if (state.data.items!.isEmpty) {
-                return Center(
+                return const Center(
                   child: Text("Data Kosong"),
                 );
               }
 
               return ListView.builder(
                 itemCount: state.data.items!.length,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, index) {
                   final Item disclaimer = state.data.items![index];
@@ -88,15 +88,15 @@ class _DisclaimerStackWidgetState extends State<DisclaimerStackWidget> {
                   return Container(
                     width: MediaQuery.of(context).size.width * 0.95,
                     height: 430,
-                    padding: EdgeInsets.all(25),
-                    decoration: BoxDecoration(
+                    padding: const EdgeInsets.all(25),
+                    decoration: const BoxDecoration(
                       color: Colors.transparent,
                     ),
                     child: Column(
                       children: [
                         Text(
                           "${disclaimer.judul}",
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -116,7 +116,7 @@ class _DisclaimerStackWidgetState extends State<DisclaimerStackWidget> {
                         ),
                         Text(
                           "${disclaimer.deskripsi}",
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 12.0,
                               color: Colors.black,
                               fontWeight: FontWeight.normal),
@@ -130,7 +130,7 @@ class _DisclaimerStackWidgetState extends State<DisclaimerStackWidget> {
               );
             }
 
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           },

@@ -87,7 +87,7 @@ class _MonografiDetailScreenState extends State<MonografiDetailScreen> {
     var parsedDate =
         DateTime.parse('${widget.produkhukum.tanggalPengundangan}');
 
-    String convertedDate = new DateFormat("dd-MM-yyyy").format(parsedDate);
+    String convertedDate = DateFormat("dd-MM-yyyy").format(parsedDate);
 
     return Scaffold(
       // appBar: AppBar(
@@ -188,7 +188,7 @@ class _MonografiDetailScreenState extends State<MonografiDetailScreen> {
                             Container(
                               //height normalanya 80 kalau titlenya enggak
                               //panjang
-                              constraints: BoxConstraints(maxHeight: 160),
+                              constraints: const BoxConstraints(maxHeight: 160),
                               //height: 120,
                               //color: Colors.brown,
                               //padding: EdgeInsets.only(bottom: 10),
@@ -325,7 +325,7 @@ class _MonografiDetailScreenState extends State<MonografiDetailScreen> {
                     title: "ISBN", subtitle: "${widget.produkhukum.isbn}"),
                 InfoDetailWidget(
                     title: "Tanggal-bulan-tahun Pengundangan",
-                    subtitle: "${convertedDate}"),
+                    subtitle: convertedDate),
                 InfoDetailWidget(
                     title: "Sumber", subtitle: "${widget.produkhukum.sumber}"),
                 // InfoDetailWidget(
@@ -357,10 +357,10 @@ class _MonografiDetailScreenState extends State<MonografiDetailScreen> {
                 BoxShadow(
                     color: Colors.grey.withOpacity(0.05),
                     spreadRadius: 1,
-                    offset: Offset(0, -10),
+                    offset: const Offset(0, -10),
                     blurRadius: 1),
               ],
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(20), topRight: Radius.circular(20))),
           margin: const EdgeInsets.only(bottom: 5),
           child: Center(child: BagikanButtonMonografiWidget(

@@ -22,7 +22,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Scaffold(
               appBar: PreferredSize(
                 //buat atur tinggi appbar
-                preferredSize: Size.fromHeight(150.0),
+                preferredSize: const Size.fromHeight(150.0),
                 child: AppBar(
                   actions: const [],
                   flexibleSpace: SizedBox(

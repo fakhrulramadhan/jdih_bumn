@@ -41,27 +41,27 @@ class _ListPutusanWidgetState extends State<ListPutusanWidget> {
     return BlocBuilder<GetPutusanBloc, GetPutusanState>(
       builder: (context, state) {
         if (state is GetPutusanLoading) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         }
 
         if (state is GetPutusanError) {
-          return Center(
+          return const Center(
             child: Text("Data Error"),
           );
         }
 
         if (state is GetPutusanLoaded) {
           if (state.data.items!.isEmpty) {
-            return Center(
+            return const Center(
               child: Text("Data Kosong"),
             );
           }
 
           return ListView.builder(
             itemCount: state.data.items!.length,
-            physics: ScrollPhysics(),
+            physics: const ScrollPhysics(),
             shrinkWrap: true,
             itemBuilder: (BuildContext context, index) {
               final Item putusan = state.data.items![index];
@@ -70,8 +70,8 @@ class _ListPutusanWidgetState extends State<ListPutusanWidget> {
 
               var parsedDate = DateTime.parse('${putusan.tglPenetapan}');
 
-              String tgl_penetapan =
-                  new DateFormat("dd-MM-yyyy").format(parsedDate);
+              String tglPenetapan =
+                  DateFormat("dd-MM-yyyy").format(parsedDate);
 
               return InkWell(
                 onTap: () {
@@ -202,7 +202,7 @@ class _ListPutusanWidgetState extends State<ListPutusanWidget> {
                                         width: 2.0,
                                       ),
                                       Text(
-                                        "${tgl_penetapan}",
+                                        tglPenetapan,
                                         style: const TextStyle(
                                           fontSize: 9.0,
                                           color: Colors.black,
@@ -246,7 +246,7 @@ class _ListPutusanWidgetState extends State<ListPutusanWidget> {
           );
         }
 
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(),
         );
       },

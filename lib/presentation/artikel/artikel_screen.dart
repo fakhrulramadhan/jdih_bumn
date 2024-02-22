@@ -60,7 +60,7 @@ class _ArtikelScreenState extends State<ArtikelScreen> {
           ),
           SingleChildScrollView(
             controller: ScrollController(),
-            child: Container(
+            child: SizedBox(
               width: MediaQuery.of(context).size.width,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

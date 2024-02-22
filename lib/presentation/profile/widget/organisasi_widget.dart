@@ -46,20 +46,20 @@ class _OrgansisasiWidgetState extends State<OrgansisasiWidget> {
                           GetStrukturJdihState>(
                         builder: (context, state) {
                           if (state is GetStrukturJdihError) {
-                            return Center(
+                            return const Center(
                               child: Text("Data Error"),
                             );
                           }
 
                           if (state is GetStrukturJdihLoading) {
-                            return Center(
+                            return const Center(
                               child: CircularProgressIndicator(),
                             );
                           }
 
                           if (state is GetStrukturJdihLoaded) {
                             if (state.data.items!.isEmpty) {
-                              return Center(
+                              return const Center(
                                 child: CircularProgressIndicator(),
                               );
                             }
@@ -69,15 +69,15 @@ class _OrgansisasiWidgetState extends State<OrgansisasiWidget> {
                               physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemBuilder: (BuildContext context, index) {
-                                final struktur_jdih = state.data.items![index];
+                                final strukturJdih = state.data.items![index];
 
                                 print(
                                     "ini jumlah datanya ${state.data.items!.length}");
-                                return Container(
+                                return SizedBox(
                                   width: 350,
                                   height: 205,
                                   child: Image.network(
-                                    "${struktur_jdih.organisasi}",
+                                    "${strukturJdih.organisasi}",
                                     // width: 350,
                                     // height: 205,
                                     fit: BoxFit.fill,
@@ -87,7 +87,7 @@ class _OrgansisasiWidgetState extends State<OrgansisasiWidget> {
                             );
                           }
 
-                          return Center(
+                          return const Center(
                             child: CircularProgressIndicator(),
                           );
                         },

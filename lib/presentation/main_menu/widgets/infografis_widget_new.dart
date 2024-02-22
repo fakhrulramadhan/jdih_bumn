@@ -24,11 +24,11 @@ class _InfoGrafisWidgetNewState extends State<InfoGrafisWidgetNew> {
 
   @override
   Widget build(BuildContext context) {
-    bool _enabled = true;
+    bool enabled = true;
     return BlocBuilder<GetInfografisBloc, GetInfografisState>(
       builder: (context, state) {
         if (state is GetInfografisError) {
-          return Center(
+          return const Center(
             child: Text("Data Error"),
           );
         }
@@ -41,7 +41,7 @@ class _InfoGrafisWidgetNewState extends State<InfoGrafisWidgetNew> {
             enabled: true, //nyalain layout mockupnya
             child: ListView.builder(
               itemCount: 3,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, index) {
@@ -70,13 +70,13 @@ class _InfoGrafisWidgetNewState extends State<InfoGrafisWidgetNew> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Container(
+                          const Padding(
+                            padding: EdgeInsets.only(left: 20),
+                            child: SizedBox(
                               height: 70,
                               child: Text(
                                 "test",
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 12.0,
                                   color: Colors.white,
                                 ),
@@ -109,7 +109,7 @@ class _InfoGrafisWidgetNewState extends State<InfoGrafisWidgetNew> {
 
         if (state is GetInfografisLoaded) {
           if (state.data.items!.isEmpty) {
-            return Center(
+            return const Center(
               child: Text("Data Kosong"),
             );
           }
@@ -118,7 +118,7 @@ class _InfoGrafisWidgetNewState extends State<InfoGrafisWidgetNew> {
             enabled: false, //matikan mockup
             child: ListView.builder(
               itemCount: state.data.items!.length,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, index) {
@@ -149,7 +149,7 @@ class _InfoGrafisWidgetNewState extends State<InfoGrafisWidgetNew> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(left: 20),
-                            child: Container(
+                            child: SizedBox(
                               height: 70,
                               child: Text(
                                 "${infografis.judul}",
@@ -189,7 +189,7 @@ class _InfoGrafisWidgetNewState extends State<InfoGrafisWidgetNew> {
             ),
           );
         }
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(),
         );
       },

@@ -1,31 +1,25 @@
 // ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
 
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:jdih_bumn/bloc/stage/get_berita/get_berita_bloc.dart';
-import 'package:http/http.dart' as http;
-import 'package:jdih_bumn/constants/constants.dart';
-import 'package:jdih_bumn/data/model/response/stage/berita_response_model.dart';
-import 'package:jdih_bumn/presentation/berita_detail/berita_detail_screen.dart';
 
-class BeritaDanInfoWidget extends StatefulWidget {
+class BeritaDanInfoWidgetSort extends StatefulWidget {
   // final String title;
   // final String waktu;
   final VoidCallback? onTap;
 
-  const BeritaDanInfoWidget({Key? key, this.onTap}) : super(key: key);
+  const BeritaDanInfoWidgetSort({Key? key, this.onTap}) : super(key: key);
 
   @override
-  State<BeritaDanInfoWidget> createState() => _BeritaDanInfoWidgetState();
+  State<BeritaDanInfoWidgetSort> createState() =>
+      _BeritaDanInfoWidgetSortState();
 }
 
-class _BeritaDanInfoWidgetState extends State<BeritaDanInfoWidget> {
+class _BeritaDanInfoWidgetSortState extends State<BeritaDanInfoWidgetSort> {
   @override
   void initState() {
-    context.read<GetBeritaBloc>().add(DoGetBeritaEvent());
+    context.read<GetBeritaBloc>().add(DoGetBeritaSort());
     // TODO: implement initState
     super.initState();
   }
@@ -35,47 +29,31 @@ class _BeritaDanInfoWidgetState extends State<BeritaDanInfoWidget> {
     return BlocBuilder<GetBeritaBloc, GetBeritaState>(
       builder: (context, state) {
         if (state is GetBeritaError) {
-          return const Center(
+          return Center(
             child: Text("Data Error"),
           );
         }
 
         if (state is GetBeritaLoading) {
-          return const Center(
+          return Center(
             child: CircularProgressIndicator(),
           );
         }
 
-        if (state is GetBeritaLoaded) {
+        if (state is GetBeritaSort) {
           return ListView.builder(
-            itemCount: 1,
-            physics: const NeverScrollableScrollPhysics(),
+            itemCount: state.data.length,
+            physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemBuilder: (context, index) {
-              final sortberita = state.data.items![0];
-
-              print('${sortberita.tanggal}');
-              print("INI TANGGAL BERITANYA");
-
-              var parsedDate = DateTime.parse('${sortberita.tanggal}');
-
-              String convertedDate =
-                  DateFormat("dd-MM-yyyy").format(parsedDate);
+              final sortberita = state.data[index];
               return InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            BeritaDetailScreen(berita: sortberita)),
-                  );
-                },
+                onTap: widget.onTap,
                 child: Center(
                   child: Container(
                     height: 190,
                     width: MediaQuery.of(context).size.width * 0.9,
-                    padding:
-                        const EdgeInsets.only(top: 10, left: 10, right: 10),
+                    padding: const EdgeInsets.only(top: 10),
                     decoration: BoxDecoration(
                         color: Colors.yellow[50],
                         boxShadow: const [
@@ -94,14 +72,13 @@ class _BeritaDanInfoWidgetState extends State<BeritaDanInfoWidget> {
                               fontSize: 18.0,
                               color: Color.fromARGB(255, 0, 9, 85),
                               fontWeight: FontWeight.w700),
-                          textAlign: TextAlign.center,
                         ),
                         const SizedBox(
                           height: 5.0,
                         ),
                         Center(
                           child: Text(
-                            "${convertedDate}",
+                            "${sortberita.tanggal}",
                             style: const TextStyle(
                                 fontSize: 15.0,
                                 color: Colors.blue,
@@ -131,7 +108,7 @@ class _BeritaDanInfoWidgetState extends State<BeritaDanInfoWidget> {
           );
         }
 
-        return const Center(
+        return Center(
           child: CircularProgressIndicator(),
         );
       },

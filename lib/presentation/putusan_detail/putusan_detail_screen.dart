@@ -155,10 +155,10 @@ class _PutusanDetailScreenState extends State<PutusanDetailScreen> {
                       margin: const EdgeInsets.only(left: 20),
                       child: Column(
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             height: 280.0,
                           ),
-                          Align(
+                          const Align(
                             alignment: Alignment.topLeft,
                             child: Text(
                               "Detail Peraturan",
@@ -168,10 +168,10 @@ class _PutusanDetailScreenState extends State<PutusanDetailScreen> {
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10.0,
                           ),
-                          InfoDetailMarginNoWidget(
+                          const InfoDetailMarginNoWidget(
                               title: "Tipe Dokumen", subtitle: "Putusan"),
                           InfoDetailMarginNoWidget(
                               title: "Judul",
@@ -193,7 +193,7 @@ class _PutusanDetailScreenState extends State<PutusanDetailScreen> {
                           InfoDetailMarginNoWidget(
                               title: "Subjek",
                               subtitle: widget.putusan.namaSubjek ?? "-"),
-                          InfoDetailMarginNoWidget(
+                          const InfoDetailMarginNoWidget(
                               title: "Tanggal Dibacakan",
                               subtitle: "25 November 2021"),
                           InfoDetailMarginNoWidget(
@@ -252,22 +252,22 @@ class _PutusanDetailScreenState extends State<PutusanDetailScreen> {
               BoxShadow(
                   color: Colors.grey.withOpacity(0.05),
                   spreadRadius: 1,
-                  offset: Offset(0, -10),
+                  offset: const Offset(0, -10),
                   blurRadius: 1),
             ],
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width * 0.45,
               child: BagikanButtonWidget(
                 onPressed: () async {
                   String urlLink = widget.putusan.urlDetailPutusan ?? "-";
 
                   //masukkin kata katanya di tanda kutip
-                  await Share.share("$urlLink");
+                  await Share.share(urlLink);
 
                   print("${widget.putusan.urlDetailFilePutusan}");
                 },
@@ -278,10 +278,10 @@ class _PutusanDetailScreenState extends State<PutusanDetailScreen> {
                 ? Container(
                     width: MediaQuery.of(context).size.width * 0.45,
                   )
-                : Container(
+                : SizedBox(
                     width: MediaQuery.of(context).size.width * 0.45,
                     child: _progress != null
-                        ? Center(child: CircularProgressIndicator())
+                        ? const Center(child: CircularProgressIndicator())
                         : DownloadButtonWidget(
                             onTap: () async {
                               // await download(Dio(), "${widget.putusan.urlDetailFilePutusan}",

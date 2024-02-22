@@ -19,4 +19,18 @@ class GetBeritaLoaded extends GetBeritaState {
   }
 }
 
+class GetBeritaSort extends GetBeritaState {
+  List<dynamic> data; //ambil items nya aja
+  //BeritaResponseModel data;
+
+  GetBeritaSort({required this.data});
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is GetBeritaSort && other.data == data;
+  }
+}
+
 class GetBeritaError extends GetBeritaState {}

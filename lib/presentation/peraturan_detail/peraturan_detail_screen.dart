@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:jdih_bumn/data/model/response/peraturan_hukum_response_model.dart';
 
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/bagikan_button_widget.dart';
@@ -96,7 +95,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
     // String convertedDate = new DateFormat("dd-MM-yyyy").format(parsedDate);
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(45),
+        preferredSize: const Size.fromHeight(45),
         child: AppBar(
           title: const Text(
             "Peraturan",
@@ -232,8 +231,8 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
             ),
             // kalau diatas sama dengan 500 karakter, heightnya 1800
             // widget.peraturanHukum.abstraksi!.length <= 200000
-            Padding(
-              padding: const EdgeInsets.only(left: 17),
+            const Padding(
+              padding: EdgeInsets.only(left: 17),
               child: Align(
                 alignment: Alignment.topLeft,
                 child: Text(
@@ -290,7 +289,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                         : widget.peraturanHukum.tentang!.length >= 45 &&
                                 widget.peraturanHukum.tentang!.length <= 84
                             ? 100
-                            : widget.peraturanHukum.tentang!.length >= 1 &&
+                            : widget.peraturanHukum.tentang!.isNotEmpty &&
                                     widget.peraturanHukum.tentang!.length <= 44
                                 ? 80
                                 : 100
@@ -375,10 +374,10 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
               BoxShadow(
                   color: Colors.grey.withOpacity(0.05),
                   spreadRadius: 1,
-                  offset: Offset(0, -10),
+                  offset: const Offset(0, -10),
                   blurRadius: 1),
             ],
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

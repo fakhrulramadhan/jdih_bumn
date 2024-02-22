@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jdih_bumn/data/datasources/stage/berita_datasource.dart';
 import 'package:jdih_bumn/data/model/response/stage/berita_response_model.dart';
@@ -20,6 +19,16 @@ class GetBeritaBloc extends Bloc<GetBeritaEvent, GetBeritaState> {
 
       result.fold(
           (l) => emit(GetBeritaError()), (r) => emit(GetBeritaLoaded(data: r)));
+    });
+
+    on<DoGetBeritaSort>((event, emit) async {
+      emit(GetBeritaLoading());
+
+      //final result = await datasource.fetchsortBerita();
+
+      final result = await datasource.fetchsortBerita();
+      result.fold(
+          (l) => emit(GetBeritaError()), (r) => emit(GetBeritaSort(data: r)));
     });
   }
 }

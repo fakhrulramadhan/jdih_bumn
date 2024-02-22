@@ -23,7 +23,7 @@ class _BeritaDetailScreenState extends State<BeritaDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String _parseHtmlString(String? htmlString) {
+    String parseHtmlString(String? htmlString) {
       final document = parse(htmlString);
       final String parsedString =
           parse(document.body!.text).documentElement!.text;
@@ -31,7 +31,7 @@ class _BeritaDetailScreenState extends State<BeritaDetailScreen> {
       return parsedString;
     }
 
-    int hitungString = _parseHtmlString(widget.berita.narasi).length;
+    int hitungString = parseHtmlString(widget.berita.narasi).length;
 
     return Scaffold(
       appBar: AppBar(
@@ -54,7 +54,7 @@ class _BeritaDetailScreenState extends State<BeritaDetailScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              height: 250,
+              //height: 250,
               width: MediaQuery.of(context).size.width,
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
@@ -79,13 +79,18 @@ class _BeritaDetailScreenState extends State<BeritaDetailScreen> {
             ),
             Center(
               child: Container(
-                height: _parseHtmlString(widget.berita.narasi).length <= 1100
-                    ? 700
-                    : _parseHtmlString(widget.berita.narasi).length > 750 &&
-                            _parseHtmlString(widget.berita.narasi).length <=
-                                3500
-                        ? 1350
-                        : 3100,
+                // height: parseHtmlString(widget.berita.narasi).length <= 1100
+                //     ? 700
+                //     : parseHtmlString(widget.berita.narasi).length > 750 &&
+                //             parseHtmlString(widget.berita.narasi).length <=
+                //                 3500
+                //         ? 1000
+                //         : parseHtmlString(widget.berita.narasi).length >
+                //                     3500 &&
+                //                 parseHtmlString(widget.berita.narasi).length <=
+                //                     8000
+                //             ? 2700
+                //             : 3100,
                 //height: double.infinity,
                 color: Colors.white,
                 padding: const EdgeInsets.only(left: 20, right: 20),
@@ -93,19 +98,19 @@ class _BeritaDetailScreenState extends State<BeritaDetailScreen> {
                   children: [
                     Text(
                       "${widget.berita.judul}",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                       ),
                       overflow: TextOverflow.visible,
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 18.0,
                     ),
                     Text(
-                      '''${_parseHtmlString(widget.berita.narasi)}''',
-                      style: TextStyle(
+                      parseHtmlString(widget.berita.narasi),
+                      style: const TextStyle(
                         fontSize: 12.0,
                       ),
                       textAlign: TextAlign.justify,
@@ -126,10 +131,10 @@ class _BeritaDetailScreenState extends State<BeritaDetailScreen> {
               BoxShadow(
                   color: Colors.grey.withOpacity(0.05),
                   spreadRadius: 1,
-                  offset: Offset(0, -10),
+                  offset: const Offset(0, -10),
                   blurRadius: 1),
             ],
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -137,8 +142,8 @@ class _BeritaDetailScreenState extends State<BeritaDetailScreen> {
             BagikanButtonBeritaWidget(
               onPressed: () async {
                 String urlLink = "${widget.berita.urlDetailBerita}";
-                print(_parseHtmlString(widget.berita.narasi).length);
-                await Share.share("$urlLink");
+                print(parseHtmlString(widget.berita.narasi).length);
+                await Share.share(urlLink);
               },
             )
           ],

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jdih_bumn/presentation/populer/widget/populer_widget.dart';
 
@@ -72,7 +71,7 @@ class _PopulerScreenState extends State<PopulerScreen> {
             const SizedBox(
               height: 28.0,
             ),
-            PopulerWidget(),
+            const PopulerWidget(),
             // const PopulerWidget(
             //   judul: "SEMENBUMN",
             //   nosk: "SK-8/DKU.MBU/12/2023",

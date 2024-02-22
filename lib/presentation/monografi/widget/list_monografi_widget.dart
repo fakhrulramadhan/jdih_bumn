@@ -38,18 +38,11 @@ class _ListMonografiWidgetState extends State<ListMonografiWidget> {
         }
 
         if (state is GetProdukHukumLoaded) {
-          if (state.data == null) {
-            return const Center(
-              child: Center(
-                child: Text("Belum ada data"),
-              ),
-            );
-          }
           List<ProdukHukumResponseModel> produkhukumList = state.data;
 
           return GridView.builder(
             shrinkWrap: true,
-            physics: ScrollPhysics(),
+            physics: const ScrollPhysics(),
             controller: ScrollController(), //agar smooth
             scrollDirection: Axis.vertical,
             itemCount: produkhukumList.length,

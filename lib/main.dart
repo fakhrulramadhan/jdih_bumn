@@ -26,7 +26,6 @@ import 'package:jdih_bumn/data/datasources/stage/putusan_datasource.dart';
 import 'package:jdih_bumn/data/datasources/stage/struktur_jdih_datasource.dart';
 import 'package:jdih_bumn/data/datasources/stage/tentang_jdih_datasource.dart';
 import 'package:jdih_bumn/presentation/splash_screen_lottie/splash_screen_lottie.dart';
-import 'package:intl/intl.dart';
 
 void main() async {
   // BlocOverrides.runZoned(() => runApp(const MyApp()),
@@ -36,7 +35,7 @@ void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
 
-  await initializeDateFormatting('id_ID', null).then((_) => runApp(MyApp()));
+  await initializeDateFormatting('id_ID', null).then((_) => runApp(const MyApp()));
   //lock potrait only
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((value) => runApp(const MyApp()));

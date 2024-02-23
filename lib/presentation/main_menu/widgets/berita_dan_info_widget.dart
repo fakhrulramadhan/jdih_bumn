@@ -1,14 +1,10 @@
 // ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
 
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:jdih_bumn/bloc/stage/get_berita/get_berita_bloc.dart';
-import 'package:http/http.dart' as http;
-import 'package:jdih_bumn/constants/constants.dart';
-import 'package:jdih_bumn/data/model/response/stage/berita_response_model.dart';
 import 'package:jdih_bumn/presentation/berita_detail/berita_detail_screen.dart';
 
 class BeritaDanInfoWidget extends StatefulWidget {
@@ -72,7 +68,7 @@ class _BeritaDanInfoWidgetState extends State<BeritaDanInfoWidget> {
                 },
                 child: Center(
                   child: Container(
-                    height: 190,
+                    height: 240,
                     width: MediaQuery.of(context).size.width * 0.9,
                     padding:
                         const EdgeInsets.only(top: 10, left: 10, right: 10),
@@ -101,7 +97,7 @@ class _BeritaDanInfoWidgetState extends State<BeritaDanInfoWidget> {
                         ),
                         Center(
                           child: Text(
-                            "${convertedDate}",
+                            convertedDate,
                             style: const TextStyle(
                                 fontSize: 15.0,
                                 color: Colors.blue,
@@ -118,8 +114,8 @@ class _BeritaDanInfoWidgetState extends State<BeritaDanInfoWidget> {
                           child: Image.network(
                             "${sortberita.imagePathFull}",
                             width: 270.0,
-                            height: 90.0,
-                            fit: BoxFit.fill,
+                            height: 140.0,
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ],

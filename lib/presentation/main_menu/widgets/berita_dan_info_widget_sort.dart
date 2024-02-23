@@ -29,13 +29,13 @@ class _BeritaDanInfoWidgetSortState extends State<BeritaDanInfoWidgetSort> {
     return BlocBuilder<GetBeritaBloc, GetBeritaState>(
       builder: (context, state) {
         if (state is GetBeritaError) {
-          return Center(
+          return const Center(
             child: Text("Data Error"),
           );
         }
 
         if (state is GetBeritaLoading) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         }
@@ -43,7 +43,7 @@ class _BeritaDanInfoWidgetSortState extends State<BeritaDanInfoWidgetSort> {
         if (state is GetBeritaSort) {
           return ListView.builder(
             itemCount: state.data.length,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemBuilder: (context, index) {
               final sortberita = state.data[index];
@@ -108,7 +108,7 @@ class _BeritaDanInfoWidgetSortState extends State<BeritaDanInfoWidgetSort> {
           );
         }
 
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(),
         );
       },

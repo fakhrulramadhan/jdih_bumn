@@ -74,15 +74,14 @@ class _OrgansisasiWidgetState extends State<PengelolaanWidget> {
                                 physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 itemBuilder: (context, index) {
-                                  final strukturJdih =
-                                      state.data.items![index];
+                                  final strukturJdih = state.data.items![index];
 
                                   print(
                                       "ini jumlah datanya ${state.data.items!.length}");
 
                                   return SizedBox(
-                                    width: 340,
-                                    height: 431,
+                                    width: 340, //340
+                                    height: 440, //440
                                     child: Image.network(
                                       "${strukturJdih.pengelola}",
                                       // width: 340,

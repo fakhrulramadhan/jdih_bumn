@@ -5,7 +5,6 @@ import 'package:jdih_bumn/presentation/artikel/artikel_screen.dart';
 import 'package:jdih_bumn/presentation/berita/berita_screen.dart';
 import 'package:jdih_bumn/presentation/kamus_hukum/kamus_hukum_screen.dart';
 import 'package:jdih_bumn/presentation/main_menu/widgets/berita_dan_info_widget.dart';
-import 'package:jdih_bumn/presentation/main_menu/widgets/berita_dan_info_widget_sort.dart';
 import 'package:jdih_bumn/presentation/main_menu/widgets/disclaimer_stack_widget.dart';
 import 'package:jdih_bumn/presentation/main_menu/widgets/infografis_widget_new.dart';
 import 'package:jdih_bumn/presentation/main_menu/widgets/list_menu_peraturan_bumn_widget.dart';

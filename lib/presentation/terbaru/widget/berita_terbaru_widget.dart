@@ -37,27 +37,27 @@ class _BeritaTerbaruWidgetState extends State<BeritaTerbaruWidget> {
     return BlocBuilder<GetPeraturanTerbaruBloc, GetPeraturanTerbaruState>(
       builder: (context, state) {
         if (state is GetPeraturanTerbaruLoading) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         }
 
         if (state is GetPeraturanTerbaruError) {
-          return Center(
+          return const Center(
             child: Text("Data Error"),
           );
         }
 
         if (state is GetPeraturanTerbaruLoaded) {
           if (state.data.items!.isEmpty) {
-            return Center(
+            return const Center(
               child: Text("Data Kosong"),
             );
           }
 
           return ListView.builder(
             itemCount: state.data.items!.length,
-            physics: ScrollPhysics(),
+            physics: const ScrollPhysics(),
             shrinkWrap: true,
             scrollDirection: Axis.vertical,
             itemBuilder: (BuildContext context, index) {
@@ -220,7 +220,7 @@ class _BeritaTerbaruWidgetState extends State<BeritaTerbaruWidget> {
                                     width: 2.0,
                                   ),
                                   Text(
-                                    "${convertedDate}",
+                                    convertedDate,
                                     style: const TextStyle(
                                       fontSize: 9.0,
                                       color: Colors.black,
@@ -259,7 +259,7 @@ class _BeritaTerbaruWidgetState extends State<BeritaTerbaruWidget> {
           );
         }
 
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(),
         );
       },

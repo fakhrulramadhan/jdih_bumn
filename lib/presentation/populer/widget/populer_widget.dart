@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:jdih_bumn/bloc/stage/get_peraturan_populer.dart/get_peraturan_populer_bloc.dart';
 
 import '../../../data/model/response/stage/peraturan_populer_response_model.dart';
+//import '../../../data/model/response/stage/peraturan_populer_new_response_model.dart';
 
 class PopulerWidget extends StatefulWidget {
   // final String judul;
@@ -62,6 +64,11 @@ class _PopulerWidgetState extends State<PopulerWidget> {
               final Item peraturanPopuler = state.data.items![index];
 
               print("ini jumlah datanya ${state.data.items!.length}");
+              var parsedDate =
+                  DateTime.parse('${peraturanPopuler.tanggalPengundangan}');
+
+              String tglPerngundangan =
+                  DateFormat("dd-MM-yyyy").format(parsedDate);
 
               return SizedBox(
                 height: 185,
@@ -110,7 +117,7 @@ class _PopulerWidgetState extends State<PopulerWidget> {
                                       SizedBox(
                                         width: 260,
                                         child: Text(
-                                          "${peraturanPopuler.jenisPeraturanShort}",
+                                          "${peraturanPopuler.jenis}",
                                           style: const TextStyle(
                                             fontSize: 14.0,
                                             fontWeight: FontWeight.w600,
@@ -135,7 +142,7 @@ class _PopulerWidgetState extends State<PopulerWidget> {
                                         height: 8.0,
                                       ),
                                       Text(
-                                        "${peraturanPopuler.deskripsiTentang}",
+                                        "${peraturanPopuler.judul}",
                                         style: const TextStyle(
                                           fontSize: 12.0,
                                           fontWeight: FontWeight.w500,
@@ -168,7 +175,7 @@ class _PopulerWidgetState extends State<PopulerWidget> {
                                   width: 2.0,
                                 ),
                                 Text(
-                                  "${peraturanPopuler.tglPenetapanMigrasi}",
+                                  "${tglPerngundangan}",
                                   style: const TextStyle(
                                     fontSize: 9.0,
                                     color: Colors.black,

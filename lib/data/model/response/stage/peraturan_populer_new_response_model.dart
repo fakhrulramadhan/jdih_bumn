@@ -1,42 +1,43 @@
 // To parse this JSON data, do
 //
-//     final peraturanPopulerResponseModel = peraturanPopulerResponseModelFromJson(jsonString);
+//     final peraturanPopulerNewResponseModel = peraturanPopulerNewResponseModelFromJson(jsonString);
 
 import 'dart:convert';
 
-PeraturanPopulerResponseModel peraturanPopulerResponseModelFromJson(
+PeraturanPopulerNewResponseModel peraturanPopulerNewResponseModelFromJson(
         String str) =>
-    PeraturanPopulerResponseModel.fromJson(json.decode(str));
+    PeraturanPopulerNewResponseModel.fromJson(json.decode(str));
 
-String peraturanPopulerResponseModelToJson(
-        PeraturanPopulerResponseModel data) =>
+String peraturanPopulerNewResponseModelToJson(
+        PeraturanPopulerNewResponseModel data) =>
     json.encode(data.toJson());
 
-class PeraturanPopulerResponseModel {
+class PeraturanPopulerNewResponseModel {
   final List<Item>? items;
 
-  PeraturanPopulerResponseModel({
+  PeraturanPopulerNewResponseModel({
     this.items,
   });
 
-  PeraturanPopulerResponseModel copyWith({
+  PeraturanPopulerNewResponseModel copyWith({
     List<Item>? items,
   }) =>
-      PeraturanPopulerResponseModel(
+      PeraturanPopulerNewResponseModel(
         items: items ?? this.items,
       );
 
-  factory PeraturanPopulerResponseModel.fromJson(Map<String, dynamic> json) =>
-      PeraturanPopulerResponseModel(
-        items: json["items"] == null
-            ? []
-            : List<Item>.from(json["items"]!.map((x) => Item.fromJson(x))),
+  factory PeraturanPopulerNewResponseModel.fromJson(
+          Map<String, dynamic> json) =>
+      PeraturanPopulerNewResponseModel(
+        items: json["items"] != null
+            ? List<Item>.from(json["items"].map((x) => Item.fromJson(x)))
+            : null,
       );
 
   Map<String, dynamic> toJson() => {
-        "items": items == null
-            ? []
-            : List<dynamic>.from(items!.map((x) => x.toJson())),
+        "items": items != null
+            ? List<dynamic>.from(items!.map((x) => x.toJson()))
+            : null,
       };
 }
 
@@ -175,17 +176,13 @@ class Item {
         nomorPeraturanBaru: json["nomor_peraturan_baru"],
         id: json["id"],
         tahunPengundangan: json["tahun_pengundangan"],
-        tanggalPengundangan: json["tanggal_pengundangan"] == null
-            ? null
-            : DateTime.parse(json["tanggal_pengundangan"]),
+        tanggalPengundangan: DateTime.parse(json["tanggal_pengundangan"]),
         jenis: json["jenis"],
         judul: json["judul"],
         singkatanJenis: json["singkatanJenis"],
         tempatTerbit: json["tempatTerbit"],
         sumber: json["sumber"],
-        subjek: json["subjek"] == null
-            ? []
-            : List<String>.from(json["subjek"]!.map((x) => x)),
+        subjek: List<String>.from(json["subjek"].map((x) => x)),
         status: json["status"],
         bahasa: json["bahasa"],
         bidangHukum: json["bidangHukum"],
@@ -197,23 +194,16 @@ class Item {
         countReader: json["count_reader"],
         fileLampiran: json["file_lampiran"],
         fileAbstrak: json["file_abstrak"],
-        tglPenetapan: json["tgl_penetapan"] == null
-            ? null
-            : DateTime.parse(json["tgl_penetapan"]),
+        tglPenetapan: DateTime.parse(json["tgl_penetapan"]),
         perNoBaru: json["per_no_baru"],
         perNoObjek: json["per_no_objek"],
         urlFileLampiran: json["urlFileLampiran"],
         urlFileAbstrak: json["urlFileAbstrak"],
         seeData: json["see_data"],
-        createdAt: json["created_at"] == null
-            ? null
-            : DateTime.parse(json["created_at"]),
-        updatedAt: json["updated_at"] == null
-            ? null
-            : DateTime.parse(json["updated_at"]),
-        detailStatusPeraturan: json["detailStatusPeraturan"] == null
-            ? []
-            : List<DetailStatusPeraturan>.from(json["detailStatusPeraturan"]!
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+        detailStatusPeraturan: List<DetailStatusPeraturan>.from(
+            json["detailStatusPeraturan"]
                 .map((x) => DetailStatusPeraturan.fromJson(x))),
       );
 
@@ -221,15 +211,16 @@ class Item {
         "nomor_peraturan_baru": nomorPeraturanBaru,
         "id": id,
         "tahun_pengundangan": tahunPengundangan,
-        "tanggal_pengundangan":
-            "${tanggalPengundangan!.year.toString().padLeft(4, '0')}-${tanggalPengundangan!.month.toString().padLeft(2, '0')}-${tanggalPengundangan!.day.toString().padLeft(2, '0')}",
+        "tanggal_pengundangan": tanggalPengundangan != null
+            ? "${tanggalPengundangan!.year.toString().padLeft(4, '0')}-${tanggalPengundangan?.month.toString().padLeft(2, '0')}-${tanggalPengundangan?.day.toString().padLeft(2, '0')}"
+            : null,
         "jenis": jenis,
         "judul": judul,
         "singkatanJenis": singkatanJenis,
         "tempatTerbit": tempatTerbit,
         "sumber": sumber,
         "subjek":
-            subjek == null ? [] : List<dynamic>.from(subjek!.map((x) => x)),
+            subjek != null ? List<dynamic>.from(subjek!.map((x) => x)) : null,
         "status": status,
         "bahasa": bahasa,
         "bidangHukum": bidangHukum,
@@ -241,8 +232,9 @@ class Item {
         "count_reader": countReader,
         "file_lampiran": fileLampiran,
         "file_abstrak": fileAbstrak,
-        "tgl_penetapan":
-            "${tglPenetapan!.year.toString().padLeft(4, '0')}-${tglPenetapan!.month.toString().padLeft(2, '0')}-${tglPenetapan!.day.toString().padLeft(2, '0')}",
+        "tgl_penetapan": tglPenetapan != null
+            ? "${tglPenetapan!.year.toString().padLeft(4, '0')}-${tglPenetapan?.month.toString().padLeft(2, '0')}-${tglPenetapan?.day.toString().padLeft(2, '0')}"
+            : null,
         "per_no_baru": perNoBaru,
         "per_no_objek": perNoObjek,
         "urlFileLampiran": urlFileLampiran,
@@ -250,9 +242,9 @@ class Item {
         "see_data": seeData,
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
-        "detailStatusPeraturan": detailStatusPeraturan == null
-            ? []
-            : List<dynamic>.from(detailStatusPeraturan!.map((x) => x.toJson())),
+        "detailStatusPeraturan": detailStatusPeraturan != null
+            ? List<dynamic>.from(detailStatusPeraturan!.map((x) => x.toJson()))
+            : null,
       };
 }
 

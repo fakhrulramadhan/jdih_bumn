@@ -26,15 +26,15 @@ class PeraturanResponseModel {
 
   factory PeraturanResponseModel.fromJson(Map<String, dynamic> json) =>
       PeraturanResponseModel(
-        items: json["items"] == null
-            ? []
-            : List<Item>.from(json["items"]!.map((x) => Item.fromJson(x))),
+        items: json["items"] != null
+            ? List<Item>.from(json["items"].map((x) => Item.fromJson(x)))
+            : null,
       );
 
   Map<String, dynamic> toJson() => {
-        "items": items == null
-            ? []
-            : List<dynamic>.from(items!.map((x) => x.toJson())),
+        "items": items != null
+            ? List<dynamic>.from(items!.map((x) => x.toJson()))
+            : null,
       };
 }
 
@@ -170,22 +170,33 @@ class Item {
       );
 
   factory Item.fromJson(Map<String, dynamic> json) => Item(
-        nomorPeraturanBaru: json["nomor_peraturan_baru"],
+        nomorPeraturanBaru: json["nomor_peraturan_baru"] ?? "",
         id: json["id"],
         tahunPengundangan: json["tahun_pengundangan"],
-        tanggalPengundangan: json["tanggal_pengundangan"] == null
-            ? null
-            : DateTime.parse(json["tanggal_pengundangan"]),
-        jenis: jenisValues.map[json["jenis"]]!,
+        tanggalPengundangan: json["tanggal_pengundangan"] != null
+            ? DateTime.parse(json["tanggal_pengundangan"])
+            : null,
+        jenis: json["jenis"] != null ? jenisValues.map[json["jenis"]] : null,
         judul: json["judul"],
-        singkatanJenis: singkatanJenisValues.map[json["singkatanJenis"]]!,
-        tempatTerbit: tempatTerbitValues.map[json["tempatTerbit"]]!,
-        sumber: subjekEnumValues.map[json["sumber"]]!,
+        singkatanJenis: json["singkatanJenis"] != null
+            ? singkatanJenisValues.map[json["singkatanJenis"]]
+            : null,
+        tempatTerbit: json["tempatTerbit"] != null
+            ? tempatTerbitValues.map[json["tempatTerbit"]]
+            : null,
+        sumber: json["sumber"] != null
+            ? subjekEnumValues.map[json["sumber"]]
+            : null,
         subjek: json["subjek"],
         status: json["status"],
-        bahasa: bahasaValues.map[json["bahasa"]]!,
-        bidangHukum: bidangHukumValues.map[json["bidangHukum"]]!,
-        teuBadan: teuBadanValues.map[json["teuBadan"]]!,
+        bahasa:
+            json["bahasa"] != null ? bahasaValues.map[json["bahasa"]] : null,
+        bidangHukum: json["bidangHukum"] != null
+            ? bidangHukumValues.map[json["bidangHukum"]]
+            : null,
+        teuBadan: json["teuBadan"] != null
+            ? teuBadanValues.map[json["teuBadan"]]
+            : null,
         fileDownload: json["fileDownload"],
         urlDownload: json["urlDownload"],
         urlDetailPeraturan: json["urlDetailPeraturan"],
@@ -193,24 +204,24 @@ class Item {
         countReader: json["count_reader"],
         fileLampiran: json["file_lampiran"],
         fileAbstrak: json["file_abstrak"],
-        tglPenetapan: json["tgl_penetapan"] == null
-            ? null
-            : DateTime.parse(json["tgl_penetapan"]),
+        tglPenetapan: json["tgl_penetapan"] != null
+            ? DateTime.parse(json["tgl_penetapan"])
+            : null,
         perNoBaru: json["per_no_baru"],
         perNoObjek: json["per_no_objek"],
         urlFileLampiran: json["urlFileLampiran"],
         urlFileAbstrak: json["urlFileAbstrak"],
         seeData: json["see_data"],
-        createdAt: json["created_at"] == null
-            ? null
-            : DateTime.parse(json["created_at"]),
-        updatedAt: json["updated_at"] == null
-            ? null
-            : DateTime.parse(json["updated_at"]),
-        detailStatusPeraturan: json["detailStatusPeraturan"] == null
-            ? []
-            : List<DetailStatusPeraturan>.from(json["detailStatusPeraturan"]!
-                .map((x) => DetailStatusPeraturan.fromJson(x))),
+        createdAt: json["created_at"] != null
+            ? DateTime.parse(json["created_at"])
+            : null,
+        updatedAt: json["updated_at"] != null
+            ? DateTime.parse(json["updated_at"])
+            : null,
+        detailStatusPeraturan: json["detailStatusPeraturan"] != null
+            ? List<DetailStatusPeraturan>.from(json["detailStatusPeraturan"]
+                .map((x) => DetailStatusPeraturan.fromJson(x)))
+            : null,
       );
 
   Map<String, dynamic> toJson() => {
@@ -218,17 +229,23 @@ class Item {
         "id": id,
         "tahun_pengundangan": tahunPengundangan,
         "tanggal_pengundangan":
-            "${tanggalPengundangan!.year.toString().padLeft(4, '0')}-${tanggalPengundangan!.month.toString().padLeft(2, '0')}-${tanggalPengundangan!.day.toString().padLeft(2, '0')}",
-        "jenis": jenisValues.reverse[jenis],
+            "${tanggalPengundangan?.year.toString().padLeft(4, '0')}-${tanggalPengundangan?.month.toString().padLeft(2, '0')}-${tanggalPengundangan?.day.toString().padLeft(2, '0')}",
+        "jenis": jenis != null ? jenisValues.reverse[jenis!] : null,
         "judul": judul,
-        "singkatanJenis": singkatanJenisValues.reverse[singkatanJenis],
-        "tempatTerbit": tempatTerbitValues.reverse[tempatTerbit],
-        "sumber": subjekEnumValues.reverse[sumber],
+        "singkatanJenis": singkatanJenis != null
+            ? singkatanJenisValues.reverse[singkatanJenis!]
+            : null,
+        "tempatTerbit": tempatTerbit != null
+            ? tempatTerbitValues.reverse[tempatTerbit!]
+            : null,
+        "sumber": sumber != null ? subjekEnumValues.reverse[sumber!] : null,
         "subjek": subjek,
         "status": status,
-        "bahasa": bahasaValues.reverse[bahasa],
-        "bidangHukum": bidangHukumValues.reverse[bidangHukum],
-        "teuBadan": teuBadanValues.reverse[teuBadan],
+        "bahasa": bahasa != null ? bahasaValues.reverse[bahasa!] : null,
+        "bidangHukum": bidangHukum != null
+            ? bidangHukumValues.reverse[bidangHukum!]
+            : null,
+        "teuBadan": teuBadan != null ? teuBadanValues.reverse[teuBadan!] : null,
         "fileDownload": fileDownload,
         "urlDownload": urlDownload,
         "urlDetailPeraturan": urlDetailPeraturan,
@@ -237,7 +254,7 @@ class Item {
         "file_lampiran": fileLampiran,
         "file_abstrak": fileAbstrak,
         "tgl_penetapan":
-            "${tglPenetapan!.year.toString().padLeft(4, '0')}-${tglPenetapan!.month.toString().padLeft(2, '0')}-${tglPenetapan!.day.toString().padLeft(2, '0')}",
+            "${tglPenetapan?.year.toString().padLeft(4, '0')}-${tglPenetapan?.month.toString().padLeft(2, '0')}-${tglPenetapan?.day.toString().padLeft(2, '0')}",
         "per_no_baru": perNoBaru,
         "per_no_objek": perNoObjek,
         "urlFileLampiran": urlFileLampiran,
@@ -245,9 +262,9 @@ class Item {
         "see_data": seeData,
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
-        "detailStatusPeraturan": detailStatusPeraturan == null
-            ? []
-            : List<dynamic>.from(detailStatusPeraturan!.map((x) => x.toJson())),
+        "detailStatusPeraturan": detailStatusPeraturan != null
+            ? List<dynamic>.from(detailStatusPeraturan!.map((x) => x.toJson()))
+            : null,
       };
 }
 
@@ -308,7 +325,7 @@ class DetailStatusPeraturan {
   factory DetailStatusPeraturan.fromJson(Map<String, dynamic> json) =>
       DetailStatusPeraturan(
         detailNamaStatus:
-            detailNamaStatusValues.map[json["detail_nama_status"]]!,
+            detailNamaStatusValues.map[json["detail_nama_status"]],
         perNoObjek: json["per_no_objek"],
       );
 

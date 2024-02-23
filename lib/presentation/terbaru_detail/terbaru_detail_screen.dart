@@ -8,7 +8,6 @@ import 'package:jdih_bumn/data/model/response/stage/peraturan_terbaru_response_m
 
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/bagikan_button_widget.dart';
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/download_button_widget.dart';
-import 'package:jdih_bumn/presentation/peraturan_detail/widget/icon_info_widget.dart';
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/info_detail_widget.dart';
 //import 'widget/icon_info_widget.dart';
 
@@ -105,12 +104,12 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
     var parsedDatePerngundangan =
         DateTime.parse('${widget.peraturanTerbaru.tanggalPengundangan}');
 
-    String convertedDate = new DateFormat("dd-MM-yyyy").format(parsedDate);
+    String convertedDate = DateFormat("dd-MM-yyyy").format(parsedDate);
 
     String convertedDateUndang =
-        new DateFormat("dd-MM-yyyy").format(parsedDatePerngundangan);
+        DateFormat("dd-MM-yyyy").format(parsedDatePerngundangan);
 
-    double? _progress;
+    double? progress;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(45),
@@ -272,7 +271,7 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
                     ? "-"
                     : widget.peraturanTerbaru.urlFileAbstrak!,
                 heightTitle: 70),
-            InfoDetailTerbaruWidget(
+            const InfoDetailTerbaruWidget(
               title: "Tipe Dokumen",
               subtitle: "Peraturan",
               heightTitle: 80,
@@ -330,12 +329,12 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
             //"${widget.peraturanHukum.tanggal}"
             InfoDetailWidget(
               title: "Tanggal-bulan-tahun Penetapan",
-              subtitle: "${convertedDate}",
+              subtitle: convertedDate,
               heightTitle: 80,
             ),
             InfoDetailWidget(
               title: "Tanggal-bulan-tahun Pengundangan",
-              subtitle: "${convertedDateUndang}",
+              subtitle: convertedDateUndang,
             ),
             InfoDetailWidget(
               title: "Sumber",
@@ -413,7 +412,7 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
                   )
                 : SizedBox(
                     width: MediaQuery.of(context).size.width * 0.45,
-                    child: _progress != null
+                    child: progress != null
                         ? const Center(child: CircularProgressIndicator())
                         : DownloadButtonWidget(
                             onTap: () async {
@@ -426,14 +425,14 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
                                 url: "${widget.peraturanTerbaru.urlDownload}",
                                 onProgress: (fileName, progresz) {
                                   setState(() {
-                                    _progress = progresz;
+                                    progress = progresz;
                                   });
                                 },
                                 onDownloadCompleted: (path) {
                                   print('Path: $path');
 
                                   setState(() {
-                                    _progress = null;
+                                    progress = null;
                                   });
                                 },
                               );

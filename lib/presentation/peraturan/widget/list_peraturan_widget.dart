@@ -119,12 +119,16 @@ class _ListPeraturanWidgetState extends State<ListPeraturanWidget> {
                               child: Stack(
                                 children: [
                                   Container(
-                                    height: peraturan.judul!.length >= 100
+                                    height: peraturan.judul!.length >= 435
                                         ? 180
-                                        : peraturan.judul!.length >= 50 &&
-                                                peraturan.judul!.length < 100
-                                            ? 140
-                                            : 140,
+                                        : peraturan.judul!.length >= 100 &&
+                                                peraturan.judul!.length < 435
+                                            ? 180
+                                            : peraturan.judul!.length >= 50 &&
+                                                    peraturan.judul!.length <
+                                                        100
+                                                ? 140
+                                                : 140,
                                     width: 341,
                                     //color: Colors.yellow,
                                     padding: const EdgeInsets.all(20),
@@ -140,7 +144,7 @@ class _ListPeraturanWidgetState extends State<ListPeraturanWidget> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          peraturan.perNoBaru ?? '',
+                                          peraturan.perNoBaru ?? '-',
                                           style: const TextStyle(
                                             fontSize: 14.0,
                                             fontWeight: FontWeight.w600,
@@ -172,6 +176,7 @@ class _ListPeraturanWidgetState extends State<ListPeraturanWidget> {
                                             color: Colors.black,
                                           ),
                                           textAlign: TextAlign.left,
+                                          overflow: TextOverflow.fade,
                                         ),
                                       ],
                                     ),
@@ -236,7 +241,7 @@ class _ListPeraturanWidgetState extends State<ListPeraturanWidget> {
                                           width: 2.0,
                                         ),
                                         Text(
-                                          "${convertedDate}",
+                                          convertedDate,
                                           style: const TextStyle(
                                             fontSize: 9.0,
                                             color: Colors.black,

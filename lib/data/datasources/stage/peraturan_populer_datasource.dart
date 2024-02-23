@@ -5,6 +5,7 @@ import '../../../constants/constants.dart';
 import 'package:http/http.dart' as http;
 
 class PeraturanPopulerDatasource {
+  //PeraturanPopulerResponseModel PeraturanPopulerNewResponseModel
   Future<Either<String, PeraturanPopulerResponseModel>>
       getPeraturanPopuler() async {
     final response = await http.get(Uri.parse(

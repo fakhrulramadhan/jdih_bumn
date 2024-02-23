@@ -18,7 +18,7 @@ class PeraturanDatasource {
     } else {
       print(response.body);
 
-      return Left("Server Error");
+      return const Left("Server Error");
     }
   }
 }

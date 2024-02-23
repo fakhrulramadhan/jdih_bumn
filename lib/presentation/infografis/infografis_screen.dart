@@ -92,14 +92,15 @@ class _InfografisScreenState extends State<InfografisScreen> {
                           // ),
                           Center(
                             child: Container(
-                              height: 60,
-                              padding: const EdgeInsets.all(10),
+                              height: 80,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 10),
                               child: Text(
                                 "${widget.infografis.judul}",
                                 style: const TextStyle(
                                     fontSize: 14.0,
                                     color: Colors.white,
-                                    overflow: TextOverflow.visible),
+                                    overflow: TextOverflow.fade),
                                 textAlign: TextAlign.center,
                               ),
                             ),

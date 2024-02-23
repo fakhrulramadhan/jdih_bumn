@@ -102,12 +102,12 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
     var parsedDatePerngundangan =
         DateTime.parse('${widget.peraturan.tanggalPengundangan}');
 
-    String convertedDate = new DateFormat("dd-MM-yyyy").format(parsedDate);
+    String convertedDate = DateFormat("dd-MM-yyyy").format(parsedDate);
 
     String convertedDateUndang =
-        new DateFormat("dd-MM-yyyy").format(parsedDatePerngundangan);
+        DateFormat("dd-MM-yyyy").format(parsedDatePerngundangan);
 
-    double? _progress;
+    double? progress;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(45),
@@ -268,7 +268,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                     ? "-"
                     : widget.peraturan.urlFileAbstrak!,
                 heightTitle: 70),
-            InfoDetailWidget(
+            const InfoDetailWidget(
               title: "Tipe Dokumen",
               subtitle: "Peraturan",
               heightTitle: 80,
@@ -320,12 +320,12 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
             //"${widget.peraturanHukum.tanggal}"
             InfoDetailWidget(
               title: "Tanggal-bulan-tahun Penetapan",
-              subtitle: "${convertedDate}",
+              subtitle: convertedDate,
               heightTitle: 80,
             ),
             InfoDetailWidget(
               title: "Tanggal-bulan-tahun Pengundangan",
-              subtitle: "${convertedDateUndang}",
+              subtitle: convertedDateUndang,
             ),
             InfoDetailWidget(
               title: "Sumber",
@@ -356,7 +356,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
             ),
             InfoDetailWidget(
               title: "Lampiran",
-              subtitle: "${widget.peraturan.fileLampiran ?? "-"}",
+              subtitle: widget.peraturan.fileLampiran ?? "-",
               heightTitle: 80,
             ),
             const SizedBox(
@@ -402,7 +402,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                   )
                 : SizedBox(
                     width: MediaQuery.of(context).size.width * 0.45,
-                    child: _progress != null
+                    child: progress != null
                         ? const Center(child: CircularProgressIndicator())
                         : DownloadButtonWidget(
                             onTap: () async {
@@ -415,14 +415,14 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                                 url: "${widget.peraturan.urlDownload}",
                                 onProgress: (fileName, progresz) {
                                   setState(() {
-                                    _progress = progresz;
+                                    progress = progresz;
                                   });
                                 },
                                 onDownloadCompleted: (path) {
                                   print('Path: $path');
 
                                   setState(() {
-                                    _progress = null;
+                                    progress = null;
                                   });
                                 },
                               );

@@ -21,7 +21,7 @@ class PeraturanTerbaruDatasource {
     } else {
       print(response.body);
 
-      return Left("Server Error");
+      return const Left("Server Error");
     }
   }
 }

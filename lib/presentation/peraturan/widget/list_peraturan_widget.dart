@@ -71,23 +71,23 @@ class _ListPeraturanWidgetState extends State<ListPeraturanWidget> {
                 },
                 // length = panjang karakter
                 child: Container(
-                  height: peraturan.judul!.length >= 100
-                      ? 240
-                      : peraturan.judul!.length >= 50 &&
-                              peraturan.judul!.length < 100
-                          ? 190
-                          : 190,
+                  // height: peraturan.judul!.length >= 100
+                  //     ? 240
+                  //     : peraturan.judul!.length >= 50 &&
+                  //             peraturan.judul!.length < 100
+                  //         ? 190
+                  //         : 190,
                   width: 361,
                   padding: const EdgeInsets.all(5),
                   child: Column(
                     children: [
                       Container(
-                        height: peraturan.judul!.length >= 100
-                            ? 210
-                            : peraturan.judul!.length >= 50 &&
-                                    peraturan.judul!.length < 100
-                                ? 170
-                                : 170,
+                        // height: peraturan.judul!.length >= 100
+                        //     ? 210
+                        //     : peraturan.judul!.length >= 50 &&
+                        //             peraturan.judul!.length < 100
+                        //         ? 170
+                        //         : 170,
                         width: 361,
                         decoration: const BoxDecoration(
                             color: Colors.white,
@@ -106,12 +106,12 @@ class _ListPeraturanWidgetState extends State<ListPeraturanWidget> {
                         child: Column(
                           children: [
                             Container(
-                              height: peraturan.judul!.length >= 100
-                                  ? 180
-                                  : peraturan.judul!.length >= 50 &&
-                                          peraturan.judul!.length < 100
-                                      ? 140
-                                      : 140,
+                              // height: peraturan.judul!.length >= 100
+                              //     ? 180
+                              //     : peraturan.judul!.length >= 50 &&
+                              //             peraturan.judul!.length < 100
+                              //         ? 140
+                              //         : 140,
                               width: 361,
                               //color: Colors.brown,
                               padding:
@@ -119,16 +119,16 @@ class _ListPeraturanWidgetState extends State<ListPeraturanWidget> {
                               child: Stack(
                                 children: [
                                   Container(
-                                    height: peraturan.judul!.length >= 435
-                                        ? 180
-                                        : peraturan.judul!.length >= 100 &&
-                                                peraturan.judul!.length < 435
-                                            ? 180
-                                            : peraturan.judul!.length >= 50 &&
-                                                    peraturan.judul!.length <
-                                                        100
-                                                ? 140
-                                                : 140,
+                                    // height: peraturan.judul!.length >= 435
+                                    //     ? 180
+                                    //     : peraturan.judul!.length >= 100 &&
+                                    //             peraturan.judul!.length < 435
+                                    //         ? 180
+                                    //         : peraturan.judul!.length >= 50 &&
+                                    //                 peraturan.judul!.length <
+                                    //                     100
+                                    //             ? 140
+                                    //             : 140,
                                     width: 341,
                                     //color: Colors.yellow,
                                     padding: const EdgeInsets.all(20),

@@ -169,7 +169,7 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
                           height: 10.0,
                         ),
                         Text(
-                          "${widget.peraturanTerbaru.teuBadan}",
+                          "${widget.peraturanTerbaru.teuBadan ?? ''}",
                           style: const TextStyle(
                             fontSize: 24.0,
                             fontWeight: FontWeight.bold,
@@ -181,7 +181,7 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
                           height: 10.0,
                         ),
                         Text(
-                          "${widget.peraturanTerbaru.perNoBaru}",
+                          "${widget.peraturanTerbaru.perNoBaru ?? ''}",
                           style: const TextStyle(
                             fontSize: 14.0,
                             color: Colors.white,
@@ -192,7 +192,7 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
                           height: 20.0,
                         ),
                         Text(
-                          "${widget.peraturanTerbaru.judul}",
+                          "${widget.peraturanTerbaru.judul ?? ''}",
                           style: const TextStyle(
                             fontSize: 14.0,
                             fontWeight: FontWeight.bold,
@@ -220,23 +220,24 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
                             children: [
                               IconInfoTerbaruWidget(
                                   imageUrl: "assets/images/berlaku.svg",
-                                  title: widget.peraturanTerbaru.status!.isEmpty
+                                  title: widget.peraturanTerbaru.status == null
                                       ? '-'
                                       : "Baru",
                                   subtitle: "Status"),
                               IconInfoTerbaruWidget(
                                   imageUrl: "assets/images/kalender.svg",
                                   title:
-                                      "${widget.peraturanTerbaru.tahunPengundangan}",
+                                      "${widget.peraturanTerbaru.tahunPengundangan ?? '-'}",
                                   subtitle: "Tahun Terbit"),
                               IconInfoTerbaruWidget(
                                   imageUrl: "assets/images/view.svg",
                                   title:
-                                      "${widget.peraturanTerbaru.countReader}",
+                                      "${widget.peraturanTerbaru.countReader ?? '-'}",
                                   subtitle: "Dilihat"),
                               IconInfoTerbaruWidget(
                                   imageUrl: "assets/images/bahasa.svg",
-                                  title: "${widget.peraturanTerbaru.bahasa}",
+                                  title:
+                                      "${widget.peraturanTerbaru.bahasa ?? '-'}",
                                   subtitle: "Bahasa")
                             ],
                           ),
@@ -267,8 +268,8 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
             ),
             InfoDetailTerbaruWidget(
                 title: "Abstrak",
-                subtitle: widget.peraturanTerbaru.urlFileAbstrak!.isEmpty
-                    ? "-"
+                subtitle: widget.peraturanTerbaru.urlFileAbstrak == null
+                    ? '-'
                     : widget.peraturanTerbaru.urlFileAbstrak!,
                 heightTitle: 70),
             const InfoDetailTerbaruWidget(
@@ -298,74 +299,74 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
                                             widget.peraturanTerbaru.judul!
                                                     .length <=
                                                 30
-                                        ? 70
-                                        : 70
-                    : 70,
+                                        ? 90
+                                        : 90
+                    : 90,
                 subtitle: "${widget.peraturanTerbaru.judul}"),
             InfoDetailTerbaruWidget(
                 title: "T.E.U Badan/Pengarang",
-                subtitle: "${widget.peraturanTerbaru.teuBadan}",
+                subtitle: "${widget.peraturanTerbaru.teuBadan ?? '-'}",
                 heightTitle: 80),
             InfoDetailTerbaruWidget(
               title: "Nomor Peraturan",
-              subtitle: "${widget.peraturanTerbaru.nomorPeraturanBaru}",
+              subtitle: "${widget.peraturanTerbaru.nomorPeraturanBaru ?? '-'}",
               heightTitle: 80,
             ),
             InfoDetailTerbaruWidget(
               title: "Jenis Peraturan",
-              subtitle: "${widget.peraturanTerbaru.jenis}",
+              subtitle: "${widget.peraturanTerbaru.jenis ?? '-'}",
               heightTitle: 80,
             ),
             InfoDetailTerbaruWidget(
               title: "Singkatan Jenis/Bentuk Peraturan",
-              subtitle: "${widget.peraturanTerbaru.singkatanJenis}",
+              subtitle: "${widget.peraturanTerbaru.singkatanJenis ?? '-'}",
               heightTitle: 80,
             ),
             InfoDetailTerbaruWidget(
               title: "Tempat Penetapan",
-              subtitle: "${widget.peraturanTerbaru.tempatTerbit}",
+              subtitle: "${widget.peraturanTerbaru.tempatTerbit ?? '-'}",
               heightTitle: 80,
             ),
             //"${widget.peraturanHukum.tanggal}"
-            InfoDetailWidget(
+            InfoDetailTerbaruWidget(
               title: "Tanggal-bulan-tahun Penetapan",
               subtitle: convertedDate,
               heightTitle: 80,
             ),
-            InfoDetailWidget(
+            InfoDetailTerbaruWidget(
               title: "Tanggal-bulan-tahun Pengundangan",
               subtitle: convertedDateUndang,
             ),
-            InfoDetailWidget(
+            InfoDetailTerbaruWidget(
               title: "Sumber",
-              subtitle: "${widget.peraturanTerbaru.sumber}",
+              subtitle: "${widget.peraturanTerbaru.sumber ?? '-'}",
               heightTitle: 80,
             ),
-            InfoDetailWidget(
+            InfoDetailTerbaruWidget(
               title: "Subjek",
-              subtitle: "${widget.peraturanTerbaru.subjek}",
+              subtitle: "${widget.peraturanTerbaru.subjek ?? '-'}",
               heightTitle: 80,
             ),
-            // InfoDetailWidget(
+            // InfoDetailTerbaruWidget(
             //   title: "Detail Status Peraturan",
             //   subtitle: widget.peraturanTerbaru.detailStatusPeraturan!.isEmpty
             //       ? "-"
             //       : "Baru",
             //   heightTitle: 80,
             // ),
-            InfoDetailWidget(
+            InfoDetailTerbaruWidget(
               title: "Lokasi",
-              subtitle: "${widget.peraturanTerbaru.tempatTerbit}",
+              subtitle: "${widget.peraturanTerbaru.tempatTerbit ?? '-'}",
               heightTitle: 80,
             ),
-            InfoDetailWidget(
+            InfoDetailTerbaruWidget(
               title: "Bidang Hukum",
-              subtitle: "${widget.peraturanTerbaru.bidangHukum}",
+              subtitle: "${widget.peraturanTerbaru.bidangHukum ?? '-'}",
               heightTitle: 80,
             ),
-            InfoDetailWidget(
+            InfoDetailTerbaruWidget(
               title: "Lampiran",
-              subtitle: "${widget.peraturanTerbaru.fileLampiran ?? "-"}",
+              subtitle: "${widget.peraturanTerbaru.fileLampiran ?? '-'}",
               heightTitle: 80,
             ),
             const SizedBox(

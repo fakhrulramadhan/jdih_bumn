@@ -175,7 +175,7 @@ class _PopulerWidgetState extends State<PopulerWidget> {
                                   width: 2.0,
                                 ),
                                 Text(
-                                  "${tglPerngundangan}",
+                                  tglPerngundangan,
                                   style: const TextStyle(
                                     fontSize: 9.0,
                                     color: Colors.black,

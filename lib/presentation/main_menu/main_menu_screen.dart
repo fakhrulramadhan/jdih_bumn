@@ -9,6 +9,7 @@ import 'package:jdih_bumn/presentation/main_menu/widgets/disclaimer_stack_widget
 import 'package:jdih_bumn/presentation/main_menu/widgets/infografis_widget_new.dart';
 import 'package:jdih_bumn/presentation/main_menu/widgets/list_menu_peraturan_bumn_widget.dart';
 import 'package:jdih_bumn/presentation/main_menu/widgets/list_menu_widget.dart';
+import 'package:jdih_bumn/presentation/maintenance/maintenance_screen.dart';
 import 'package:jdih_bumn/presentation/monografi/monografi_screen.dart';
 import 'package:jdih_bumn/presentation/putusan/putusan_screen.dart';
 import 'package:jdih_bumn/presentation/survei/survei_screen.dart';
@@ -243,7 +244,8 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const PerarturanBumnScreen()),
+                                        //const PerarturanBumnScreen()
+                                        const MaintenanceScreen()),
                               );
                             },
                             menuText: "Peraturan \n  BUMN"),
@@ -269,7 +271,8 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const MonografiScreen()),
+                                        //const MonografiScreen()
+                                        MaintenanceScreen()),
                               );
                             },
                             assetUrl: "assets/images/monografis.svg",
@@ -353,7 +356,8 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const ArtikelScreen()),
+                                        //const ArtikelScreen()
+                                        MaintenanceScreen()),
                               );
                             },
                             assetUrl: "assets/images/Artikel.svg",

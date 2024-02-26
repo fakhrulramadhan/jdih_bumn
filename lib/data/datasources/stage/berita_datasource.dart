@@ -35,6 +35,11 @@ class BeritaDatasource {
 
       List<dynamic> responseJson = json.decode(response.body);
 
+      //Map<String, dynamic> data = jsonDecode(response.body);
+
+      // List<Map<String, dynamic>> rows =
+      //     List<Map<String, dynamic>>.from(data['items']);
+
       var beritaList = responseJson.map((e) => Item.fromJson(e)).toList();
 
       beritaList.sort(
@@ -42,6 +47,8 @@ class BeritaDatasource {
           return b.tanggal!.compareTo(a.tanggal!);
         },
       );
+
+      //rows.sort((a, b) => DateTime.parse(formattedString),);
 
       return Right(beritaList);
       //return Right(PeraturanHukumResponseModel.fromRawJson(response.body));

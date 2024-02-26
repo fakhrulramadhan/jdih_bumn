@@ -8,6 +8,7 @@ import 'package:jdih_bumn/data/model/response/stage/peraturan_response_model.dar
 
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/bagikan_button_widget.dart';
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/download_button_widget.dart';
+import 'package:jdih_bumn/presentation/peraturan_detail/widget/info_detail_status_peraturan_widget.dart';
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/info_detail_widget.dart';
 import 'widget/icon_info_widget.dart';
 
@@ -113,7 +114,47 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
         DateFormat("dd-MM-yyyy").format(parsedDatePerngundangan);
 
     double? progress;
+
+    List<Widget> _buildListItems() {
+      List<Widget> items = [];
+
+      widget.peraturan.detailStatusPeraturan?.forEach((map) {
+        items.add(
+          // ListTile(
+          //   title: Text('${map.detailNamaStatus}' ?? ''),
+          //   subtitle: Text('${map.perNoObjek}' ?? ''),
+          // ),
+          Row(
+            children: [
+              //tanda titiknya dibuang, dan tulisan setelah
+              //titik diambil
+              Text(
+                '• ',
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                "${map.detailNamaStatus.toString().split('.').last ?? ''}",
+                style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(
+                width: 3.0,
+              ),
+              Text(
+                "${map.perNoObjek ?? ''}",
+                style: TextStyle(
+                  fontSize: 13.0,
+                ),
+              ),
+            ],
+          ),
+        );
+      });
+
+      return items;
+    }
+
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(45),
         child: AppBar(
@@ -173,17 +214,19 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                         const SizedBox(
                           height: 10.0,
                         ),
+
+                        // "${widget.peraturan.teuBadan.toString().split('.').last ?? ''}",
                         Text(
-                          "${widget.peraturan.teuBadan.toString().split('.').last ?? ''}",
+                          "${widget.peraturan.judul}",
                           style: const TextStyle(
-                            fontSize: 24.0,
+                            fontSize: 18.0,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
-                          textAlign: TextAlign.justify,
+                          textAlign: TextAlign.center,
                         ),
                         const SizedBox(
-                          height: 10.0,
+                          height: 20.0,
                         ),
                         Text(
                           "${widget.peraturan.perNoBaru ?? ''}",
@@ -346,9 +389,27 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
             ),
             InfoDetailWidget(
               title: "Subjek",
-              subtitle: "${widget.peraturan.subjek ?? ''}",
-              heightTitle: 90,
+              subtitle: "${widget.peraturan.subjek ?? '-'}",
+              heightTitle: widget.peraturan.subjek != '-' ? 90 : 80,
             ),
+            InfoDetailWidget(
+                title: "Status", subtitle: "${widget.peraturan.status ?? '-'}"),
+            InfoDetailStatusPeraturanWidget(
+                title: "Detail Status Peraturan",
+                heightTitle: 120,
+                subWidget: Column(
+                  children: _buildListItems(),
+                  // children: [
+                  //   _buildListItems(),
+                  //   // Text(
+                  //   //   "${widget.peraturan.detailStatusPeraturan![0].detailNamaStatus.toString().split('.').last} ${widget.peraturan.detailStatusPeraturan![0].perNoObjek}",
+                  //   //   style: TextStyle(
+                  //   //     fontSize: 13.0,
+                  //   //   ),
+                  //   // ),
+                  // ],
+                )),
+
             // InfoDetailWidget(
             //   title: "Detail Status Peraturan",
             //   subtitle: widget.peraturan.detailStatusPeraturan!.isEmpty
@@ -365,7 +426,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
             InfoDetailWidget(
               title: "Bidang Hukum",
               subtitle:
-                  "${widget.peraturan.bidangHukum.toString().split('.').last}",
+                  "${widget.peraturan.bidangHukum.toString().split('.').last.replaceAll('_', ' ')}",
               heightTitle: 80,
             ),
             InfoDetailWidget(

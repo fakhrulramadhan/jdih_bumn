@@ -7,6 +7,7 @@ part 'get_peraturan_state.dart';
 
 class GetPeraturanBloc extends Bloc<GetPeraturanEvent, GetPeraturanState> {
   final PeraturanDatasource datasource;
+  List<Item> _data = []; // Store loaded data
 
   GetPeraturanBloc(this.datasource) : super(GetPeraturanInitial()) {
     on<GetPeraturanEvent>((event, emit) {});
@@ -18,6 +19,18 @@ class GetPeraturanBloc extends Bloc<GetPeraturanEvent, GetPeraturanState> {
 
       result.fold((l) => emit(GetPeraturanError()),
           (r) => emit(GetPeraturanLoaded(data: r)));
+    });
+
+    on<DoGetPeraturanPagingEvent>((event, emit) async* {
+      if (state is GetPeraturanInitial) {
+        emit(GetPeraturanLoading());
+
+        final newdatapage = await datasource.getDataPaging(page: 1);
+
+        _data.addAll(newdatapage);
+
+        
+      }
     });
   }
 }

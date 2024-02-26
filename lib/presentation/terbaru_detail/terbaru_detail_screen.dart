@@ -8,7 +8,6 @@ import 'package:jdih_bumn/data/model/response/stage/peraturan_terbaru_response_m
 
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/bagikan_button_widget.dart';
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/download_button_widget.dart';
-import 'package:jdih_bumn/presentation/peraturan_detail/widget/info_detail_widget.dart';
 //import 'widget/icon_info_widget.dart';
 
 import 'package:dio/dio.dart';
@@ -169,7 +168,7 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
                           height: 10.0,
                         ),
                         Text(
-                          "${widget.peraturanTerbaru.teuBadan ?? ''}",
+                          widget.peraturanTerbaru.teuBadan ?? '',
                           style: const TextStyle(
                             fontSize: 24.0,
                             fontWeight: FontWeight.bold,
@@ -181,7 +180,7 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
                           height: 10.0,
                         ),
                         Text(
-                          "${widget.peraturanTerbaru.perNoBaru ?? ''}",
+                          widget.peraturanTerbaru.perNoBaru ?? '',
                           style: const TextStyle(
                             fontSize: 14.0,
                             color: Colors.white,
@@ -192,7 +191,7 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
                           height: 20.0,
                         ),
                         Text(
-                          "${widget.peraturanTerbaru.judul ?? ''}",
+                          widget.peraturanTerbaru.judul ?? '',
                           style: const TextStyle(
                             fontSize: 14.0,
                             fontWeight: FontWeight.bold,
@@ -227,7 +226,7 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
                               IconInfoTerbaruWidget(
                                   imageUrl: "assets/images/kalender.svg",
                                   title:
-                                      "${widget.peraturanTerbaru.tahunPengundangan ?? '-'}",
+                                      widget.peraturanTerbaru.tahunPengundangan ?? '-',
                                   subtitle: "Tahun Terbit"),
                               IconInfoTerbaruWidget(
                                   imageUrl: "assets/images/view.svg",
@@ -237,7 +236,7 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
                               IconInfoTerbaruWidget(
                                   imageUrl: "assets/images/bahasa.svg",
                                   title:
-                                      "${widget.peraturanTerbaru.bahasa ?? '-'}",
+                                      widget.peraturanTerbaru.bahasa ?? '-',
                                   subtitle: "Bahasa")
                             ],
                           ),
@@ -305,26 +304,26 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
                 subtitle: "${widget.peraturanTerbaru.judul}"),
             InfoDetailTerbaruWidget(
                 title: "T.E.U Badan/Pengarang",
-                subtitle: "${widget.peraturanTerbaru.teuBadan ?? '-'}",
+                subtitle: widget.peraturanTerbaru.teuBadan ?? '-',
                 heightTitle: 80),
             InfoDetailTerbaruWidget(
               title: "Nomor Peraturan",
-              subtitle: "${widget.peraturanTerbaru.nomorPeraturanBaru ?? '-'}",
+              subtitle: widget.peraturanTerbaru.nomorPeraturanBaru ?? '-',
               heightTitle: 80,
             ),
             InfoDetailTerbaruWidget(
               title: "Jenis Peraturan",
-              subtitle: "${widget.peraturanTerbaru.jenis ?? '-'}",
+              subtitle: widget.peraturanTerbaru.jenis ?? '-',
               heightTitle: 80,
             ),
             InfoDetailTerbaruWidget(
               title: "Singkatan Jenis/Bentuk Peraturan",
-              subtitle: "${widget.peraturanTerbaru.singkatanJenis ?? '-'}",
+              subtitle: widget.peraturanTerbaru.singkatanJenis ?? '-',
               heightTitle: 80,
             ),
             InfoDetailTerbaruWidget(
               title: "Tempat Penetapan",
-              subtitle: "${widget.peraturanTerbaru.tempatTerbit ?? '-'}",
+              subtitle: widget.peraturanTerbaru.tempatTerbit ?? '-',
               heightTitle: 80,
             ),
             //"${widget.peraturanHukum.tanggal}"
@@ -339,12 +338,12 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
             ),
             InfoDetailTerbaruWidget(
               title: "Sumber",
-              subtitle: "${widget.peraturanTerbaru.sumber ?? '-'}",
+              subtitle: widget.peraturanTerbaru.sumber ?? '-',
               heightTitle: 80,
             ),
             InfoDetailTerbaruWidget(
               title: "Subjek",
-              subtitle: "${widget.peraturanTerbaru.subjek ?? '-'}",
+              subtitle: widget.peraturanTerbaru.subjek ?? '-',
               heightTitle: 80,
             ),
             // InfoDetailTerbaruWidget(
@@ -356,12 +355,12 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
             // ),
             InfoDetailTerbaruWidget(
               title: "Lokasi",
-              subtitle: "${widget.peraturanTerbaru.tempatTerbit ?? '-'}",
+              subtitle: widget.peraturanTerbaru.tempatTerbit ?? '-',
               heightTitle: 80,
             ),
             InfoDetailTerbaruWidget(
               title: "Bidang Hukum",
-              subtitle: "${widget.peraturanTerbaru.bidangHukum ?? '-'}",
+              subtitle: widget.peraturanTerbaru.bidangHukum ?? '-',
               heightTitle: 80,
             ),
             InfoDetailTerbaruWidget(

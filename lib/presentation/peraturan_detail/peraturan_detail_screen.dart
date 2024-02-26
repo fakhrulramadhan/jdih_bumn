@@ -93,7 +93,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
 
 //ambil data dari api kalau tipe datanya enum
   String toShortString() {
-    return this.toString().split('.').last;
+    return toString().split('.').last;
   }
 
   String removeAllHtmlTags(String htmlText) {
@@ -115,7 +115,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
 
     double? progress;
 
-    List<Widget> _buildListItems() {
+    List<Widget> buildListItems() {
       List<Widget> items = [];
 
       widget.peraturan.detailStatusPeraturan?.forEach((map) {
@@ -128,20 +128,20 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
             children: [
               //tanda titiknya dibuang, dan tulisan setelah
               //titik diambil
-              Text(
+              const Text(
                 '• ',
                 style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
               ),
               Text(
-                "${map.detailNamaStatus.toString().split('.').last ?? ''}",
-                style: TextStyle(fontSize: 13.0, fontWeight: FontWeight.bold),
+                map.detailNamaStatus.toString().split('.').last ?? '',
+                style: const TextStyle(fontSize: 13.0, fontWeight: FontWeight.bold),
               ),
               const SizedBox(
                 width: 3.0,
               ),
               Text(
-                "${map.perNoObjek ?? ''}",
-                style: TextStyle(
+                map.perNoObjek ?? '',
+                style: const TextStyle(
                   fontSize: 13.0,
                 ),
               ),
@@ -229,7 +229,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                           height: 20.0,
                         ),
                         Text(
-                          "${widget.peraturan.perNoBaru ?? ''}",
+                          widget.peraturan.perNoBaru ?? '',
                           style: const TextStyle(
                             fontSize: 14.0,
                             color: Colors.white,
@@ -240,7 +240,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                           height: 20.0,
                         ),
                         Text(
-                          "${widget.peraturan.judul ?? ''}",
+                          widget.peraturan.judul ?? '',
                           style: const TextStyle(
                             fontSize: 14.0,
                             fontWeight: FontWeight.bold,
@@ -275,7 +275,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                               IconInfoWidget(
                                   imageUrl: "assets/images/kalender.svg",
                                   title:
-                                      "${widget.peraturan.tahunPengundangan ?? ''}",
+                                      widget.peraturan.tahunPengundangan ?? '',
                                   subtitle: "Tahun Terbit"),
                               IconInfoWidget(
                                   imageUrl: "assets/images/view.svg",
@@ -285,7 +285,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                               IconInfoWidget(
                                   imageUrl: "assets/images/bahasa.svg",
                                   title:
-                                      "${widget.peraturan.bahasa.toString().split('.').last ?? ''}",
+                                      widget.peraturan.bahasa.toString().split('.').last ?? '',
                                   subtitle: "Bahasa")
                             ],
                           ),
@@ -342,33 +342,33 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                                         ? 130
                                         : 130
                     : 130,
-                subtitle: "${widget.peraturan.judul ?? ''}"),
+                subtitle: widget.peraturan.judul ?? ''),
             InfoDetailWidget(
                 title: "T.E.U Badan/Pengarang",
                 subtitle:
-                    "${widget.peraturan.teuBadan.toString().split('.').last ?? ''}",
+                    widget.peraturan.teuBadan.toString().split('.').last ?? '',
                 heightTitle: 80),
             InfoDetailWidget(
               title: "Nomor Peraturan",
-              subtitle: "${widget.peraturan.nomorPeraturanBaru ?? ''}",
+              subtitle: widget.peraturan.nomorPeraturanBaru ?? '',
               heightTitle: 80,
             ),
             InfoDetailWidget(
               title: "Jenis Peraturan",
               subtitle:
-                  "${widget.peraturan.jenis.toString().split('.').last ?? ''}",
+                  widget.peraturan.jenis.toString().split('.').last ?? '',
               heightTitle: 80,
             ),
             InfoDetailWidget(
               title: "Singkatan Jenis/Bentuk Peraturan",
               subtitle:
-                  "${widget.peraturan.singkatanJenis.toString().split('.').last ?? ''}",
+                  widget.peraturan.singkatanJenis.toString().split('.').last ?? '',
               heightTitle: 80,
             ),
             InfoDetailWidget(
               title: "Tempat Penetapan",
               subtitle:
-                  "${widget.peraturan.tempatTerbit.toString().split('.').last ?? ''}",
+                  widget.peraturan.tempatTerbit.toString().split('.').last ?? '',
               heightTitle: 80,
             ),
             //"${widget.peraturanHukum.tanggal}"
@@ -384,7 +384,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
             InfoDetailWidget(
               title: "Sumber",
               subtitle:
-                  "${widget.peraturan.sumber.toString().split('.').last == 'EMPTY' ? '-' : ''}",
+                  widget.peraturan.sumber.toString().split('.').last == 'EMPTY' ? '-' : '',
               heightTitle: 80,
             ),
             InfoDetailWidget(
@@ -398,7 +398,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                 title: "Detail Status Peraturan",
                 heightTitle: 120,
                 subWidget: Column(
-                  children: _buildListItems(),
+                  children: buildListItems(),
                   // children: [
                   //   _buildListItems(),
                   //   // Text(
@@ -420,13 +420,13 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
             InfoDetailWidget(
               title: "Lokasi",
               subtitle:
-                  "${widget.peraturan.tempatTerbit.toString().split('.').last ?? ''}",
+                  widget.peraturan.tempatTerbit.toString().split('.').last ?? '',
               heightTitle: 80,
             ),
             InfoDetailWidget(
               title: "Bidang Hukum",
               subtitle:
-                  "${widget.peraturan.bidangHukum.toString().split('.').last.replaceAll('_', ' ')}",
+                  widget.peraturan.bidangHukum.toString().split('.').last.replaceAll('_', ' '),
               heightTitle: 80,
             ),
             InfoDetailWidget(

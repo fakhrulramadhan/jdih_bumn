@@ -25,7 +25,7 @@ class PeraturanDatasource {
   Future<Either<String, PeraturanResponseModel>> getPeraturanPaging(
       {required int page}) async {
     final response = await http.get(Uri.parse(
-        '${Constants.baseUrlStage}/produk-hukum/produk/peraturan?page=${page}'));
+        '${Constants.baseUrlStage}/produk-hukum/produk/peraturan?page=$page'));
 
     if (response.statusCode == 200) {
       print(response.body);
@@ -40,9 +40,26 @@ class PeraturanDatasource {
     }
   }
 
+  // Future<PeraturanResponseModel> getPeraturanPaging({required int page}) async {
+  //   final response = await http.get(Uri.parse(
+  //       '${Constants.baseUrlStage}/produk-hukum/produk/peraturan?page=$page'));
+
+  //   if (response.statusCode == 200) {
+  //     print(response.body);
+  //     print("=====");
+  //     print(Right(PeraturanResponseModel.fromJson(jsonDecode(response.body))));
+
+  //     return PeraturanResponseModel.fromJson(json.decode(response.body));
+  //   } else {
+  //     print(response.body);
+
+  //     throw Exception('Failed to Load Data');
+  //   }
+  // }
+
   Future<List<Item>> getDataPaging({required int page}) async {
     final response = await http.get(Uri.parse(
-        '${Constants.baseUrlStage}/produk-hukum/produk/peraturan?page=${page}'));
+        '${Constants.baseUrlStage}/produk-hukum/produk/peraturan?page=$page'));
 
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);

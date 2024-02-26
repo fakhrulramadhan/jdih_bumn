@@ -7,7 +7,7 @@ part 'get_peraturan_state.dart';
 
 class GetPeraturanBloc extends Bloc<GetPeraturanEvent, GetPeraturanState> {
   final PeraturanDatasource datasource;
-  List<Item> _data = []; // Store loaded data
+  final List<Item> _data = []; // Store loaded data
 
   GetPeraturanBloc(this.datasource) : super(GetPeraturanInitial()) {
     on<GetPeraturanEvent>((event, emit) {});

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -24,7 +25,7 @@ class BeritaDatasource {
     }
   }
 
-  Future<Either<String, List<dynamic>>> sortBerita() async {
+  Future<Either<String, List<Item>>> sortBerita() async {
     final response = await http
         .get(Uri.parse('${Constants.baseUrlStage}/publikasi/news/berita'));
 
@@ -33,7 +34,7 @@ class BeritaDatasource {
       print("=====");
       print(Right(BeritaResponseModel.fromJson(jsonDecode(response.body))));
 
-      List<dynamic> responseJson = json.decode(response.body);
+      List<Map<String, dynamic>> responseJson = json.decode(response.body);
 
       //Map<String, dynamic> data = jsonDecode(response.body);
 
@@ -44,7 +45,7 @@ class BeritaDatasource {
 
       beritaList.sort(
         (a, b) {
-          return b.tanggal!.compareTo(a.tanggal!);
+          return a.tanggal!.compareTo(b.tanggal!);
         },
       );
 

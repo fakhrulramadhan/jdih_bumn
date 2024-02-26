@@ -26,7 +26,7 @@ class GetBeritaBloc extends Bloc<GetBeritaEvent, GetBeritaState> {
 
       //final result = await datasource.fetchsortBerita();
 
-      final result = await datasource.fetchsortBerita();
+      final result = await datasource.sortBerita();
       result.fold(
           (l) => emit(GetBeritaError()), (r) => emit(GetBeritaSort(data: r)));
     });

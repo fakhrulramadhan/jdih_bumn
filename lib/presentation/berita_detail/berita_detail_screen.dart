@@ -5,7 +5,7 @@ import 'package:jdih_bumn/presentation/berita_detail/widget/bagikan_button_berit
 import 'package:share_plus/share_plus.dart';
 
 class BeritaDetailScreen extends StatefulWidget {
-  final Item berita;
+  final Item? berita;
   const BeritaDetailScreen({super.key, required this.berita});
 
   @override
@@ -31,7 +31,7 @@ class _BeritaDetailScreenState extends State<BeritaDetailScreen> {
       return parsedString;
     }
 
-    int hitungString = parseHtmlString(widget.berita.narasi).length;
+    int hitungString = parseHtmlString(widget.berita?.narasi).length;
 
     return Scaffold(
       appBar: AppBar(
@@ -67,7 +67,7 @@ class _BeritaDetailScreenState extends State<BeritaDetailScreen> {
                 borderRadius: BorderRadius.circular(12),
                 clipBehavior: Clip.hardEdge,
                 child: Image.network(
-                  "${widget.berita.imagePathOriFull}",
+                  "${widget.berita?.imagePathOriFull}",
                   width: MediaQuery.of(context).size.width,
                   height: 250,
                   fit: BoxFit.cover,
@@ -97,7 +97,7 @@ class _BeritaDetailScreenState extends State<BeritaDetailScreen> {
                 child: Column(
                   children: [
                     Text(
-                      "${widget.berita.judul}",
+                      "${widget.berita?.judul}",
                       style: const TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
@@ -109,7 +109,7 @@ class _BeritaDetailScreenState extends State<BeritaDetailScreen> {
                       height: 18.0,
                     ),
                     Text(
-                      parseHtmlString(widget.berita.narasi),
+                      parseHtmlString(widget.berita?.narasi),
                       style: const TextStyle(
                         fontSize: 12.0,
                       ),
@@ -141,8 +141,8 @@ class _BeritaDetailScreenState extends State<BeritaDetailScreen> {
           children: [
             BagikanButtonBeritaWidget(
               onPressed: () async {
-                String urlLink = "${widget.berita.urlDetailBerita}";
-                print(parseHtmlString(widget.berita.narasi).length);
+                String urlLink = "${widget.berita?.urlDetailBerita}";
+                print(parseHtmlString(widget.berita?.narasi).length);
                 await Share.share(urlLink);
               },
             )

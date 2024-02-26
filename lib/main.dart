@@ -17,6 +17,7 @@ import 'package:jdih_bumn/bloc/stage/get_peraturan_terbaru/get_peraturan_terbaru
 import 'package:jdih_bumn/bloc/stage/get_putusan/get_putusan_bloc.dart';
 import 'package:jdih_bumn/bloc/stage/get_struktur_jdih/get_struktur_jdih_bloc.dart';
 import 'package:jdih_bumn/bloc/stage/get_tentang_jdih/get_tentang_jdih_bloc.dart';
+import 'package:jdih_bumn/cubit/get_page_peraturan/get_page_peraturan_cubit.dart';
 import 'package:jdih_bumn/data/datasources/peraturan_hukum_datasource.dart';
 import 'package:jdih_bumn/data/datasources/produk_hukum_datasource.dart';
 import 'package:jdih_bumn/data/datasources/stage/berita_datasource.dart';
@@ -96,7 +97,10 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) =>
               GetPeraturanTerbaruBloc(PeraturanTerbaruDatasource()),
-        )
+        ),
+        BlocProvider(
+          create: (context) => GetPagePeraturanCubit(PeraturanDatasource()),
+        ),
       ],
       child: MaterialApp(
         title: 'JDIH BUMN',

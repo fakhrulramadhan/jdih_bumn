@@ -24,7 +24,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
               const SizedBox(
                 height: 50.0,
               ),
-              Text(
+              const Text(
                 "Proses Pembaruan \nHalaman Aplikasi",
                 style: TextStyle(
                     fontSize: 28.0,
@@ -43,7 +43,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
               const SizedBox(
                 height: 18.0,
               ),
-              Text(
+              const Text(
                 "Mohon maaf atas ketidaknyamanan ini. Kami sedang melakukan pembaruan pada halaman aplikasi untuk memberikan pengalaman terbaik bagi pengguna.",
                 style: TextStyle(
                   fontSize: 18.0,
@@ -66,16 +66,16 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
               BoxShadow(
                   color: Colors.grey.withOpacity(0.05),
                   spreadRadius: 1,
-                  offset: Offset(0, -10),
+                  offset: const Offset(0, -10),
                   blurRadius: 1)
             ],
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
         child: InkWell(
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => HomeScreen()),
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
             );
           },
           child: Center(
@@ -84,9 +84,9 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
               width: MediaQuery.of(context).size.width * 0.8,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                color: Color(0xff0093AD),
+                color: const Color(0xff0093AD),
               ),
-              child: Center(
+              child: const Center(
                   child: Text(
                 "Kembali Ke Beranda",
                 style: TextStyle(color: Colors.white, fontSize: 12),

@@ -1,7 +1,6 @@
 // ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
-import 'package:jdih_bumn/presentation/artikel/artikel_screen.dart';
 import 'package:jdih_bumn/presentation/berita/berita_screen.dart';
 import 'package:jdih_bumn/presentation/kamus_hukum/kamus_hukum_screen.dart';
 import 'package:jdih_bumn/presentation/main_menu/widgets/berita_dan_info_widget.dart';
@@ -10,11 +9,9 @@ import 'package:jdih_bumn/presentation/main_menu/widgets/infografis_widget_new.d
 import 'package:jdih_bumn/presentation/main_menu/widgets/list_menu_peraturan_bumn_widget.dart';
 import 'package:jdih_bumn/presentation/main_menu/widgets/list_menu_widget.dart';
 import 'package:jdih_bumn/presentation/maintenance/maintenance_screen.dart';
-import 'package:jdih_bumn/presentation/monografi/monografi_screen.dart';
 import 'package:jdih_bumn/presentation/putusan/putusan_screen.dart';
 import 'package:jdih_bumn/presentation/survei/survei_screen.dart';
 import '../peraturan/peraturan_screen.dart';
-import '../peraturan_bumn/peraturan_bumn.dart';
 import 'package:dyn_mouse_scroll/dyn_mouse_scroll.dart';
 
 class MainMenuScreen extends StatefulWidget {
@@ -272,7 +269,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                         //const MonografiScreen()
-                                        MaintenanceScreen()),
+                                        const MaintenanceScreen()),
                               );
                             },
                             assetUrl: "assets/images/monografis.svg",
@@ -357,7 +354,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                         //const ArtikelScreen()
-                                        MaintenanceScreen()),
+                                        const MaintenanceScreen()),
                               );
                             },
                             assetUrl: "assets/images/Artikel.svg",

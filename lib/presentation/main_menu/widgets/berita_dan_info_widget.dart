@@ -1,6 +1,5 @@
 // ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -48,12 +47,14 @@ class _BeritaDanInfoWidgetState extends State<BeritaDanInfoWidget> {
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemBuilder: (context, index) {
-              final sortberita = state.data.items![0];
+              //final sortberita = state.data.items![0];
+              //cukup ambil data berita pertamanya aja dari api
+              final sortberita = state.data.items!.firstOrNull;
 
-              print('${sortberita.tanggal}');
+              print('${sortberita?.tanggal}');
               print("INI TANGGAL BERITANYA");
 
-              var parsedDate = DateTime.parse('${sortberita.tanggal}');
+              var parsedDate = DateTime.parse('${sortberita?.tanggal}');
 
               String convertedDate =
                   DateFormat("dd-MM-yyyy").format(parsedDate);
@@ -85,7 +86,7 @@ class _BeritaDanInfoWidgetState extends State<BeritaDanInfoWidget> {
                     child: Column(
                       children: [
                         Text(
-                          "${sortberita.judul}",
+                          "${sortberita?.judul}",
                           style: const TextStyle(
                               fontSize: 18.0,
                               color: Color.fromARGB(255, 0, 9, 85),
@@ -112,7 +113,7 @@ class _BeritaDanInfoWidgetState extends State<BeritaDanInfoWidget> {
                               topLeft: Radius.circular(10),
                               topRight: Radius.circular(10)),
                           child: Image.network(
-                            "${sortberita.imagePathFull}",
+                            "${sortberita?.imagePathFull}",
                             width: 270.0,
                             height: 140.0,
                             fit: BoxFit.cover,

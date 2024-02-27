@@ -7,8 +7,8 @@ import 'package:jdih_bumn/cubit/get_page_peraturan/get_page_peraturan_cubit.dart
 import 'package:jdih_bumn/data/model/response/stage/peraturan_response_model.dart';
 import 'package:jdih_bumn/presentation/peraturan_detail/peraturan_detail_screen.dart';
 
-class ListPeraturanPagingWidget extends StatelessWidget {
-  ListPeraturanPagingWidget({super.key});
+class ListPeraturanPagingsWidget extends StatelessWidget {
+  ListPeraturanPagingsWidget({super.key});
 
   final scrollController = ScrollController();
 
@@ -17,7 +17,7 @@ class ListPeraturanPagingWidget extends StatelessWidget {
       () {
         if (scrollController.position.atEdge) {
           if (scrollController.position.pixels != 0) {
-            BlocProvider.of<GetPagePeraturanCubit>(context).getPeraturanPage();
+            BlocProvider.of<GetPagePeraturanCubit>(context).loadPeraturanPage();
           }
         }
       },
@@ -27,6 +27,7 @@ class ListPeraturanPagingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     setupScrollController(context);
+    BlocProvider.of<GetPagePeraturanCubit>(context).loadPeraturanPage();
     return BlocBuilder<GetPagePeraturanCubit, GetPagePeraturanState>(
       builder: (context, state) {
         if (state is GetPagePeraturanLoading && state.isFirstFetch) {
@@ -47,8 +48,10 @@ class ListPeraturanPagingWidget extends StatelessWidget {
 
         return ListView.builder(
           controller: scrollController,
-          itemCount: peraturans.length + (isLoading ? 1 : 0),
-          itemBuilder: (context, index) {
+          shrinkWrap: true,
+          scrollDirection: Axis.vertical,
+          physics: const ScrollPhysics(),
+          itemBuilder: (BuildContext context, index) {
             if (index < peraturans.length) {
               var peraturanind = peraturans[index];
 
@@ -323,6 +326,7 @@ class ListPeraturanPagingWidget extends StatelessWidget {
               );
             }
           },
+          itemCount: peraturans.length + (isLoading ? 1 : 0),
         );
       },
     );

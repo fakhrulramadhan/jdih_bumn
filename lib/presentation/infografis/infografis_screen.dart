@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -122,11 +123,33 @@ class _InfografisScreenState extends State<InfografisScreen> {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
                                     clipBehavior: Clip.hardEdge,
-                                    child: Image.network(
-                                      "${i.imagePath}",
-                                      fit: BoxFit.fill,
-                                      // height: 300,
-                                      // width: 280,
+                                    // Image.network(
+                                    //   "${i.imagePath}",
+                                    //   fit: BoxFit.fill,
+                                    //   // height: 300,
+                                    //   // width: 280,
+                                    // ),
+
+                                    child: CachedNetworkImage(
+                                      imageUrl: "${i.imagePath}",
+                                      progressIndicatorBuilder:
+                                          (context, url, downloadProgress) =>
+                                              Center(
+                                        child: Container(
+                                          height: 50,
+                                          width: 50,
+                                          child: CircularProgressIndicator(
+                                            value: downloadProgress.progress,
+                                          ),
+                                        ),
+                                      ),
+                                      errorWidget: (context, url, error) =>
+                                          const Icon(
+                                        Icons.error,
+                                        size: 24.0,
+                                      ),
+                                      height: 300,
+                                      width: 280,
                                     ),
                                   ),
                                 ),

@@ -134,7 +134,8 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
               ),
               Text(
                 map.detailNamaStatus.toString().split('.').last ?? '',
-                style: const TextStyle(fontSize: 13.0, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                    fontSize: 13.0, fontWeight: FontWeight.bold),
               ),
               const SizedBox(
                 width: 3.0,
@@ -216,38 +217,48 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                         ),
 
                         // "${widget.peraturan.teuBadan.toString().split('.').last ?? ''}",
-                        Text(
-                          "${widget.peraturan.judul}",
-                          style: const TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                        Container(
+                          height:
+                              widget.peraturan.judul!.length <= 65 ? 75 : 80,
+                          child: Text(
+                            "${widget.peraturan.judul ?? '-'}",
+                            style: const TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.clip,
                           ),
-                          textAlign: TextAlign.center,
                         ),
                         const SizedBox(
-                          height: 20.0,
+                          height: 17.0,
                         ),
                         Text(
-                          widget.peraturan.perNoBaru ?? '',
+                          widget.peraturan.perNoBaru ?? '-',
                           style: const TextStyle(
                             fontSize: 14.0,
                             color: Colors.white,
                           ),
                           overflow: TextOverflow.visible,
                         ),
-                        const SizedBox(
-                          height: 20.0,
+                        SizedBox(
+                          height:
+                              widget.peraturan.judul!.length <= 70 ? 20 : 12.0,
                         ),
-                        Text(
-                          widget.peraturan.judul ?? '',
-                          style: const TextStyle(
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                        Container(
+                          height: 80,
+                          //color: Colors.yellow,
+                          child: Text(
+                            widget.peraturan.judul ?? '-',
+                            style: const TextStyle(
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                            overflow: TextOverflow.clip,
+                            textAlign: TextAlign.center,
                           ),
-                          overflow: TextOverflow.visible,
-                          textAlign: TextAlign.center,
                         ),
                       ],
                     ),
@@ -284,8 +295,11 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                                   subtitle: "Dilihat"),
                               IconInfoWidget(
                                   imageUrl: "assets/images/bahasa.svg",
-                                  title:
-                                      widget.peraturan.bahasa.toString().split('.').last ?? '',
+                                  title: widget.peraturan.bahasa
+                                          .toString()
+                                          .split('.')
+                                          .last ??
+                                      '',
                                   subtitle: "Bahasa")
                             ],
                           ),
@@ -316,7 +330,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
             ),
             InfoDetailWidget(
                 title: "Abstrak",
-                subtitle: widget.peraturan.urlFileAbstrak ?? '-',
+                subtitle: widget.peraturan.fileAbstrak ?? '-',
                 heightTitle: 90),
             const InfoDetailWidget(
               title: "Tipe Dokumen",
@@ -325,7 +339,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
             ),
             InfoDetailWidget(
                 title: "Judul",
-                heightTitle: widget.peraturan.judul!.isEmpty
+                heightTitle: widget.peraturan.judul!.isNotEmpty
                     ? widget.peraturan.judul!.length >= 3180
                         ? 1140 //1150
                         : widget.peraturan.judul!.length >= 1065 &&
@@ -337,68 +351,113 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                                 : widget.peraturan.judul!.length >= 201 &&
                                         widget.peraturan.judul!.length <= 399
                                     ? 600
-                                    : widget.peraturan.judul!.length >= 5 &&
-                                            widget.peraturan.judul!.length <= 30
-                                        ? 130
-                                        : 130
-                    : 130,
+                                    : widget.peraturan.judul!.length >= 101 &&
+                                            widget.peraturan.judul!.length <=
+                                                200
+                                        ? 120
+                                        : widget.peraturan.judul!.length > 30 &&
+                                                widget.peraturan.judul!
+                                                        .length <=
+                                                    100
+                                            ? 100
+                                            : widget.peraturan.judul!.length >=
+                                                        5 &&
+                                                    widget.peraturan.judul!
+                                                            .length <=
+                                                        30
+                                                ? 90
+                                                : 90
+                    : 90,
                 subtitle: widget.peraturan.judul ?? ''),
             InfoDetailWidget(
                 title: "T.E.U Badan/Pengarang",
-                subtitle:
-                    widget.peraturan.teuBadan.toString().split('.').last ?? '',
+                subtitle: widget.peraturan.teuBadan
+                        .toString()
+                        .split('.')
+                        .last
+                        .replaceAll('_', ' ') ??
+                    '-',
                 heightTitle: 80),
             InfoDetailWidget(
               title: "Nomor Peraturan",
-              subtitle: widget.peraturan.nomorPeraturanBaru ?? '',
+              subtitle: widget.peraturan.nomorPeraturanBaru ?? '-',
               heightTitle: 80,
             ),
             InfoDetailWidget(
               title: "Jenis Peraturan",
-              subtitle:
-                  widget.peraturan.jenis.toString().split('.').last ?? '',
+              subtitle: widget.peraturan.jenis
+                      .toString()
+                      .split('.')
+                      .last
+                      .replaceAll("_", " ") ??
+                  '-',
               heightTitle: 80,
             ),
             InfoDetailWidget(
               title: "Singkatan Jenis/Bentuk Peraturan",
               subtitle:
-                  widget.peraturan.singkatanJenis.toString().split('.').last ?? '',
+                  widget.peraturan.singkatanJenis.toString().split('.').last ??
+                      '-',
               heightTitle: 80,
             ),
             InfoDetailWidget(
               title: "Tempat Penetapan",
               subtitle:
-                  widget.peraturan.tempatTerbit.toString().split('.').last ?? '',
+                  widget.peraturan.tempatTerbit.toString().split('.').last ??
+                      '-',
               heightTitle: 80,
             ),
             //"${widget.peraturanHukum.tanggal}"
             InfoDetailWidget(
               title: "Tanggal-bulan-tahun Penetapan",
-              subtitle: convertedDate,
+              subtitle: convertedDate ?? '-',
               heightTitle: 80,
             ),
             InfoDetailWidget(
               title: "Tanggal-bulan-tahun Pengundangan",
-              subtitle: convertedDateUndang,
+              subtitle: convertedDateUndang ?? '-',
             ),
             InfoDetailWidget(
               title: "Sumber",
               subtitle:
-                  widget.peraturan.sumber.toString().split('.').last == 'EMPTY' ? '-' : '',
+                  widget.peraturan.sumber.toString().split('.').last == 'EMPTY'
+                      ? '-'
+                      : '-',
               heightTitle: 80,
             ),
             InfoDetailWidget(
               title: "Subjek",
-              subtitle: "${widget.peraturan.subjek ?? '-'}",
+              subtitle: "${widget.peraturan.subjek[0] ?? '-'}",
               heightTitle: widget.peraturan.subjek != '-' ? 90 : 80,
             ),
             InfoDetailWidget(
                 title: "Status", subtitle: "${widget.peraturan.status ?? '-'}"),
             InfoDetailStatusPeraturanWidget(
                 title: "Detail Status Peraturan",
-                heightTitle: 120,
+                heightTitle: widget
+                            .peraturan.detailStatusPeraturan![0].perNoObjek !=
+                        null
+                    ? widget.peraturan.detailStatusPeraturan!.length == 1
+                        ? 80
+                        : widget.peraturan.detailStatusPeraturan!.length > 1 &&
+                                widget.peraturan.detailStatusPeraturan!
+                                        .length <=
+                                    3
+                            ? 120
+                            : widget.peraturan.detailStatusPeraturan!.length <=
+                                        5 &&
+                                    widget.peraturan.detailStatusPeraturan!
+                                            .length >
+                                        3
+                                ? 140
+                                : 240
+                    : 80, //ini kalau detailnya enggak ada
                 subWidget: Column(
-                  children: buildListItems(),
+                  children: widget.peraturan.detailStatusPeraturan![0]
+                              .detailNamaStatus !=
+                          null
+                      ? buildListItems()
+                      : [Text("-")],
                   // children: [
                   //   _buildListItems(),
                   //   // Text(
@@ -420,13 +479,17 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
             InfoDetailWidget(
               title: "Lokasi",
               subtitle:
-                  widget.peraturan.tempatTerbit.toString().split('.').last ?? '',
+                  widget.peraturan.tempatTerbit.toString().split('.').last ??
+                      '-',
               heightTitle: 80,
             ),
             InfoDetailWidget(
               title: "Bidang Hukum",
-              subtitle:
-                  widget.peraturan.bidangHukum.toString().split('.').last.replaceAll('_', ' '),
+              subtitle: widget.peraturan.bidangHukum
+                  .toString()
+                  .split('.')
+                  .last
+                  .replaceAll('_', ' '),
               heightTitle: 80,
             ),
             InfoDetailWidget(

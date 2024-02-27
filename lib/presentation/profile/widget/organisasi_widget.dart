@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -73,16 +74,37 @@ class _OrgansisasiWidgetState extends State<OrgansisasiWidget> {
 
                                 print(
                                     "ini jumlah datanya ${state.data.items!.length}");
+                                //  Image.network(
+                                //     "${strukturJdih.organisasi}",
+                                //     // width: 350,
+                                //     // height: 205,
+                                //     fit: BoxFit.fill,
+                                //   ),
+
                                 return SizedBox(
-                                  width: 350,
-                                  height: 205,
-                                  child: Image.network(
-                                    "${strukturJdih.organisasi}",
-                                    // width: 350,
-                                    // height: 205,
-                                    fit: BoxFit.fill,
-                                  ),
-                                );
+                                    width: 350,
+                                    height: 205,
+                                    child: CachedNetworkImage(
+                                      imageUrl: "${strukturJdih.organisasi}",
+                                      progressIndicatorBuilder:
+                                          (context, url, downloadProgress) =>
+                                              Center(
+                                        child: Container(
+                                          height: 50,
+                                          width: 50,
+                                          child: CircularProgressIndicator(
+                                            value: downloadProgress.progress,
+                                          ),
+                                        ),
+                                      ),
+                                      errorWidget: (context, url, error) =>
+                                          const Icon(
+                                        Icons.error,
+                                        size: 24.0,
+                                      ),
+                                      width: 350,
+                                      height: 205,
+                                    ));
                               },
                             );
                           }

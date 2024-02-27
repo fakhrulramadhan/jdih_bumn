@@ -1,5 +1,6 @@
 // ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jdih_bumn/bloc/stage/get_berita/get_berita_bloc.dart';
@@ -92,11 +93,30 @@ class _BeritaDanInfoWidgetSortState extends State<BeritaDanInfoWidgetSort> {
                           borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(10),
                               topRight: Radius.circular(10)),
-                          child: Image.network(
-                            "${sortberita.imagePathFull}",
+                          //     Image.network(
+                          //   "${sortberita.imagePathFull}",
+                          //   width: 270.0,
+                          //   height: 90.0,
+                          //   fit: BoxFit.fill,
+                          // ),
+                          child: CachedNetworkImage(
+                            imageUrl: "${sortberita.imagePathFull}",
+                            progressIndicatorBuilder:
+                                (context, url, downloadProgress) => Center(
+                              child: Container(
+                                height: 50,
+                                width: 50,
+                                child: CircularProgressIndicator(
+                                  value: downloadProgress.progress,
+                                ),
+                              ),
+                            ),
+                            errorWidget: (context, url, error) => const Icon(
+                              Icons.error,
+                              size: 24.0,
+                            ),
                             width: 270.0,
                             height: 90.0,
-                            fit: BoxFit.fill,
                           ),
                         ),
                       ],

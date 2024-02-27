@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jdih_bumn/bloc/stage/get_infografis/get_infografis_bloc.dart';
@@ -168,17 +169,38 @@ class _InfoGrafisWidgetNewState extends State<InfoGrafisWidgetNew> {
                           Padding(
                             padding: const EdgeInsets.only(left: 12),
                             child: Container(
-                              width: 125.0,
-                              height: 100.0,
-                              //kalau belum keload gambarnya
-                              color: Colors.grey.withOpacity(0.1),
-                              child: Image.network(
-                                "${infografis.details![0].imagePath}",
-                                // width: 125.0,
-                                // height: 100.0,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
+                                width: 125.0,
+                                height: 100.0,
+                                //kalau belum keload gambarnya
+                                // Image.network(
+                                //   "${infografis.details![0].imagePath}",
+                                //   // width: 125.0,
+                                //   // height: 100.0,
+                                //   fit: BoxFit.cover,
+                                // ),
+                                color: Colors.grey.withOpacity(0.1),
+                                child: CachedNetworkImage(
+                                  imageUrl:
+                                      "${infografis.details![0].imagePath}",
+                                  progressIndicatorBuilder:
+                                      (context, url, downloadProgress) =>
+                                          Center(
+                                    child: Container(
+                                      height: 50,
+                                      width: 50,
+                                      child: CircularProgressIndicator(
+                                        value: downloadProgress.progress,
+                                      ),
+                                    ),
+                                  ),
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(
+                                    Icons.error,
+                                    size: 24.0,
+                                  ),
+                                  height: 100,
+                                  width: 125,
+                                )),
                           ),
                         ],
                       ),

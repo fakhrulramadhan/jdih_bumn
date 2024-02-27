@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jdih_bumn/presentation/peraturan/widget/list_peraturan_paging/list_peraturan_paging_widget.dart';
+import 'package:jdih_bumn/presentation/peraturan/widget/list_peraturan_paging/list_peraturan_pagings_widget.dart';
+import 'package:jdih_bumn/presentation/peraturan/widget/list_peraturan_paging/list_peraturan_refresh.dart';
 import 'package:jdih_bumn/presentation/peraturan/widget/list_peraturan_widget.dart';
 
 class PeraturanScreen extends StatefulWidget {
@@ -134,8 +136,15 @@ class _PeraturanScreenState extends State<PeraturanScreen> {
                             height: 20.0,
                           ),
                           //const ListPeraturanWidget(),
-                          //const ListPeraturanPagingWidget()
-                          const ListPeraturanPagingWidget()
+                          Container(
+                              height: 900,
+                              width: MediaQuery.of(context).size.width,
+                              child: const ListPeraturanRefresh())
+                          //ListPeraturanPagingsWidget(),
+                          // Container(
+                          //     height: double.infinity,
+                          //     width: MediaQuery.of(context).size.width,
+                          //     child: ListPeraturanPagingsWidget())
                         ],
                       ),
                     ),

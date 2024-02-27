@@ -71,4 +71,15 @@ class PeraturanDatasource {
       throw Exception('Failed to load data');
     }
   }
+
+  Future<List<dynamic>> fetchPeraturan(int page) async {
+    try {
+      final response = await http.get(Uri.parse(
+          '${Constants.baseUrlStage}/produk-hukum/produk/peraturan?page=$page'));
+
+      return jsonDecode(response.body) as List<dynamic>;
+    } catch (err) {
+      return [];
+    }
+  }
 }

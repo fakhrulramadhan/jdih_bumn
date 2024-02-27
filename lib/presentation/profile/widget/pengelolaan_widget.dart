@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -79,16 +80,36 @@ class _OrgansisasiWidgetState extends State<PengelolaanWidget> {
                                   print(
                                       "ini jumlah datanya ${state.data.items!.length}");
 
+                                  // Image.network(
+                                  //     "${strukturJdih.pengelola}",
+                                  //     // width: 340,
+                                  //     // height: 431,
+                                  //     fit: BoxFit.fill,
+                                  //   ),
                                   return SizedBox(
-                                    width: 340, //340
-                                    height: 440, //440
-                                    child: Image.network(
-                                      "${strukturJdih.pengelola}",
-                                      // width: 340,
-                                      // height: 431,
-                                      fit: BoxFit.fill,
-                                    ),
-                                  );
+                                      width: 340, //340
+                                      height: 440, //440
+                                      child: CachedNetworkImage(
+                                        imageUrl: "${strukturJdih.pengelola}",
+                                        progressIndicatorBuilder:
+                                            (context, url, downloadProgress) =>
+                                                Center(
+                                          child: Container(
+                                            height: 50,
+                                            width: 50,
+                                            child: CircularProgressIndicator(
+                                              value: downloadProgress.progress,
+                                            ),
+                                          ),
+                                        ),
+                                        errorWidget: (context, url, error) =>
+                                            const Icon(
+                                          Icons.error,
+                                          size: 24.0,
+                                        ),
+                                        width: 340,
+                                        height: 431,
+                                      ));
                                 },
                               );
                             }

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jdih_bumn/bloc/stage/get_berita/get_berita_bloc.dart';
@@ -108,11 +109,33 @@ class _ListBeritaWidgetState extends State<ListBeritaWidget> {
                           borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(12),
                               topRight: Radius.circular(12)),
-                          child: Image.network(
-                            "${berita.imagePathFull}",
-                            width: 180.0,
-                            height: 122.0,
-                            fit: BoxFit.cover,
+                          child: Container(
+                            color: Colors.grey.withOpacity(0.1),
+                            //  Image.network(
+                            //   "${berita.imagePathFull}",
+                            //   width: 180.0,
+                            //   height: 122.0,
+                            //   fit: BoxFit.cover,
+                            // ),
+                            child: CachedNetworkImage(
+                              imageUrl: "${berita.imagePathFull}",
+                              progressIndicatorBuilder:
+                                  (context, url, downloadProgress) => Center(
+                                child: Container(
+                                  height: 50,
+                                  width: 50,
+                                  child: CircularProgressIndicator(
+                                    value: downloadProgress.progress,
+                                  ),
+                                ),
+                              ),
+                              errorWidget: (context, url, error) => const Icon(
+                                Icons.error,
+                                size: 24.0,
+                              ),
+                              height: 122,
+                              width: 180,
+                            ),
                           ),
                         ),
                       ),

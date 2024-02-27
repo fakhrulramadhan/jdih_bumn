@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,9 +31,13 @@ import 'package:jdih_bumn/data/datasources/stage/peraturan_terbaru_datasource.da
 import 'package:jdih_bumn/data/datasources/stage/putusan_datasource.dart';
 import 'package:jdih_bumn/data/datasources/stage/struktur_jdih_datasource.dart';
 import 'package:jdih_bumn/data/datasources/stage/tentang_jdih_datasource.dart';
+import 'package:jdih_bumn/data/repositories/peraturan_paging_repository.dart';
 import 'package:jdih_bumn/presentation/splash_screen_lottie/splash_screen_lottie.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:http/http.dart' as http;
 
 void main() async {
+  HttpOverrides.global = new MyHttpOverrides();
   // BlocOverrides.runZoned(() => runApp(const MyApp()),
   //     blocObserver: AppBlocObserver());
   //https://www.youtube.com/watch?v=CNUBhb_cM6E
@@ -50,12 +55,22 @@ void main() async {
   //runApp(const MyApp());
 }
 
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final PeraturanPagingRepository repository;
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -99,7 +114,8 @@ class MyApp extends StatelessWidget {
               GetPeraturanTerbaruBloc(PeraturanTerbaruDatasource()),
         ),
         BlocProvider(
-          create: (context) => GetPagePeraturanCubit(PeraturanDatasource()),
+          create: (context) => GetPagePeraturanCubit(
+              PeraturanPagingRepository(PeraturanDatasource())),
         ),
       ],
       child: MaterialApp(

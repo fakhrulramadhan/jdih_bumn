@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 import 'package:jdih_bumn/data/model/response/stage/berita_response_model.dart';
@@ -66,11 +67,29 @@ class _BeritaDetailScreenState extends State<BeritaDetailScreen> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 clipBehavior: Clip.hardEdge,
-                child: Image.network(
-                  "${widget.berita?.imagePathOriFull}",
+                // Image.network(
+                //   "${widget.berita?.imagePathOriFull}",
+                //   width: MediaQuery.of(context).size.width,
+                //   height: 250,
+                //   fit: BoxFit.cover,
+                // ),
+                child: CachedNetworkImage(
+                  imageUrl: "${widget.berita?.imagePathOriFull}",
+                  progressIndicatorBuilder: (context, url, downloadProgress) =>
+                      Center(
+                    child: Container(
+                      height: 50,
+                      width: 50,
+                      child: CircularProgressIndicator(
+                          value: downloadProgress.progress),
+                    ),
+                  ),
+                  errorWidget: (context, url, error) => const Icon(
+                    Icons.error,
+                    size: 24.0,
+                  ),
                   width: MediaQuery.of(context).size.width,
                   height: 250,
-                  fit: BoxFit.cover,
                 ),
               ),
             ),

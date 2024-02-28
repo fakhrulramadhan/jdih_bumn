@@ -45,7 +45,7 @@ void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
 
-  await initializeDateFormatting('id_ID', null)
+  await initializeDateFormatting('id_ID', null) 
       .then((_) => runApp(const MyApp()));
   //lock potrait only
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])

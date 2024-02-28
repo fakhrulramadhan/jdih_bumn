@@ -21,13 +21,13 @@ class _IconInfoWidgetState extends State<IconInfoWidget> {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        height: 87.0,
+        height: 110.0,
         width: 100.0,
         color: Colors.white,
         child: Column(
           children: [
             Container(
-              height: 30,
+              height: 40,
               width: 30,
               decoration: BoxDecoration(
                   color: const Color(0xffF5F5FF),
@@ -40,12 +40,29 @@ class _IconInfoWidgetState extends State<IconInfoWidget> {
             const SizedBox(
               height: 9.0,
             ),
-            Text(
-              widget.title,
-              style: const TextStyle(
-                  fontSize: 12.0,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xff101010)),
+            Container(
+              height: widget.title.length > 9 ? 40 : 20,
+              child: widget.title.length > 9
+                  ? Center(
+                      child: Text(
+                        widget.title,
+                        style: const TextStyle(
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xff101010)),
+                        overflow: TextOverflow.fade,
+                        //textAlign: TextAlign.center,
+                      ),
+                    )
+                  : Text(
+                      widget.title,
+                      style: const TextStyle(
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xff101010)),
+                      overflow: TextOverflow.fade,
+                      //textAlign: TextAlign.center,
+                    ),
             ),
             const SizedBox(
               height: 4.0,

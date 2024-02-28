@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:jdih_bumn/bloc/stage/get_peraturan_populer.dart/get_peraturan_populer_bloc.dart';
+import 'package:jdih_bumn/presentation/populer_detail/populer_detail_screen.dart';
 
 import '../../../data/model/response/stage/peraturan_populer_response_model.dart';
 //import '../../../data/model/response/stage/peraturan_populer_new_response_model.dart';
@@ -70,143 +71,153 @@ class _PopulerWidgetState extends State<PopulerWidget> {
               String tglPerngundangan =
                   DateFormat("dd-MM-yyyy").format(parsedDate);
 
-              return SizedBox(
-                height: 185,
-                width: 341,
-                child: Column(
-                  children: [
-                    Container(
-                      height: 165,
-                      width: 341,
-                      //margin: const EdgeInsets.only(bottom: 20),
-                      decoration: const BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey,
-                                spreadRadius: 2,
-                                offset: Offset(0, 0),
-                                blurRadius: 2)
-                          ],
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(12),
-                              topRight: Radius.circular(12),
-                              bottomLeft: Radius.circular(12),
-                              bottomRight: Radius.circular(12))),
-                      child: Column(
-                        children: [
-                          Container(
-                            height: 135,
-                            width: 341,
-                            padding: const EdgeInsets.only(left: 20),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(12)),
-                            child: Stack(
-                              children: [
-                                SizedBox(
-                                  height: 115,
-                                  width: 341,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const SizedBox(
-                                        height: 20.0,
-                                      ),
-                                      SizedBox(
-                                        width: 260,
-                                        child: Text(
-                                          "${peraturanPopuler.jenis}",
+              return InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => PopulerDetailScreen(
+                            peraturanPopuler: peraturanPopuler)),
+                  );
+                },
+                child: SizedBox(
+                  height: 185,
+                  width: 341,
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 165,
+                        width: 341,
+                        //margin: const EdgeInsets.only(bottom: 20),
+                        decoration: const BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.grey,
+                                  spreadRadius: 2,
+                                  offset: Offset(0, 0),
+                                  blurRadius: 2)
+                            ],
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(12),
+                                topRight: Radius.circular(12),
+                                bottomLeft: Radius.circular(12),
+                                bottomRight: Radius.circular(12))),
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 135,
+                              width: 341,
+                              padding: const EdgeInsets.only(left: 20),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(12)),
+                              child: Stack(
+                                children: [
+                                  SizedBox(
+                                    height: 115,
+                                    width: 341,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const SizedBox(
+                                          height: 20.0,
+                                        ),
+                                        SizedBox(
+                                          width: 260,
+                                          child: Text(
+                                            "${peraturanPopuler.jenis}",
+                                            style: const TextStyle(
+                                              fontSize: 14.0,
+                                              fontWeight: FontWeight.w600,
+                                              color: Color(0xFF0093AD),
+                                            ),
+                                            textAlign: TextAlign.left,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 8.0,
+                                        ),
+                                        Text(
+                                          "${peraturanPopuler.nomorPeraturanBaru}",
                                           style: const TextStyle(
-                                            fontSize: 14.0,
-                                            fontWeight: FontWeight.w600,
-                                            color: Color(0xFF0093AD),
+                                            fontSize: 12.0,
+                                            fontWeight: FontWeight.w300,
+                                            color: Colors.black,
                                           ),
                                           textAlign: TextAlign.left,
                                         ),
-                                      ),
-                                      const SizedBox(
-                                        height: 8.0,
-                                      ),
-                                      Text(
-                                        "${peraturanPopuler.nomorPeraturanBaru}",
-                                        style: const TextStyle(
-                                          fontSize: 12.0,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.black,
+                                        const SizedBox(
+                                          height: 8.0,
                                         ),
-                                        textAlign: TextAlign.left,
-                                      ),
-                                      const SizedBox(
-                                        height: 8.0,
-                                      ),
-                                      Text(
-                                        "${peraturanPopuler.judul}",
-                                        style: const TextStyle(
-                                          fontSize: 12.0,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.black,
+                                        Text(
+                                          "${peraturanPopuler.judul}",
+                                          style: const TextStyle(
+                                            fontSize: 12.0,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.black,
+                                          ),
+                                          textAlign: TextAlign.left,
                                         ),
-                                        textAlign: TextAlign.left,
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                          Container(
-                            height: 30,
-                            width: 341,
-                            decoration: const BoxDecoration(
-                                color: Color(0xFFECF0F1),
-                                borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(12),
-                                    bottomRight: Radius.circular(12))),
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Row(
-                              children: [
-                                const Icon(
-                                  Icons.calendar_month,
-                                  size: 8.0,
-                                ),
-                                const SizedBox(
-                                  width: 2.0,
-                                ),
-                                Text(
-                                  tglPerngundangan,
-                                  style: const TextStyle(
-                                    fontSize: 9.0,
-                                    color: Colors.black,
+                            Container(
+                              height: 30,
+                              width: 341,
+                              decoration: const BoxDecoration(
+                                  color: Color(0xFFECF0F1),
+                                  borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(12),
+                                      bottomRight: Radius.circular(12))),
+                              padding: const EdgeInsets.only(left: 20),
+                              child: Row(
+                                children: [
+                                  const Icon(
+                                    Icons.calendar_month,
+                                    size: 8.0,
                                   ),
-                                ),
-                                const SizedBox(
-                                  width: 4.0,
-                                ),
-                                const Icon(
-                                  Icons.remove_red_eye,
-                                  size: 8.0,
-                                ),
-                                const SizedBox(
-                                  width: 2.0,
-                                ),
-                                Text(
-                                  "${peraturanPopuler.countReader}",
-                                  style: const TextStyle(
-                                    fontSize: 9.0,
+                                  const SizedBox(
+                                    width: 2.0,
                                   ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
+                                  Text(
+                                    tglPerngundangan,
+                                    style: const TextStyle(
+                                      fontSize: 9.0,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 4.0,
+                                  ),
+                                  const Icon(
+                                    Icons.remove_red_eye,
+                                    size: 8.0,
+                                  ),
+                                  const SizedBox(
+                                    width: 2.0,
+                                  ),
+                                  Text(
+                                    "${peraturanPopuler.countReader}",
+                                    style: const TextStyle(
+                                      fontSize: 9.0,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                  ],
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                    ],
+                  ),
                 ),
               );
             },

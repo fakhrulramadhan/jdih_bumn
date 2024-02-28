@@ -104,14 +104,14 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var parsedDate = DateTime.parse('${widget.peraturan.tglPenetapan}');
-    var parsedDatePerngundangan =
-        DateTime.parse('${widget.peraturan.tanggalPengundangan}');
+    // var parsedDate = DateTime.parse('${widget.peraturan.tglPenetapan}');
+    // var parsedDatePerngundangan =
+    //     DateTime.parse('${widget.peraturan.tanggalPengundangan}');
 
-    String convertedDate = DateFormat("dd-MM-yyyy").format(parsedDate);
+    // String convertedDate = DateFormat("dd-MM-yyyy").format(parsedDate);
 
-    String convertedDateUndang =
-        DateFormat("dd-MM-yyyy").format(parsedDatePerngundangan);
+    // String convertedDateUndang =
+    //     DateFormat("dd-MM-yyyy").format(parsedDatePerngundangan);
 
     double? progress;
 
@@ -225,7 +225,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                               widget.peraturan.judul!.length <= 65 ? 70 : 80,
                           //color: Colors.yellow,
                           child: Text(
-                            "${widget.peraturan.judul ?? '-'}",
+                            widget.peraturan.judul ?? '-',
                             style: const TextStyle(
                               fontSize: 18.0,
                               fontWeight: FontWeight.bold,
@@ -315,15 +315,20 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                                 title: "${widget.peraturan.countReader ?? ''}",
                                 subtitle: "Dilihat"),
                             // karakter _ diganti dengan &
-                            IconInfoWidget(
-                                imageUrl: "assets/images/bahasa.svg",
-                                title: widget.peraturan.bahasa
-                                        .toString()
-                                        .split('.')
-                                        .last
-                                        .replaceAll('_', ' & ') ??
-                                    '',
-                                subtitle: "Bahasa")
+                            widget.peraturan.bahasa != null
+                                ? IconInfoWidget(
+                                    imageUrl: "assets/images/bahasa.svg",
+                                    title: widget.peraturan.bahasa
+                                            .toString()
+                                            .split('.')
+                                            .last
+                                            .replaceAll('_', ' & ') ??
+                                        '',
+                                    subtitle: "Bahasa")
+                                : const IconInfoWidget(
+                                    imageUrl: "assets/images/bahasa.svg",
+                                    title: '-',
+                                    subtitle: "Bahasa")
                           ],
                         ),
                       ],
@@ -391,62 +396,110 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                                                 : 90
                     : 90,
                 subtitle: widget.peraturan.judul ?? ''),
-            InfoDetailWidget(
-                title: "T.E.U Badan/Pengarang",
-                subtitle: widget.peraturan.teuBadan
+            widget.peraturan.teuBadan != null
+                ? InfoDetailWidget(
+                    title: "T.E.U Badan/Pengarang",
+                    subtitle: widget.peraturan.teuBadan
                         .toString()
                         .split('.')
                         .last
-                        .replaceAll('_', ' ') ??
-                    '-',
-                heightTitle: 80),
+                        .replaceAll('_', ' '),
+                    heightTitle: 80)
+                : const InfoDetailWidget(
+                    title: "T.E.U Badan/Pengarang",
+                    subtitle: '-',
+                    heightTitle: 80),
+
             InfoDetailWidget(
               title: "Nomor Peraturan",
               subtitle: widget.peraturan.nomorPeraturanBaru ?? '-',
               heightTitle: 80,
             ),
-            InfoDetailWidget(
-              title: "Jenis Peraturan",
-              subtitle: widget.peraturan.jenis
-                      .toString()
-                      .split('.')
-                      .last
-                      .replaceAll("_", " ") ??
-                  '-',
-              heightTitle: 80,
-            ),
-            InfoDetailWidget(
-              title: "Singkatan Jenis/Bentuk Peraturan",
-              subtitle:
-                  widget.peraturan.singkatanJenis.toString().split('.').last ??
-                      '-',
-              heightTitle: 80,
-            ),
-            InfoDetailWidget(
-              title: "Tempat Penetapan",
-              subtitle:
-                  widget.peraturan.tempatTerbit.toString().split('.').last ??
-                      '-',
-              heightTitle: 80,
-            ),
+            widget.peraturan.jenis != null
+                ? InfoDetailWidget(
+                    title: "Jenis Peraturan",
+                    subtitle: widget.peraturan.jenis
+                        .toString()
+                        .split('.')
+                        .last
+                        .replaceAll("_", " "),
+                    heightTitle: 80,
+                  )
+                : const InfoDetailWidget(
+                    title: "Jenis Peraturan",
+                    subtitle: '-',
+                    heightTitle: 80,
+                  ),
+            widget.peraturan.singkatanJenis != null
+                ? InfoDetailWidget(
+                    title: "Singkatan Jenis/Bentuk Peraturan",
+                    subtitle: widget.peraturan.singkatanJenis
+                        .toString()
+                        .split('.')
+                        .last,
+                    heightTitle: 80,
+                  )
+                : const InfoDetailWidget(
+                    title: "Singkatan Jenis/Bentuk Peraturan",
+                    subtitle: '-',
+                    heightTitle: 80,
+                  ),
+            widget.peraturan.tempatTerbit != null
+                ? InfoDetailWidget(
+                    title: "Tempat Penetapan",
+                    subtitle: widget.peraturan.tempatTerbit
+                        .toString()
+                        .split('.')
+                        .last,
+                    heightTitle: 80,
+                  )
+                : const InfoDetailWidget(
+                    title: "Tempat Penetapan",
+                    subtitle: '-',
+                    heightTitle: 80,
+                  ),
             //"${widget.peraturanHukum.tanggal}"
-            InfoDetailWidget(
-              title: "Tanggal-bulan-tahun Penetapan",
-              subtitle: convertedDate ?? '-',
-              heightTitle: 80,
-            ),
-            InfoDetailWidget(
-              title: "Tanggal-bulan-tahun Pengundangan",
-              subtitle: convertedDateUndang ?? '-',
-            ),
-            InfoDetailWidget(
-              title: "Sumber",
-              subtitle:
-                  widget.peraturan.sumber.toString().split('.').last == 'EMPTY'
-                      ? '-'
-                      : '-',
-              heightTitle: 80,
-            ),
+            widget.peraturan.tglPenetapan == null
+                ? const InfoDetailWidget(
+                    title: "Tanggal-bulan-tahun Penetapan",
+                    subtitle: '-',
+                    heightTitle: 80,
+                  )
+                : InfoDetailWidget(
+                    title: "Tanggal-bulan-tahun Penetapan",
+                    subtitle: DateFormat('dd-MM-yyyy').format(
+                        DateTime.parse('${widget.peraturan.tglPenetapan}')),
+                    heightTitle: 80,
+                  ),
+            widget.peraturan.tanggalPengundangan == null
+                ? const InfoDetailWidget(
+                    title: "Tanggal-bulan-tahun Pengundangan",
+                    subtitle: '-',
+                  )
+                : InfoDetailWidget(
+                    title: "Tanggal-bulan-tahun Pengundangan",
+                    subtitle: DateFormat('dd-MM-yyyy').format(DateTime.parse(
+                        '${widget.peraturan.tanggalPengundangan}')),
+                  ),
+            widget.peraturan.sumber == null
+                ? InfoDetailWidget(
+                    title: "Sumber",
+                    subtitle:
+                        widget.peraturan.sumber.toString().split('.').last ==
+                                'EMPTY'
+                            ? '-'
+                            : '-',
+                    heightTitle: 80,
+                  )
+                : InfoDetailWidget(
+                    title: "Sumber",
+                    subtitle:
+                        widget.peraturan.sumber.toString().split('.').last ==
+                                'EMPTY'
+                            ? '-'
+                            : '-',
+                    heightTitle: 80,
+                  ),
             InfoDetailWidget(
               title: "Subjek",
               subtitle: "${widget.peraturan.subjek[0] ?? '-'}",
@@ -479,7 +532,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                               .detailNamaStatus !=
                           null
                       ? buildListItems()
-                      : [Text("-")],
+                      : [const Text("-")],
                   // children: [
                   //   _buildListItems(),
                   //   // Text(
@@ -498,22 +551,35 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
             //       : "Baru",
             //   heightTitle: 80,
             // ),
-            InfoDetailWidget(
-              title: "Lokasi",
-              subtitle:
-                  widget.peraturan.tempatTerbit.toString().split('.').last ??
-                      '-',
-              heightTitle: 80,
-            ),
-            InfoDetailWidget(
-              title: "Bidang Hukum",
-              subtitle: widget.peraturan.bidangHukum
-                  .toString()
-                  .split('.')
-                  .last
-                  .replaceAll('_', ' '),
-              heightTitle: 80,
-            ),
+            widget.peraturan.tempatTerbit == null
+                ? const InfoDetailWidget(
+                    title: "Lokasi",
+                    subtitle: '-',
+                    heightTitle: 80,
+                  )
+                : InfoDetailWidget(
+                    title: "Lokasi",
+                    subtitle: widget.peraturan.tempatTerbit
+                        .toString()
+                        .split('.')
+                        .last,
+                    heightTitle: 80,
+                  ),
+            widget.peraturan.bidangHukum == null
+                ? const InfoDetailWidget(
+                    title: "Bidang Hukum",
+                    subtitle: '-',
+                    heightTitle: 80,
+                  )
+                : InfoDetailWidget(
+                    title: "Bidang Hukum",
+                    subtitle: widget.peraturan.bidangHukum
+                        .toString()
+                        .split('.')
+                        .last
+                        .replaceAll('_', ' '),
+                    heightTitle: 80,
+                  ),
             InfoDetailWidget(
               title: "Lampiran",
               subtitle: widget.peraturan.fileLampiran ?? "-",

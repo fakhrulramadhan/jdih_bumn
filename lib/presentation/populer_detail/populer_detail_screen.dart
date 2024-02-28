@@ -465,16 +465,20 @@ class _PopulerDetailScreenState extends State<PopulerDetailScreen> {
                     subtitle: '-',
                     heightTitle: 80,
                   ),
-
-            InfoDetailWidget(
-              title: "Tempat Penetapan",
-              subtitle: widget.peraturanPopuler.tempatTerbit
-                      .toString()
-                      .split('.')
-                      .last ??
-                  '-',
-              heightTitle: 80,
-            ),
+            widget.peraturanPopuler.tempatTerbit != null
+                ? InfoDetailWidget(
+                    title: "Tempat Penetapan",
+                    subtitle: widget.peraturanPopuler.tempatTerbit
+                        .toString()
+                        .split('.')
+                        .last,
+                    heightTitle: 80,
+                  )
+                : InfoDetailWidget(
+                    title: "Tempat Penetapan",
+                    subtitle: '-',
+                    heightTitle: 80,
+                  ),
             //"${widget.peraturanHukum.tanggal}"
             //subtitle: convertedDate ?? '-',
             widget.peraturanPopuler.tglPenetapan == null
@@ -522,7 +526,9 @@ class _PopulerDetailScreenState extends State<PopulerDetailScreen> {
                   ),
             InfoDetailWidget(
               title: "Subjek",
-              subtitle: widget.peraturanPopuler.subjek?[0] ?? '-',
+              subtitle:
+                  widget.peraturanPopuler.subjek?[0].replaceAll('-', ' ') ??
+                      '-',
               heightTitle: widget.peraturanPopuler.subjek?[0] != '-' ? 90 : 80,
             ),
             InfoDetailWidget(

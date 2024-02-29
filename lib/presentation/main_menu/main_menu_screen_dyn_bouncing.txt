@@ -1,21 +1,17 @@
 // ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
-import 'package:jdih_bumn/presentation/artikel/artikel_screen.dart';
 import 'package:jdih_bumn/presentation/berita/berita_screen.dart';
-import 'package:jdih_bumn/presentation/berita_detail/berita_detail_screen.dart';
-import 'package:jdih_bumn/presentation/infografis/infografis_screen.dart';
 import 'package:jdih_bumn/presentation/kamus_hukum/kamus_hukum_screen.dart';
 import 'package:jdih_bumn/presentation/main_menu/widgets/berita_dan_info_widget.dart';
 import 'package:jdih_bumn/presentation/main_menu/widgets/disclaimer_stack_widget.dart';
 import 'package:jdih_bumn/presentation/main_menu/widgets/infografis_widget_new.dart';
 import 'package:jdih_bumn/presentation/main_menu/widgets/list_menu_peraturan_bumn_widget.dart';
 import 'package:jdih_bumn/presentation/main_menu/widgets/list_menu_widget.dart';
-import 'package:jdih_bumn/presentation/monografi/monografi_screen.dart';
+import 'package:jdih_bumn/presentation/maintenance/maintenance_screen.dart';
 import 'package:jdih_bumn/presentation/putusan/putusan_screen.dart';
 import 'package:jdih_bumn/presentation/survei/survei_screen.dart';
 import '../peraturan/peraturan_screen.dart';
-import '../peraturan_bumn/peraturan_bumn.dart';
 import 'package:dyn_mouse_scroll/dyn_mouse_scroll.dart';
 
 class MainMenuScreen extends StatefulWidget {
@@ -35,6 +31,9 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
     super.initState();
   }
 
+  //skeleton utk menampilkan layout ui
+  //ketika dalam keadaan masih loading
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -45,10 +44,14 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
     return Scaffold(
       //appBar: ,
       body: DynMouseScroll(
+        durationMS: 400,
+        mobilePhysics: BouncingScrollPhysics(),
         builder: (context, controller, physics) => ListView(
           controller: controller,
           physics: physics,
+          //physics: const BouncingScrollPhysics(),
           scrollDirection: Axis.vertical,
+
           shrinkWrap: true,
           children: [
             SafeArea(
@@ -242,7 +245,8 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const PerarturanBumnScreen()),
+                                        //const PerarturanBumnScreen()
+                                        const MaintenanceScreen()),
                               );
                             },
                             menuText: "Peraturan \n  BUMN"),
@@ -268,7 +272,8 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const MonografiScreen()),
+                                        //const MonografiScreen()
+                                        const MaintenanceScreen()),
                               );
                             },
                             assetUrl: "assets/images/monografis.svg",
@@ -352,7 +357,8 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const ArtikelScreen()),
+                                        //const ArtikelScreen()
+                                        const MaintenanceScreen()),
                               );
                             },
                             assetUrl: "assets/images/Artikel.svg",
@@ -396,10 +402,12 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                               //       );
                               //     });
 
+                              //builder: (context) => const SurveiScreen()
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const SurveiScreen()),
+                                    builder: (context) =>
+                                        const MaintenanceScreen()),
                               );
                             },
                             assetUrl: "assets/images/Survei.svg",
@@ -431,11 +439,17 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                   //   width: 80,
                   //   color: Colors.purple,
                   // )
-                  SingleChildScrollView(
-                    //controller: controller,
-                    controller: controller,
-                    physics: Padding(padding: EdgeInsets.all(8.0),child: physics,                    scrollDirection: Axis.horizontal,                    child: Row(                      children: [                        InfoGrafisWidgetNew(                          text:                              "Prinsip Tata Kelola \nPerusahaan yang Baik \nBUMN",                          onTap: () {                            Navigator.push(                              context,                              MaterialPageRoute(                                  builder: (context) =>                                      const InfografisScreen()),                            );                          },                        ),                        InfoGrafisWidgetNew(                          text:                              "Prinsip Tata Kelola \nPerusahaan yang Baik \nBUMN",                          onTap: () {                            Navigator.push(                              context,                              MaterialPageRoute(                                  builder: (context) =>                                      const InfografisScreen()),                            );                          },                        ),                        InfoGrafisWidgetNew(                          text:                              "Prinsip Tata Kelola \nPerusahaan yang Baik \nBUMN",                          onTap: () {                            Navigator.push(                              context,                              MaterialPageRoute(                                  builder: (context) =>                                      const InfografisScreen()),                            );                          },                        ),                      ],                    ),),
-                  ),
+                  SizedBox(
+                      height: 200,
+                      width: MediaQuery.of(context).size.width,
+                      child: SingleChildScrollView(
+                        controller: controller,
+                        physics: physics,
+                        scrollDirection: Axis.horizontal,
+                        child: const Row(
+                          children: [InfoGrafisWidgetNew()],
+                        ),
+                      )),
                   const SizedBox(
                     height: 20.0,
                   ),
@@ -452,17 +466,19 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                   const SizedBox(
                     height: 8.0,
                   ),
-                  BeritaDanInfoWidget(
-                    title: "Seminar Merger Dan Akuisisi BUMN",
-                    waktu: "Jakarta, 30 November 2023",
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const BeritaDetailScreen()),
-                      );
-                    },
-                  ),
+                  const BeritaDanInfoWidget(),
+                  //BeritaDanInfoWidgetSort(),
+                  // BeritaDanInfoWidget(
+                  //   title: "Seminar Merger Dan Akuisisi BUMN",
+                  //   waktu: "Jakarta, 30 November 2023",
+                  //   onTap: () {
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //           builder: (context) => const BeritaDetailzScreen()),
+                  //     );
+                  //   },
+                  // ),
                   const SizedBox(
                     height: 20.0,
                   ),

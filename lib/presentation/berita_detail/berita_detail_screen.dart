@@ -50,6 +50,8 @@ class _BeritaDetailScreenState extends State<BeritaDetailScreen> {
       ),
       body: SingleChildScrollView(
         controller: _scrollController,
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.vertical,
         child: Column(
           //mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,

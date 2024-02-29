@@ -30,6 +30,8 @@ class _TerbaruScreenState extends State<TerbaruScreen> {
       },
       child: SingleChildScrollView(
         controller: ScrollController(),
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.vertical,
         child: SafeArea(
             child: SizedBox(
           child: Column(

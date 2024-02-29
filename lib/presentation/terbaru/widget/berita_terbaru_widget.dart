@@ -57,8 +57,9 @@ class _BeritaTerbaruWidgetState extends State<BeritaTerbaruWidget> {
 
           return ListView.builder(
             itemCount: state.data.items!.length,
-            physics: const ScrollPhysics(),
+            //physics: const ScrollPhysics(),
             shrinkWrap: true,
+            physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.vertical,
             itemBuilder: (BuildContext context, index) {
               final Item peraturanTerbaru = state.data.items![index];

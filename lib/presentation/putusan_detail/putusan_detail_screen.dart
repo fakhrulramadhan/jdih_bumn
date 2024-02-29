@@ -128,6 +128,8 @@ class _PutusanDetailScreenState extends State<PutusanDetailScreen> {
       ),
       body: SingleChildScrollView(
         controller: _scrollController,
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.vertical,
         child: Column(
           //mainAxisSize: MainAxisSize.min,d
           children: [

@@ -47,6 +47,8 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
           ),
           SingleChildScrollView(
             controller: ScrollController(),
+            physics: const BouncingScrollPhysics(),
+            scrollDirection: Axis.vertical,
             child: SizedBox(
               width: MediaQuery.of(context).size.width,
               child: Column(

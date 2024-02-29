@@ -207,6 +207,8 @@ class _PopulerDetailScreenState extends State<PopulerDetailScreen> {
       ),
       body: SingleChildScrollView(
         controller: _scrollController,
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.vertical,
         child: Column(
           //mainAxisSize: MainAxisSize.min,
           //tetap butuh height agar ukurannya proporsional
@@ -728,10 +730,19 @@ class _PopulerDetailScreenState extends State<PopulerDetailScreen> {
                                         onPressed: () async {
                                           print(path);
                                           // Open the downloaded file in the Files app
+                                          // print(
+                                          //     '${path.replaceAll('%', ' ').replaceAll('20', '')}');
+
                                           print(
-                                              '${path.replaceAll('%', ' ').replaceAll('20', '')}');
+                                              '${path.replaceAll('%20', ' ')}');
+                                          // await OpenFilex.open(
+                                          //         '${path.replaceAll('%', ' ').replaceAll('20', '')}')
+                                          //     .then((value) {
+                                          //   print(value.message.toString());
+                                          // });
+
                                           await OpenFilex.open(
-                                                  '${path.replaceAll('%', ' ').replaceAll('20', '')}')
+                                                  '${path.replaceAll('%20', ' ')}')
                                               .then((value) {
                                             print(value.message.toString());
                                           });

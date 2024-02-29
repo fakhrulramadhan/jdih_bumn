@@ -44,8 +44,6 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
     return Scaffold(
       //appBar: ,
       body: DynMouseScroll(
-        durationMS: 400,
-        mobilePhysics: BouncingScrollPhysics(),
         builder: (context, controller, physics) => ListView(
           controller: controller,
           physics: physics,
@@ -363,15 +361,13 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                             },
                             assetUrl: "assets/images/Artikel.svg",
                             menuText: "Artikel"),
-                        // builder: (context) =>
-                        //const KamusHukumScreen()
                         ListMenuWidget(
                             onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const MaintenanceScreen()),
+                                        const KamusHukumScreen()),
                               );
                             },
                             assetUrl: "assets/images/Kamus Hukum.svg",

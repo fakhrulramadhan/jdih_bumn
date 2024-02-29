@@ -200,6 +200,8 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
       ),
       body: SingleChildScrollView(
         controller: _scrollController,
+        physics: const BouncingScrollPhysics(), //pakai bouncing
+        scrollDirection: Axis.vertical,
         child: Column(
           //mainAxisSize: MainAxisSize.min,
           //tetap butuh height agar ukurannya proporsional
@@ -667,14 +669,13 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                                 url: "${widget.peraturan.urlDownload}",
                                 onProgress: (fileName, progresz) {
                                   setState(() {
-                                    progress = progresz;
+                                    _progress = progresz;
                                   });
                                 },
                                 onDownloadCompleted: (path) {
                                   print('Path: $path');
 
                                   setState(() {
-                                    progress = 0;
                                     _progress = null;
                                   });
 

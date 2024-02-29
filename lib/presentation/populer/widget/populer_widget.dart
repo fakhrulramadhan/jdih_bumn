@@ -59,8 +59,10 @@ class _PopulerWidgetState extends State<PopulerWidget> {
           }
           return ListView.builder(
             itemCount: state.data.items!.length,
-            physics: const ScrollPhysics(),
+            // physics: const ScrollPhysics(),
             shrinkWrap: true,
+            physics: const BouncingScrollPhysics(),
+            scrollDirection: Axis.vertical,
             itemBuilder: (BuildContext context, index) {
               final Item peraturanPopuler = state.data.items![index];
 

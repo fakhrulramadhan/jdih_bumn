@@ -32,6 +32,8 @@ class _ListPeraturanPagingWidgetState extends State<ListPeraturanPagingWidget> {
     return ListView.builder(
       itemCount: peraturansList.length,
       controller: ScrollController(),
+      physics: const BouncingScrollPhysics(),
+      scrollDirection: Axis.vertical,
       itemBuilder: (context, index) {
         final peraturan = peraturansList[index];
 

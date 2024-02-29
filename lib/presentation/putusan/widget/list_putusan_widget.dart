@@ -61,7 +61,9 @@ class _ListPutusanWidgetState extends State<ListPutusanWidget> {
 
           return ListView.builder(
             itemCount: state.data.items!.length,
-            physics: const ScrollPhysics(),
+            //physics: const ScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
+            scrollDirection: Axis.vertical,
             shrinkWrap: true,
             itemBuilder: (BuildContext context, index) {
               final Item putusan = state.data.items![index];
@@ -70,8 +72,7 @@ class _ListPutusanWidgetState extends State<ListPutusanWidget> {
 
               var parsedDate = DateTime.parse('${putusan.tglPenetapan}');
 
-              String tglPenetapan =
-                  DateFormat("dd-MM-yyyy").format(parsedDate);
+              String tglPenetapan = DateFormat("dd-MM-yyyy").format(parsedDate);
 
               return InkWell(
                 onTap: () {

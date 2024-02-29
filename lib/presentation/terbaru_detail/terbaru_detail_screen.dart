@@ -10,6 +10,7 @@ import 'package:jdih_bumn/presentation/peraturan_detail/widget/bagikan_button_wi
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/download_button_widget.dart';
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/info_detail_status_peraturan_widget.dart';
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/info_detail_widget.dart';
+import 'package:open_filex/open_filex.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../peraturan_detail/widget/icon_info_widget.dart';
 import 'widget/icon_info_widget.dart';
@@ -202,6 +203,8 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
       ),
       body: SingleChildScrollView(
         controller: _scrollController,
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.vertical,
         child: Column(
           //mainAxisSize: MainAxisSize.min,
           //tetap butuh height agar ukurannya proporsional
@@ -699,6 +702,44 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
                                     progress = 0;
                                     _progress = null;
                                   });
+
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'Unduhan Selesai',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      backgroundColor:
+                                          Color.fromARGB(255, 2, 25, 117),
+                                      action: SnackBarAction(
+                                        label: 'Buka File',
+                                        textColor: Colors.white,
+                                        onPressed: () async {
+                                          print(path);
+                                          // Open the downloaded file in the Files app
+                                          // print(
+                                          //     '${path.replaceAll('%', ' ').replaceAll('20', '')}');
+
+                                          print('${path}');
+                                          // await OpenFilex.open(
+                                          //         '${path.replaceAll('%', ' ').replaceAll('20', '')}')
+                                          //     .then((value) {
+                                          //   print(value.message.toString());
+                                          // });
+
+                                          await OpenFilex.open('${path}')
+                                              .then((value) {
+                                            print(value.message.toString());
+                                          });
+
+                                          // await SfPdfViewer.file(
+                                          //     File('${path}'));
+                                        },
+                                      ),
+                                    ),
+                                  );
                                 },
                               );
                             },

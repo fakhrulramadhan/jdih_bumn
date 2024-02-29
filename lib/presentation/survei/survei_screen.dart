@@ -54,6 +54,8 @@ class _SurveiScreenState extends State<SurveiScreen> {
           ),
           SingleChildScrollView(
             controller: ScrollController(),
+            physics: const BouncingScrollPhysics(),
+            scrollDirection: Axis.vertical,
             child: SizedBox(
               width: MediaQuery.of(context).size.width,
               child: Column(

@@ -100,6 +100,8 @@ class _PeraturanBumnDetailScreenState extends State<PeraturanBumnDetailScreen> {
       ),
       body: SingleChildScrollView(
         controller: _scrollController,
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.vertical,
         child: Column(
           //mainAxisSize: MainAxisSize.min,
           children: [

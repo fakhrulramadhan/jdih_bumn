@@ -87,7 +87,8 @@ class _ListPeraturanRefreshState extends State<ListPeraturanRefresh> {
         }
       },
       child: ListView.builder(
-          physics: AlwaysScrollableScrollPhysics(),
+          physics: const AlwaysScrollableScrollPhysics(),
+          //physics: BouncingScrollPhysics(),
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
           itemBuilder: (context, index) {

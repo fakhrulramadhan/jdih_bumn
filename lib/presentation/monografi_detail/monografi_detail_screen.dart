@@ -102,6 +102,8 @@ class _MonografiDetailScreenState extends State<MonografiDetailScreen> {
       // ),
       body: SingleChildScrollView(
         controller: _scrollController,
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.vertical,
         child: SafeArea(
           child: Container(
             child: Column(

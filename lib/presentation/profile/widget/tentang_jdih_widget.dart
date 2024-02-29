@@ -5,6 +5,8 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:html/parser.dart';
 import 'package:jdih_bumn/bloc/stage/get_tentang_jdih/get_tentang_jdih_bloc.dart';
+import 'package:jdih_bumn/presentation/home_screen/home_screen.dart';
+import 'package:jdih_bumn/presentation/main_menu/main_menu_screen.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import '../../../data/model/response/stage/tentang_jdih_response_model.dart';
 // import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
@@ -425,11 +427,16 @@ class _TentangJdihWidgetState extends State<TentangJdihWidget> {
           ),
         ),
         onWillPop: () async {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Maaf, tidak bisa ke halaman sebelumnya'),
-              backgroundColor: Colors.red,
-            ),
+          // ScaffoldMessenger.of(context).showSnackBar(
+          //   const SnackBar(
+          //     content: Text('Maaf, tidak bisa ke halaman sebelumnya'),
+          //     backgroundColor: Colors.red,
+          //   ),
+          // );
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => HomeScreen()),
           );
           return false;
         });

@@ -13,6 +13,8 @@ import 'package:jdih_bumn/presentation/peraturan_detail/widget/info_detail_statu
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/info_detail_widget.dart';
 
 import 'package:dio/dio.dart';
+import 'package:open_filex/open_filex.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
 
 class PopulerDetailScreen extends StatefulWidget {
@@ -29,9 +31,12 @@ class PopulerDetailScreen extends StatefulWidget {
 class _PopulerDetailScreenState extends State<PopulerDetailScreen> {
   // Track the progress of a downloaded file here.
   double progress = 0;
+  double? _progress;
 
   // Track if the PDF was downloaded here.
   bool didDownloadPDF = false;
+
+  bool isPermission = false;
 
   // Show the progress status to the user.
   String progressString = 'File has not been downloaded yet.';
@@ -47,6 +52,29 @@ class _PopulerDetailScreenState extends State<PopulerDetailScreen> {
   void initState() {
     _scrollController = ScrollController();
     super.initState();
+  }
+
+  isStoragePermission() async {
+    var isStorage = await Permission.storage.status;
+    if (!isStorage.isGranted) {
+      await Permission.storage.request();
+      if (!isStorage.isGranted) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return true;
+    }
+  }
+
+  checkPermission() async {
+    var permission = await isStoragePermission();
+    if (permission) {
+      setState(() {
+        isPermission = true;
+      });
+    }
   }
 
   // You can update the download progress here so that the user is
@@ -659,7 +687,7 @@ class _PopulerDetailScreenState extends State<PopulerDetailScreen> {
                   )
                 : SizedBox(
                     width: MediaQuery.of(context).size.width * 0.45,
-                    child: progress != null
+                    child: _progress != null
                         ? const Center(child: CircularProgressIndicator())
                         : DownloadButtonWidget(
                             onTap: () async {
@@ -668,19 +696,52 @@ class _PopulerDetailScreenState extends State<PopulerDetailScreen> {
 
                               print("${widget.peraturanPopuler.urlDownload}");
 
+                              await checkPermission();
+
                               await FileDownloader.downloadFile(
                                 url: "${widget.peraturanPopuler.urlDownload}",
                                 onProgress: (fileName, progresz) {
                                   setState(() {
-                                    progress = progresz;
+                                    _progress = progresz;
                                   });
                                 },
                                 onDownloadCompleted: (path) {
                                   print('Path: $path');
 
                                   setState(() {
-                                    progress = null;
+                                    progress = 0;
+                                    _progress = null;
                                   });
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'Unduhan Selesai',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      backgroundColor:
+                                          Color.fromARGB(255, 2, 25, 117),
+                                      action: SnackBarAction(
+                                        label: 'Buka File',
+                                        textColor: Colors.white,
+                                        onPressed: () async {
+                                          print(path);
+                                          // Open the downloaded file in the Files app
+                                          print(
+                                              '${path.replaceAll('%', ' ').replaceAll('20', '')}');
+                                          await OpenFilex.open(
+                                                  '${path.replaceAll('%', ' ').replaceAll('20', '')}')
+                                              .then((value) {
+                                            print(value.message.toString());
+                                          });
+
+                                          // await SfPdfViewer.file(
+                                          //     File('${path}'));
+                                        },
+                                      ),
+                                    ),
+                                  );
                                 },
                               );
                             },

@@ -10,6 +10,7 @@ import 'package:jdih_bumn/presentation/peraturan_detail/widget/bagikan_button_wi
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/download_button_widget.dart';
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/info_detail_status_peraturan_widget.dart';
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/info_detail_widget.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../peraturan_detail/widget/icon_info_widget.dart';
 import 'widget/icon_info_widget.dart';
 
@@ -29,7 +30,11 @@ class TerbaruDetailScreen extends StatefulWidget {
 
 class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
   // Track the progress of a downloaded file here.
+
   double progress = 0;
+  double? _progress;
+
+  bool isPermission = false;
 
   // Track if the PDF was downloaded here.
   bool didDownloadPDF = false;
@@ -64,6 +69,29 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
             'Download progress: ${(progress * 100).toStringAsFixed(0)}% done.';
       }
     });
+  }
+
+  isStoragePermission() async {
+    var isStorage = await Permission.storage.status;
+    if (!isStorage.isGranted) {
+      await Permission.storage.request();
+      if (!isStorage.isGranted) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return true;
+    }
+  }
+
+  checkPermission() async {
+    var permission = await isStoragePermission();
+    if (permission) {
+      setState(() {
+        isPermission = true;
+      });
+    }
   }
 
   // This method uses Dio to download a file from the given URL
@@ -113,8 +141,6 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
 
     // String convertedDateUndang =
     //     DateFormat("dd-MM-yyyy").format(parsedDatePerngundangan);
-
-    double? progress;
 
     List<Widget> buildListItems() {
       List<Widget> items = [];
@@ -650,7 +676,7 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
                   )
                 : SizedBox(
                     width: MediaQuery.of(context).size.width * 0.45,
-                    child: progress != null
+                    child: _progress != null
                         ? const Center(child: CircularProgressIndicator())
                         : DownloadButtonWidget(
                             onTap: () async {
@@ -658,19 +684,20 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
                               //     '/storage/emulated/0/Download');
 
                               print("${widget.peraturanTerbaru.urlDownload}");
-
+                              await checkPermission();
                               await FileDownloader.downloadFile(
                                 url: "${widget.peraturanTerbaru.urlDownload}",
                                 onProgress: (fileName, progresz) {
                                   setState(() {
-                                    progress = progresz;
+                                    _progress = progresz;
                                   });
                                 },
                                 onDownloadCompleted: (path) {
                                   print('Path: $path');
 
                                   setState(() {
-                                    progress = null;
+                                    progress = 0;
+                                    _progress = null;
                                   });
                                 },
                               );

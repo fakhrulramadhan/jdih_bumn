@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:jdih_bumn/bloc/get_peraturan_hukum/get_peraturan_hukum_bloc.dart';
 import 'package:jdih_bumn/bloc/get_produk_hukum/get_produk_hukum_bloc.dart';
@@ -45,7 +46,14 @@ void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
 
-  await initializeDateFormatting('id_ID', null) 
+  await FlutterDownloader.initialize(
+      debug:
+          true, // optional: set to false to disable printing logs to console (default: true)
+      ignoreSsl:
+          true // option: set to false to disable working with http links (default: false)
+      );
+
+  await initializeDateFormatting('id_ID', null)
       .then((_) => runApp(const MyApp()));
   //lock potrait only
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])

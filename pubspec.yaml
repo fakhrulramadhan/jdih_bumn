@@ -65,6 +65,11 @@ dependencies:
   provider: ^6.1.1
   pull_to_refresh: ^2.0.0
   cached_network_image: ^3.3.1
+  flutter_local_notifications: ^16.3.2
+  flutter_downloader: ^1.11.6
+  file_picker: ^6.1.1
+  permission_handler: ^11.3.0
+  open_filex: ^4.4.0
   
 dev_dependencies:
   flutter_test:

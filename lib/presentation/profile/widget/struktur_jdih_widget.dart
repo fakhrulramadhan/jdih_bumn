@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jdih_bumn/presentation/home_screen/home_screen.dart';
 import 'package:jdih_bumn/presentation/profile/widget/organisasi_widget.dart';
 import 'package:jdih_bumn/presentation/profile/widget/pengelolaan_widget.dart';
 
@@ -171,7 +172,10 @@ class _StrukturJdihWidgetState extends State<StrukturJdihWidget> {
                           pageIndex = newpage;
                         });
                       },
-                      children: const [OrgansisasiWidget(), PengelolaanWidget()],
+                      children: const [
+                        OrgansisasiWidget(),
+                        PengelolaanWidget()
+                      ],
                     ),
                   )
                 ],
@@ -180,11 +184,15 @@ class _StrukturJdihWidgetState extends State<StrukturJdihWidget> {
           ),
         ),
         onWillPop: () async {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Maaf, tidak bisa ke halaman sebelumnya'),
-              backgroundColor: Colors.red,
-            ),
+          // ScaffoldMessenger.of(context).showSnackBar(
+          //   const SnackBar(
+          //     content: Text('Maaf, tidak bisa ke halaman sebelumnya'),
+          //     backgroundColor: Colors.red,
+          //   ),
+          // );
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => HomeScreen()),
           );
           return false;
         });

@@ -10,6 +10,8 @@ import 'package:jdih_bumn/presentation/peraturan_detail/widget/bagikan_button_wi
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/download_button_widget.dart';
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/info_detail_status_peraturan_widget.dart';
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/info_detail_widget.dart';
+import 'package:open_filex/open_filex.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'widget/icon_info_widget.dart';
 
 import 'package:dio/dio.dart';
@@ -29,9 +31,11 @@ class PeraturanDetailScreen extends StatefulWidget {
 class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
   // Track the progress of a downloaded file here.
   double progress = 0;
-
+  double? _progress;
   // Track if the PDF was downloaded here.
   bool didDownloadPDF = false;
+
+  bool isPermission = false;
 
   // Show the progress status to the user.
   String progressString = 'File has not been downloaded yet.';
@@ -47,6 +51,29 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
   void initState() {
     _scrollController = ScrollController();
     super.initState();
+  }
+
+  isStoragePermission() async {
+    var isStorage = await Permission.storage.status;
+    if (!isStorage.isGranted) {
+      await Permission.storage.request();
+      if (!isStorage.isGranted) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return true;
+    }
+  }
+
+  checkPermission() async {
+    var permission = await isStoragePermission();
+    if (permission) {
+      setState(() {
+        isPermission = true;
+      });
+    }
   }
 
   // You can update the download progress here so that the user is
@@ -112,8 +139,6 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
 
     // String convertedDateUndang =
     //     DateFormat("dd-MM-yyyy").format(parsedDatePerngundangan);
-
-    double? progress;
 
     List<Widget> buildListItems() {
       List<Widget> items = [];
@@ -319,11 +344,10 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                                 ? IconInfoWidget(
                                     imageUrl: "assets/images/bahasa.svg",
                                     title: widget.peraturan.bahasa
-                                            .toString()
-                                            .split('.')
-                                            .last
-                                            .replaceAll('_', ' & ') ??
-                                        '',
+                                        .toString()
+                                        .split('.')
+                                        .last
+                                        .replaceAll('_', ' & '),
                                     subtitle: "Bahasa")
                                 : const IconInfoWidget(
                                     imageUrl: "assets/images/bahasa.svg",
@@ -628,7 +652,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                   )
                 : SizedBox(
                     width: MediaQuery.of(context).size.width * 0.45,
-                    child: progress != null
+                    child: _progress != null
                         ? const Center(child: CircularProgressIndicator())
                         : DownloadButtonWidget(
                             onTap: () async {
@@ -636,6 +660,8 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                               //     '/storage/emulated/0/Download');
 
                               print("${widget.peraturan.urlDownload}");
+
+                              await checkPermission();
 
                               await FileDownloader.downloadFile(
                                 url: "${widget.peraturan.urlDownload}",
@@ -648,8 +674,37 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                                   print('Path: $path');
 
                                   setState(() {
-                                    progress = null;
+                                    progress = 0;
+                                    _progress = null;
                                   });
+
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'Unduhan Selesai',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      backgroundColor:
+                                          Color.fromARGB(255, 2, 25, 117),
+                                      action: SnackBarAction(
+                                        label: 'Buka File',
+                                        textColor: Colors.white,
+                                        onPressed: () async {
+                                          print(path);
+                                          // Open the downloaded file in the Files app
+                                          await OpenFilex.open('$path')
+                                              .then((value) {
+                                            print(value.message.toString());
+                                          });
+
+                                          // await SfPdfViewer.file(
+                                          //     File('${path}'));
+                                        },
+                                      ),
+                                    ),
+                                  );
                                 },
                               );
                             },

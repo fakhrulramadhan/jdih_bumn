@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jdih_bumn/bloc/stage/get_faq/get_faq_bloc.dart';
+import 'package:jdih_bumn/presentation/home_screen/home_screen.dart';
 
 import '../../../data/model/response/stage/faq_response_model.dart';
 
@@ -117,11 +118,15 @@ class _FaqWidgetState extends State<FaqWidget> {
           ),
         ),
         onWillPop: () async {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Maaf, tidak bisa ke halaman sebelumnya'),
-              backgroundColor: Colors.red,
-            ),
+          // ScaffoldMessenger.of(context).showSnackBar(
+          //   const SnackBar(
+          //     content: Text('Maaf, tidak bisa ke halaman sebelumnya'),
+          //     backgroundColor: Colors.red,
+          //   ),
+          // );
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => HomeScreen()),
           );
           return false;
         });

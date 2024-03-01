@@ -20,3 +20,12 @@ class GetKamusHukumBloc extends Bloc<GetKamusHukumEvent, GetKamusHukumState> {
     });
   }
 }
+
+List<List<T>> _splitList<T>(List<T> list, int chunkSize) {
+  List<List<T>> chunks = [];
+  for (var i = 0; i < list.length; i += chunkSize) {
+    var end = (i + chunkSize < list.length) ? i + chunkSize : list.length;
+    chunks.add(list.sublist(i, end));
+  }
+  return chunks;
+}

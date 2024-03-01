@@ -21,4 +21,20 @@ class KamusHukumDatasource {
       return const Left('Server Error');
     }
   }
+
+  //  Future<Either<String, List<Item>>> getKamusList() async {
+  //   final response = await http
+  //       .get(Uri.parse('${Constants.baseUrlStage}/publikasi/kamus-hukum'));
+
+  //   if (response.statusCode == 200) {
+  //     print(response.body);
+  //     print("=====");
+  //     print(Right(KamusHukumResponseModel.fromJson(jsonDecode(response.body))));
+  //     return Right(KamusHukumResponseModel.fromJson(jsonDecode(response.body)));
+  //   } else {
+  //     print(response.body);
+  //     print("Server Error");
+  //     return const Left('Server Error');
+  //   }
+  // }
 }

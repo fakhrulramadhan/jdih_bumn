@@ -361,13 +361,15 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                             },
                             assetUrl: "assets/images/Artikel.svg",
                             menuText: "Artikel"),
+                        // builder: (context) =>
+                        //const KamusHukumScreen()
                         ListMenuWidget(
                             onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const KamusHukumScreen()),
+                                        const MaintenanceScreen()),
                               );
                             },
                             assetUrl: "assets/images/Kamus Hukum.svg",

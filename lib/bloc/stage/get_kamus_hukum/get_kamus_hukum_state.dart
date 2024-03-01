@@ -22,4 +22,13 @@ class GetKamusHukumLoaded extends GetKamusHukumState {
   int get hashCode => data.hashCode;
 }
 
+class GetKamusHukumLoadedSplit extends GetKamusHukumState {
+  final List<List<Item>> pages;
+
+  GetKamusHukumLoadedSplit({required this.pages});
+
+  @override
+  List<Object> get props => [pages];
+}
+
 class GetKamusHukumError extends GetKamusHukumState {}

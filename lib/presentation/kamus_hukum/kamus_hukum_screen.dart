@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jdih_bumn/bloc/stage/get_kamus_hukum/get_kamus_hukum_bloc.dart';
+import 'package:jdih_bumn/data/datasources/stage/kamus_hukum_datasource.dart';
 import 'package:jdih_bumn/presentation/kamus_hukum/body_kamus_page.dart';
 import 'package:jdih_bumn/presentation/kamus_hukum/body_kamus_page_two.dart';
 import 'package:jdih_bumn/presentation/kamus_hukum/widget/kamus_sebelumnya_button_widget.dart';
 import 'package:jdih_bumn/presentation/kamus_hukum/widget/title_kamus_widget.dart';
 import './widget/kamus_selanjutnya_button_widget_new.dart';
+import 'package:jdih_bumn/data/model/response/stage/kamus_hukum_response_model.dart';
 
 class KamusHukumScreen extends StatefulWidget {
   const KamusHukumScreen({super.key});
@@ -14,6 +18,7 @@ class KamusHukumScreen extends StatefulWidget {
 
 class _KamusHukumScreenState extends State<KamusHukumScreen> {
   int pageIndex = 0;
+  late Future<List<Item>> futurePosts;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +32,7 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
 
     @override
     void initState() {
-      //context.read<GetPeraturanHukumBloc>().add(DoGetPeraturanHukumEvent());
+      context.read<GetKamusHukumBloc>().add(DoGetKamusHukumEvent());
       // TODO: implement initState
       super.initState();
     }
@@ -149,27 +154,59 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
                         // pakai pageview nuilder
                         const TitleKamusWidget(),
                         SizedBox(
-                          height: 730,
-                          width: MediaQuery.of(context).size.width,
-                          child: PageView(
-                            controller: page,
-                            physics: const NeverScrollableScrollPhysics(),
-                            scrollDirection: Axis.horizontal,
-                            pageSnapping: true,
-                            // on page changed (ketika halamannya berubah)
-                            onPageChanged: (newpage) {
-                              //update ui halamannya ke berapa
-                              setState(() {
-                                pageIndex = newpage;
-                              });
-                            },
-                            children: const [
-                              BodyKamusPage(),
-                              BodyKamusPageTwo(),
-                              BodyKamusPage()
-                            ],
-                          ),
-                        ),
+                            height: 730,
+                            width: MediaQuery.of(context).size.width,
+                            child: BlocBuilder<GetKamusHukumBloc,
+                                GetKamusHukumState>(
+                              builder: (context, state) {
+                                if (state is GetKamusHukumLoading) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                }
+
+                                if (state is GetKamusHukumError) {
+                                  return const Center(
+                                    child: Text("Data Error"),
+                                  );
+                                }
+
+                                // if (state is GetKamusHukumLoaded) {
+                                //   if (state.data.items!.isEmpty) {
+                                //     return const Center(
+                                //       child: Text("Data kosong"),
+                                //     );
+                                //   }
+                                //   return PageView.builder(
+                                //     itemCount: state.data.items!.length,
+                                //     itemBuilder: (context, index) {
+                                //       final Item kamus =
+                                //           state.data.items![index];
+                                //       return Container(
+                                //         padding: EdgeInsets.all(16),
+                                //         child: Column(
+                                //           crossAxisAlignment:
+                                //               CrossAxisAlignment.start,
+                                //           children: <Widget>[
+                                //             Text(kamus.istilah.toString(),
+                                //                 style: TextStyle(
+                                //                     fontSize: 22,
+                                //                     fontWeight:
+                                //                         FontWeight.bold)),
+                                //             SizedBox(height: 8),
+                                //             Text(kamus.istilah.toString()),
+                                //           ],
+                                //         ),
+                                //       );
+                                //     },
+                                //   );
+                                // }
+
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              },
+                            )),
                       ],
                     ),
                   ),

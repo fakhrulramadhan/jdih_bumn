@@ -1,8 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_launcher_icons/xml_templates.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gallery_image_viewer/gallery_image_viewer.dart';
+import 'package:insta_image_viewer/insta_image_viewer.dart';
 import 'package:jdih_bumn/bloc/stage/get_struktur_jdih/get_struktur_jdih_bloc.dart';
+import 'package:pinch_zoom/pinch_zoom.dart';
+import 'package:widget_zoom/widget_zoom.dart';
 
 class OrgansisasiWidget extends StatefulWidget {
   const OrgansisasiWidget({super.key});
@@ -21,6 +27,7 @@ class _OrgansisasiWidgetState extends State<OrgansisasiWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 445,
       child: Column(
         children: [
           const Center(
@@ -81,30 +88,62 @@ class _OrgansisasiWidgetState extends State<OrgansisasiWidget> {
                                 //     fit: BoxFit.fill,
                                 //   ),
 
-                                return SizedBox(
-                                    width: 350,
-                                    height: 205,
-                                    child: CachedNetworkImage(
-                                      imageUrl: "${strukturJdih.organisasi}",
-                                      progressIndicatorBuilder:
-                                          (context, url, downloadProgress) =>
-                                              Center(
-                                        child: Container(
-                                          height: 50,
-                                          width: 50,
-                                          child: CircularProgressIndicator(
-                                            value: downloadProgress.progress,
-                                          ),
-                                        ),
-                                      ),
-                                      errorWidget: (context, url, error) =>
-                                          const Icon(
-                                        Icons.error,
-                                        size: 24.0,
-                                      ),
+                                return InkWell(
+                                  onTap: () => showImageViewer(
+                                      context,
+                                      Image.network(
+                                              "${strukturJdih.organisasi}")
+                                          .image,
+                                      swipeDismissible: true,
+                                      // backgroundColor: Colors.white
+                                      backgroundColor:
+                                          Colors.white.withOpacity(0.7),
+                                      closeButtonColor: Colors.black),
+                                  child: Container(
                                       width: 350,
                                       height: 205,
-                                    ));
+                                      //color: Colors.white,
+                                      child: CachedNetworkImage(
+                                        imageUrl: "${strukturJdih.organisasi}",
+                                        progressIndicatorBuilder:
+                                            (context, url, downloadProgress) =>
+                                                Center(
+                                          child: Container(
+                                            height: 50,
+                                            width: 50,
+                                            child: CircularProgressIndicator(
+                                              value: downloadProgress.progress,
+                                            ),
+                                          ),
+                                        ),
+                                        errorWidget: (context, url, error) =>
+                                            const Icon(
+                                          Icons.error,
+                                          size: 24.0,
+                                        ),
+                                        width: 350,
+                                        height: 205,
+                                      )),
+                                );
+
+                                // return InteractiveViewer(
+                                //     maxScale: 5.0,
+                                //     minScale: 0.01,
+                                //     boundaryMargin:
+                                //         EdgeInsets.all(double.infinity),
+                                //     child: Image.network(
+                                //         "${strukturJdih.organisasi}"));
+
+                                // return Container(
+                                //   width: 350,
+                                //   height: 205,
+                                //   child: InstaImageViewer(
+                                //       // backgroundColor: Colors.white,
+                                //       backgroundIsTransparent: true,
+                                //       child: Image.network(
+                                //         "${strukturJdih.organisasi}",
+                                //       )),
+                                // );
                               },
                             );
                           }

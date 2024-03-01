@@ -137,7 +137,7 @@ class _InfoGrafisWidgetNewState extends State<InfoGrafisWidgetNew> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20),
                     child: Container(
-                      height: 195,
+                      height: 230,
                       width: 150,
                       // color: Colors.purple,
                       padding: const EdgeInsets.only(top: 10),

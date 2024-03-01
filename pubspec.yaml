@@ -70,6 +70,11 @@ dependencies:
   file_picker: ^6.1.1
   permission_handler: ^11.3.0
   open_filex: ^4.4.0
+  widget_zoom: ^0.0.3
+  gallery_image_viewer: ^1.2.0
+  insta_image_viewer: ^1.0.2
+  pinch_zoom: ^2.0.0
+
   
 dev_dependencies:
   flutter_test:

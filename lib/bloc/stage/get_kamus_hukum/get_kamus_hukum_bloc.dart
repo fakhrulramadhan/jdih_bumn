@@ -18,6 +18,16 @@ class GetKamusHukumBloc extends Bloc<GetKamusHukumEvent, GetKamusHukumState> {
       result.fold((l) => emit(GetKamusHukumError()),
           (r) => emit(GetKamusHukumLoaded(data: r)));
     });
+
+    on<DoGetKamusHukumEventList>((event, emit) async {
+      emit(GetKamusHukumLoading()); //update ui
+
+      final result = await datasource.getKamusHukum();
+      // result.fold((l) => emit(GetKamusHukumError()),
+      //     (r) => emit(GetKamusHukumLoaded(data: r)));
+
+      //final List<List<Item>> pages = _splitList(posts, 4);
+    });
   }
 }
 

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:gallery_image_viewer/gallery_image_viewer.dart';
 import 'package:jdih_bumn/data/model/response/stage/infografis_response_model.dart';
 
 class InfografisScreen extends StatefulWidget {
@@ -29,7 +30,7 @@ class _InfografisScreenState extends State<InfografisScreen> {
         child: Column(
           children: [
             Container(
-              height: 0.95 * height,
+              height: 0.9 * height,
               width: width,
               color: Colors.white,
               child: Column(
@@ -114,42 +115,52 @@ class _InfografisScreenState extends State<InfografisScreen> {
                             carouselController: controller1,
                             items: widget.infografis.details!.map((i) {
                               return Builder(
-                                builder: (BuildContext context) => Container(
-                                  height: 336,
-                                  width: 346,
-                                  decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.1),
-                                      borderRadius: BorderRadius.circular(20)),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    clipBehavior: Clip.hardEdge,
-                                    // Image.network(
-                                    //   "${i.imagePath}",
-                                    //   fit: BoxFit.fill,
-                                    //   // height: 300,
-                                    //   // width: 280,
-                                    // ),
+                                builder: (BuildContext context) => InkWell(
+                                  onTap: () => showImageViewer(context,
+                                      Image.network("${i.imagePath}").image,
+                                      swipeDismissible: true,
+                                      // backgroundColor: Colors.white
+                                      backgroundColor:
+                                          Colors.white.withOpacity(0.7),
+                                      closeButtonColor: Colors.black),
+                                  child: Container(
+                                    height: 336,
+                                    width: 346,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white.withOpacity(0.1),
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      clipBehavior: Clip.hardEdge,
+                                      // Image.network(
+                                      //   "${i.imagePath}",
+                                      //   fit: BoxFit.fill,
+                                      //   // height: 300,
+                                      //   // width: 280,
+                                      // ),
 
-                                    child: CachedNetworkImage(
-                                      imageUrl: "${i.imagePath}",
-                                      progressIndicatorBuilder:
-                                          (context, url, downloadProgress) =>
-                                              Center(
-                                        child: Container(
-                                          height: 50,
-                                          width: 50,
-                                          child: CircularProgressIndicator(
-                                            value: downloadProgress.progress,
+                                      child: CachedNetworkImage(
+                                        imageUrl: "${i.imagePath}",
+                                        progressIndicatorBuilder:
+                                            (context, url, downloadProgress) =>
+                                                Center(
+                                          child: Container(
+                                            height: 50,
+                                            width: 50,
+                                            child: CircularProgressIndicator(
+                                              value: downloadProgress.progress,
+                                            ),
                                           ),
                                         ),
+                                        errorWidget: (context, url, error) =>
+                                            const Icon(
+                                          Icons.error,
+                                          size: 24.0,
+                                        ),
+                                        height: 300,
+                                        width: 280,
                                       ),
-                                      errorWidget: (context, url, error) =>
-                                          const Icon(
-                                        Icons.error,
-                                        size: 24.0,
-                                      ),
-                                      height: 300,
-                                      width: 280,
                                     ),
                                   ),
                                 ),

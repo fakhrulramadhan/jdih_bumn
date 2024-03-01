@@ -24,6 +24,9 @@ class _TentangJdihWidgetState extends State<TentangJdihWidget> {
   final List<String> _items = [];
   final bool _isLoading = true;
 
+  //  final ScrollController _controller =
+  //     ScrollController(initialScrollOffset: 0.0, keepScrollOffset: true);
+
   @override
   void initState() {
     context.read<GetTentangJdihBloc>().add(DoGetTentangJdihEvent());
@@ -70,7 +73,7 @@ class _TentangJdihWidgetState extends State<TentangJdihWidget> {
           body: SingleChildScrollView(
             controller: ScrollController(),
             child: Container(
-              height: 1100,
+              height: 1040,
               color: Colors.white,
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
               child: BlocBuilder<GetTentangJdihBloc, GetTentangJdihState>(
@@ -268,6 +271,7 @@ class _TentangJdihWidgetState extends State<TentangJdihWidget> {
                         print("ini jumlah datanya ${state.data.items!.length}");
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
                               "${tentangJdih.judul}",
@@ -293,7 +297,7 @@ class _TentangJdihWidgetState extends State<TentangJdihWidget> {
                             Container(
                               height: 1143,
                               width: 344,
-                              color: Colors.yellow,
+                              //color: Colors.yellow,
                               child: Stack(
                                 children: [
                                   Container(

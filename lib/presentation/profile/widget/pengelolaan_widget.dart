@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gallery_image_viewer/gallery_image_viewer.dart';
 import 'package:jdih_bumn/bloc/stage/get_struktur_jdih/get_struktur_jdih_bloc.dart';
 
 class PengelolaanWidget extends StatefulWidget {
@@ -22,6 +23,7 @@ class _OrgansisasiWidgetState extends State<PengelolaanWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 445,
       child: Column(
         children: [
           const Center(
@@ -37,9 +39,9 @@ class _OrgansisasiWidgetState extends State<PengelolaanWidget> {
 
           // width: 340,
           //height: 431,
-          const SizedBox(
-            height: 25.0,
-          ),
+          // const SizedBox(
+          //   height: 25.0,
+          // ),
           SizedBox(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -48,7 +50,7 @@ class _OrgansisasiWidgetState extends State<PengelolaanWidget> {
                   Center(
                     child: SizedBox(
                         width: 344,
-                        height: 431,
+                        height: 205,
                         child: BlocBuilder<GetStrukturJdihBloc,
                             GetStrukturJdihState>(
                           builder: (context, state) {
@@ -83,33 +85,46 @@ class _OrgansisasiWidgetState extends State<PengelolaanWidget> {
                                   // Image.network(
                                   //     "${strukturJdih.pengelola}",
                                   //     // width: 340,
-                                  //     // height: 431,
+                                  //     // height: 231,
                                   //     fit: BoxFit.fill,
                                   //   ),
-                                  return SizedBox(
-                                      width: 340, //340
-                                      height: 440, //440
-                                      child: CachedNetworkImage(
-                                        imageUrl: "${strukturJdih.pengelola}",
-                                        progressIndicatorBuilder:
-                                            (context, url, downloadProgress) =>
-                                                Center(
-                                          child: Container(
-                                            height: 50,
-                                            width: 50,
-                                            child: CircularProgressIndicator(
-                                              value: downloadProgress.progress,
+                                  return InkWell(
+                                    onTap: () => showImageViewer(
+                                        context,
+                                        Image.network(
+                                                "${strukturJdih.pengelola}")
+                                            .image,
+                                        swipeDismissible: true,
+                                        // backgroundColor: Colors.white
+                                        backgroundColor:
+                                            Colors.white.withOpacity(0.7),
+                                        closeButtonColor: Colors.black),
+                                    child: SizedBox(
+                                        width: 340, //340
+                                        height: 240, //440
+                                        child: CachedNetworkImage(
+                                          imageUrl: "${strukturJdih.pengelola}",
+                                          progressIndicatorBuilder: (context,
+                                                  url, downloadProgress) =>
+                                              Center(
+                                            child: Container(
+                                              height: 50,
+                                              width: 50,
+                                              child: CircularProgressIndicator(
+                                                value:
+                                                    downloadProgress.progress,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        errorWidget: (context, url, error) =>
-                                            const Icon(
-                                          Icons.error,
-                                          size: 24.0,
-                                        ),
-                                        width: 340,
-                                        height: 431,
-                                      ));
+                                          errorWidget: (context, url, error) =>
+                                              const Icon(
+                                            Icons.error,
+                                            size: 24.0,
+                                          ),
+                                          width: 340,
+                                          height: 231,
+                                        )),
+                                  );
                                 },
                               );
                             }

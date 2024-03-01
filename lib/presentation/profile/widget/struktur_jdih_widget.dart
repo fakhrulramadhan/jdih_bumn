@@ -28,7 +28,7 @@ class _StrukturJdihWidgetState extends State<StrukturJdihWidget> {
           body: SingleChildScrollView(
             controller: ScrollController(),
             child: Container(
-              height: 1000, //550 :770
+              height: 540, //550 :770
               width: width,
               color: Colors.white,
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
@@ -161,7 +161,7 @@ class _StrukturJdihWidgetState extends State<StrukturJdihWidget> {
                     height: 15.0,
                   ),
                   SizedBox(
-                    height: 770,
+                    height: 445,
                     child: PageView(
                       controller: page,
                       physics: const NeverScrollableScrollPhysics(),

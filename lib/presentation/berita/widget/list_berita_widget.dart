@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:jdih_bumn/bloc/stage/get_berita/get_berita_bloc.dart';
 import 'package:jdih_bumn/data/model/response/stage/berita_response_model.dart';
 import 'package:jdih_bumn/presentation/berita_detail/berita_detail_screen.dart';
@@ -51,7 +52,7 @@ class _ListBeritaWidgetState extends State<ListBeritaWidget> {
             //padding: const EdgeInsets.symmetric(horizontal: 16),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               //0.65
-              childAspectRatio: 0.65,
+              childAspectRatio: 0.7,
               crossAxisCount: 2,
               mainAxisSpacing: 12, //ke bawah spasi
               crossAxisSpacing: 25, //ke samping spasi
@@ -61,6 +62,11 @@ class _ListBeritaWidgetState extends State<ListBeritaWidget> {
             physics: const ScrollPhysics(),
             itemBuilder: (BuildContext context, int index) {
               final Item berita = state.data.items![index];
+
+              var parsedDate = DateTime.parse('${berita.tanggal}');
+
+              String convertedDate =
+                  DateFormat("dd-MM-yyyy").format(parsedDate);
 
               print("ini beritanya");
               print("$berita");
@@ -87,7 +93,7 @@ class _ListBeritaWidgetState extends State<ListBeritaWidget> {
                 child: Container(
                   height: 240,
                   width: 180,
-                  //padding: const EdgeInsets.only(left: 5, right: 5),
+                  padding: const EdgeInsets.only(left: 10, right: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     color: Colors.white,
@@ -124,6 +130,8 @@ class _ListBeritaWidgetState extends State<ListBeritaWidget> {
                                 child: Container(
                                   height: 50,
                                   width: 50,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 4.0),
                                   child: CircularProgressIndicator(
                                     value: downloadProgress.progress,
                                   ),
@@ -143,9 +151,9 @@ class _ListBeritaWidgetState extends State<ListBeritaWidget> {
                         height: 8.0,
                       ),
                       Align(
-                        alignment: Alignment.centerLeft,
+                        alignment: Alignment.topLeft,
                         child: Text(
-                          "${berita.tanggal}",
+                          "${convertedDate}",
                           style: const TextStyle(
                             fontSize: 8.0,
                           ),
@@ -160,23 +168,23 @@ class _ListBeritaWidgetState extends State<ListBeritaWidget> {
                             fontSize: 12.0,
                             fontWeight: FontWeight.bold,
                           ),
-                          textAlign: TextAlign.justify,
+                          textAlign: TextAlign.left,
                           overflow: TextOverflow.clip,
                         ),
                       ),
                       const SizedBox(
                         height: 20.0,
                       ),
-                      const Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "Baca Selengkapnya....",
-                          style: TextStyle(
-                              fontSize: 10.0,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.blue),
-                        ),
-                      ),
+                      // const Align(
+                      //   alignment: Alignment.centerLeft,
+                      //   child: Text(
+                      //     "Baca Selengkapnya....",
+                      //     style: TextStyle(
+                      //         fontSize: 10.0,
+                      //         fontWeight: FontWeight.w400,
+                      //         color: Colors.blue),
+                      //   ),
+                      // ),
                       // const SizedBox(
                       //   height: 15.0,
                       // ),

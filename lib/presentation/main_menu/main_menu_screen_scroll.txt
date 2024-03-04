@@ -189,7 +189,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                             //                                     .black38,
                             //                                 width: 1)),
                             //                     hintText:
-                            //                         '  Ketik kata kunci pencarian....',
+                            //                         'Ketik kata kunci pencarian....',
                             //                     hintStyle:
                             //                         const TextStyle(
                             //                       fontWeight:

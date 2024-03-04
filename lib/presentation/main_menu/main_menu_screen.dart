@@ -171,9 +171,8 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                   //                     ),
                                   //                     filled: true,
                                   //                     fillColor: Colors.white,
-                                  //                     contentPadding:
-                                  //                         const EdgeInsets.only(
-                                  //                             top: 10),
+                                  //                      contentPadding: const EdgeInsets.only(
+                                  //            top: 10, left: 20, right: 20),
                                   //                     border:
                                   //                         const OutlineInputBorder(
                                   //                             borderRadius:
@@ -197,7 +196,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                                   //                                     .black38,
                                   //                                 width: 1)),
                                   //                     hintText:
-                                  //                         '  Ketik kata kunci pencarian....',
+                                  //                         'Ketik kata kunci pencarian....',
                                   //                     hintStyle:
                                   //                         const TextStyle(
                                   //                       fontWeight:

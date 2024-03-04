@@ -89,7 +89,7 @@
 //                                   BorderRadius.all(Radius.circular(10)),
 //                               borderSide:
 //                                   BorderSide(color: Colors.black38, width: 1)),
-//                           hintText: '  Ketik kata kunci pencarian....',
+//                           hintText: 'Ketik kata kunci pencarian....',
 //                           hintStyle: const TextStyle(
 //                             fontWeight: FontWeight.w400,
 //                             fontSize: 14.0,

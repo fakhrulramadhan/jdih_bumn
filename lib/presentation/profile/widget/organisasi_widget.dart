@@ -5,10 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_launcher_icons/xml_templates.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gallery_image_viewer/gallery_image_viewer.dart';
-import 'package:insta_image_viewer/insta_image_viewer.dart';
 import 'package:jdih_bumn/bloc/stage/get_struktur_jdih/get_struktur_jdih_bloc.dart';
-import 'package:pinch_zoom/pinch_zoom.dart';
-import 'package:widget_zoom/widget_zoom.dart';
 
 class OrgansisasiWidget extends StatefulWidget {
   const OrgansisasiWidget({super.key});

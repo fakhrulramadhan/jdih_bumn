@@ -111,9 +111,13 @@ class _BeritaScreenState extends State<BeritaScreen> {
                           height: 10.0,
                         ),
                         Center(
-                          child: SizedBox(
+                          child: Container(
                             height: 45,
                             width: width * 0.9,
+                            decoration: const BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(24),
+                                    topRight: Radius.circular(24))),
                             child: Material(
                               borderRadius: BorderRadius.circular(10),
                               elevation: 3,
@@ -134,8 +138,8 @@ class _BeritaScreenState extends State<BeritaScreen> {
                                     ),
                                     filled: true,
                                     fillColor: Colors.white,
-                                    contentPadding:
-                                        const EdgeInsets.only(top: 10),
+                                    contentPadding: const EdgeInsets.only(
+                                        top: 10, left: 20, right: 20),
                                     border: const OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                           Radius.circular(7),
@@ -146,8 +150,7 @@ class _BeritaScreenState extends State<BeritaScreen> {
                                             Radius.circular(10)),
                                         borderSide: BorderSide(
                                             color: Colors.black38, width: 1)),
-                                    hintText:
-                                        '  Ketik kata kunci pencarian....',
+                                    hintText: 'Ketik kata kunci pencarian....',
                                     hintStyle: const TextStyle(
                                       fontWeight: FontWeight.w400,
                                       fontSize: 14.0,

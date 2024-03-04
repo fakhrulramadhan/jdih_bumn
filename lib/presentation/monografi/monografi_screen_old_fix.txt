@@ -153,7 +153,7 @@ class _MonografiScreenState extends State<MonografiScreen> {
                                           borderSide: BorderSide(
                                               color: Colors.black38, width: 1)),
                                       hintText:
-                                          '  Ketik kata kunci pencarian....',
+                                          'Ketik kata kunci pencarian....',
                                       hintStyle: const TextStyle(
                                         fontWeight: FontWeight.w400,
                                         fontSize: 14.0,

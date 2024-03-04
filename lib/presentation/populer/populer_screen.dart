@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jdih_bumn/presentation/home_screen/home_screen.dart';
 import 'package:jdih_bumn/presentation/populer/widget/populer_widget.dart';
@@ -27,10 +28,12 @@ class _PopulerScreenState extends State<PopulerScreen> {
     double width = MediaQuery.of(context).size.width;
     return WillPopScope(
       onWillPop: () async {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => HomeScreen()),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => HomeScreen()),
+        // );
+
+        SystemNavigator.pop();
 
         return false;
       },

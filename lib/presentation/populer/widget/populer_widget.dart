@@ -154,7 +154,7 @@ class _PopulerWidgetState extends State<PopulerWidget> {
                                           height: 8.0,
                                         ),
                                         Text(
-                                          "${peraturanPopuler.judul}",
+                                          "${peraturanPopuler.deskripsiTentang}",
                                           style: const TextStyle(
                                             fontSize: 12.0,
                                             fontWeight: FontWeight.w500,

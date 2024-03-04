@@ -249,10 +249,12 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                         // "${widget.peraturan.teuBadan.toString().split('.').last ?? ''}",
                         Container(
                           height:
-                              widget.peraturan.judul!.length <= 65 ? 70 : 80,
+                              widget.peraturan.deskripsiTentang!.length <= 65
+                                  ? 70
+                                  : 80,
                           //color: Colors.yellow,
                           child: Text(
-                            widget.peraturan.judul ?? '-',
+                            widget.peraturan.deskripsiTentang ?? '-',
                             style: const TextStyle(
                               fontSize: 18.0,
                               fontWeight: FontWeight.bold,
@@ -275,13 +277,15 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                         ),
                         SizedBox(
                           height:
-                              widget.peraturan.judul!.length <= 70 ? 20 : 12.0,
+                              widget.peraturan.deskripsiTentang!.length <= 70
+                                  ? 20
+                                  : 12.0,
                         ),
                         Container(
                           height: 80,
                           //color: Colors.yellow,
                           child: Text(
-                            widget.peraturan.judul ?? '-',
+                            widget.peraturan.deskripsiTentang ?? '-',
                             style: const TextStyle(
                               fontSize: 14.0,
                               fontWeight: FontWeight.bold,
@@ -392,36 +396,52 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
             ),
             InfoDetailWidget(
                 title: "Judul",
-                heightTitle: widget.peraturan.judul!.isNotEmpty
-                    ? widget.peraturan.judul!.length >= 3180
+                heightTitle: widget.peraturan.deskripsiTentang!.isNotEmpty
+                    ? widget.peraturan.deskripsiTentang!.length >= 3180
                         ? 1140 //1150
-                        : widget.peraturan.judul!.length >= 1065 &&
-                                widget.peraturan.judul!.length <= 2999
+                        : widget.peraturan.deskripsiTentang!.length >= 1065 &&
+                                widget.peraturan.deskripsiTentang!.length <=
+                                    2999
                             ? 560
-                            : widget.peraturan.judul!.length >= 400 &&
-                                    widget.peraturan.judul!.length <= 1064
+                            : widget.peraturan.deskripsiTentang!.length >=
+                                        400 &&
+                                    widget.peraturan.deskripsiTentang!.length <=
+                                        1064
                                 ? 470
-                                : widget.peraturan.judul!.length >= 201 &&
-                                        widget.peraturan.judul!.length <= 399
+                                : widget.peraturan.deskripsiTentang!.length >=
+                                            201 &&
+                                        widget.peraturan.deskripsiTentang!
+                                                .length <=
+                                            399
                                     ? 600
-                                    : widget.peraturan.judul!.length >= 101 &&
-                                            widget.peraturan.judul!.length <=
+                                    : widget.peraturan.deskripsiTentang!
+                                                    .length >=
+                                                101 &&
+                                            widget.peraturan.deskripsiTentang!
+                                                    .length <=
                                                 200
                                         ? 120
-                                        : widget.peraturan.judul!.length > 30 &&
-                                                widget.peraturan.judul!
+                                        : widget.peraturan.deskripsiTentang!
+                                                        .length >
+                                                    30 &&
+                                                widget
+                                                        .peraturan
+                                                        .deskripsiTentang!
                                                         .length <=
                                                     100
                                             ? 100
-                                            : widget.peraturan.judul!.length >=
+                                            : widget.peraturan.deskripsiTentang!
+                                                            .length >=
                                                         5 &&
-                                                    widget.peraturan.judul!
+                                                    widget
+                                                            .peraturan
+                                                            .deskripsiTentang!
                                                             .length <=
                                                         30
                                                 ? 90
                                                 : 90
                     : 90,
-                subtitle: widget.peraturan.judul ?? ''),
+                subtitle: widget.peraturan.deskripsiTentang ?? ''),
             widget.peraturan.teuBadan != null
                 ? InfoDetailWidget(
                     title: "T.E.U Badan/Pengarang",

@@ -91,6 +91,24 @@ class PeraturanDatasource {
     }
   }
 
+  Future<Either<String, PeraturanResponseModel>> getSearchPeraturan(
+      String keyword,
+      {int? page}) async {
+    final response = await http.get(Uri.parse(
+        '${Constants.baseUrlStage}/produk-hukum/produk/peraturan?page=$page&keyword=$keyword'));
+
+    if (response.statusCode == 200) {
+      return Right(PeraturanResponseModel.fromJson(jsonDecode(response.body)));
+      // final jsonData = jsonDecode(response.body);
+      // final List<Item> dataList = (jsonData['items'] as List)
+      //     .map((data) => Item.fromJson(data))
+      //     .toList();
+      // return dataList;
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+
   Future<List<PeraturanSearch>> postSearchPeraturan(
       {required String keyword}) async {
     final response = await http.post(

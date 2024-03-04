@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:jdih_bumn/data/model/response/stage/search_peraturan_response_model.dart';
 import 'package:jdih_bumn/presentation/berita/berita_screen.dart';
 import 'package:jdih_bumn/presentation/kamus_hukum/kamus_hukum_screen.dart';
 import 'package:jdih_bumn/presentation/main_menu/widgets/berita_dan_info_widget.dart';
@@ -10,6 +11,7 @@ import 'package:jdih_bumn/presentation/main_menu/widgets/infografis_widget_new.d
 import 'package:jdih_bumn/presentation/main_menu/widgets/list_menu_peraturan_bumn_widget.dart';
 import 'package:jdih_bumn/presentation/main_menu/widgets/list_menu_widget.dart';
 import 'package:jdih_bumn/presentation/maintenance/maintenance_screen.dart';
+import 'package:jdih_bumn/presentation/peraturan_search/peraturan_search.dart';
 import 'package:jdih_bumn/presentation/putusan/putusan_screen.dart';
 import 'package:jdih_bumn/presentation/survei/survei_screen.dart';
 import '../peraturan/peraturan_screen.dart';
@@ -232,7 +234,8 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) {
-                                return const PeraturanScreen();
+                                //return const PeraturanScreen();
+                                return PeraturanSearchScreen();
                               }),
                             );
                           },

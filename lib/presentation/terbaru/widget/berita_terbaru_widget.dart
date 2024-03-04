@@ -154,7 +154,7 @@ class _BeritaTerbaruWidgetState extends State<BeritaTerbaruWidget> {
                                           height: 8.0,
                                         ),
                                         Text(
-                                          "${peraturanTerbaru.judul}",
+                                          "${peraturanTerbaru.deskripsiTentang}",
                                           style: const TextStyle(
                                             fontSize: 12.0,
                                             fontWeight: FontWeight.w500,

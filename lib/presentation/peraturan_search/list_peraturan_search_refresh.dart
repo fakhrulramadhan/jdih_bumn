@@ -6,14 +6,16 @@ import 'package:jdih_bumn/presentation/peraturan_detail/peraturan_detail_screen.
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:jdih_bumn/data/model/response/stage/peraturan_response_model.dart';
 
-class ListPeraturanRefresh extends StatefulWidget {
-  const ListPeraturanRefresh({super.key});
+class ListPeraturanSearchRefresh extends StatefulWidget {
+  const ListPeraturanSearchRefresh({super.key});
 
   @override
-  State<ListPeraturanRefresh> createState() => _ListPeraturanRefreshState();
+  State<ListPeraturanSearchRefresh> createState() =>
+      _ListPeraturanSearchRefreshState();
 }
 
-class _ListPeraturanRefreshState extends State<ListPeraturanRefresh> {
+class _ListPeraturanSearchRefreshState
+    extends State<ListPeraturanSearchRefresh> {
   int currentPage = 1;
 
   int totalPages = 30;

@@ -85,6 +85,18 @@ class _OrgansisasiWidgetState extends State<OrgansisasiWidget> {
                                 //     fit: BoxFit.fill,
                                 //   ),
 
+                                // InkWell(
+                                //   onTap: () => showImageViewer(
+                                //       context,
+                                //       Image.network(
+                                //               "${strukturJdih.organisasi}")
+                                //           .image,
+                                //       swipeDismissible: true,
+                                //       // backgroundColor: Colors.white
+                                //       backgroundColor:
+                                //           Colors.white.withOpacity(0.7),
+                                //       closeButtonColor: Colors.black),
+
                                 return InkWell(
                                   onTap: () => showImageViewer(
                                       context,

@@ -168,7 +168,7 @@ class _ListBeritaWidgetState extends State<ListBeritaWidget> {
                             fontSize: 12.0,
                             fontWeight: FontWeight.bold,
                           ),
-                          textAlign: TextAlign.left,
+                          textAlign: TextAlign.left, //kalau pakai justify mepet
                           overflow: TextOverflow.clip,
                         ),
                       ),

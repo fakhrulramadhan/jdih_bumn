@@ -255,12 +255,14 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
 
                         // "${widget.peraturanTerbaru.teuBadan.toString().split('.').last ?? ''}",
                         Container(
-                          height: widget.peraturanTerbaru.judul!.length <= 65
+                          height: widget.peraturanTerbaru.deskripsiTentang!
+                                      .length <=
+                                  65
                               ? 70
                               : 80,
                           //color: Colors.yellow,
                           child: Text(
-                            "${widget.peraturanTerbaru.judul ?? '-'}",
+                            "${widget.peraturanTerbaru.deskripsiTentang ?? '-'}",
                             style: const TextStyle(
                               fontSize: 18.0,
                               fontWeight: FontWeight.bold,
@@ -282,7 +284,9 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
                           overflow: TextOverflow.visible,
                         ),
                         SizedBox(
-                          height: widget.peraturanTerbaru.judul!.length <= 70
+                          height: widget.peraturanTerbaru.deskripsiTentang!
+                                      .length <=
+                                  70
                               ? 20
                               : 12.0,
                         ),
@@ -290,7 +294,7 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
                           height: 80,
                           //color: Colors.yellow,
                           child: Text(
-                            widget.peraturanTerbaru.judul ?? '-',
+                            widget.peraturanTerbaru.deskripsiTentang ?? '-',
                             style: const TextStyle(
                               fontSize: 14.0,
                               fontWeight: FontWeight.bold,
@@ -405,44 +409,44 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
             ),
             InfoDetailWidget(
                 title: "Judul",
-                heightTitle: widget.peraturanTerbaru.judul!.isNotEmpty
-                    ? widget.peraturanTerbaru.judul!.length >= 3180
+                heightTitle: widget
+                        .peraturanTerbaru.deskripsiTentang!.isNotEmpty
+                    ? widget.peraturanTerbaru.deskripsiTentang!.length >= 3180
                         ? 1140 //1150
-                        : widget.peraturanTerbaru.judul!.length >= 1065 &&
-                                widget.peraturanTerbaru.judul!.length <= 2999
+                        : widget.peraturanTerbaru.deskripsiTentang!.length >= 1065 &&
+                                widget.peraturanTerbaru.deskripsiTentang!.length <=
+                                    2999
                             ? 560
-                            : widget.peraturanTerbaru.judul!.length >= 400 &&
-                                    widget.peraturanTerbaru.judul!.length <=
+                            : widget.peraturanTerbaru.deskripsiTentang!.length >= 400 &&
+                                    widget.peraturanTerbaru.deskripsiTentang!.length <=
                                         1064
                                 ? 470
-                                : widget.peraturanTerbaru.judul!.length >=
-                                            201 &&
-                                        widget.peraturanTerbaru.judul!.length <=
+                                : widget.peraturanTerbaru.deskripsiTentang!.length >= 201 &&
+                                        widget.peraturanTerbaru.deskripsiTentang!.length <=
                                             399
                                     ? 600
-                                    : widget.peraturanTerbaru.judul!.length >=
-                                                101 &&
-                                            widget.peraturanTerbaru.judul!
-                                                    .length <=
+                                    : widget.peraturanTerbaru.deskripsiTentang!.length >= 101 &&
+                                            widget.peraturanTerbaru
+                                                    .deskripsiTentang!.length <=
                                                 200
                                         ? 120
-                                        : widget.peraturanTerbaru.judul!
-                                                        .length >
-                                                    30 &&
-                                                widget.peraturanTerbaru.judul!
+                                        : widget.peraturanTerbaru.deskripsiTentang!.length > 30 &&
+                                                widget
+                                                        .peraturanTerbaru
+                                                        .deskripsiTentang!
                                                         .length <=
                                                     100
                                             ? 100
-                                            : widget.peraturanTerbaru.judul!
-                                                            .length >=
-                                                        5 &&
-                                                    widget.peraturanTerbaru
-                                                            .judul!.length <=
+                                            : widget.peraturanTerbaru.deskripsiTentang!.length >= 5 &&
+                                                    widget
+                                                            .peraturanTerbaru
+                                                            .deskripsiTentang!
+                                                            .length <=
                                                         30
                                                 ? 90
                                                 : 90
                     : 90,
-                subtitle: widget.peraturanTerbaru.judul ?? ''),
+                subtitle: widget.peraturanTerbaru.deskripsiTentang ?? ''),
             widget.peraturanTerbaru.teuBadan != null
                 ? InfoDetailWidget(
                     title: "T.E.U Badan/Pengarang",

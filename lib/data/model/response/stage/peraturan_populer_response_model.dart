@@ -46,7 +46,7 @@ class Item {
   final String? tahunPengundangan;
   final DateTime? tanggalPengundangan;
   final String? jenis;
-  final String? judul;
+  final String? deskripsiTentang;
   final String? singkatanJenis;
   final String? tempatTerbit;
   final String? sumber;
@@ -78,7 +78,7 @@ class Item {
     this.tahunPengundangan,
     this.tanggalPengundangan,
     this.jenis,
-    this.judul,
+    this.deskripsiTentang,
     this.singkatanJenis,
     this.tempatTerbit,
     this.sumber,
@@ -111,7 +111,7 @@ class Item {
     String? tahunPengundangan,
     DateTime? tanggalPengundangan,
     String? jenis,
-    String? judul,
+    String? deskripsiTentang,
     String? singkatanJenis,
     String? tempatTerbit,
     String? sumber,
@@ -143,7 +143,7 @@ class Item {
         tahunPengundangan: tahunPengundangan ?? this.tahunPengundangan,
         tanggalPengundangan: tanggalPengundangan ?? this.tanggalPengundangan,
         jenis: jenis ?? this.jenis,
-        judul: judul ?? this.judul,
+        deskripsiTentang: deskripsiTentang ?? this.deskripsiTentang,
         singkatanJenis: singkatanJenis ?? this.singkatanJenis,
         tempatTerbit: tempatTerbit ?? this.tempatTerbit,
         sumber: sumber ?? this.sumber,
@@ -179,7 +179,7 @@ class Item {
             ? null
             : DateTime.parse(json["tanggal_pengundangan"]),
         jenis: json["jenis"],
-        judul: json["judul"],
+        deskripsiTentang: json["deskripsi_tentang"],
         singkatanJenis: json["singkatanJenis"],
         tempatTerbit: json["tempatTerbit"],
         sumber: json["sumber"],
@@ -224,7 +224,7 @@ class Item {
         "tanggal_pengundangan":
             "${tanggalPengundangan!.year.toString().padLeft(4, '0')}-${tanggalPengundangan!.month.toString().padLeft(2, '0')}-${tanggalPengundangan!.day.toString().padLeft(2, '0')}",
         "jenis": jenis,
-        "judul": judul,
+        "deskripsi_tentang": deskripsiTentang,
         "singkatanJenis": singkatanJenis,
         "tempatTerbit": tempatTerbit,
         "sumber": sumber,

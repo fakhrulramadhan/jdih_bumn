@@ -149,7 +149,7 @@ class _ListPeraturanPagingWidgetState extends State<ListPeraturanPagingWidget> {
                                     height: 8.0,
                                   ),
                                   Text(
-                                    peraturan.judul ?? '',
+                                    peraturan.deskripsiTentang ?? '',
                                     style: const TextStyle(
                                       fontSize: 12.0,
                                       fontWeight: FontWeight.w500,

@@ -168,7 +168,7 @@ class ListPeraturanPagingsWidget extends StatelessWidget {
                                           height: 8.0,
                                         ),
                                         Text(
-                                          peraturanind.judul ?? '',
+                                          peraturanind.deskripsiTentang ?? '',
                                           style: const TextStyle(
                                             fontSize: 12.0,
                                             fontWeight: FontWeight.w500,

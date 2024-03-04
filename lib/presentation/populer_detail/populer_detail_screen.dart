@@ -259,12 +259,14 @@ class _PopulerDetailScreenState extends State<PopulerDetailScreen> {
 
                         // "${widget.peraturanPopuler.teuBadan.toString().split('.').last ?? ''}",
                         Container(
-                          height: widget.peraturanPopuler.judul!.length <= 65
+                          height: widget.peraturanPopuler.deskripsiTentang!
+                                      .length <=
+                                  65
                               ? 70
                               : 80,
                           //color: Colors.yellow,
                           child: Text(
-                            widget.peraturanPopuler.judul ?? '-',
+                            widget.peraturanPopuler.deskripsiTentang ?? '-',
                             style: const TextStyle(
                               fontSize: 18.0,
                               fontWeight: FontWeight.bold,
@@ -286,7 +288,9 @@ class _PopulerDetailScreenState extends State<PopulerDetailScreen> {
                           overflow: TextOverflow.visible,
                         ),
                         SizedBox(
-                          height: widget.peraturanPopuler.judul!.length <= 70
+                          height: widget.peraturanPopuler.deskripsiTentang!
+                                      .length <=
+                                  70
                               ? 20
                               : 12.0,
                         ),
@@ -294,7 +298,7 @@ class _PopulerDetailScreenState extends State<PopulerDetailScreen> {
                           height: 80,
                           //color: Colors.yellow,
                           child: Text(
-                            widget.peraturanPopuler.judul ?? '-',
+                            widget.peraturanPopuler.deskripsiTentang ?? '-',
                             style: const TextStyle(
                               fontSize: 14.0,
                               fontWeight: FontWeight.bold,
@@ -409,44 +413,44 @@ class _PopulerDetailScreenState extends State<PopulerDetailScreen> {
             ),
             InfoDetailWidget(
                 title: "Judul",
-                heightTitle: widget.peraturanPopuler.judul!.isNotEmpty
-                    ? widget.peraturanPopuler.judul!.length >= 3180
+                heightTitle: widget
+                        .peraturanPopuler.deskripsiTentang!.isNotEmpty
+                    ? widget.peraturanPopuler.deskripsiTentang!.length >= 3180
                         ? 1140 //1150
-                        : widget.peraturanPopuler.judul!.length >= 1065 &&
-                                widget.peraturanPopuler.judul!.length <= 2999
+                        : widget.peraturanPopuler.deskripsiTentang!.length >= 1065 &&
+                                widget.peraturanPopuler.deskripsiTentang!.length <=
+                                    2999
                             ? 560
-                            : widget.peraturanPopuler.judul!.length >= 400 &&
-                                    widget.peraturanPopuler.judul!.length <=
+                            : widget.peraturanPopuler.deskripsiTentang!.length >= 400 &&
+                                    widget.peraturanPopuler.deskripsiTentang!.length <=
                                         1064
                                 ? 470
-                                : widget.peraturanPopuler.judul!.length >=
-                                            201 &&
-                                        widget.peraturanPopuler.judul!.length <=
+                                : widget.peraturanPopuler.deskripsiTentang!.length >= 201 &&
+                                        widget.peraturanPopuler.deskripsiTentang!.length <=
                                             399
                                     ? 600
-                                    : widget.peraturanPopuler.judul!.length >=
-                                                101 &&
-                                            widget.peraturanPopuler.judul!
-                                                    .length <=
+                                    : widget.peraturanPopuler.deskripsiTentang!.length >= 101 &&
+                                            widget.peraturanPopuler
+                                                    .deskripsiTentang!.length <=
                                                 200
                                         ? 120
-                                        : widget.peraturanPopuler.judul!
-                                                        .length >
-                                                    30 &&
-                                                widget.peraturanPopuler.judul!
+                                        : widget.peraturanPopuler.deskripsiTentang!.length > 30 &&
+                                                widget
+                                                        .peraturanPopuler
+                                                        .deskripsiTentang!
                                                         .length <=
                                                     100
                                             ? 100
-                                            : widget.peraturanPopuler.judul!
-                                                            .length >=
-                                                        5 &&
-                                                    widget.peraturanPopuler
-                                                            .judul!.length <=
+                                            : widget.peraturanPopuler.deskripsiTentang!.length >= 5 &&
+                                                    widget
+                                                            .peraturanPopuler
+                                                            .deskripsiTentang!
+                                                            .length <=
                                                         30
                                                 ? 90
                                                 : 90
                     : 90,
-                subtitle: widget.peraturanPopuler.judul ?? ''),
+                subtitle: widget.peraturanPopuler.deskripsiTentang ?? ''),
 
             widget.peraturanPopuler.teuBadan != null
                 ? InfoDetailWidget(

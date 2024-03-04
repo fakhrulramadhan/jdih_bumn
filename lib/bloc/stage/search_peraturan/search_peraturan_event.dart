@@ -1,10 +1,9 @@
 part of 'search_peraturan_bloc.dart';
 
-abstract class SearchTentangJdihEvent {}
+abstract class SearchPeraturanEvent {}
 
-class DoSearchTentangJdihEvent extends SearchTentangJdihEvent {
-  final String? judul;
-  final String? nomor_peraturan_baru;
+class DoSearchPeraturanEvent extends SearchPeraturanEvent {
+  final String keyword;
 
-  DoSearchTentangJdihEvent({this.judul, this.nomor_peraturan_baru});
+  DoSearchPeraturanEvent({required this.keyword});
 }

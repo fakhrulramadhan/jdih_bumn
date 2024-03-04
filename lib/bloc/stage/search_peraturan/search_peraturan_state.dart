@@ -7,9 +7,9 @@ class SearchPeraturanInital extends SearchPeraturanState {}
 class SearchPeraturanLoading extends SearchPeraturanState {}
 
 class SearchPeraturanLoaded extends SearchPeraturanState {
-  PeraturanSearch data;
+  PeraturanResponseModel? data;
 
-  SearchPeraturanLoaded({required this.data});
+  SearchPeraturanLoaded({this.data});
 
   @override
   bool operator ==(Object other) {

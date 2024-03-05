@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jdih_bumn/presentation/putusan/widget/list_putusan_widget.dart';
+import 'package:jdih_bumn/presentation/putusan_search/putusan_search_screen.dart';
 
 class PutusanScreen extends StatefulWidget {
   const PutusanScreen({super.key});
@@ -124,7 +125,16 @@ class _PutusanScreenState extends State<PutusanScreen> {
                               elevation: 3,
                               child: TextFormField(
                                 controller: searchController,
-                                onFieldSubmitted: (value) {},
+                                onFieldSubmitted: (_) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      print(searchController.text);
+                                      return PutusanSearchScreen(
+                                          keyword: searchController.text);
+                                    }),
+                                  );
+                                },
                                 decoration: InputDecoration(
                                     suffixIcon: InkWell(
                                       onTap: () {},

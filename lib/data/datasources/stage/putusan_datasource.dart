@@ -21,4 +21,24 @@ class PutusanDatasource {
       return const Left('Server Error');
     }
   }
+
+  Future<Either<String, PutusanResponseModel>> searchPutusan(
+      String keyword) async {
+    final response = await http.get(Uri.parse(
+        '${Constants.baseUrlStage}/produk-hukum/putusan?keyword=$keyword'));
+
+    print(response.body);
+    print("putusan freezed");
+    if (response.statusCode == 200) {
+      print(response.body);
+      print("=====");
+      print(Right(PutusanResponseModel.fromRawJson(response.body)));
+      return Right(PutusanResponseModel.fromRawJson(response.body));
+      //return Right(PeraturanHukumResponseModel.fromRawJson(response.body));
+    } else {
+      print(response.body);
+      print("Server error");
+      return const Left('Server Error');
+    }
+  }
 }

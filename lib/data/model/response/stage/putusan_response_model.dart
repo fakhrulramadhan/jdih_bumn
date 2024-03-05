@@ -24,6 +24,9 @@ class PutusanResponseModel {
         items: items ?? this.items,
       );
 
+  factory PutusanResponseModel.fromRawJson(String str) =>
+      PutusanResponseModel.fromJson(json.decode(str));
+
   factory PutusanResponseModel.fromJson(Map<String, dynamic> json) =>
       PutusanResponseModel(
         items: json["items"] == null

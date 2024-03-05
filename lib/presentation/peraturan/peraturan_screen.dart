@@ -3,6 +3,7 @@ import 'package:jdih_bumn/presentation/peraturan/widget/list_peraturan_paging/li
 import 'package:jdih_bumn/presentation/peraturan/widget/list_peraturan_paging/list_peraturan_pagings_widget.dart';
 import 'package:jdih_bumn/presentation/peraturan/widget/list_peraturan_paging/list_peraturan_refresh.dart';
 import 'package:jdih_bumn/presentation/peraturan/widget/list_peraturan_widget.dart';
+import 'package:jdih_bumn/presentation/peraturan_search/peraturan_search_screen.dart';
 
 class PeraturanScreen extends StatefulWidget {
   const PeraturanScreen({super.key});
@@ -98,7 +99,22 @@ class _PeraturanScreenState extends State<PeraturanScreen> {
                                     elevation: 3,
                                     child: TextFormField(
                                       controller: searchController,
-                                      onFieldSubmitted: (value) {},
+                                      onFieldSubmitted: (value) {
+                                        // Navigator.push(
+                                        //   context,
+                                        //   MaterialPageRoute(
+                                        //       builder: (context) =>
+                                        //           PeraturanSearchScreen(
+                                        //             keyword: value,
+                                        //           )
+                                        //           ),
+                                        // );
+                                      },
+
+                                      // PeraturanSearchScreen(
+                                      //   keyword: value,
+                                      // )
+
                                       decoration: InputDecoration(
                                           suffixIcon: InkWell(
                                             onTap: () {},

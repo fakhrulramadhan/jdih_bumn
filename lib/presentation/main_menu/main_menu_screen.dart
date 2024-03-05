@@ -11,8 +11,9 @@ import 'package:jdih_bumn/presentation/main_menu/widgets/infografis_widget_new.d
 import 'package:jdih_bumn/presentation/main_menu/widgets/list_menu_peraturan_bumn_widget.dart';
 import 'package:jdih_bumn/presentation/main_menu/widgets/list_menu_widget.dart';
 import 'package:jdih_bumn/presentation/maintenance/maintenance_screen.dart';
-import 'package:jdih_bumn/presentation/peraturan_search/peraturan_search.dart';
+import 'package:jdih_bumn/presentation/peraturan_search/peraturan_search_screen.dart';
 import 'package:jdih_bumn/presentation/putusan/putusan_screen.dart';
+import 'package:jdih_bumn/presentation/putusan_search/putusan_search_screen.dart';
 import 'package:jdih_bumn/presentation/survei/survei_screen.dart';
 import '../peraturan/peraturan_screen.dart';
 import 'package:dyn_mouse_scroll/dyn_mouse_scroll.dart';
@@ -234,8 +235,8 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) {
-                                //return const PeraturanScreen();
-                                return PeraturanSearchScreen();
+                                return const PeraturanScreen();
+                                //return PeraturanSearchScreen();
                               }),
                             );
                           },
@@ -263,8 +264,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        const PutusanScreen()),
+                                    builder: (context) => PutusanScreen()),
                               );
                             },
                             assetUrl: "assets/images/Putusan.svg",

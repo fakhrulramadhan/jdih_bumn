@@ -14,7 +14,7 @@ class GetPutusanBloc extends Bloc<GetPutusanEvent, GetPutusanState> {
     on<DoGetPutusanEvent>((event, emit) async {
       emit(GetPutusanLoading());
 
-      final result = await datasource.getPutusan();
+      final result = await datasource.getPutusan(event.search);
       result.fold((l) => emit(GetPutusanError()),
           (r) => emit(GetPutusanLoaded(data: r)));
     });

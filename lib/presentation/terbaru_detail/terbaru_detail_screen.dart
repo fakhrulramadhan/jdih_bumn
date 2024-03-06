@@ -659,101 +659,108 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
             ],
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        child: Column(
           children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.45,
-              child: BagikanButtonWidget(
-                onPressed: () async {
-                  String urlLink =
-                      widget.peraturanTerbaru.urlDetailPeraturan ?? "-";
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.45,
+                  child: BagikanButtonWidget(
+                    onPressed: () async {
+                      String urlLink =
+                          widget.peraturanTerbaru.urlDetailPeraturan ?? "-";
 
-                  //masukkin kata katanya di tanda kutip
-                  await Share.share(urlLink);
+                      //masukkin kata katanya di tanda kutip
+                      await Share.share(urlLink);
 
-                  print("${widget.peraturanTerbaru.urlDetailPeraturan}");
-                },
-              ),
-            ),
-            widget.peraturanTerbaru.urlDownload ==
-                    "https://jdihstage.bumn.go.id/storage/peraturan/"
-                ? Container(
-                    width: MediaQuery.of(context).size.width * 0.45,
-                  )
-                : SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.45,
-                    child: _progress != null
-                        ? const Center(child: CircularProgressIndicator())
-                        : DownloadButtonWidget(
-                            onTap: () async {
-                              // await download(Dio(), "${widget.putusan.urlDetailFilePutusan}",
-                              //     '/storage/emulated/0/Download');
+                      print("${widget.peraturanTerbaru.urlDetailPeraturan}");
+                    },
+                  ),
+                ),
+                widget.peraturanTerbaru.urlDownload ==
+                        "https://jdihstage.bumn.go.id/storage/peraturan/"
+                    ? Container(
+                        width: MediaQuery.of(context).size.width * 0.45,
+                      )
+                    : SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.45,
+                        child: _progress != null
+                            ? const Center(child: CircularProgressIndicator())
+                            : DownloadButtonWidget(
+                                onTap: () async {
+                                  // await download(Dio(), "${widget.putusan.urlDetailFilePutusan}",
+                                  //     '/storage/emulated/0/Download');
 
-                              print("${widget.peraturanTerbaru.urlDownload}");
-                              await checkPermission();
-                              await FileDownloader.downloadFile(
-                                url: "${widget.peraturanTerbaru.urlDownload}",
-                                onProgress: (fileName, progresz) {
-                                  setState(() {
-                                    _progress = progresz;
-                                  });
-                                },
-                                onDownloadCompleted: (path) {
-                                  print('Path: $path');
+                                  print(
+                                      "${widget.peraturanTerbaru.urlDownload}");
+                                  await checkPermission();
+                                  await FileDownloader.downloadFile(
+                                    url:
+                                        "${widget.peraturanTerbaru.urlDownload}",
+                                    onProgress: (fileName, progresz) {
+                                      setState(() {
+                                        _progress = progresz;
+                                      });
+                                    },
+                                    onDownloadCompleted: (path) {
+                                      print('Path: $path');
 
-                                  setState(() {
-                                    progress = 0;
-                                    _progress = null;
-                                  });
+                                      setState(() {
+                                        progress = 0;
+                                        _progress = null;
+                                      });
 
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'Unduhan Selesai',
-                                        style: TextStyle(
-                                          color: Colors.white,
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'Unduhan Selesai',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          backgroundColor:
+                                              Color.fromARGB(255, 2, 25, 117),
+                                          action: SnackBarAction(
+                                            label: 'Buka File',
+                                            textColor: Colors.white,
+                                            onPressed: () async {
+                                              print(path);
+                                              // Open the downloaded file in the Files app
+                                              // print(
+                                              //     '${path.replaceAll('%', ' ').replaceAll('20', '')}');
+
+                                              print('${path}');
+                                              // await OpenFilex.open(
+                                              //         '${path.replaceAll('%', ' ').replaceAll('20', '')}')
+                                              //     .then((value) {
+                                              //   print(value.message.toString());
+                                              // });
+
+                                              await OpenFilex.open('${path}')
+                                                  .then((value) {
+                                                print(value.message.toString());
+                                              });
+
+                                              // await SfPdfViewer.file(
+                                              //     File('${path}'));
+                                            },
+                                          ),
                                         ),
-                                      ),
-                                      backgroundColor:
-                                          Color.fromARGB(255, 2, 25, 117),
-                                      action: SnackBarAction(
-                                        label: 'Buka File',
-                                        textColor: Colors.white,
-                                        onPressed: () async {
-                                          print(path);
-                                          // Open the downloaded file in the Files app
-                                          // print(
-                                          //     '${path.replaceAll('%', ' ').replaceAll('20', '')}');
-
-                                          print('${path}');
-                                          // await OpenFilex.open(
-                                          //         '${path.replaceAll('%', ' ').replaceAll('20', '')}')
-                                          //     .then((value) {
-                                          //   print(value.message.toString());
-                                          // });
-
-                                          await OpenFilex.open('${path}')
-                                              .then((value) {
-                                            print(value.message.toString());
-                                          });
-
-                                          // await SfPdfViewer.file(
-                                          //     File('${path}'));
-                                        },
-                                      ),
-                                    ),
+                                      );
+                                    },
                                   );
                                 },
-                              );
-                            },
-                          ),
-                  )
-            // DownloadButtonWidget(
-            //   onTap: () async {
-            //     await download(Dio(), url, savePath);
-            //   },
-            // )
+                              ),
+                      )
+                // DownloadButtonWidget(
+                //   onTap: () async {
+                //     await download(Dio(), url, savePath);
+                //   },
+                // )
+              ],
+            ),
           ],
         ),
       ),

@@ -13,6 +13,8 @@ class PeraturanScreen extends StatefulWidget {
 }
 
 class _PeraturanScreenState extends State<PeraturanScreen> {
+  final TextEditingController searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -25,7 +27,6 @@ class _PeraturanScreenState extends State<PeraturanScreen> {
       super.initState();
     }
 
-    final TextEditingController searchController = TextEditingController();
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -100,15 +101,8 @@ class _PeraturanScreenState extends State<PeraturanScreen> {
                                     child: TextFormField(
                                       controller: searchController,
                                       onFieldSubmitted: (value) {
-                                        // Navigator.push(
-                                        //   context,
-                                        //   MaterialPageRoute(
-                                        //       builder: (context) =>
-                                        //           PeraturanSearchScreen(
-                                        //             keyword: value,
-                                        //           )
-                                        //           ),
-                                        // );
+                                        ListPeraturanRefreshState.instance
+                                            .updateSearch(value);
                                       },
 
                                       // PeraturanSearchScreen(

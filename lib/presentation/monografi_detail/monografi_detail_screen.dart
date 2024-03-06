@@ -365,13 +365,17 @@ class _MonografiDetailScreenState extends State<MonografiDetailScreen> {
               borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(20), topRight: Radius.circular(20))),
           margin: const EdgeInsets.only(bottom: 5),
-          child: Center(child: BagikanButtonMonografiWidget(
-            onPressed: () async {
-              const urlLink = "https://www.youtube.com/watch?v=CNUBhb_cM6E";
+          child: Column(
+            children: [
+              Center(child: BagikanButtonMonografiWidget(
+                onPressed: () async {
+                  const urlLink = "https://www.youtube.com/watch?v=CNUBhb_cM6E";
 
-              await Share.share("This cat is cute $urlLink");
-            },
-          ))),
+                  await Share.share("This cat is cute $urlLink");
+                },
+              )),
+            ],
+          )),
     );
   }
 }

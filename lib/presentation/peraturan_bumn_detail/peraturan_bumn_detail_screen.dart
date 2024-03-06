@@ -277,7 +277,7 @@ class _PeraturanBumnDetailScreenState extends State<PeraturanBumnDetailScreen> {
         ),
       ),
       bottomNavigationBar: Container(
-        height: 80,
+        height: 100,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             color: Colors.white,
@@ -290,41 +290,49 @@ class _PeraturanBumnDetailScreenState extends State<PeraturanBumnDetailScreen> {
             ],
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        child: Column(
           children: [
-            BagikanButtonWidget(
-              onPressed: () async {
-                const urlLink = "https://www.youtube.com/watch?v=CNUBhb_cM6E";
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                BagikanButtonWidget(
+                  onPressed: () async {
+                    const urlLink =
+                        "https://www.youtube.com/watch?v=CNUBhb_cM6E";
 
-                await Share.share("This Cat is cute $urlLink");
+                    await Share.share("This Cat is cute $urlLink");
 
-                // showModalBottomSheet<void>(
-                //   context: context,
-                //   builder: (BuildContext context) {
-                //     return Container(
-                //       height: 200,
-                //       color: Colors.white,
-                //       child: Row(
-                //       children: [
+                    // showModalBottomSheet<void>(
+                    //   context: context,
+                    //   builder: (BuildContext context) {
+                    //     return Container(
+                    //       height: 200,
+                    //       color: Colors.white,
+                    //       child: Row(
+                    //       children: [
 
-                //       ],
-                //       ),
-                //     );
+                    //       ],
+                    //       ),
+                    //     );
 
-                //   },
-                // );
-              },
+                    //   },
+                    // );
+                  },
+                ),
+                const DownloadButtonWidget()
+                // const DownloadButtonWidget(
+                //     onTap: didDownloadPDF
+                //         ? null
+                //         : () async {
+                //             var tempDir = await getTemporaryDirectory();
+                //             download(Dio(), ${widget.peraturanHukum.fileId}, tempDir.path + fileName);
+                //           },
+                //     ),
+              ],
             ),
-            const DownloadButtonWidget()
-            // const DownloadButtonWidget(
-            //     onTap: didDownloadPDF
-            //         ? null
-            //         : () async {
-            //             var tempDir = await getTemporaryDirectory();
-            //             download(Dio(), ${widget.peraturanHukum.fileId}, tempDir.path + fileName);
-            //           },
-            //     ),
+            const SizedBox(
+              height: 20.0,
+            ),
           ],
         ),
       ),

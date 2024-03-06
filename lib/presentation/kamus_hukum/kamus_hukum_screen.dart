@@ -311,7 +311,7 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

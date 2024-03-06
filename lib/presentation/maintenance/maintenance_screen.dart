@@ -39,14 +39,15 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
                 Image.asset(
                   "assets/images/maintenance.png",
                   width: 303.0,
-                  height: 120.0,
+                  height: 230.0,
                   fit: BoxFit.fill,
                 ),
                 const SizedBox(
                   height: 18.0,
                 ),
                 const Text(
-                  "Mohon maaf atas ketidaknyamanan ini. Kami sedang melakukan pembaruan pada halaman aplikasi untuk memberikan pengalaman terbaik bagi pengguna.",
+                  '''Mohon maaf atas ketidaknyamanan ini. Kami sedang melakukan pembaruan pada halaman aplikasi untuk memberikan pengalaman terbaik bagi pengguna.
+                  ''',
                   style: TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.w400,
@@ -61,7 +62,7 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
       ),
 
       bottomNavigationBar: Container(
-        height: 100,
+        height: 110,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             color: Colors.white,
@@ -74,28 +75,38 @@ class _MaintenanceScreenState extends State<MaintenanceScreen> {
             ],
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
-        child: InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const HomeScreen()),
-            );
-          },
-          child: Center(
-            child: Container(
-              height: 40,
-              width: MediaQuery.of(context).size.width * 0.8,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: const Color(0xff0093AD),
-              ),
-              child: const Center(
-                  child: Text(
-                "Kembali Ke Beranda",
-                style: TextStyle(color: Colors.white, fontSize: 12),
-              )),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            // Container(
+            //   height: 20,
+            //   width: MediaQuery.of(context).size.width,
+            // ),
+            const SizedBox(
+              height: 10.0,
             ),
-          ),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                );
+              },
+              child: Container(
+                height: 40,
+                width: MediaQuery.of(context).size.width * 0.9,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: const Color(0xff0093AD),
+                ),
+                child: const Center(
+                    child: Text(
+                  "Kembali Ke Beranda",
+                  style: TextStyle(color: Colors.white, fontSize: 12),
+                )),
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -25,15 +25,23 @@ class ListPutusanWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<ListPutusanWidget> createState() => _ListPutusanWidgetState();
+  State<ListPutusanWidget> createState() => ListPutusanWidgetState();
 }
 
-class _ListPutusanWidgetState extends State<ListPutusanWidget> {
+class ListPutusanWidgetState extends State<ListPutusanWidget> {
+  static late ListPutusanWidgetState instance;
+
+  updateSearch(value) {
+    context.read<GetPutusanBloc>().add(DoGetPutusanEvent(search: value));
+  }
+
   @override
   void initState() {
-    context.read<GetPutusanBloc>().add(DoGetPutusanEvent());
+    context.read<GetPutusanBloc>().add(DoGetPutusanEvent(search: ''));
     // TODO: implement initState
     super.initState();
+
+    instance = this;
   }
 
   @override
@@ -54,8 +62,10 @@ class _ListPutusanWidgetState extends State<ListPutusanWidget> {
 
         if (state is GetPutusanLoaded) {
           if (state.data.items!.isEmpty) {
-            return const Center(
-              child: Text("Data Kosong"),
+            return Container(
+              child: const Center(
+                child: Text("Tidak Ditemukan Data"),
+              ),
             );
           }
 

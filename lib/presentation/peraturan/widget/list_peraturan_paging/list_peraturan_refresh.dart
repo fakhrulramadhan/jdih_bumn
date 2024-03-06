@@ -10,11 +10,15 @@ class ListPeraturanRefresh extends StatefulWidget {
   const ListPeraturanRefresh({super.key});
 
   @override
-  State<ListPeraturanRefresh> createState() => _ListPeraturanRefreshState();
+  State<ListPeraturanRefresh> createState() => ListPeraturanRefreshState();
 }
 
-class _ListPeraturanRefreshState extends State<ListPeraturanRefresh> {
+class ListPeraturanRefreshState extends State<ListPeraturanRefresh> {
+  static late ListPeraturanRefreshState instance;
+
   int currentPage = 1;
+
+  String search = '';
 
   int totalPages = 30;
 
@@ -22,6 +26,12 @@ class _ListPeraturanRefreshState extends State<ListPeraturanRefresh> {
 
   final RefreshController refreshController =
       RefreshController(initialRefresh: true);
+
+  updateSearch(String value) async {
+    search = value;
+
+    getPeraturanData(isRefresh: true);
+  }
 
   Future<bool> getPeraturanData({bool isRefresh = false}) async {
     if (isRefresh) {
@@ -33,8 +43,10 @@ class _ListPeraturanRefreshState extends State<ListPeraturanRefresh> {
       }
     }
 
+    print(currentPage);
+
     final response = await http.get(Uri.parse(
-        '${Constants.baseUrlStage}/produk-hukum/produk/peraturan?page=$currentPage'));
+        '${Constants.baseUrlStage}/produk-hukum/produk/peraturan?page=$currentPage&keyword=$search'));
 
     if (response.statusCode == 200) {
       final result = peraturanResponseModelFromJson(response.body);
@@ -60,7 +72,10 @@ class _ListPeraturanRefreshState extends State<ListPeraturanRefresh> {
   @override
   void initState() {
     // TODO: implement initState
+
     super.initState();
+
+    instance = this;
   }
 
   @override

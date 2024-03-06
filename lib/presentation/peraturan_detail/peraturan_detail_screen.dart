@@ -571,7 +571,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                                             .length >
                                         3
                                 ? 140
-                                : 190 //240
+                                : 240 //240
                     : 80, //ini kalau detailnya enggak ada
                 subWidget: Column(
                   children: widget.peraturan.detailStatusPeraturan![0]
@@ -629,7 +629,9 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
             InfoDetailWidget(
               title: "Lampiran",
               subtitle: widget.peraturan.fileLampiran ?? "-",
-              heightTitle: 80,
+              heightTitle: widget.peraturan.fileLampiran.toString().length <= 50
+                  ? 80
+                  : 95,
             ),
             const SizedBox(
               height: 20.0,
@@ -651,91 +653,100 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
             ],
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        child: Column(
           children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.45,
-              child: BagikanButtonWidget(
-                onPressed: () async {
-                  String urlLink = widget.peraturan.urlDetailPeraturan ?? "-";
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.45,
+                  child: BagikanButtonWidget(
+                    onPressed: () async {
+                      String urlLink =
+                          widget.peraturan.urlDetailPeraturan ?? "-";
 
-                  //masukkin kata katanya di tanda kutip
-                  await Share.share(urlLink);
+                      //masukkin kata katanya di tanda kutip
+                      await Share.share(urlLink);
 
-                  print("${widget.peraturan.urlDetailPeraturan}");
-                },
-              ),
-            ),
-            widget.peraturan.urlDownload ==
-                    "https://jdihstage.bumn.go.id/storage/peraturan/"
-                ? Container(
-                    width: MediaQuery.of(context).size.width * 0.45,
-                  )
-                : SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.45,
-                    child: _progress != null
-                        ? const Center(child: CircularProgressIndicator())
-                        : DownloadButtonWidget(
-                            onTap: () async {
-                              // await download(Dio(), "${widget.putusan.urlDetailFilePutusan}",
-                              //     '/storage/emulated/0/Download');
+                      print("${widget.peraturan.urlDetailPeraturan}");
+                    },
+                  ),
+                ),
+                widget.peraturan.urlDownload ==
+                        "https://jdihstage.bumn.go.id/storage/peraturan/"
+                    ? Container(
+                        width: MediaQuery.of(context).size.width * 0.45,
+                      )
+                    : SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.45,
+                        child: _progress != null
+                            ? const Center(child: CircularProgressIndicator())
+                            : DownloadButtonWidget(
+                                onTap: () async {
+                                  // await download(Dio(), "${widget.putusan.urlDetailFilePutusan}",
+                                  //     '/storage/emulated/0/Download');
 
-                              print("${widget.peraturan.urlDownload}");
+                                  print("${widget.peraturan.urlDownload}");
 
-                              await checkPermission();
+                                  await checkPermission();
 
-                              await FileDownloader.downloadFile(
-                                url: "${widget.peraturan.urlDownload}",
-                                onProgress: (fileName, progresz) {
-                                  setState(() {
-                                    _progress = progresz;
-                                  });
-                                },
-                                onDownloadCompleted: (path) {
-                                  print('Path: $path');
+                                  await FileDownloader.downloadFile(
+                                    url: "${widget.peraturan.urlDownload}",
+                                    onProgress: (fileName, progresz) {
+                                      setState(() {
+                                        _progress = progresz;
+                                      });
+                                    },
+                                    onDownloadCompleted: (path) {
+                                      print('Path: $path');
 
-                                  setState(() {
-                                    _progress = null;
-                                  });
+                                      setState(() {
+                                        _progress = null;
+                                      });
 
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'Unduhan Selesai',
-                                        style: TextStyle(
-                                          color: Colors.white,
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'Unduhan Selesai',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          backgroundColor:
+                                              Color.fromARGB(255, 2, 25, 117),
+                                          action: SnackBarAction(
+                                            label: 'Buka File',
+                                            textColor: Colors.white,
+                                            onPressed: () async {
+                                              print(path);
+                                              // Open the downloaded file in the Files app
+                                              await OpenFilex.open('$path')
+                                                  .then((value) {
+                                                print(value.message.toString());
+                                              });
+
+                                              // await SfPdfViewer.file(
+                                              //     File('${path}'));
+                                            },
+                                          ),
                                         ),
-                                      ),
-                                      backgroundColor:
-                                          Color.fromARGB(255, 2, 25, 117),
-                                      action: SnackBarAction(
-                                        label: 'Buka File',
-                                        textColor: Colors.white,
-                                        onPressed: () async {
-                                          print(path);
-                                          // Open the downloaded file in the Files app
-                                          await OpenFilex.open('$path')
-                                              .then((value) {
-                                            print(value.message.toString());
-                                          });
-
-                                          // await SfPdfViewer.file(
-                                          //     File('${path}'));
-                                        },
-                                      ),
-                                    ),
+                                      );
+                                    },
                                   );
                                 },
-                              );
-                            },
-                          ),
-                  )
-            // DownloadButtonWidget(
-            //   onTap: () async {
-            //     await download(Dio(), url, savePath);
-            //   },
-            // )
+                              ),
+                      )
+                // DownloadButtonWidget(
+                //   onTap: () async {
+                //     await download(Dio(), url, savePath);
+                //   },
+                // )
+              ],
+            ),
+            // const SizedBox(
+            //   height: 20.0,
+            // ),
           ],
         ),
       ),

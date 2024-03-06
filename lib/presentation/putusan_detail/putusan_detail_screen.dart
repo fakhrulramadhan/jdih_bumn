@@ -296,128 +296,135 @@ class _PutusanDetailScreenState extends State<PutusanDetailScreen> {
             ],
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        child: Column(
           children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.45,
-              child: BagikanButtonWidget(
-                onPressed: () async {
-                  String urlLink = widget.putusan.urlDetailPutusan ?? "-";
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.45,
+                  child: BagikanButtonWidget(
+                    onPressed: () async {
+                      String urlLink = widget.putusan.urlDetailPutusan ?? "-";
 
-                  //masukkin kata katanya di tanda kutip
-                  await Share.share(urlLink);
+                      //masukkin kata katanya di tanda kutip
+                      await Share.share(urlLink);
 
-                  print("${widget.putusan.urlDetailFilePutusan}");
-                },
-              ),
-            ),
-            widget.putusan.urlDetailFilePutusan ==
-                    "https://jdihstage.bumn.go.id/storage/putusan/"
-                ? Container(
-                    width: MediaQuery.of(context).size.width * 0.45,
-                  )
-                : SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.45,
-                    child: _progress != null
-                        ? const Center(child: CircularProgressIndicator())
-                        : DownloadButtonWidget(
-                            onTap: () async {
-                              // await download(Dio(), "${widget.putusan.urlDetailFilePutusan}",
-                              //     '/storage/emulated/0/Download');
+                      print("${widget.putusan.urlDetailFilePutusan}");
+                    },
+                  ),
+                ),
+                widget.putusan.urlDetailFilePutusan ==
+                        "https://jdihstage.bumn.go.id/storage/putusan/"
+                    ? Container(
+                        width: MediaQuery.of(context).size.width * 0.45,
+                      )
+                    : SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.45,
+                        child: _progress != null
+                            ? const Center(child: CircularProgressIndicator())
+                            : DownloadButtonWidget(
+                                onTap: () async {
+                                  // await download(Dio(), "${widget.putusan.urlDetailFilePutusan}",
+                                  //     '/storage/emulated/0/Download');
 
-                              print("${widget.putusan.urlDetailFilePutusan}");
+                                  print(
+                                      "${widget.putusan.urlDetailFilePutusan}");
 
-                              await checkPermission();
+                                  await checkPermission();
 
-                              await FileDownloader.downloadFile(
-                                url: "${widget.putusan.urlDetailFilePutusan}",
-                                onProgress: (fileName, progresz) {
-                                  setState(() {
-                                    _progress = progresz;
-                                  });
-                                },
-                                onDownloadCompleted: (path) {
-                                  print('Path: $path');
+                                  await FileDownloader.downloadFile(
+                                    url:
+                                        "${widget.putusan.urlDetailFilePutusan}",
+                                    onProgress: (fileName, progresz) {
+                                      setState(() {
+                                        _progress = progresz;
+                                      });
+                                    },
+                                    onDownloadCompleted: (path) {
+                                      print('Path: $path');
 
-                                  setState(() {
-                                    progress = 0;
-                                    _progress = null;
-                                  });
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'Unduhan Selesai',
-                                        style: TextStyle(
-                                          color: Colors.white,
+                                      setState(() {
+                                        progress = 0;
+                                        _progress = null;
+                                      });
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'Unduhan Selesai',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          backgroundColor:
+                                              Color.fromARGB(255, 2, 25, 117),
+                                          action: SnackBarAction(
+                                            label: 'Buka File',
+                                            textColor: Colors.white,
+                                            onPressed: () async {
+                                              print(path);
+                                              // Open the downloaded file in the Files app
+                                              await OpenFilex.open('$path')
+                                                  .then((value) {
+                                                print(value.message.toString());
+                                              });
+
+                                              // await SfPdfViewer.file(
+                                              //     File('${path}'));
+                                            },
+                                          ),
                                         ),
-                                      ),
-                                      backgroundColor:
-                                          Color.fromARGB(255, 2, 25, 117),
-                                      action: SnackBarAction(
-                                        label: 'Buka File',
-                                        textColor: Colors.white,
-                                        onPressed: () async {
-                                          print(path);
-                                          // Open the downloaded file in the Files app
-                                          await OpenFilex.open('$path')
-                                              .then((value) {
-                                            print(value.message.toString());
-                                          });
-
-                                          // await SfPdfViewer.file(
-                                          //     File('${path}'));
-                                        },
-                                      ),
-                                    ),
+                                      );
+                                    },
                                   );
+
+                                  // final taskId = FlutterDownloader.enqueue(
+                                  //   url: "${widget.putusan.urlDetailFilePutusan}",
+                                  //   savedDir:
+                                  //       (await getApplicationDocumentsDirectory())
+                                  //           .path,
+                                  //   showNotification:
+                                  //       true, // show download progress in status bar (for Android)
+                                  //   openFileFromNotification:
+                                  //       true, // click on notification to open downloaded file (for Android)
+                                  // );
+
+                                  // await FlutterDownloader.enqueue(
+                                  //   url: "${widget.putusan.urlDetailFilePutusan}",
+                                  //   savedDir:
+                                  //       (await getApplicationDocumentsDirectory())
+                                  //           .path,
+                                  //   showNotification:
+                                  //       true, // show download progress in status bar (for Android)
+                                  //   openFileFromNotification:
+                                  //       true, // click on notification to open downloaded file (for Android)
+                                  // );
+
+                                  // //notifikasi utk di ios
+                                  // ScaffoldMessenger.of(context).showSnackBar(
+                                  //   SnackBar(
+                                  //     content: Text('Download completed'),
+                                  //     action: SnackBarAction(
+                                  //       label: 'Open',
+                                  //       onPressed: () async {
+                                  //         // Open the downloaded file in the Files app
+                                  //         await OpenFile.open(
+                                  //             '${(await getApplicationDocumentsDirectory()).path}/$taskId.pdf');
+                                  //       },
+                                  //     ),
+                                  //   ),
+                                  // );
                                 },
-                              );
-
-                              // final taskId = FlutterDownloader.enqueue(
-                              //   url: "${widget.putusan.urlDetailFilePutusan}",
-                              //   savedDir:
-                              //       (await getApplicationDocumentsDirectory())
-                              //           .path,
-                              //   showNotification:
-                              //       true, // show download progress in status bar (for Android)
-                              //   openFileFromNotification:
-                              //       true, // click on notification to open downloaded file (for Android)
-                              // );
-
-                              // await FlutterDownloader.enqueue(
-                              //   url: "${widget.putusan.urlDetailFilePutusan}",
-                              //   savedDir:
-                              //       (await getApplicationDocumentsDirectory())
-                              //           .path,
-                              //   showNotification:
-                              //       true, // show download progress in status bar (for Android)
-                              //   openFileFromNotification:
-                              //       true, // click on notification to open downloaded file (for Android)
-                              // );
-
-                              // //notifikasi utk di ios
-                              // ScaffoldMessenger.of(context).showSnackBar(
-                              //   SnackBar(
-                              //     content: Text('Download completed'),
-                              //     action: SnackBarAction(
-                              //       label: 'Open',
-                              //       onPressed: () async {
-                              //         // Open the downloaded file in the Files app
-                              //         await OpenFile.open(
-                              //             '${(await getApplicationDocumentsDirectory()).path}/$taskId.pdf');
-                              //       },
-                              //     ),
-                              //   ),
-                              // );
-                            },
-                          ),
-                  )
-            // DownloadButtonWidget(
-            //   onTap: () async {
-            //     await download(Dio(), url, savePath);
-            //   },
-            // )
+                              ),
+                      )
+                // DownloadButtonWidget(
+                //   onTap: () async {
+                //     await download(Dio(), url, savePath);
+                //   },
+                // )
+              ],
+            ),
           ],
         ),
       ),

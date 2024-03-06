@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:easy_image_viewer/easy_image_viewer.dart';
+import 'package:gallery_image_viewer/gallery_image_viewer.dart';
 import 'package:jdih_bumn/data/model/response/stage/infografis_response_model.dart';
 
 class InfografisScreen extends StatefulWidget {
@@ -116,18 +116,13 @@ class _InfografisScreenState extends State<InfografisScreen> {
                             items: widget.infografis.details!.map((i) {
                               return Builder(
                                 builder: (BuildContext context) => InkWell(
-                                  onTap: () => showImageViewer(
-                                    context,
-                                    Image.network("${i.imagePath}").image,
-                                    swipeDismissible: true,
-                                    doubleTapZoomable: true,
-                                    // backgroundColor: Colors.white
-                                    backgroundColor:
-                                        Colors.white.withOpacity(0.7),
-                                    closeButtonColor: Colors.black,
-                                    useSafeArea:
-                                        true, //agar botnavbarnya enggak berubah
-                                  ),
+                                  onTap: () => showImageViewer(context,
+                                      Image.network("${i.imagePath}").image,
+                                      swipeDismissible: true,
+                                      // backgroundColor: Colors.white
+                                      backgroundColor:
+                                          Colors.white.withOpacity(0.7),
+                                      closeButtonColor: Colors.black),
                                   child: Container(
                                     height: 336,
                                     width: 346,

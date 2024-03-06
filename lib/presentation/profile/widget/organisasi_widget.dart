@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_launcher_icons/xml_templates.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gallery_image_viewer/gallery_image_viewer.dart';
+import 'package:easy_image_viewer/easy_image_viewer.dart';
 import 'package:jdih_bumn/bloc/stage/get_struktur_jdih/get_struktur_jdih_bloc.dart';
 
 class OrgansisasiWidget extends StatefulWidget {
@@ -105,6 +105,7 @@ class _OrgansisasiWidgetState extends State<OrgansisasiWidget> {
                                           .image,
                                       swipeDismissible: true,
                                       // backgroundColor: Colors.white
+                                      doubleTapZoomable: true,
                                       backgroundColor:
                                           Colors.white.withOpacity(0.7),
                                       closeButtonColor: Colors.black),

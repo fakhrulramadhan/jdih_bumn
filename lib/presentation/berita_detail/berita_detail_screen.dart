@@ -143,6 +143,7 @@ class _BeritaDetailScreenState extends State<BeritaDetailScreen> {
           ],
         ),
       ),
+      //.
       bottomNavigationBar: Container(
         height: 100,
         width: MediaQuery.of(context).size.width,
@@ -157,16 +158,20 @@ class _BeritaDetailScreenState extends State<BeritaDetailScreen> {
             ],
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        child: Column(
           children: [
-            BagikanButtonBeritaWidget(
-              onPressed: () async {
-                String urlLink = "${widget.berita?.urlDetailBerita}";
-                print(parseHtmlString(widget.berita?.narasi).length);
-                await Share.share(urlLink);
-              },
-            )
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                BagikanButtonBeritaWidget(
+                  onPressed: () async {
+                    String urlLink = "${widget.berita?.urlDetailBerita}";
+                    print(parseHtmlString(widget.berita?.narasi).length);
+                    await Share.share(urlLink);
+                  },
+                )
+              ],
+            ),
           ],
         ),
       ),

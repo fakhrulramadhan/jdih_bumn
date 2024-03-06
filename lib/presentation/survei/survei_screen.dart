@@ -252,9 +252,13 @@ class _SurveiScreenState extends State<SurveiScreen> {
       bottomNavigationBar: SizedBox(
         height: 80,
         width: MediaQuery.of(context).size.width,
-        child: const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [KirimButtonWidget()],
+        child: Column(
+          children: [
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [KirimButtonWidget()],
+            ),
+          ],
         ),
       ),
     );

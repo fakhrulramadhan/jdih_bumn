@@ -10,6 +10,8 @@ class PutusanScreen extends StatefulWidget {
 }
 
 class _PutusanScreenState extends State<PutusanScreen> {
+  final TextEditingController searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -24,7 +26,6 @@ class _PutusanScreenState extends State<PutusanScreen> {
       super.initState();
     }
 
-    final TextEditingController searchController = TextEditingController();
     return Scaffold(
       // appBar: AppBar(
       //   toolbarHeight: 90,
@@ -125,15 +126,16 @@ class _PutusanScreenState extends State<PutusanScreen> {
                               elevation: 3,
                               child: TextFormField(
                                 controller: searchController,
-                                onFieldSubmitted: (_) {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) {
-                                      print(searchController.text);
-                                      return PutusanSearchScreen(
-                                          keyword: searchController.text);
-                                    }),
-                                  );
+                                onFieldSubmitted: (value) {
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(builder: (context) {
+                                  //     print(searchController.text);
+                                  //     return PutusanSearchScreen();
+                                  //   }),
+                                  // );
+                                  ListPutusanWidgetState.instance
+                                      .updateSearch(value);
                                 },
                                 decoration: InputDecoration(
                                     suffixIcon: InkWell(

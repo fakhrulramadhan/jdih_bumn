@@ -196,17 +196,22 @@ class _ArtikelDetailScreenState extends State<ArtikelDetailScreen> {
             ],
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20), topRight: Radius.circular(20))),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            BagikanButtonWidget(
-              onPressed: () async {
-                const urlLink = "https://www.youtube.com/watch?v=CNUBhb_cM6E";
-
-                await Share.share("This cat is cute $urlLink");
-              },
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                BagikanButtonWidget(
+                  onPressed: () async {
+                    const urlLink =
+                        "https://www.youtube.com/watch?v=CNUBhb_cM6E";
+                    await Share.share("This cat is cute $urlLink");
+                  },
+                ),
+                const DownloadButtonWidget()
+              ],
             ),
-            const DownloadButtonWidget()
           ],
         ),
       ),

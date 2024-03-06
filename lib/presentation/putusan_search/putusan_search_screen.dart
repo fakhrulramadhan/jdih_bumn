@@ -9,8 +9,8 @@ import 'package:jdih_bumn/presentation/putusan/widget/list_putusan_widget.dart';
 import 'package:jdih_bumn/presentation/putusan_detail/putusan_detail_screen.dart';
 
 class PutusanSearchScreen extends StatefulWidget {
-  final String keyword;
-  const PutusanSearchScreen({super.key, required this.keyword});
+  //final String keyword;
+  const PutusanSearchScreen({super.key});
 
   @override
   State<PutusanSearchScreen> createState() => _PutusanSearchScreenState();
@@ -27,11 +27,11 @@ class _PutusanSearchScreenState extends State<PutusanSearchScreen> {
     @override
     void initState() {
       // TODO: implement initState
-      searchController.text = widget.keyword;
+      //searchController.text = widget.keyword;
 
       context
           .read<SearchPutusanFreezedBloc>()
-          .add(SearchPutusanFreezedEvent.search(widget.keyword));
+          .add(SearchPutusanFreezedEvent.search(''));
       super.initState();
     }
 
@@ -135,16 +135,19 @@ class _PutusanSearchScreenState extends State<PutusanSearchScreen> {
                               elevation: 3,
                               child: TextFormField(
                                 controller: searchController,
-                                onFieldSubmitted: (value) {},
+                                onFieldSubmitted: (value) {
+                                  ListPutusanWidgetState.instance
+                                      .updateSearch(value);
+                                },
                                 decoration: InputDecoration(
                                     suffixIcon: InkWell(
-                                      onTap: () {
-                                        context.read<SearchPutusanBloc>().add(
-                                            DoSearchPutusanEvent(
-                                                keyword:
-                                                    searchController.text));
-                                        print(searchController.text);
-                                      },
+                                      // onTap: () {
+                                      //   context.read<SearchPutusanBloc>().add(
+                                      //       DoSearchPutusanEvent(
+                                      //           keyword:
+                                      //               searchController.text));
+                                      //   print(searchController.text);
+                                      // },
                                       child: const Padding(
                                         padding: EdgeInsets.only(left: 6),
                                         child: Icon(

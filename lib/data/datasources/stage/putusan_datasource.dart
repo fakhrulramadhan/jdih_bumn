@@ -5,9 +5,10 @@ import '../../../constants/constants.dart';
 import 'package:http/http.dart' as http;
 
 class PutusanDatasource {
-  Future<Either<String, PutusanResponseModel>> getPutusan() async {
-    final response = await http
-        .get(Uri.parse('${Constants.baseUrlStage}/produk-hukum/putusan'));
+  Future<Either<String, PutusanResponseModel>> getPutusan(
+      String keyword) async {
+    final response = await http.get(Uri.parse(
+        '${Constants.baseUrlStage}/produk-hukum/putusan?keyword=$keyword'));
 
     if (response.statusCode == 200) {
       print(response.body);

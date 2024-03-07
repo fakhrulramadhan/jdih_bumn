@@ -1,39 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_close_app/flutter_close_app.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jdih_bumn/presentation/home_screen/home_screen.dart';
-import 'package:jdih_bumn/presentation/populer/widget/populer_widget.dart';
+import 'package:jdih_bumn/presentation/terbaru/widget/berita_terbaru_widget.dart';
 
-class PopulerScreen extends StatefulWidget {
+class TerbaruScreen extends StatefulWidget {
   // harus bikin reusable widget dulu, sama kayak yang di main_menu
   // final String judul;
   // final String nosk;
   // final String isi;
-  const PopulerScreen({super.key});
+  const TerbaruScreen({super.key});
 
   @override
-  State<PopulerScreen> createState() => _PopulerScreenState();
+  State<TerbaruScreen> createState() => _TerbaruScreenState();
 }
 
-class _PopulerScreenState extends State<PopulerScreen> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
+class _TerbaruScreenState extends State<TerbaruScreen> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    return FlutterCloseAppPage(
-      interval: 2,
-      condition: true,
-      onCloseFailed: () {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text("Tekan Sekali Lagi Untuk Keluar Aplikasi"),
-        ));
+    return WillPopScope(
+      onWillPop: () async {
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => HomeScreen()),
+        // );
+
+        SystemNavigator.pop();
+
+        return false;
       },
       child: SingleChildScrollView(
         controller: ScrollController(),
@@ -67,7 +63,7 @@ class _PopulerScreenState extends State<PopulerScreen> {
                           width: width,
                           child: const Center(
                             child: Text(
-                              "Populer",
+                              "Terbaru",
                               style: TextStyle(
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.bold,
@@ -84,24 +80,9 @@ class _PopulerScreenState extends State<PopulerScreen> {
               const SizedBox(
                 height: 28.0,
               ),
-              const PopulerWidget(),
-              // const PopulerWidget(
-              //   judul: "SEMENBUMN",
-              //   nosk: "SK-8/DKU.MBU/12/2023",
-              //   isi:
-              //       "Nilai-nilai Utama (Core Values) Sumber Daya Manusia Badan Usaha Milik Negara",
-              //   tgl_publikasi: "06-12-2023",
-              //   jml_dilihat: "2.731 K",
-              // ),
-              // const PopulerWidget(
-              //   judul: "Undang - Undang",
-              //   nosk: "UU Nomor 31 Tahun 1999",
-              //   isi: "Pemberantasan Tindak Pidana Korupsi",
-              //   tgl_publikasi: "06-12-2023",
-              //   jml_dilihat: "2.731 K",
-              // ),
+              const BeritaTerbaruWidget(),
               const SizedBox(
-                height: 20.0,
+                height: 20,
               ),
               SvgPicture.asset(
                 "assets/images/BUMN Background.svg",

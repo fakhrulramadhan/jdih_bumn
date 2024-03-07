@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_close_app/flutter_close_app.dart';
 import 'package:jdih_bumn/data/model/response/stage/search_peraturan_response_model.dart';
 import 'package:jdih_bumn/presentation/berita/berita_screen.dart';
 import 'package:jdih_bumn/presentation/kamus_hukum/kamus_hukum_screen.dart';
@@ -28,6 +27,7 @@ class MainMenuScreen extends StatefulWidget {
 
 class _MainMenuScreenState extends State<MainMenuScreen> {
   late ScrollController _scrollController;
+  
 
   @override
   void initState() {
@@ -38,6 +38,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
 
   //skeleton utk menampilkan layout ui
   //ketika dalam keadaan masih loading
+  
 
   @override
   Widget build(BuildContext context) {
@@ -46,13 +47,13 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
 
     final TextEditingController searchController = TextEditingController();
 
-    return FlutterCloseAppPage(
-      interval: 2, //jeda waktu (detik) untuk close
-      condition: true,
-      onCloseFailed: () {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text("Tekan Sekali Lagi Untuk Keluar Aplikasi"),
-        ));
+    return WillPopScope(
+      onWillPop: () async {
+        //kalau di ios pakai exit(0)
+        SystemNavigator.pop();
+
+
+        return false;
       },
       child: Scaffold(
         //appBar: ,

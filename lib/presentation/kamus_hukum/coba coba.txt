@@ -11,6 +11,7 @@ import 'package:jdih_bumn/presentation/kamus_hukum/body_kamus_page_two.dart';
 import 'package:jdih_bumn/presentation/kamus_hukum/widget/body_kamus_widget.dart';
 import 'package:jdih_bumn/presentation/kamus_hukum/widget/kamus_sebelumnya_button_widget.dart';
 import 'package:jdih_bumn/presentation/kamus_hukum/widget/title_kamus_widget.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import './widget/kamus_selanjutnya_button_widget_new.dart';
 import 'package:jdih_bumn/data/model/response/stage/kamus_hukum_response_model.dart';
 import 'package:http/http.dart' as http;
@@ -27,31 +28,45 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
   // late Future<List<Item>> futurePosts;
 
   int _currentPage = 1;
-  List<Item> _items = [];
+  final List<Item> _items = [];
   final PageController _controller = PageController();
 
-  Future<void> _loadItems(int page) async {
-    final response = await http.get(Uri.parse(
-        "${Constants.baseUrlStage}/publikasi/kamus-hukum?page=$page"));
+  int currentPage = 1;
+  int totalPages = 30;
+  List<Item> kamushukum = [];
+
+  final RefreshController refreshController =
+      RefreshController(initialRefresh: true);
+
+  Future<List<Item>> fetchItems(int page) async {
+    final uri =
+        Uri.parse('${Constants.baseUrl}/publikasi/kamus-hukum?page=$page');
+    final response = await http.get(uri);
 
     if (response.statusCode == 200) {
-      // output tipe datanya dalam bentuk map (yang dibawah), bukan
-      // dalam bentuk list
-      // List<dynamic> data = json.decode(response.body);
-      // List<Item> fetchedItems =
-      //     data.map((item) => Item.fromJson(item)).toList();
-
-      Map<String, dynamic> responseData = json.decode(response.body);
-      List<dynamic> data = responseData['items'];
-      List<Item> fetchedItems =
-          data.map((item) => Item.fromJson(item)).toList();
-
-      setState(() {
-        _items = fetchedItems;
-      });
+      final List<dynamic> itemsJson = json.decode(response.body);
+      return itemsJson.map((json) => Item.fromJson(json)).toList();
     } else {
       throw Exception('Failed to load items');
     }
+  }
+
+  Future<List<Item>> getItems({bool isRefresh = false}) async {
+    if (isRefresh) {
+      currentPage = 1;
+    } else {
+      if (currentPage >= totalPages) {
+        refreshController.loadNoData();
+        //return false;
+      }
+    }
+  }
+
+  Future<void> _loadItems() async {
+    final items = await fetchItems(_currentPage);
+    setState(() {
+      _items.addAll(items);
+    });
   }
 
   @override
@@ -60,7 +75,7 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
     // TODO: implement initState
     super.initState();
     // _loadPage(_currentPage);
-    _loadItems(_currentPage);
+    _loadItems();
   }
 
   @override
@@ -207,7 +222,7 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
                               child: PageView.builder(
                                 controller: _controller,
                                 //itemCount: _items.length,
-                                itemCount: _items.length,
+                                itemCount: 3,
                                 // onPageChanged: (int page) {
                                 //   if (page >= _items.length - 1) {
                                 //     // Approaching end of loaded items, fetch more
@@ -219,19 +234,9 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
                                   //final Item kamus = state.data.items![index];
                                   final item = _items[index];
 
-                                  return Column(
-                                    children: [
-                                      BodyKamusWidget(
-                                          istilah: item.istilah.toString(),
-                                          definisi: item.definisi.toString()),
-                                      BodyKamusWidget(
-                                          istilah: _items[1].istilah.toString(),
-                                          definisi: item.definisi.toString()),
-                                      BodyKamusWidget(
-                                          istilah: _items[2].istilah.toString(),
-                                          definisi: item.definisi.toString()),
-                                    ],
-                                  );
+                                  return BodyKamusWidget(
+                                      istilah: item.istilah.toString(),
+                                      definisi: item.definisi.toString());
                                 },
                               )),
                         ],
@@ -255,14 +260,31 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   KamusSebelumnyaButtonWidget(
-                      onTap: _currentPage > 1 ? _loadPreviousPage : null),
-                  KamusSelanjutnyaButtonWidgetNew(onTap: _loadNextPage)
+                    onTap: () {
+                      if (_currentPage > 1) {
+                        setState(() {
+                          _currentPage--;
+                          _items.clear();
+                          _loadItems();
+                        });
+                      }
+                    },
+                  ),
+                  KamusSelanjutnyaButtonWidgetNew(
+                    onTap: () {
+                      setState(() {
+                        _currentPage++;
+                        _items.clear();
+                        _loadItems();
+                      });
+                    },
+                  )
                   // KamusSelanjutnyaButtonWidget(
                   //   onTap: () {
                   //     page.animateToPage(pageIndex + 1,
                   //         duration: const Duration(milliseconds: 200),
                   //         curve: Curves.easeOut);
-                  //     print(pageIndex);..
+                  //     print(pageIndex);
                   //     // page.animateToPage(pageIndex--,
                   //     //     duration: const Duration(milliseconds: 400),
                   //     //     curve: Curves.linearToEaseOut);
@@ -311,7 +333,7 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
                       width: 2.0,
                     ),
                     const Text(
-                      "99",
+                      "10",
                       style: TextStyle(
                         fontSize: 8.0,
                       ),
@@ -324,22 +346,5 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
         ),
       ),
     );
-  }
-
-  // halaman sebelumnya
-  void _loadPreviousPage() {
-    if (_currentPage > 1) {
-      _currentPage--;
-      _controller.previousPage(
-          duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
-      _loadItems(_currentPage);
-    }
-  }
-
-  void _loadNextPage() {
-    _currentPage++;
-    _controller.nextPage(
-        duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
-    _loadItems(_currentPage);
   }
 }

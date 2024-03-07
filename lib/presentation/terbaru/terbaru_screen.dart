@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_close_app/flutter_close_app.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jdih_bumn/presentation/home_screen/home_screen.dart';
 import 'package:jdih_bumn/presentation/terbaru/widget/berita_terbaru_widget.dart';
@@ -20,16 +21,13 @@ class _TerbaruScreenState extends State<TerbaruScreen> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    return WillPopScope(
-      onWillPop: () async {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(builder: (context) => HomeScreen()),
-        // );
-
-        SystemNavigator.pop();
-
-        return false;
+    return FlutterCloseAppPage(
+      interval: 2,
+      condition: true,
+      onCloseFailed: () {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Tekan Sekali Lagi Untuk Keluar Aplikasi"),
+        ));
       },
       child: SingleChildScrollView(
         controller: ScrollController(),

@@ -390,6 +390,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.3.1"
+  flutter_close_app:
+    dependency: "direct main"
+    description:
+      name: flutter_close_app
+      sha256: "793f4d2f361557894c46ace3e596073e34006a5de1f518d559a86af0a6a3f9cd"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   flutter_downloader:
     dependency: "direct main"
     description:

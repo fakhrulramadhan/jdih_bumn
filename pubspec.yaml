@@ -78,6 +78,7 @@ dependencies:
   freezed_annotation: ^2.4.1
   build_runner: ^2.4.8
   easy_image_viewer: ^1.4.1
+  flutter_close_app: ^1.0.0
 
   
 dev_dependencies:

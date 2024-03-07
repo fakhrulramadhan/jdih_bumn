@@ -49,9 +49,9 @@ class _BeritaTerbaruWidgetState extends State<BeritaTerbaruWidget> {
         }
 
         if (state is GetPeraturanTerbaruLoaded) {
-          if (state.data.items!.isEmpty) {
+          if (state.data.items == null) {
             return const Center(
-              child: Text("Data Kosong"),
+              child: Text("Belum ada data"),
             );
           }
 

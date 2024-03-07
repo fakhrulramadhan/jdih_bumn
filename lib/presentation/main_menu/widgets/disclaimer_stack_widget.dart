@@ -50,7 +50,7 @@ class _DisclaimerStackWidgetState extends State<DisclaimerStackWidget> {
               clipBehavior: Clip.hardEdge,
               child: Image.asset(
                 "assets/images/appbar-bg2.png",
-                width: MediaQuery.of(context).size.width * 0.95,
+                width: MediaQuery.of(context).size.width * 0.87,
                 height: 195.0,
                 fit: BoxFit.none,
               ),

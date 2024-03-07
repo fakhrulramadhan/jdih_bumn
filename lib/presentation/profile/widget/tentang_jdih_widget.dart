@@ -1,4 +1,5 @@
 // ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,11 +20,25 @@ class TentangJdihWidget extends StatefulWidget {
   State<TentangJdihWidget> createState() => _TentangJdihWidgetState();
 }
 
+class AppScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
+}
+
 class _TentangJdihWidgetState extends State<TentangJdihWidget> {
   //late ScrollController _scrollController;
 
   final List<String> _items = [];
   final bool _isLoading = true;
+
+  final ScrollController _controller = ScrollController();
+  final double _height = 10.0;
+
+  final ScrollController _scrollController = ScrollController();
+  bool _scrollEnabled = true;
 
   //  final ScrollController _controller =
   //     ScrollController(initialScrollOffset: 0.0, keepScrollOffset: true);
@@ -35,6 +50,28 @@ class _TentangJdihWidgetState extends State<TentangJdihWidget> {
     // _scrollController = ScrollController();
 
     super.initState();
+    _scrollController.addListener(_scrollListener);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _scrollController.removeListener(_scrollListener);
+    _scrollController.dispose();
+  }
+
+  void _scrollListener() {
+    if (_scrollController.offset >= 400) {
+      // Assuming 200 is the stopping point
+      if (_scrollEnabled) {
+        setState(() {
+          _scrollEnabled = false;
+        });
+      }
+      // Optionally, you can force the scroll back to the stopping point
+      _scrollController.jumpTo(400);
+    }
   }
 
   String _parseHtmlString(String? htmlString) {
@@ -50,6 +87,14 @@ class _TentangJdihWidgetState extends State<TentangJdihWidget> {
 
     return htmlText!.replaceAll(exp, '');
   }
+
+  // void _animateToIndex(int index) {
+  //   _controller.animateTo(
+  //     index * _height,
+  //     duration: Duration(seconds: 2),
+  //     curve: Curves.fastOutSlowIn,
+  //   );
+  // }
 
   // Future<void> _fetchDataFromAPI() async {
   //   final response = await http
@@ -71,41 +116,232 @@ class _TentangJdihWidgetState extends State<TentangJdihWidget> {
   Widget build(BuildContext context) {
     return WillPopScope(
         child: Scaffold(
-          body: SingleChildScrollView(
-            controller: ScrollController(),
-            child: Container(
-              height: 1040,
-              color: Colors.white,
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-              child: BlocBuilder<GetTentangJdihBloc, GetTentangJdihState>(
-                builder: (context, state) {
-                  if (state is GetTentangJdihError) {
-                    return const Center(
-                      child: Text('data error'),
-                    );
-                  }
+          // floatingActionButton: FloatingActionButton(
+          //   child: Icon(Icons.arrow_downward),
+          //   onPressed: () => _animateToIndex(30),
+          // ),
+          body: NotificationListener<ScrollNotification>(
+            onNotification: (scrollNotification) {
+              if (!_scrollEnabled) return true;
 
-                  if (state is GetTentangJdihLoading) {
-                    // return const Center(
-                    //   child: CircularProgressIndicator(),
-                    // );
+              return false;
+            },
+            child: SingleChildScrollView(
+              //controller: ScrollController(),
+              //controller: _controller,
+              controller: _scrollController,
+              // physics: _scrollEnabled
+              //     ? const AlwaysScrollableScrollPhysics()
+              //     : const AlwaysScrollableScrollPhysics(),
+              child: Container(
+                height: 1040,
+                color: Colors.white,
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                child: BlocBuilder<GetTentangJdihBloc, GetTentangJdihState>(
+                  builder: (context, state) {
+                    if (state is GetTentangJdihError) {
+                      return const Center(
+                        child: Text('data error'),
+                      );
+                    }
 
-                    return Skeletonizer(
-                      enabled: true,
-                      child: ListView.builder(
-                        itemCount: 1,
+                    if (state is GetTentangJdihLoading) {
+                      // return const Center(
+                      //   child: CircularProgressIndicator(),
+                      // );
+
+                      return Skeletonizer(
+                        enabled: true,
+                        child: ListView.builder(
+                          itemCount: 1,
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemBuilder: (BuildContext context, index) {
+                            // final Item tentang_jdih = state.data.items![index];
+
+                            // print("ini jumlah datanya ${state.data.items!.length}");
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "test",
+                                  style: TextStyle(
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 8.0,
+                                ),
+                                //"${removeAllHtmlTags(tentang_jdih.deskripsi)}"
+                                const Text(
+                                  "Test",
+                                  style: TextStyle(
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.w400),
+                                  textAlign: TextAlign.justify,
+                                  overflow: TextOverflow.visible,
+                                ),
+                                const SizedBox(
+                                  height: 14.0,
+                                ),
+                                Container(
+                                  height: 1143,
+                                  width: 344,
+                                  color: Colors.yellow,
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        height: 1143,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        decoration: const BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(
+                                              12.0,
+                                            ),
+                                          ),
+                                          // image: DecorationImage(
+                                          //     image: AssetImage(
+                                          //         'assets/images/appbar-bg2.png'),
+                                          //     fit: BoxFit.cover)
+                                        ),
+                                        child: Image.asset(
+                                          "assets/images/appbar-bg2.png",
+                                          // width: MediaQuery.of(context).size.width,
+                                          // height: 1000,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      Container(
+                                        height: 1143,
+                                        width: 344,
+                                        //color: Colors.white,
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 20, horizontal: 20),
+                                        child: const Center(
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                "VISI",
+                                                style: TextStyle(
+                                                  fontSize: 24.0,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 8.0,
+                                              ),
+                                              Text(
+                                                "test",
+                                                style: TextStyle(
+                                                  fontSize: 14.0,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                                overflow: TextOverflow.visible,
+                                                textAlign: TextAlign.justify,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 1143,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: Column(
+                                          children: [
+                                            const SizedBox(
+                                              height: 170.0,
+                                            ),
+                                            const Text(
+                                              "MISI",
+                                              style: TextStyle(
+                                                fontSize: 24.0,
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              height: 8.0,
+                                            ),
+                                            //semua tag html yang ada
+                                            //di api, harus dimasukkin
+                                            //ke style buat diatur styling
+                                            //nya (margin / padding),
+                                            //ternyata atur padding di ul nya
+                                            Html(
+                                              data: "test",
+                                              style: {
+                                                "li": Style(
+                                                    fontSize: FontSize(12),
+                                                    margin: Margins.zero,
+                                                    padding: HtmlPaddings.zero,
+                                                    fontStyle: FontStyle.normal,
+                                                    color: Colors.white,
+                                                    textAlign:
+                                                        TextAlign.justify),
+                                                "ul": Style(
+                                                    margin: Margins.symmetric(
+                                                        horizontal: 20),
+                                                    padding: HtmlPaddings.zero),
+                                                "span": Style(
+                                                    margin: Margins.zero,
+                                                    padding: HtmlPaddings.zero)
+                                              },
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 10),
+                                              child: SvgPicture.asset(
+                                                "assets/images/BUMN Background.svg",
+                                                height: 153,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.8,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            );
+                          },
+                        ),
+                      );
+                    }
+
+                    if (state is GetTentangJdihLoaded) {
+                      if (state.data.items!.isEmpty) {
+                        return const Center(
+                          child: Text("Data kosong"),
+                        );
+                      }
+
+                      return ListView.builder(
+                        itemCount: state.data.items!.length,
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemBuilder: (BuildContext context, index) {
-                          // final Item tentang_jdih = state.data.items![index];
+                          final Item tentangJdih = state.data.items![index];
 
-                          // print("ini jumlah datanya ${state.data.items!.length}");
+                          print(
+                              "ini jumlah datanya ${state.data.items!.length}");
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
                             children: [
-                              const Text(
-                                "test",
-                                style: TextStyle(
+                              Text(
+                                "${tentangJdih.judul}",
+                                style: const TextStyle(
                                   fontSize: 15.0,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -114,9 +350,9 @@ class _TentangJdihWidgetState extends State<TentangJdihWidget> {
                                 height: 8.0,
                               ),
                               //"${removeAllHtmlTags(tentang_jdih.deskripsi)}"
-                              const Text(
-                                "Test",
-                                style: TextStyle(
+                              Text(
+                                _parseHtmlString(tentangJdih.deskripsi),
+                                style: const TextStyle(
                                     fontSize: 12.0,
                                     fontWeight: FontWeight.w400),
                                 textAlign: TextAlign.justify,
@@ -128,7 +364,7 @@ class _TentangJdihWidgetState extends State<TentangJdihWidget> {
                               Container(
                                 height: 1143,
                                 width: 344,
-                                color: Colors.yellow,
+                                //color: Colors.yellow,
                                 child: Stack(
                                   children: [
                                     Container(
@@ -159,10 +395,10 @@ class _TentangJdihWidgetState extends State<TentangJdihWidget> {
                                       //color: Colors.white,
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 20, horizontal: 20),
-                                      child: const Center(
+                                      child: Center(
                                         child: Column(
                                           children: [
-                                            Text(
+                                            const Text(
                                               "VISI",
                                               style: TextStyle(
                                                 fontSize: 24.0,
@@ -170,12 +406,13 @@ class _TentangJdihWidgetState extends State<TentangJdihWidget> {
                                                 color: Colors.white,
                                               ),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               height: 8.0,
                                             ),
                                             Text(
-                                              "test",
-                                              style: TextStyle(
+                                              removeAllHtmlTags(
+                                                  tentangJdih.visi),
+                                              style: const TextStyle(
                                                 fontSize: 14.0,
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.w400,
@@ -212,7 +449,7 @@ class _TentangJdihWidgetState extends State<TentangJdihWidget> {
                                           //nya (margin / padding),
                                           //ternyata atur padding di ul nya
                                           Html(
-                                            data: "test",
+                                            data: "${tentangJdih.misi}",
                                             style: {
                                               "li": Style(
                                                   fontSize: FontSize(12),
@@ -251,182 +488,13 @@ class _TentangJdihWidgetState extends State<TentangJdihWidget> {
                             ],
                           );
                         },
-                      ),
-                    );
-                  }
-
-                  if (state is GetTentangJdihLoaded) {
-                    if (state.data.items!.isEmpty) {
-                      return const Center(
-                        child: Text("Data kosong"),
                       );
                     }
-
-                    return ListView.builder(
-                      itemCount: state.data.items!.length,
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext context, index) {
-                        final Item tentangJdih = state.data.items![index];
-
-                        print("ini jumlah datanya ${state.data.items!.length}");
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              "${tentangJdih.judul}",
-                              style: const TextStyle(
-                                fontSize: 15.0,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 8.0,
-                            ),
-                            //"${removeAllHtmlTags(tentang_jdih.deskripsi)}"
-                            Text(
-                              _parseHtmlString(tentangJdih.deskripsi),
-                              style: const TextStyle(
-                                  fontSize: 12.0, fontWeight: FontWeight.w400),
-                              textAlign: TextAlign.justify,
-                              overflow: TextOverflow.visible,
-                            ),
-                            const SizedBox(
-                              height: 14.0,
-                            ),
-                            Container(
-                              height: 1143,
-                              width: 344,
-                              //color: Colors.yellow,
-                              child: Stack(
-                                children: [
-                                  Container(
-                                    height: 1143,
-                                    width: MediaQuery.of(context).size.width,
-                                    decoration: const BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(
-                                          12.0,
-                                        ),
-                                      ),
-                                      // image: DecorationImage(
-                                      //     image: AssetImage(
-                                      //         'assets/images/appbar-bg2.png'),
-                                      //     fit: BoxFit.cover)
-                                    ),
-                                    child: Image.asset(
-                                      "assets/images/appbar-bg2.png",
-                                      // width: MediaQuery.of(context).size.width,
-                                      // height: 1000,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 1143,
-                                    width: 344,
-                                    //color: Colors.white,
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 20, horizontal: 20),
-                                    child: Center(
-                                      child: Column(
-                                        children: [
-                                          const Text(
-                                            "VISI",
-                                            style: TextStyle(
-                                              fontSize: 24.0,
-                                              fontWeight: FontWeight.w700,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            height: 8.0,
-                                          ),
-                                          Text(
-                                            removeAllHtmlTags(tentangJdih.visi),
-                                            style: const TextStyle(
-                                              fontSize: 14.0,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                            overflow: TextOverflow.visible,
-                                            textAlign: TextAlign.justify,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 1143,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Column(
-                                      children: [
-                                        const SizedBox(
-                                          height: 170.0,
-                                        ),
-                                        const Text(
-                                          "MISI",
-                                          style: TextStyle(
-                                            fontSize: 24.0,
-                                            fontWeight: FontWeight.w700,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 8.0,
-                                        ),
-                                        //semua tag html yang ada
-                                        //di api, harus dimasukkin
-                                        //ke style buat diatur styling
-                                        //nya (margin / padding),
-                                        //ternyata atur padding di ul nya
-                                        Html(
-                                          data: "${tentangJdih.misi}",
-                                          style: {
-                                            "li": Style(
-                                                fontSize: FontSize(12),
-                                                margin: Margins.zero,
-                                                padding: HtmlPaddings.zero,
-                                                fontStyle: FontStyle.normal,
-                                                color: Colors.white,
-                                                textAlign: TextAlign.justify),
-                                            "ul": Style(
-                                                margin: Margins.symmetric(
-                                                    horizontal: 20),
-                                                padding: HtmlPaddings.zero),
-                                            "span": Style(
-                                                margin: Margins.zero,
-                                                padding: HtmlPaddings.zero)
-                                          },
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(bottom: 10),
-                                          child: SvgPicture.asset(
-                                            "assets/images/BUMN Background.svg",
-                                            height: 153,
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.8,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        );
-                      },
+                    return const Center(
+                      child: CircularProgressIndicator(),
                     );
-                  }
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                },
+                  },
+                ),
               ),
             ),
           ),

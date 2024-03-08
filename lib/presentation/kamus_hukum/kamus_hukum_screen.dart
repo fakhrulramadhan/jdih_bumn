@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_close_app/flutter_close_app.dart';
 import 'package:jdih_bumn/bloc/stage/get_kamus_hukum/get_kamus_hukum_bloc.dart';
@@ -29,6 +30,9 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
   int _currentPage = 1;
   List<Item> _items = [];
   final PageController _controller = PageController();
+
+  final ScrollController _scrollController = ScrollController();
+  bool _scrollEnabled = true;
 
   Future<void> _loadItems(int page) async {
     final response = await http.get(Uri.parse(
@@ -61,6 +65,28 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
     super.initState();
     // _loadPage(_currentPage);
     _loadItems(_currentPage);
+    _scrollController.addListener(_scrollListener);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _scrollController.removeListener(_scrollListener);
+    _scrollController.dispose();
+  }
+
+  void _scrollListener() {
+    if (_scrollController.offset >= 200) {
+      if (_scrollEnabled) {
+        setState(() {
+          _scrollEnabled = false;
+        });
+      }
+
+      //hanya bisa di scroll sampai height 400
+      _scrollController.jumpTo(200);
+    }
   }
 
   @override
@@ -94,150 +120,161 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
               height: 110.0,
               fit: BoxFit.none,
             ),
-            SingleChildScrollView(
-              controller: ScrollController(),
-              physics: const BouncingScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        BackButton(
-                          color: Colors.white,
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                        ),
-                        SizedBox(
-                          width: 0.185 * MediaQuery.of(context).size.width,
-                        ),
-                        const Expanded(
-                          child: SizedBox(
-                            height: 90,
-                            width: 150,
-                            child: Center(
-                              child: Text(
-                                "Kamus Hukum",
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(child: Container())
-                      ],
-                    ),
-                    Container(
-                      decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(24),
-                              topRight: Radius.circular(24))),
-                      padding: const EdgeInsets.all(20.0),
-                      child: Column(
-                        children: [
-                          const SizedBox(
-                            height: 10.0,
-                          ),
-                          Center(
-                            child: Container(
-                              height: 45,
-                              width: width * 0.9,
-                              decoration: const BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(24),
-                                      topRight: Radius.circular(24))),
-                              child: Material(
-                                borderRadius: BorderRadius.circular(10),
-                                elevation: 3,
-                                child: TextFormField(
-                                  controller: searchController,
-                                  onFieldSubmitted: (value) {},
-                                  decoration: InputDecoration(
-                                      suffixIcon: InkWell(
-                                        onTap: () {},
-                                        child: const Padding(
-                                          padding: EdgeInsets.only(left: 6),
-                                          child: Icon(
-                                            Icons.search,
-                                            size: 24.0,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      contentPadding: const EdgeInsets.only(
-                                          top: 10, left: 20, right: 20),
-                                      border: const OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(7),
-                                          ),
-                                          borderSide: BorderSide.none),
-                                      enabledBorder: const OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10)),
-                                          borderSide: BorderSide(
-                                              color: Colors.black38, width: 1)),
-                                      hintText:
-                                          'Ketik kata kunci pencarian....',
-                                      hintStyle: const TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14.0,
-                                      )),
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 18.0,
-                          ),
-                          // pakai pageview nuilder
-                          const TitleKamusWidget(),
-                          SizedBox(
-                              height: 730,
-                              width: MediaQuery.of(context).size.width,
-                              child: PageView.builder(
-                                controller: _controller,
-                                //itemCount: _items.length,
-                                itemCount: _items.length,
-                                // onPageChanged: (int page) {
-                                //   if (page >= _items.length - 1) {
-                                //     // Approaching end of loaded items, fetch more
-                                //     _currentPage++;
-                                //     _loadPage(_currentPage);
-                                //   }
-                                // },
-                                itemBuilder: (context, index) {
-                                  //final Item kamus = state.data.items![index];
-                                  final item = _items[index];
+            NotificationListener<ScrollNotification>(
+              onNotification: (notification) {
+                if (!_scrollEnabled) return true;
 
-                                  return Column(
-                                    children: [
-                                      BodyKamusWidget(
-                                          istilah: item.istilah.toString(),
-                                          definisi: item.definisi.toString()),
-                                      BodyKamusWidget(
-                                          istilah: _items[1].istilah.toString(),
-                                          definisi: item.definisi.toString()),
-                                      BodyKamusWidget(
-                                          istilah: _items[2].istilah.toString(),
-                                          definisi: item.definisi.toString()),
-                                    ],
-                                  );
-                                },
-                              )),
+                return false;
+              },
+              child: SingleChildScrollView(
+                //controller: ScrollController(),
+                controller: _scrollController,
+                physics: const BouncingScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          BackButton(
+                            color: Colors.white,
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                          SizedBox(
+                            width: 0.185 * MediaQuery.of(context).size.width,
+                          ),
+                          const Expanded(
+                            child: SizedBox(
+                              height: 90,
+                              width: 150,
+                              child: Center(
+                                child: Text(
+                                  "Kamus Hukum",
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Expanded(child: Container())
                         ],
                       ),
-                    ),
-                  ],
+                      Container(
+                        decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(24),
+                                topRight: Radius.circular(24))),
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 10.0,
+                            ),
+                            Center(
+                              child: Container(
+                                height: 45,
+                                width: width * 0.9,
+                                decoration: const BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(24),
+                                        topRight: Radius.circular(24))),
+                                child: Material(
+                                  borderRadius: BorderRadius.circular(10),
+                                  elevation: 3,
+                                  child: TextFormField(
+                                    controller: searchController,
+                                    onFieldSubmitted: (value) {},
+                                    decoration: InputDecoration(
+                                        suffixIcon: InkWell(
+                                          onTap: () {},
+                                          child: const Padding(
+                                            padding: EdgeInsets.only(left: 6),
+                                            child: Icon(
+                                              Icons.search,
+                                              size: 24.0,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ),
+                                        filled: true,
+                                        fillColor: Colors.white,
+                                        contentPadding: const EdgeInsets.only(
+                                            top: 10, left: 20, right: 20),
+                                        border: const OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(7),
+                                            ),
+                                            borderSide: BorderSide.none),
+                                        enabledBorder: const OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10)),
+                                            borderSide: BorderSide(
+                                                color: Colors.black38,
+                                                width: 1)),
+                                        hintText:
+                                            'Ketik kata kunci pencarian....',
+                                        hintStyle: const TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14.0,
+                                        )),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 18.0,
+                            ),
+                            // pakai pageview nuilder
+                            const TitleKamusWidget(),
+                            SizedBox(
+                                height: 530,
+                                width: MediaQuery.of(context).size.width,
+                                child: PageView.builder(
+                                  controller: _controller,
+                                  //itemCount: _items.length,
+                                  itemCount: _items.length,
+                                  // onPageChanged: (int page) {
+                                  //   if (page >= _items.length - 1) {
+                                  //     // Approaching end of loaded items, fetch more
+                                  //     _currentPage++;
+                                  //     _loadPage(_currentPage);
+                                  //   }
+                                  // },
+                                  itemBuilder: (context, index) {
+                                    //final Item kamus = state.data.items![index];
+                                    final item = _items[index];
+
+                                    return Column(
+                                      children: [
+                                        BodyKamusWidget(
+                                            istilah: item.istilah.toString(),
+                                            definisi: item.definisi.toString()),
+                                        BodyKamusWidget(
+                                            istilah:
+                                                _items[1].istilah.toString(),
+                                            definisi: item.definisi.toString()),
+                                        BodyKamusWidget(
+                                            istilah:
+                                                _items[2].istilah.toString(),
+                                            definisi: item.definisi.toString()),
+                                      ],
+                                    );
+                                  },
+                                )),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

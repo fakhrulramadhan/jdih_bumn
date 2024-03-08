@@ -54,6 +54,9 @@ class BodyKamusWidget extends StatelessWidget {
                   overflow: TextOverflow.visible,
                 ),
               ),
+              const SizedBox(
+                width: 5.0,
+              ),
             ],
           ),
           const SizedBox(

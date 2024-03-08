@@ -65,7 +65,6 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
     search = value;
 
     _loadItemsSearch();
-    _currentPage = 1;
   }
 
   Future<void> _loadItemsSearch() async {
@@ -303,56 +302,30 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
                                         // },
                                         itemBuilder: (context, index) {
                                           //final Item kamus = state.data.items![index];
-                                          final item = _items[index];
-                                          print("jumlah datanya");
-                                          print(_items.length);
+                                          //final item = _items[index];
 
-                                          return Column(
-                                            children: [
-                                              BodyKamusWidget(
+                                          // return Column(
+                                          //   children: [
+                                          //     BodyKamusWidget(
+                                          //         istilah: item!.istilah.toString(),
+                                          //         definisi: item.definisi.toString()),
+
+                                          //   ],
+                                          // );
+
+                                          return ListView.builder(
+                                            itemCount: _items.length,
+                                            scrollDirection: Axis.vertical,
+                                            physics:
+                                                const AlwaysScrollableScrollPhysics(),
+                                            itemBuilder: (context, index) {
+                                              final item = _items[index];
+                                              return BodyKamusWidget(
                                                   istilah:
                                                       item!.istilah.toString(),
                                                   definisi:
-                                                      item.definisi.toString()),
-                                              _items.length > 1
-                                                  ? BodyKamusWidget(
-                                                      istilah: _items[1]!
-                                                          .istilah
-                                                          .toString(),
-                                                      definisi: _items[1]!
-                                                          .definisi
-                                                          .toString())
-                                                  : Container(),
-                                              _items.length > 2
-                                                  ? BodyKamusWidget(
-                                                      istilah: _items[2]!
-                                                          .istilah
-                                                          .toString(),
-                                                      definisi: _items[2]!
-                                                          .definisi
-                                                          .toString())
-                                                  : Container()
-
-                                              // _items[1] != null
-                                              //     ? BodyKamusWidget(
-                                              //         istilah: _items[1]!
-                                              //             .istilah
-                                              //             .toString(),
-                                              //         definisi: _items[1]!
-                                              //             .definisi
-                                              //             .toString())
-                                              //     : Container(),
-                                              // _items[1] != null &&
-                                              //         _items[2] != null
-                                              //     ? BodyKamusWidget(
-                                              //         istilah: _items[2]!
-                                              //             .istilah
-                                              //             .toString(),
-                                              //         definisi: _items[2]!
-                                              //             .definisi
-                                              //             .toString())
-                                              //     : Container(),
-                                            ],
+                                                      item.definisi.toString());
+                                            },
                                           );
                                         },
                                       )
@@ -461,7 +434,6 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
   }
 
   void _loadNextPage() {
-    print(_currentPage);
     _currentPage++;
     _pageController.nextPage(
         duration: Duration(milliseconds: 300), curve: Curves.easeInOut);

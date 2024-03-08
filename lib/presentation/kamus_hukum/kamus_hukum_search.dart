@@ -16,16 +16,15 @@ import './widget/kamus_selanjutnya_button_widget_new.dart';
 import 'package:jdih_bumn/data/model/response/stage/kamus_hukum_response_model.dart';
 import 'package:http/http.dart' as http;
 
-class KamusHukumScreen extends StatefulWidget {
-  const KamusHukumScreen({super.key});
+class KamusHukumSearchScreen extends StatefulWidget {
+  const KamusHukumSearchScreen({super.key});
 
   @override
-  State<KamusHukumScreen> createState() => _KamusHukumScreenState();
+  State<KamusHukumSearchScreen> createState() => KamusHukumSearchScreenState();
 }
 
-class _KamusHukumScreenState extends State<KamusHukumScreen> {
-  // int pageIndex = 0;
-  // late Future<List<Item>> futurePosts;
+class KamusHukumSearchScreenState extends State<KamusHukumSearchScreen> {
+  static late KamusHukumSearchScreenState instance;
 
   int _currentPage = 1;
   List<Item?> _items = [];
@@ -65,12 +64,11 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
     search = value;
 
     _loadItemsSearch();
-    _currentPage = 1;
   }
 
   Future<void> _loadItemsSearch() async {
     final response = await http.get(Uri.parse(
-        "${Constants.baseUrlStage}/publikasi/kamus-hukum?page=$_currentPage&keyword=$search"));
+        "${Constants.baseUrlStage}/publikasi/kamus-hukum?keyword=$search"));
 
     if (response.statusCode == 200) {
       // output tipe datanya dalam bentuk map (yang dibawah), bukan
@@ -98,8 +96,8 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
     // TODO: implement initState
     super.initState();
     //_loadItems(_currentPage);
-    //_loadItems(_currentPage);
-    _loadItems(_currentPage);
+    instance = this;
+    _loadItemsSearch();
     _scrollController.addListener(_scrollListener);
     _pageController.addListener(() {
       // This is called whenever the page in the PageView changes
@@ -303,56 +301,30 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
                                         // },
                                         itemBuilder: (context, index) {
                                           //final Item kamus = state.data.items![index];
-                                          final item = _items[index];
-                                          print("jumlah datanya");
-                                          print(_items.length);
+                                          //final item = _items[index];
 
-                                          return Column(
-                                            children: [
-                                              BodyKamusWidget(
+                                          // return Column(
+                                          //   children: [
+                                          //     BodyKamusWidget(
+                                          //         istilah: item!.istilah.toString(),
+                                          //         definisi: item.definisi.toString()),
+
+                                          //   ],
+                                          // );
+
+                                          return ListView.builder(
+                                            itemCount: _items.length,
+                                            scrollDirection: Axis.vertical,
+                                            physics:
+                                                const AlwaysScrollableScrollPhysics(),
+                                            itemBuilder: (context, index) {
+                                              final item = _items[index];
+                                              return BodyKamusWidget(
                                                   istilah:
                                                       item!.istilah.toString(),
                                                   definisi:
-                                                      item.definisi.toString()),
-                                              _items.length > 1
-                                                  ? BodyKamusWidget(
-                                                      istilah: _items[1]!
-                                                          .istilah
-                                                          .toString(),
-                                                      definisi: _items[1]!
-                                                          .definisi
-                                                          .toString())
-                                                  : Container(),
-                                              _items.length > 2
-                                                  ? BodyKamusWidget(
-                                                      istilah: _items[2]!
-                                                          .istilah
-                                                          .toString(),
-                                                      definisi: _items[2]!
-                                                          .definisi
-                                                          .toString())
-                                                  : Container()
-
-                                              // _items[1] != null
-                                              //     ? BodyKamusWidget(
-                                              //         istilah: _items[1]!
-                                              //             .istilah
-                                              //             .toString(),
-                                              //         definisi: _items[1]!
-                                              //             .definisi
-                                              //             .toString())
-                                              //     : Container(),
-                                              // _items[1] != null &&
-                                              //         _items[2] != null
-                                              //     ? BodyKamusWidget(
-                                              //         istilah: _items[2]!
-                                              //             .istilah
-                                              //             .toString(),
-                                              //         definisi: _items[2]!
-                                              //             .definisi
-                                              //             .toString())
-                                              //     : Container(),
-                                            ],
+                                                      item.definisi.toString());
+                                            },
                                           );
                                         },
                                       )
@@ -461,7 +433,6 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
   }
 
   void _loadNextPage() {
-    print(_currentPage);
     _currentPage++;
     _pageController.nextPage(
         duration: Duration(milliseconds: 300), curve: Curves.easeInOut);

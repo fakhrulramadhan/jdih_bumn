@@ -28,49 +28,15 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
   // late Future<List<Item>> futurePosts;
 
   int _currentPage = 1;
-  List<Item?> _items = [];
-  //final PageController _controller = PageController();
-  final PageController _pageController = PageController();
+  List<Item> _items = [];
+  final PageController _controller = PageController();
 
   final ScrollController _scrollController = ScrollController();
   bool _scrollEnabled = true;
 
-  String? search;
-
   Future<void> _loadItems(int page) async {
     final response = await http.get(Uri.parse(
         "${Constants.baseUrlStage}/publikasi/kamus-hukum?page=$page"));
-
-    if (response.statusCode == 200) {
-      // output tipe datanya dalam bentuk map (yang dibawah), bukan
-      // dalam bentuk list
-      // List<dynamic> data = json.decode(response.body);
-      // List<Item> fetchedItems =
-      //     data.map((item) => Item.fromJson(item)).toList();
-
-      Map<String, dynamic> responseData = json.decode(response.body);
-      List<dynamic> data = responseData['items'];
-      List<Item> fetchedItems =
-          data.map((item) => Item.fromJson(item)).toList();
-
-      setState(() {
-        _items = fetchedItems;
-      });
-    } else {
-      throw Exception('Failed to load items');
-    }
-  }
-
-  updateSearch(String value) async {
-    search = value;
-
-    _loadItemsSearch();
-    _currentPage = 1;
-  }
-
-  Future<void> _loadItemsSearch() async {
-    final response = await http.get(Uri.parse(
-        "${Constants.baseUrlStage}/publikasi/kamus-hukum?page=$_currentPage&keyword=$search"));
 
     if (response.statusCode == 200) {
       // output tipe datanya dalam bentuk map (yang dibawah), bukan
@@ -97,28 +63,15 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
     //context.read<GetKamusHukumBloc>().add(DoGetKamusHukumEvent());
     // TODO: implement initState
     super.initState();
-    //_loadItems(_currentPage);
-    //_loadItems(_currentPage);
+    // _loadPage(_currentPage);
     _loadItems(_currentPage);
     _scrollController.addListener(_scrollListener);
-    _pageController.addListener(() {
-      // This is called whenever the page in the PageView changes
-      if (_pageController.page == _pageController.page?.roundToDouble()) {
-        // Check if scrolling stopped.
-        print("Current Page: ${_pageController.page}");
-        _currentPage = _pageController.page?.round() ?? 0;
-        setState(() {});
-        // Here you can update your state or perform any actions
-        // based on the current page index.
-      }
-    });
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    _pageController.dispose(); // Don't forget to dispose it!
     _scrollController.removeListener(_scrollListener);
     _scrollController.dispose();
   }
@@ -239,9 +192,7 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
                                   elevation: 3,
                                   child: TextFormField(
                                     controller: searchController,
-                                    onFieldSubmitted: (value) {
-                                      updateSearch(value);
-                                    },
+                                    onFieldSubmitted: (value) {},
                                     decoration: InputDecoration(
                                         suffixIcon: InkWell(
                                           onTap: () {},
@@ -287,76 +238,38 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
                             SizedBox(
                                 height: 530,
                                 width: MediaQuery.of(context).size.width,
-                                child: _items.isNotEmpty
-                                    ? PageView.builder(
-                                        //controller: _controller,
-                                        controller: _pageController,
-                                        scrollDirection: Axis.horizontal,
-                                        itemCount: _items.length,
-                                        //itemCount: _items.length,
-                                        // onPageChanged: (int page) {
-                                        //   if (page >= _items.length - 1) {
-                                        //     // Approaching end of loaded items, fetch more
-                                        //     _currentPage++;
-                                        //     _loadPage(_currentPage);
-                                        //   }
-                                        // },
-                                        itemBuilder: (context, index) {
-                                          //final Item kamus = state.data.items![index];
-                                          final item = _items[index];
-                                          print("jumlah datanya");
-                                          print(_items.length);
+                                child: PageView.builder(
+                                  controller: _controller,
+                                  //itemCount: _items.length,
+                                  itemCount: _items.length,
+                                  // onPageChanged: (int page) {
+                                  //   if (page >= _items.length - 1) {
+                                  //     // Approaching end of loaded items, fetch more
+                                  //     _currentPage++;
+                                  //     _loadPage(_currentPage);
+                                  //   }
+                                  // },
+                                  itemBuilder: (context, index) {
+                                    //final Item kamus = state.data.items![index];
+                                    final item = _items[index];
 
-                                          return Column(
-                                            children: [
-                                              BodyKamusWidget(
-                                                  istilah:
-                                                      item!.istilah.toString(),
-                                                  definisi:
-                                                      item.definisi.toString()),
-                                              _items.length > 1
-                                                  ? BodyKamusWidget(
-                                                      istilah: _items[1]!
-                                                          .istilah
-                                                          .toString(),
-                                                      definisi: _items[1]!
-                                                          .definisi
-                                                          .toString())
-                                                  : Container(),
-                                              _items.length > 2
-                                                  ? BodyKamusWidget(
-                                                      istilah: _items[2]!
-                                                          .istilah
-                                                          .toString(),
-                                                      definisi: _items[2]!
-                                                          .definisi
-                                                          .toString())
-                                                  : Container()
-
-                                              // _items[1] != null
-                                              //     ? BodyKamusWidget(
-                                              //         istilah: _items[1]!
-                                              //             .istilah
-                                              //             .toString(),
-                                              //         definisi: _items[1]!
-                                              //             .definisi
-                                              //             .toString())
-                                              //     : Container(),
-                                              // _items[1] != null &&
-                                              //         _items[2] != null
-                                              //     ? BodyKamusWidget(
-                                              //         istilah: _items[2]!
-                                              //             .istilah
-                                              //             .toString(),
-                                              //         definisi: _items[2]!
-                                              //             .definisi
-                                              //             .toString())
-                                              //     : Container(),
-                                            ],
-                                          );
-                                        },
-                                      )
-                                    : Container()),
+                                    return Column(
+                                      children: [
+                                        BodyKamusWidget(
+                                            istilah: item.istilah.toString(),
+                                            definisi: item.definisi.toString()),
+                                        BodyKamusWidget(
+                                            istilah:
+                                                _items[1].istilah.toString(),
+                                            definisi: item.definisi.toString()),
+                                        BodyKamusWidget(
+                                            istilah:
+                                                _items[2].istilah.toString(),
+                                            definisi: item.definisi.toString()),
+                                      ],
+                                    );
+                                  },
+                                )),
                           ],
                         ),
                       ),
@@ -454,16 +367,15 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
   void _loadPreviousPage() {
     if (_currentPage > 1) {
       _currentPage--;
-      _pageController.previousPage(
+      _controller.previousPage(
           duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
       _loadItems(_currentPage);
     }
   }
 
   void _loadNextPage() {
-    print(_currentPage);
     _currentPage++;
-    _pageController.nextPage(
+    _controller.nextPage(
         duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
     _loadItems(_currentPage);
   }

@@ -7,7 +7,7 @@ class GetPeraturanPopulerStateInitial extends GetPeraturanPopulerState {}
 class GetPeraturanPopulerStateLoading extends GetPeraturanPopulerState {}
 
 class GetPeraturanPopulerStateLoaded extends GetPeraturanPopulerState {
-  PeraturanPopulerResponseModel data;
+  PeraturanPopulersResponseModel data;
 
   GetPeraturanPopulerStateLoaded({required this.data});
 

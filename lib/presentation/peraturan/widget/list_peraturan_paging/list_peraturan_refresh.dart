@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:jdih_bumn/constants/constants.dart';
+import 'package:jdih_bumn/presentation/peraturan/widget/pdf_screen.dart';
 import 'package:jdih_bumn/presentation/peraturan_detail/peraturan_detail_screen.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:jdih_bumn/data/model/response/stage/peraturan_response_model.dart';
+import 'package:jdih_bumn/data/model/response/stage/peraturans_response_model.dart';
+import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 
 class ListPeraturanRefresh extends StatefulWidget {
   const ListPeraturanRefresh({super.key});
@@ -49,7 +52,7 @@ class ListPeraturanRefreshState extends State<ListPeraturanRefresh> {
         '${Constants.baseUrlStage}/produk-hukum/produk/peraturan?page=$currentPage&keyword=$search'));
 
     if (response.statusCode == 200) {
-      final result = peraturanResponseModelFromJson(response.body);
+      final result = peraturansResponseModelFromJson(response.body);
 
       if (isRefresh) {
         peraturan = result.items!;
@@ -198,7 +201,7 @@ class ListPeraturanRefreshState extends State<ListPeraturanRefresh> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        peraturanindex.perNoBaru ?? '-',
+                                        peraturanindex.jenis ?? '-',
                                         style: const TextStyle(
                                           fontSize: 14.0,
                                           fontWeight: FontWeight.w600,

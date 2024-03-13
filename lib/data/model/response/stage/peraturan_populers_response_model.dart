@@ -1,33 +1,33 @@
 // To parse this JSON data, do
 //
-//     final peraturanTerbarusResponseModel = peraturanTerbarusResponseModelFromJson(jsonString);
+//     final peraturanPopulersResponseModel = peraturanPopulersResponseModelFromJson(jsonString);
 
 import 'dart:convert';
 
-PeraturanTerbarusResponseModel peraturanTerbarusResponseModelFromJson(
+PeraturanPopulersResponseModel peraturanPopulersResponseModelFromJson(
         String str) =>
-    PeraturanTerbarusResponseModel.fromJson(json.decode(str));
+    PeraturanPopulersResponseModel.fromJson(json.decode(str));
 
-String peraturanTerbarusResponseModelToJson(
-        PeraturanTerbarusResponseModel data) =>
+String peraturanPopulersResponseModelToJson(
+        PeraturanPopulersResponseModel data) =>
     json.encode(data.toJson());
 
-class PeraturanTerbarusResponseModel {
+class PeraturanPopulersResponseModel {
   final List<Item>? items;
 
-  PeraturanTerbarusResponseModel({
+  PeraturanPopulersResponseModel({
     this.items,
   });
 
-  PeraturanTerbarusResponseModel copyWith({
+  PeraturanPopulersResponseModel copyWith({
     List<Item>? items,
   }) =>
-      PeraturanTerbarusResponseModel(
+      PeraturanPopulersResponseModel(
         items: items ?? this.items,
       );
 
-  factory PeraturanTerbarusResponseModel.fromJson(Map<String, dynamic> json) =>
-      PeraturanTerbarusResponseModel(
+  factory PeraturanPopulersResponseModel.fromJson(Map<String, dynamic> json) =>
+      PeraturanPopulersResponseModel(
         items: json["items"] == null
             ? []
             : List<Item>.from(json["items"]!.map((x) => Item.fromJson(x))),
@@ -65,7 +65,7 @@ class Item {
   final dynamic fileAbstrak;
   final dynamic urlFileLampiran;
   final dynamic urlFileAbstrak;
-  final dynamic seeData;
+  final String? seeData;
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final List<DetailStatusPeraturan>? detailStatusPeraturan;
@@ -126,7 +126,7 @@ class Item {
     dynamic fileAbstrak,
     dynamic urlFileLampiran,
     dynamic urlFileAbstrak,
-    dynamic seeData,
+    String? seeData,
     DateTime? createdAt,
     DateTime? updatedAt,
     List<DetailStatusPeraturan>? detailStatusPeraturan,

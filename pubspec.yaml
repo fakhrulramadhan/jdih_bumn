@@ -79,6 +79,8 @@ dependencies:
   build_runner: ^2.4.8
   easy_image_viewer: ^1.4.1
   flutter_close_app: ^1.0.0
+  flutter_cached_pdfview: ^0.4.2
+  syncfusion_flutter_pdfviewer: ^24.2.9
 
   
 dev_dependencies:
@@ -95,7 +97,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/logo_jdih_fix_final.png"
+  image_path: "assets/images/final_logo.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
   
 

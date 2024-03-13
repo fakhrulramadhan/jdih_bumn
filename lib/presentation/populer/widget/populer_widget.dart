@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:jdih_bumn/bloc/stage/get_peraturan_populer.dart/get_peraturan_populer_bloc.dart';
 import 'package:jdih_bumn/presentation/populer_detail/populer_detail_screen.dart';
 
-import '../../../data/model/response/stage/peraturan_populer_response_model.dart';
+import '../../../data/model/response/stage/peraturan_populers_response_model.dart';
 //import '../../../data/model/response/stage/peraturan_populer_new_response_model.dart';
 
 class PopulerWidget extends StatefulWidget {
@@ -68,7 +68,7 @@ class _PopulerWidgetState extends State<PopulerWidget> {
 
               print("ini jumlah datanya ${state.data.items!.length}");
               var parsedDate =
-                  DateTime.parse('${peraturanPopuler.tanggalPengundangan}');
+                  DateTime.parse('${peraturanPopuler.tglPenetapan}');
 
               String tglPerngundangan =
                   DateFormat("dd-MM-yyyy").format(parsedDate);

@@ -7,7 +7,7 @@ class GetPeraturanInitial extends GetPeraturanState {}
 class GetPeraturanLoading extends GetPeraturanState {}
 
 class GetPeraturanLoaded extends GetPeraturanState {
-  PeraturanResponseModel data;
+  PeraturansResponseModel data;
 
   GetPeraturanLoaded({required this.data});
 

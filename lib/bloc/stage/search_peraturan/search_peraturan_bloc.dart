@@ -12,11 +12,11 @@ class SearchPeraturanBloc
   final PeraturanDatasource datasource;
 
   SearchPeraturanBloc(this.datasource) : super(SearchPeraturanInital()) {
-    on<DoSearchPeraturanEvent>((event, emit) async {
-      emit(SearchPeraturanLoading());
-      final result = await datasource.getSearchPeraturan(event.keyword);
-      result.fold((l) => emit(SearchPeraturanLoading()),
-          (r) => emit(SearchPeraturanLoaded(data: r)));
-    });
+    // on<DoSearchPeraturanEvent>((event, emit) async {
+    //   emit(SearchPeraturanLoading());
+    //   final result = await datasource.getSearchPeraturan(event.keyword);
+    //   result.fold((l) => emit(SearchPeraturanLoading()),
+    //       (r) => emit(SearchPeraturanLoaded(data: r)));
+    // });
   }
 }

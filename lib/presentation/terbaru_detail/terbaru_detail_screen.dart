@@ -287,7 +287,7 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
                             height: 17.0,
                           ),
                           Text(
-                            widget.peraturanTerbaru.perNoBaru ?? '-',
+                            widget.peraturanTerbaru.nomorPeraturanBaru ?? '-',
                             style: const TextStyle(
                               fontSize: 14.0,
                               color: Colors.white,
@@ -359,9 +359,9 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
                                   subtitle: "Status"),
                               IconInfoWidget(
                                   imageUrl: "assets/images/kalender.svg",
-                                  title: widget
-                                          .peraturanTerbaru.tahunPengundangan ??
-                                      '',
+                                  title:
+                                      widget.peraturanTerbaru.tahunPenetapan ??
+                                          '',
                                   subtitle: "Tahun Terbit"),
                               IconInfoWidget(
                                   imageUrl: "assets/images/view.svg",

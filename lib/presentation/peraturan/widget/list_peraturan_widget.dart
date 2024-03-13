@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 //import 'package:jdih_bumn/bloc/get_peraturan_hukum/get_peraturan_hukum_bloc.dart';
 import 'package:jdih_bumn/bloc/stage/get_peraturan/get_peraturan_bloc.dart';
-import 'package:jdih_bumn/data/model/response/stage/peraturan_response_model.dart';
+import 'package:jdih_bumn/data/model/response/stage/peraturans_response_model.dart';
 import 'package:jdih_bumn/presentation/peraturan_detail/peraturan_detail_screen.dart';
 
 class ListPeraturanWidget extends StatefulWidget {
@@ -144,7 +144,7 @@ class _ListPeraturanWidgetState extends State<ListPeraturanWidget> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          peraturan.perNoBaru ?? '-',
+                                          peraturan.nomorPeraturanBaru ?? '-',
                                           style: const TextStyle(
                                             fontSize: 14.0,
                                             fontWeight: FontWeight.w600,

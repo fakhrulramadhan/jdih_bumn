@@ -147,8 +147,8 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
         });
       }
 
-      //hanya bisa di scroll sampai height 400
-      _scrollController.jumpTo(200);
+      //hanya bisa di scroll sampai height 400, atur di jumpto nya
+      _scrollController.jumpTo(300); //100 sudah cukup
     }
   }
 
@@ -301,7 +301,7 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
                             // pakai pageview nuilder
                             const TitleKamusWidget(),
                             SizedBox(
-                                height: 530,
+                                height: 1130, //530
                                 width: MediaQuery.of(context).size.width,
                                 child: _items.isNotEmpty
                                     ? PageView.builder(
@@ -340,10 +340,11 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
                                           return Column(
                                             children: [
                                               BodyKamusWidget(
-                                                  istilah:
-                                                      item!.istilah.toString(),
-                                                  definisi:
-                                                      item.definisi.toString()),
+                                                istilah:
+                                                    item!.istilah.toString(),
+                                                definisi:
+                                                    item.definisi.toString(),
+                                              ),
                                               _items.length > 1
                                                   ? BodyKamusWidget(
                                                       istilah: _items[1]!

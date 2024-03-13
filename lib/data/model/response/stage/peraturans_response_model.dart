@@ -1,33 +1,31 @@
 // To parse this JSON data, do
 //
-//     final peraturanTerbarusResponseModel = peraturanTerbarusResponseModelFromJson(jsonString);
+//     final peraturansResponseModel = peraturansResponseModelFromJson(jsonString);
 
 import 'dart:convert';
 
-PeraturanTerbarusResponseModel peraturanTerbarusResponseModelFromJson(
-        String str) =>
-    PeraturanTerbarusResponseModel.fromJson(json.decode(str));
+PeraturansResponseModel peraturansResponseModelFromJson(String str) =>
+    PeraturansResponseModel.fromJson(json.decode(str));
 
-String peraturanTerbarusResponseModelToJson(
-        PeraturanTerbarusResponseModel data) =>
+String peraturansResponseModelToJson(PeraturansResponseModel data) =>
     json.encode(data.toJson());
 
-class PeraturanTerbarusResponseModel {
+class PeraturansResponseModel {
   final List<Item>? items;
 
-  PeraturanTerbarusResponseModel({
+  PeraturansResponseModel({
     this.items,
   });
 
-  PeraturanTerbarusResponseModel copyWith({
+  PeraturansResponseModel copyWith({
     List<Item>? items,
   }) =>
-      PeraturanTerbarusResponseModel(
+      PeraturansResponseModel(
         items: items ?? this.items,
       );
 
-  factory PeraturanTerbarusResponseModel.fromJson(Map<String, dynamic> json) =>
-      PeraturanTerbarusResponseModel(
+  factory PeraturansResponseModel.fromJson(Map<String, dynamic> json) =>
+      PeraturansResponseModel(
         items: json["items"] == null
             ? []
             : List<Item>.from(json["items"]!.map((x) => Item.fromJson(x))),
@@ -49,22 +47,22 @@ class Item {
   final String? jenis;
   final String? deskripsiTentang;
   final String? singkatanJenis;
-  final String? tempatTerbit;
-  final String? sumber;
+  final TempatTerbit? tempatTerbit;
+  final Sumber? sumber;
   final String? subjek;
-  final String? status;
-  final String? bahasa;
+  final Status? status;
+  final Bahasa? bahasa;
   final String? bidangHukum;
-  final String? teuBadan;
+  final TeuBadan? teuBadan;
   final String? fileDownload;
   final String? urlDownload;
   final String? urlDetailPeraturan;
   final String? slug;
   final int? countReader;
   final dynamic fileLampiran;
-  final dynamic fileAbstrak;
+  final String? fileAbstrak;
   final dynamic urlFileLampiran;
-  final dynamic urlFileAbstrak;
+  final String? urlFileAbstrak;
   final dynamic seeData;
   final DateTime? createdAt;
   final DateTime? updatedAt;
@@ -110,22 +108,22 @@ class Item {
     String? jenis,
     String? deskripsiTentang,
     String? singkatanJenis,
-    String? tempatTerbit,
-    String? sumber,
+    TempatTerbit? tempatTerbit,
+    Sumber? sumber,
     String? subjek,
-    String? status,
-    String? bahasa,
+    Status? status,
+    Bahasa? bahasa,
     String? bidangHukum,
-    String? teuBadan,
+    TeuBadan? teuBadan,
     String? fileDownload,
     String? urlDownload,
     String? urlDetailPeraturan,
     String? slug,
     int? countReader,
     dynamic fileLampiran,
-    dynamic fileAbstrak,
+    String? fileAbstrak,
     dynamic urlFileLampiran,
-    dynamic urlFileAbstrak,
+    String? urlFileAbstrak,
     dynamic seeData,
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -174,13 +172,13 @@ class Item {
         jenis: json["jenis"],
         deskripsiTentang: json["deskripsi_tentang"],
         singkatanJenis: json["singkatanJenis"],
-        tempatTerbit: json["tempatTerbit"],
-        sumber: json["sumber"],
+        tempatTerbit: tempatTerbitValues.map[json["tempatTerbit"]]!,
+        sumber: sumberValues.map[json["sumber"]]!,
         subjek: json["subjek"],
-        status: json["status"],
-        bahasa: json["bahasa"],
+        status: statusValues.map[json["status"]]!,
+        bahasa: bahasaValues.map[json["bahasa"]]!,
         bidangHukum: json["bidangHukum"],
-        teuBadan: json["teuBadan"],
+        teuBadan: teuBadanValues.map[json["teuBadan"]]!,
         fileDownload: json["fileDownload"],
         urlDownload: json["urlDownload"],
         urlDetailPeraturan: json["urlDetailPeraturan"],
@@ -213,13 +211,13 @@ class Item {
         "jenis": jenis,
         "deskripsi_tentang": deskripsiTentang,
         "singkatanJenis": singkatanJenis,
-        "tempatTerbit": tempatTerbit,
-        "sumber": sumber,
+        "tempatTerbit": tempatTerbitValues.reverse[tempatTerbit],
+        "sumber": sumberValues.reverse[sumber],
         "subjek": subjek,
-        "status": status,
-        "bahasa": bahasa,
+        "status": statusValues.reverse[status],
+        "bahasa": bahasaValues.reverse[bahasa],
         "bidangHukum": bidangHukum,
-        "teuBadan": teuBadan,
+        "teuBadan": teuBadanValues.reverse[teuBadan],
         "fileDownload": fileDownload,
         "urlDownload": urlDownload,
         "urlDetailPeraturan": urlDetailPeraturan,
@@ -238,8 +236,12 @@ class Item {
       };
 }
 
+enum Bahasa { INDONESIA }
+
+final bahasaValues = EnumValues({"Indonesia": Bahasa.INDONESIA});
+
 class DetailStatusPeraturan {
-  final String? detailNamaStatus;
+  final DetailNamaStatus? detailNamaStatus;
   final String? perNoObjek;
 
   DetailStatusPeraturan({
@@ -248,7 +250,7 @@ class DetailStatusPeraturan {
   });
 
   DetailStatusPeraturan copyWith({
-    String? detailNamaStatus,
+    DetailNamaStatus? detailNamaStatus,
     String? perNoObjek,
   }) =>
       DetailStatusPeraturan(
@@ -258,12 +260,53 @@ class DetailStatusPeraturan {
 
   factory DetailStatusPeraturan.fromJson(Map<String, dynamic> json) =>
       DetailStatusPeraturan(
-        detailNamaStatus: json["detail_nama_status"],
+        detailNamaStatus:
+            detailNamaStatusValues.map[json["detail_nama_status"]]!,
         perNoObjek: json["per_no_objek"],
       );
 
   Map<String, dynamic> toJson() => {
-        "detail_nama_status": detailNamaStatus,
+        "detail_nama_status": detailNamaStatusValues.reverse[detailNamaStatus],
         "per_no_objek": perNoObjek,
       };
+}
+
+enum DetailNamaStatus { BARU, MENCABUT, MENGUBAH }
+
+final detailNamaStatusValues = EnumValues({
+  "Baru": DetailNamaStatus.BARU,
+  "Mencabut": DetailNamaStatus.MENCABUT,
+  "Mengubah": DetailNamaStatus.MENGUBAH
+});
+
+enum Status { BERLAKU }
+
+final statusValues = EnumValues({"Berlaku": Status.BERLAKU});
+
+enum Sumber { EMPTY }
+
+final sumberValues = EnumValues({"-": Sumber.EMPTY});
+
+enum TempatTerbit { JAKARTA }
+
+final tempatTerbitValues = EnumValues({"Jakarta": TempatTerbit.JAKARTA});
+
+enum TeuBadan { KEMENTERIAN_BADAN_USAHA_MILIK_NEGARA, KEMENTERIAN_BUMN }
+
+final teuBadanValues = EnumValues({
+  "Kementerian Badan Usaha Milik Negara":
+      TeuBadan.KEMENTERIAN_BADAN_USAHA_MILIK_NEGARA,
+  "Kementerian BUMN": TeuBadan.KEMENTERIAN_BUMN
+});
+
+class EnumValues<T> {
+  Map<String, T> map;
+  late Map<T, String> reverseMap;
+
+  EnumValues(this.map);
+
+  Map<T, String> get reverse {
+    reverseMap = map.map((k, v) => MapEntry(v, k));
+    return reverseMap;
+  }
 }

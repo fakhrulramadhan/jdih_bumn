@@ -5,7 +5,7 @@ import 'package:flutter_close_app/flutter_close_app.dart';
 import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 import 'package:intl/intl.dart';
 // import 'package:jdih_bumn/data/model/response/peraturan_hukum_response_model.dart';
-import 'package:jdih_bumn/data/model/response/stage/peraturan_populer_response_model.dart';
+import 'package:jdih_bumn/data/model/response/stage/peraturan_populers_response_model.dart';
 
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/bagikan_button_widget.dart';
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/download_button_widget.dart';
@@ -297,7 +297,7 @@ class _PopulerDetailScreenState extends State<PopulerDetailScreen> {
                             height: 17.0,
                           ),
                           Text(
-                            widget.peraturanPopuler.perNoBaru ?? '-',
+                            widget.peraturanPopuler.nomorPeraturanBaru ?? '-',
                             style: const TextStyle(
                               fontSize: 14.0,
                               color: Colors.white,
@@ -362,9 +362,9 @@ class _PopulerDetailScreenState extends State<PopulerDetailScreen> {
                                   subtitle: "Status"),
                               IconInfoWidget(
                                   imageUrl: "assets/images/kalender.svg",
-                                  title: widget
-                                          .peraturanPopuler.tahunPengundangan ??
-                                      '-',
+                                  title:
+                                      widget.peraturanPopuler.tahunPenetapan ??
+                                          '-',
                                   subtitle: "Tahun Terbit"),
                               IconInfoWidget(
                                   imageUrl: "assets/images/view.svg",
@@ -583,33 +583,48 @@ class _PopulerDetailScreenState extends State<PopulerDetailScreen> {
                   subtitle: "${widget.peraturanPopuler.status ?? '-'}"),
               InfoDetailStatusPeraturanWidget(
                   title: "Detail Status Peraturan",
-                  heightTitle: widget.peraturanPopuler.detailStatusPeraturan![0]
-                              .perNoObjek !=
-                          null
-                      ? widget.peraturanPopuler.detailStatusPeraturan!.length ==
-                              1
-                          ? 80
-                          : widget.peraturanPopuler.detailStatusPeraturan!
-                                          .length >
-                                      1 &&
-                                  widget.peraturanPopuler.detailStatusPeraturan!
-                                          .length <=
-                                      3
-                              ? 120
-                              : widget.peraturanPopuler.detailStatusPeraturan!
-                                              .length <=
-                                          5 &&
-                                      widget.peraturanPopuler
-                                              .detailStatusPeraturan!.length >
-                                          3
-                                  ? 140
-                                  : 190 //240
-                      : 80, //ini kalau detailnya enggak ada
+                  heightTitle:
+                      widget.peraturanPopuler.detailStatusPeraturan!.isNotEmpty
+                          ? widget.peraturanPopuler.detailStatusPeraturan![0]
+                                      .perNoObjek !=
+                                  null
+                              ? widget.peraturanPopuler.detailStatusPeraturan!
+                                          .length ==
+                                      1
+                                  ? 80
+                                  : widget
+                                                  .peraturanPopuler
+                                                  .detailStatusPeraturan!
+                                                  .length >
+                                              1 &&
+                                          widget
+                                                  .peraturanPopuler
+                                                  .detailStatusPeraturan!
+                                                  .length <=
+                                              3
+                                      ? 120
+                                      : widget
+                                                      .peraturanPopuler
+                                                      .detailStatusPeraturan!
+                                                      .length <=
+                                                  5 &&
+                                              widget
+                                                      .peraturanPopuler
+                                                      .detailStatusPeraturan!
+                                                      .length >
+                                                  3
+                                          ? 140
+                                          : 190 //240
+                              : 80
+                          : 80, //ini kalau detailnya enggak ada
                   subWidget: Column(
-                    children: widget.peraturanPopuler.detailStatusPeraturan![0]
-                                .detailNamaStatus !=
-                            null
-                        ? buildListItems()
+                    children: widget
+                            .peraturanPopuler.detailStatusPeraturan!.isNotEmpty
+                        ? widget.peraturanPopuler.detailStatusPeraturan![0]
+                                    .detailNamaStatus !=
+                                null
+                            ? buildListItems()
+                            : [Text("-")]
                         : [Text("-")],
                     // children: [
                     //   _buildListItems(),

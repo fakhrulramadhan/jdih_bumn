@@ -5,7 +5,7 @@ import 'package:flutter_close_app/flutter_close_app.dart';
 import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 import 'package:intl/intl.dart';
 // import 'package:jdih_bumn/data/model/response/peraturan_hukum_response_model.dart';
-import 'package:jdih_bumn/data/model/response/stage/peraturan_response_model.dart';
+import 'package:jdih_bumn/data/model/response/stage/peraturans_response_model.dart';
 
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/bagikan_button_widget.dart';
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/download_button_widget.dart';
@@ -280,7 +280,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                             height: 17.0,
                           ),
                           Text(
-                            widget.peraturan.perNoBaru ?? '-',
+                            widget.peraturan.nomorPeraturanBaru ?? '-',
                             style: const TextStyle(
                               fontSize: 14.0,
                               color: Colors.white,
@@ -351,8 +351,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                                   subtitle: "Status"),
                               IconInfoWidget(
                                   imageUrl: "assets/images/kalender.svg",
-                                  title:
-                                      widget.peraturan.tahunPengundangan ?? '',
+                                  title: widget.peraturan.tahunPenetapan ?? '',
                                   subtitle: "Tahun Terbit"),
                               IconInfoWidget(
                                   imageUrl: "assets/images/view.svg",
@@ -565,7 +564,7 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                     ),
               InfoDetailWidget(
                 title: "Subjek",
-                subtitle: "${widget.peraturan.subjek[0] ?? '-'}",
+                subtitle: "${widget.peraturan.subjek?[0] ?? '-'}",
                 heightTitle: widget.peraturan.subjek != '-' ? 90 : 80,
               ),
               InfoDetailWidget(
@@ -573,8 +572,9 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                   subtitle: "${widget.peraturan.status ?? '-'}"),
               InfoDetailStatusPeraturanWidget(
                   title: "Detail Status Peraturan",
-                  heightTitle:
-                      widget.peraturan.detailStatusPeraturan![0].perNoObjek !=
+                  heightTitle: widget
+                          .peraturan.detailStatusPeraturan!.isNotEmpty
+                      ? widget.peraturan.detailStatusPeraturan![0].perNoObjek !=
                               null
                           ? widget.peraturan.detailStatusPeraturan!.length == 1
                               ? 80
@@ -593,13 +593,16 @@ class _PeraturanDetailScreenState extends State<PeraturanDetailScreen> {
                                                   .length >
                                               3
                                       ? 140
-                                      : 240 //240
-                          : 80, //ini kalau detailnya enggak ada
+                                      : 300 //240
+                          : 80
+                      : 80, //ini kalau detailnya enggak ada
                   subWidget: Column(
-                    children: widget.peraturan.detailStatusPeraturan![0]
-                                .detailNamaStatus !=
-                            null
-                        ? buildListItems()
+                    children: widget.peraturan.detailStatusPeraturan!.isNotEmpty
+                        ? widget.peraturan.detailStatusPeraturan![0]
+                                    .detailNamaStatus !=
+                                null
+                            ? buildListItems()
+                            : [const Text("-")]
                         : [const Text("-")],
                     // children: [
                     //   _buildListItems(),

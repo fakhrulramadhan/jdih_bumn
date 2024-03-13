@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jdih_bumn/data/datasources/stage/peraturan_datasource.dart';
-import 'package:jdih_bumn/data/model/response/stage/peraturan_response_model.dart';
+import 'package:jdih_bumn/data/model/response/stage/peraturans_response_model.dart';
 
 part 'get_peraturan_event.dart';
 part 'get_peraturan_state.dart';
@@ -28,8 +28,6 @@ class GetPeraturanBloc extends Bloc<GetPeraturanEvent, GetPeraturanState> {
         final newdatapage = await datasource.getDataPaging(page: 1);
 
         _data.addAll(newdatapage);
-
-        
       }
     });
   }

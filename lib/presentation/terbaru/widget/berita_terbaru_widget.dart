@@ -69,7 +69,7 @@ class _BeritaTerbaruWidgetState extends State<BeritaTerbaruWidget> {
               print("ini jumlah datanya ${state.data.items!.length}");
 
               var parsedDate =
-                  DateTime.parse('${peraturanTerbaru.tanggalPengundangan}');
+                  DateTime.parse('${peraturanTerbaru.tglPenetapan}');
 
               String convertedDate =
                   DateFormat("dd-MM-yyyy").format(parsedDate);

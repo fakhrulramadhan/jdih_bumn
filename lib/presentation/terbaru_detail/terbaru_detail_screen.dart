@@ -5,7 +5,7 @@ import 'package:flutter_close_app/flutter_close_app.dart';
 import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 import 'package:intl/intl.dart';
 // import 'package:jdih_bumn/data/model/response/peraturan_hukum_response_model.dart';
-import 'package:jdih_bumn/data/model/response/stage/peraturan_terbaru_response_model.dart';
+import 'package:jdih_bumn/data/model/response/stage/peraturan_terbarus_response_model.dart';
 
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/bagikan_button_widget.dart';
 import 'package:jdih_bumn/presentation/peraturan_detail/widget/download_button_widget.dart';
@@ -573,33 +573,48 @@ class _TerbaruDetailScreenState extends State<TerbaruDetailScreen> {
                   subtitle: "${widget.peraturanTerbaru.status ?? '-'}"),
               InfoDetailStatusPeraturanWidget(
                   title: "Detail Status Peraturan",
-                  heightTitle: widget.peraturanTerbaru.detailStatusPeraturan![0]
-                              .perNoObjek !=
-                          null
-                      ? widget.peraturanTerbaru.detailStatusPeraturan!.length ==
-                              1
-                          ? 80
-                          : widget.peraturanTerbaru.detailStatusPeraturan!
-                                          .length >
-                                      1 &&
-                                  widget.peraturanTerbaru.detailStatusPeraturan!
-                                          .length <=
-                                      3
-                              ? 120
-                              : widget.peraturanTerbaru.detailStatusPeraturan!
-                                              .length <=
-                                          5 &&
-                                      widget.peraturanTerbaru
-                                              .detailStatusPeraturan!.length >
-                                          3
-                                  ? 140
-                                  : 190 //240
-                      : 80, //ini kalau detailnya enggak ada
+                  heightTitle:
+                      widget.peraturanTerbaru.detailStatusPeraturan!.isNotEmpty
+                          ? widget.peraturanTerbaru.detailStatusPeraturan![0]
+                                      .perNoObjek !=
+                                  null
+                              ? widget.peraturanTerbaru.detailStatusPeraturan!
+                                          .length ==
+                                      1
+                                  ? 80
+                                  : widget
+                                                  .peraturanTerbaru
+                                                  .detailStatusPeraturan!
+                                                  .length >
+                                              1 &&
+                                          widget
+                                                  .peraturanTerbaru
+                                                  .detailStatusPeraturan!
+                                                  .length <=
+                                              3
+                                      ? 120
+                                      : widget
+                                                      .peraturanTerbaru
+                                                      .detailStatusPeraturan!
+                                                      .length <=
+                                                  5 &&
+                                              widget
+                                                      .peraturanTerbaru
+                                                      .detailStatusPeraturan!
+                                                      .length >
+                                                  3
+                                          ? 140
+                                          : 190 //240
+                              : 80
+                          : 80, //ini kalau detailnya enggak ada
                   subWidget: Column(
-                    children: widget.peraturanTerbaru.detailStatusPeraturan![0]
-                                .detailNamaStatus !=
-                            null
-                        ? buildListItems()
+                    children: widget
+                            .peraturanTerbaru.detailStatusPeraturan!.isNotEmpty
+                        ? widget.peraturanTerbaru.detailStatusPeraturan![0]
+                                    .detailNamaStatus !=
+                                null
+                            ? buildListItems()
+                            : [Text("-")]
                         : [Text("-")],
                     // children: [
                     //   _buildListItems(),

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,6 +32,7 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
   List<Item?> _items = [];
   //final PageController _controller = PageController();
   final PageController _pageController = PageController();
+  final int _maxLeftScrollIndex = 1;
 
   final ScrollController _scrollController = ScrollController();
   bool _scrollEnabled = true;
@@ -65,6 +67,7 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
     search = value;
 
     _loadItemsSearch();
+    _currentPage = 1;
   }
 
   Future<void> _loadItemsSearch() async {
@@ -98,10 +101,14 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
     super.initState();
     //_loadItems(_currentPage);
     //_loadItems(_currentPage);
+    //_pageController.initialPage;
+
+    _currentPage = 1;
     _loadItems(_currentPage);
     _scrollController.addListener(_scrollListener);
     _pageController.addListener(() {
       // This is called whenever the page in the PageView changes
+
       if (_pageController.page == _pageController.page?.roundToDouble()) {
         // Check if scrolling stopped.
         print("Current Page: ${_pageController.page}");
@@ -110,6 +117,16 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
         // Here you can update your state or perform any actions
         // based on the current page index.
       }
+
+      // // Determine the direction of scroll
+      // if (_pageController.page! < _currentPage &&
+      //     _currentPage > _maxLeftPageIndex) {
+      //   // If scrolling to the left beyond the allowed pages, jump to the max left page index
+      //   _pageController.jumpToPage(1);
+      // } else {
+      //   // Update the current page index if within allowed range
+      //   _currentPage = _pageController.page!.round();
+      // }
     });
   }
 
@@ -300,32 +317,72 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
                                         //     _loadPage(_currentPage);
                                         //   }
                                         // },
+                                        onPageChanged: (int index) {
+                                          if (index < _maxLeftScrollIndex) {
+                                            // Jika indeks halaman lebih kecil dari batas yang diizinkan,
+                                            // paksa PageView untuk kembali ke batas maksimal
+                                            Future.delayed(Duration.zero, () {
+                                              _pageController.jumpToPage(1);
+                                            });
+                                          } else {
+                                            // Update indeks halaman saat ini jika dalam batas yang diizinkan
+                                            setState(() {
+                                              _currentPage = index;
+                                            });
+                                          }
+                                        },
                                         itemBuilder: (context, index) {
                                           //final Item kamus = state.data.items![index];
-                                          //final item = _items[index];
+                                          final item = _items[index];
+                                          print("jumlah datanya");
+                                          print(_items.length);
 
-                                          // return Column(
-                                          //   children: [
-                                          //     BodyKamusWidget(
-                                          //         istilah: item!.istilah.toString(),
-                                          //         definisi: item.definisi.toString()),
-
-                                          //   ],
-                                          // );
-
-                                          return ListView.builder(
-                                            itemCount: _items.length,
-                                            scrollDirection: Axis.vertical,
-                                            physics:
-                                                const AlwaysScrollableScrollPhysics(),
-                                            itemBuilder: (context, index) {
-                                              final item = _items[index];
-                                              return BodyKamusWidget(
+                                          return Column(
+                                            children: [
+                                              BodyKamusWidget(
                                                   istilah:
                                                       item!.istilah.toString(),
                                                   definisi:
-                                                      item.definisi.toString());
-                                            },
+                                                      item.definisi.toString()),
+                                              _items.length > 1
+                                                  ? BodyKamusWidget(
+                                                      istilah: _items[1]!
+                                                          .istilah
+                                                          .toString(),
+                                                      definisi: _items[1]!
+                                                          .definisi
+                                                          .toString())
+                                                  : Container(),
+                                              _items.length > 2
+                                                  ? BodyKamusWidget(
+                                                      istilah: _items[2]!
+                                                          .istilah
+                                                          .toString(),
+                                                      definisi: _items[2]!
+                                                          .definisi
+                                                          .toString())
+                                                  : Container()
+
+                                              // _items[1] != null
+                                              //     ? BodyKamusWidget(
+                                              //         istilah: _items[1]!
+                                              //             .istilah
+                                              //             .toString(),
+                                              //         definisi: _items[1]!
+                                              //             .definisi
+                                              //             .toString())
+                                              //     : Container(),
+                                              // _items[1] != null &&
+                                              //         _items[2] != null
+                                              //     ? BodyKamusWidget(
+                                              //         istilah: _items[2]!
+                                              //             .istilah
+                                              //             .toString(),
+                                              //         definisi: _items[2]!
+                                              //             .definisi
+                                              //             .toString())
+                                              //     : Container(),
+                                            ],
                                           );
                                         },
                                       )
@@ -370,51 +427,60 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
               const SizedBox(
                 height: 10.0,
               ),
-              Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "Page",
-                      style: TextStyle(
-                        fontSize: 8.0,
-                      ),
+              //pakai future builder, agar bisa di tangkap (await) dulu
+              // nilai _pagecontrollernya
+              FutureBuilder(
+                future: Future.value(),
+                builder: (BuildContext context, snapshot) {
+                  return Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "Page",
+                          style: TextStyle(
+                            fontSize: 8.0,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 2.0,
+                        ),
+
+                        //_currentPage+1
+                        Container(
+                          height: 20,
+                          width: 20,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black)),
+                          child: Center(
+                              child: Text(
+                            "${_pageController.page!.round() != 0 ? _currentPage : '-'}",
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(fontSize: 11),
+                          )),
+                        ),
+                        const SizedBox(
+                          width: 2.0,
+                        ),
+                        const Text(
+                          "Of",
+                          style: TextStyle(
+                            fontSize: 8.0,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 2.0,
+                        ),
+                        const Text(
+                          "99",
+                          style: TextStyle(
+                            fontSize: 8.0,
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(
-                      width: 2.0,
-                    ),
-                    Container(
-                      height: 20,
-                      width: 20,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black)),
-                      child: Center(
-                          child: Text(
-                        "$_currentPage",
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(fontSize: 11),
-                      )),
-                    ),
-                    const SizedBox(
-                      width: 2.0,
-                    ),
-                    const Text(
-                      "Of",
-                      style: TextStyle(
-                        fontSize: 8.0,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 2.0,
-                    ),
-                    const Text(
-                      "99",
-                      style: TextStyle(
-                        fontSize: 8.0,
-                      ),
-                    ),
-                  ],
-                ),
+                  );
+                },
               ),
             ],
           ),
@@ -434,6 +500,7 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
   }
 
   void _loadNextPage() {
+    print(_currentPage);
     _currentPage++;
     _pageController.nextPage(
         duration: Duration(milliseconds: 300), curve: Curves.easeInOut);

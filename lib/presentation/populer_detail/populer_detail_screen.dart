@@ -224,20 +224,19 @@ class _PopulerDetailScreenState extends State<PopulerDetailScreen> {
             // (di detail), hapus height di list peraturanPopuler
             children: [
               Container(
-                height: widget.peraturanPopuler.bahasa
-                            .toString()
-                            .split('.')
-                            .last
-                            .length <=
-                        9
-                    ? 380
-                    : 390, //350
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(12)),
+                height: widget.peraturanPopuler.deskripsiTentang!.length <= 65
+                    ? 360
+                    : 380, //350
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                ),
                 child: Stack(
                   children: [
                     Container(
-                      height: 350,
+                      height:
+                          widget.peraturanPopuler.deskripsiTentang!.length <= 65
+                              ? 320
+                              : 370,
                       width: MediaQuery.of(context).size.width,
                       margin:
                           const EdgeInsets.only(left: 10, right: 10, top: 20),
@@ -252,13 +251,20 @@ class _PopulerDetailScreenState extends State<PopulerDetailScreen> {
                         child: Image.asset(
                           "assets/images/appbar-bg2.png",
                           width: MediaQuery.of(context).size.width,
-                          height: 350,
+                          height: widget.peraturanPopuler.deskripsiTentang!
+                                      .length <=
+                                  65
+                              ? 320
+                              : 350,
                           fit: BoxFit.cover,
                         ),
                       ),
                     ),
                     Container(
-                      height: 350,
+                      height:
+                          widget.peraturanPopuler.deskripsiTentang!.length <= 65
+                              ? 330
+                              : 370,
                       width: MediaQuery.of(context).size.width,
                       margin:
                           const EdgeInsets.only(left: 20, right: 20, top: 20),
@@ -302,8 +308,8 @@ class _PopulerDetailScreenState extends State<PopulerDetailScreen> {
                             height: widget.peraturanPopuler.deskripsiTentang!
                                         .length <=
                                     70
-                                ? 20
-                                : 12.0,
+                                ? 25
+                                : 23.0,
                           ),
                           Container(
                             height: 80,
@@ -323,14 +329,10 @@ class _PopulerDetailScreenState extends State<PopulerDetailScreen> {
                       ),
                     ),
                     Container(
-                      height: widget.peraturanPopuler.bahasa
-                                  .toString()
-                                  .split('.')
-                                  .last
-                                  .length <=
-                              9
-                          ? 380
-                          : 390, //350 (ikutin tinggi parent containernya)
+                      height:
+                          widget.peraturanPopuler.deskripsiTentang!.length <= 65
+                              ? 360
+                              : 380, //350 (ikutin tinggi parent containernya)
                       width: MediaQuery.of(context).size.width,
                       //color: Colors.green,
                       //padding: const EdgeInsets.only(top: 20),
@@ -340,14 +342,11 @@ class _PopulerDetailScreenState extends State<PopulerDetailScreen> {
                           //   height: 100.0,
                           // ),
                           SizedBox(
-                              height: widget.peraturanPopuler.bahasa
-                                          .toString()
-                                          .split('.')
-                                          .last
+                              height: widget.peraturanPopuler.deskripsiTentang!
                                           .length <=
-                                      9
-                                  ? 270
-                                  : 263
+                                      65
+                                  ? 250
+                                  : 270
                               // widget.peraturanPopuler.bahasa!.toString().length > 9
                               //     ? 263
                               //     : 100, //263

@@ -7,7 +7,8 @@ class GetPeraturanTerbaruInitial extends GetPeraturanTerbaruState {}
 class GetPeraturanTerbaruLoading extends GetPeraturanTerbaruState {}
 
 class GetPeraturanTerbaruLoaded extends GetPeraturanTerbaruState {
-  PeraturanTerbaruResponseModel data;
+  //PeraturanTerbaruResponseModel data;
+  PeraturanTerbarusResponseModel data;
 
   GetPeraturanTerbaruLoaded({required this.data});
 

@@ -14,7 +14,7 @@ class SplashScrenLottie extends StatefulWidget {
 class _SplashScrenLottieState extends State<SplashScrenLottie> {
   @override
   void initState() {
-    Timer(const Duration(milliseconds: 4800), () {
+    Timer(const Duration(milliseconds: 2800), () {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const HomeScreen()),

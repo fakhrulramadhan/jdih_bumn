@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,6 +32,7 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
   List<Item?> _items = [];
   //final PageController _controller = PageController();
   final PageController _pageController = PageController();
+  final int _maxLeftScrollIndex = 1;
 
   final ScrollController _scrollController = ScrollController();
   bool _scrollEnabled = true;
@@ -99,10 +101,14 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
     super.initState();
     //_loadItems(_currentPage);
     //_loadItems(_currentPage);
+    //_pageController.initialPage;
+
+    _currentPage = 1;
     _loadItems(_currentPage);
     _scrollController.addListener(_scrollListener);
     _pageController.addListener(() {
       // This is called whenever the page in the PageView changes
+
       if (_pageController.page == _pageController.page?.roundToDouble()) {
         // Check if scrolling stopped.
         print("Current Page: ${_pageController.page}");
@@ -111,6 +117,16 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
         // Here you can update your state or perform any actions
         // based on the current page index.
       }
+
+      // // Determine the direction of scroll
+      // if (_pageController.page! < _currentPage &&
+      //     _currentPage > _maxLeftPageIndex) {
+      //   // If scrolling to the left beyond the allowed pages, jump to the max left page index
+      //   _pageController.jumpToPage(1);
+      // } else {
+      //   // Update the current page index if within allowed range
+      //   _currentPage = _pageController.page!.round();
+      // }
     });
   }
 
@@ -301,6 +317,20 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
                                         //     _loadPage(_currentPage);
                                         //   }
                                         // },
+                                        onPageChanged: (int index) {
+                                          if (index < _maxLeftScrollIndex) {
+                                            // Jika indeks halaman lebih kecil dari batas yang diizinkan,
+                                            // paksa PageView untuk kembali ke batas maksimal
+                                            Future.delayed(Duration.zero, () {
+                                              _pageController.jumpToPage(1);
+                                            });
+                                          } else {
+                                            // Update indeks halaman saat ini jika dalam batas yang diizinkan
+                                            setState(() {
+                                              _currentPage = index;
+                                            });
+                                          }
+                                        },
                                         itemBuilder: (context, index) {
                                           //final Item kamus = state.data.items![index];
                                           final item = _items[index];
@@ -397,6 +427,8 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
               const SizedBox(
                 height: 10.0,
               ),
+              //pakai hasclients, agar bisa di tangkap (await) dulu
+              // nilai _pagecontrollernya
               Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -410,6 +442,8 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
                     const SizedBox(
                       width: 2.0,
                     ),
+
+                    //_currentPage+1
                     Container(
                       height: 20,
                       width: 20,
@@ -417,7 +451,7 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
                           border: Border.all(color: Colors.black)),
                       child: Center(
                           child: Text(
-                        "$_currentPage",
+                        "${_pageController.hasClients ? _pageController.page!.round() != 0 ? _currentPage : '-' : '-'}",
                         textAlign: TextAlign.center,
                         style: const TextStyle(fontSize: 11),
                       )),

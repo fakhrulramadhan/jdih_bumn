@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:jdih_bumn/bloc/stage/get_peraturan_terbaru/get_peraturan_terbaru_bloc.dart';
-import 'package:jdih_bumn/data/model/response/stage/peraturan_terbaru_response_model.dart';
+import 'package:jdih_bumn/data/model/response/stage/peraturan_terbarus_response_model.dart';
 import 'package:jdih_bumn/presentation/terbaru_detail/terbaru_detail_screen.dart';
 
 class BeritaTerbaruWidget extends StatefulWidget {
@@ -142,7 +142,7 @@ class _BeritaTerbaruWidgetState extends State<BeritaTerbaruWidget> {
                                           height: 8.0,
                                         ),
                                         Text(
-                                          "${peraturanTerbaru.perNoBaru}",
+                                          "${peraturanTerbaru.nomorPeraturanBaru ?? '-'}",
                                           style: const TextStyle(
                                             fontSize: 12.0,
                                             fontWeight: FontWeight.w300,

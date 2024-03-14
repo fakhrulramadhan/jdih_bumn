@@ -340,7 +340,7 @@ class KamusHukumSearchScreenState extends State<KamusHukumSearchScreen> {
           ],
         )),
         bottomNavigationBar: SizedBox(
-          height: 110,
+          height: 105,
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: [

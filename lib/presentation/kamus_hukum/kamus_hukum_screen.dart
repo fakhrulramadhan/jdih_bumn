@@ -400,13 +400,10 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
           ],
         )),
         bottomNavigationBar: SizedBox(
-          height: 110,
+          height: 120,
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: [
-              const SizedBox(
-                height: 10.0,
-              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -427,7 +424,7 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
                 ],
               ),
               const SizedBox(
-                height: 10.0,
+                height: 5.0,
               ),
               //pakai hasclients, agar bisa di tangkap (await) dulu
               // nilai _pagecontrollernya

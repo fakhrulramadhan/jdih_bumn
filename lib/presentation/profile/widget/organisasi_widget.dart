@@ -104,6 +104,7 @@ class _OrgansisasiWidgetState extends State<OrgansisasiWidget> {
                                               "${strukturJdih.organisasi}")
                                           .image,
                                       swipeDismissible: true,
+                                      useSafeArea: true,
                                       // backgroundColor: Colors.white
                                       doubleTapZoomable: true,
                                       backgroundColor:

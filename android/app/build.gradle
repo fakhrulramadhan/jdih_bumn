@@ -57,6 +57,12 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
+
+        // ndk {
+        //     // Specifies the ABI configurations of your native
+        //     // libraries Gradle should build and package your APK.
+        //     abiFilters 'armeabi-v7a', 'arm64-v8a'
+        // }
     }
 
     buildTypes {

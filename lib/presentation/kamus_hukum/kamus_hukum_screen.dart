@@ -391,7 +391,9 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
                                             );
                                           },
                                         )
-                                      : Container()),
+                                      : const Center(
+                                          child: Text("Data Tidak Ditemukan"),
+                                        )),
                             ],
                           ),
                         ),
@@ -489,6 +491,7 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
 
   // halaman sebelumnya
   void _loadPreviousPage() {
+    print(_currentPage);
     if (_currentPage > 1) {
       _currentPage--;
       _pageController.previousPage(

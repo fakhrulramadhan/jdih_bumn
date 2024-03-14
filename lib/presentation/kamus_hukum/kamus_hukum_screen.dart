@@ -172,311 +172,315 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
           content: Text("Tekan Sekali Lagi Untuk Keluar Aplikasi"),
         ));
       },
-      child: Scaffold(
-        //  kamus hukum pakai pagination, buat lihat data selanjutnya
-        resizeToAvoidBottomInset: false,
-        body: SafeArea(
-            child: Stack(
-          children: [
-            Image.asset(
-              "assets/images/appbar-bg2.png",
-              width: width,
-              height: 110.0,
-              fit: BoxFit.none,
-            ),
-            NotificationListener<ScrollNotification>(
-              onNotification: (notification) {
-                if (!_scrollEnabled) return true;
+      child: SafeArea(
+        child: Scaffold(
+          //  kamus hukum pakai pagination, buat lihat data selanjutnya
+          resizeToAvoidBottomInset: true,
+          backgroundColor: Colors.white,
+          body: Stack(
+            children: [
+              Image.asset(
+                "assets/images/appbar-bg2.png",
+                width: width,
+                height: 110.0,
+                fit: BoxFit.none,
+              ),
+              NotificationListener<ScrollNotification>(
+                onNotification: (notification) {
+                  if (!_scrollEnabled) return true;
 
-                return false;
-              },
-              child: SingleChildScrollView(
-                //controller: ScrollController(),
-                controller: _scrollController,
-                physics: const BouncingScrollPhysics(),
-                scrollDirection: Axis.vertical,
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          BackButton(
-                            color: Colors.white,
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                          SizedBox(
-                            width: 0.185 * MediaQuery.of(context).size.width,
-                          ),
-                          const Expanded(
-                            child: SizedBox(
-                              height: 90,
-                              width: 150,
-                              child: Center(
-                                child: Text(
-                                  "Kamus Hukum",
-                                  style: TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
+                  return false;
+                },
+                child: SingleChildScrollView(
+                  //controller: ScrollController(),
+                  controller: _scrollController,
+                  physics: const BouncingScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            BackButton(
+                              color: Colors.white,
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                            SizedBox(
+                              width: 0.185 * MediaQuery.of(context).size.width,
+                            ),
+                            const Expanded(
+                              child: SizedBox(
+                                height: 90,
+                                width: 150,
+                                child: Center(
+                                  child: Text(
+                                    "Kamus Hukum",
+                                    style: TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                          Expanded(child: Container())
-                        ],
-                      ),
-                      Container(
-                        decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(24),
-                                topRight: Radius.circular(24))),
-                        padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                          children: [
-                            const SizedBox(
-                              height: 10.0,
-                            ),
-                            Center(
-                              child: Container(
-                                height: 45,
-                                width: width * 0.9,
-                                decoration: const BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(24),
-                                        topRight: Radius.circular(24))),
-                                child: Material(
-                                  borderRadius: BorderRadius.circular(10),
-                                  elevation: 3,
-                                  child: TextFormField(
-                                    controller: searchController,
-                                    onFieldSubmitted: (value) {
-                                      updateSearch(value);
-                                    },
-                                    decoration: InputDecoration(
-                                        suffixIcon: InkWell(
-                                          onTap: () {},
-                                          child: const Padding(
-                                            padding: EdgeInsets.only(left: 6),
-                                            child: Icon(
-                                              Icons.search,
-                                              size: 24.0,
-                                              color: Colors.black,
+                            Expanded(child: Container())
+                          ],
+                        ),
+                        Container(
+                          decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(24),
+                                  topRight: Radius.circular(24))),
+                          padding: const EdgeInsets.all(20.0),
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 10.0,
+                              ),
+                              Center(
+                                child: Container(
+                                  height: 45,
+                                  width: width * 0.9,
+                                  decoration: const BoxDecoration(
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(24),
+                                          topRight: Radius.circular(24))),
+                                  child: Material(
+                                    borderRadius: BorderRadius.circular(10),
+                                    elevation: 3,
+                                    child: TextFormField(
+                                      controller: searchController,
+                                      onFieldSubmitted: (value) {
+                                        updateSearch(value);
+                                      },
+                                      decoration: InputDecoration(
+                                          suffixIcon: InkWell(
+                                            onTap: () {},
+                                            child: const Padding(
+                                              padding: EdgeInsets.only(left: 6),
+                                              child: Icon(
+                                                Icons.search,
+                                                size: 24.0,
+                                                color: Colors.black,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        contentPadding: const EdgeInsets.only(
-                                            top: 10, left: 20, right: 20),
-                                        border: const OutlineInputBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(7),
-                                            ),
-                                            borderSide: BorderSide.none),
-                                        enabledBorder: const OutlineInputBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(10)),
-                                            borderSide: BorderSide(
-                                                color: Colors.black38,
-                                                width: 1)),
-                                        hintText:
-                                            'Ketik kata kunci pencarian....',
-                                        hintStyle: const TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 14.0,
-                                        )),
+                                          filled: true,
+                                          fillColor: Colors.white,
+                                          contentPadding: const EdgeInsets.only(
+                                              top: 10, left: 20, right: 20),
+                                          border: const OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(7),
+                                              ),
+                                              borderSide: BorderSide.none),
+                                          enabledBorder:
+                                              const OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(10)),
+                                                  borderSide: BorderSide(
+                                                      color: Colors.black38,
+                                                      width: 1)),
+                                          hintText:
+                                              'Ketik kata kunci pencarian....',
+                                          hintStyle: const TextStyle(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 14.0,
+                                          )),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(
-                              height: 18.0,
-                            ),
-                            // pakai pageview nuilder
-                            const TitleKamusWidget(),
-                            SizedBox(
-                                height: 1130, //530
-                                width: MediaQuery.of(context).size.width,
-                                child: _items.isNotEmpty
-                                    ? PageView.builder(
-                                        //controller: _controller,
-                                        controller: _pageController,
-                                        scrollDirection: Axis.horizontal,
-                                        itemCount: _items.length,
-                                        //itemCount: _items.length,
-                                        // onPageChanged: (int page) {
-                                        //   if (page >= _items.length - 1) {
-                                        //     // Approaching end of loaded items, fetch more
-                                        //     _currentPage++;
-                                        //     _loadPage(_currentPage);
-                                        //   }
-                                        // },
-                                        onPageChanged: (int index) {
-                                          if (index < _maxLeftScrollIndex) {
-                                            // Jika indeks halaman lebih kecil dari batas yang diizinkan,
-                                            // paksa PageView untuk kembali ke batas maksimal
-                                            Future.delayed(Duration.zero, () {
-                                              _pageController.jumpToPage(1);
-                                            });
-                                          } else {
-                                            // Update indeks halaman saat ini jika dalam batas yang diizinkan
-                                            setState(() {
-                                              _currentPage = index;
-                                            });
-                                          }
-                                        },
-                                        itemBuilder: (context, index) {
-                                          //final Item kamus = state.data.items![index];
-                                          final item = _items[index];
-                                          print("jumlah datanya");
-                                          print(_items.length);
+                              const SizedBox(
+                                height: 18.0,
+                              ),
+                              // pakai pageview nuilder
+                              const TitleKamusWidget(),
+                              SizedBox(
+                                  height: 1130, //530
+                                  width: MediaQuery.of(context).size.width,
+                                  child: _items.isNotEmpty
+                                      ? PageView.builder(
+                                          //controller: _controller,
+                                          controller: _pageController,
+                                          scrollDirection: Axis.horizontal,
+                                          itemCount: _items.length,
+                                          //itemCount: _items.length,
+                                          // onPageChanged: (int page) {
+                                          //   if (page >= _items.length - 1) {
+                                          //     // Approaching end of loaded items, fetch more
+                                          //     _currentPage++;
+                                          //     _loadPage(_currentPage);
+                                          //   }
+                                          // },
+                                          onPageChanged: (int index) {
+                                            if (index < _maxLeftScrollIndex) {
+                                              // Jika indeks halaman lebih kecil dari batas yang diizinkan,
+                                              // paksa PageView untuk kembali ke batas maksimal
+                                              Future.delayed(Duration.zero, () {
+                                                _pageController.jumpToPage(1);
+                                              });
+                                            } else {
+                                              // Update indeks halaman saat ini jika dalam batas yang diizinkan
+                                              setState(() {
+                                                _currentPage = index;
+                                              });
+                                            }
+                                          },
+                                          itemBuilder: (context, index) {
+                                            //final Item kamus = state.data.items![index];
+                                            final item = _items[index];
+                                            print("jumlah datanya");
+                                            print(_items.length);
 
-                                          return Column(
-                                            children: [
-                                              BodyKamusWidget(
-                                                istilah:
-                                                    item!.istilah.toString(),
-                                                definisi:
-                                                    item.definisi.toString(),
-                                              ),
-                                              _items.length > 1
-                                                  ? BodyKamusWidget(
-                                                      istilah: _items[1]!
-                                                          .istilah
-                                                          .toString(),
-                                                      definisi: _items[1]!
-                                                          .definisi
-                                                          .toString())
-                                                  : Container(),
-                                              _items.length > 2
-                                                  ? BodyKamusWidget(
-                                                      istilah: _items[2]!
-                                                          .istilah
-                                                          .toString(),
-                                                      definisi: _items[2]!
-                                                          .definisi
-                                                          .toString())
-                                                  : Container()
+                                            return Column(
+                                              children: [
+                                                BodyKamusWidget(
+                                                  istilah:
+                                                      item!.istilah.toString(),
+                                                  definisi:
+                                                      item.definisi.toString(),
+                                                ),
+                                                _items.length > 1
+                                                    ? BodyKamusWidget(
+                                                        istilah: _items[1]!
+                                                            .istilah
+                                                            .toString(),
+                                                        definisi: _items[1]!
+                                                            .definisi
+                                                            .toString())
+                                                    : Container(),
+                                                _items.length > 2
+                                                    ? BodyKamusWidget(
+                                                        istilah: _items[2]!
+                                                            .istilah
+                                                            .toString(),
+                                                        definisi: _items[2]!
+                                                            .definisi
+                                                            .toString())
+                                                    : Container()
 
-                                              // _items[1] != null
-                                              //     ? BodyKamusWidget(
-                                              //         istilah: _items[1]!
-                                              //             .istilah
-                                              //             .toString(),
-                                              //         definisi: _items[1]!
-                                              //             .definisi
-                                              //             .toString())
-                                              //     : Container(),
-                                              // _items[1] != null &&
-                                              //         _items[2] != null
-                                              //     ? BodyKamusWidget(
-                                              //         istilah: _items[2]!
-                                              //             .istilah
-                                              //             .toString(),
-                                              //         definisi: _items[2]!
-                                              //             .definisi
-                                              //             .toString())
-                                              //     : Container(),
-                                            ],
-                                          );
-                                        },
-                                      )
-                                    : Container()),
-                          ],
+                                                // _items[1] != null
+                                                //     ? BodyKamusWidget(
+                                                //         istilah: _items[1]!
+                                                //             .istilah
+                                                //             .toString(),
+                                                //         definisi: _items[1]!
+                                                //             .definisi
+                                                //             .toString())
+                                                //     : Container(),
+                                                // _items[1] != null &&
+                                                //         _items[2] != null
+                                                //     ? BodyKamusWidget(
+                                                //         istilah: _items[2]!
+                                                //             .istilah
+                                                //             .toString(),
+                                                //         definisi: _items[2]!
+                                                //             .definisi
+                                                //             .toString())
+                                                //     : Container(),
+                                              ],
+                                            );
+                                          },
+                                        )
+                                      : Container()),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          bottomNavigationBar: SizedBox(
+            height: 87,
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    KamusSebelumnyaButtonWidget(
+                        onTap: _currentPage > 1 ? _loadPreviousPage : null),
+                    KamusSelanjutnyaButtonWidgetNew(onTap: _loadNextPage)
+                    // KamusSelanjutnyaButtonWidget(
+                    //   onTap: () {
+                    //     page.animateToPage(pageIndex + 1,
+                    //         duration: const Duration(milliseconds: 200),
+                    //         curve: Curves.easeOut);
+                    //     print(pageIndex);..
+                    //     // page.animateToPage(pageIndex--,
+                    //     //     duration: const Duration(milliseconds: 400),
+                    //     //     curve: Curves.linearToEaseOut);
+                    //   },
+                    // )
+                  ],
+                ),
+                const SizedBox(
+                  height: 5.0,
+                ),
+                //pakai hasclients, agar bisa di tangkap (await) dulu
+                // nilai _pagecontrollernya
+                Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "Page",
+                        style: TextStyle(
+                          fontSize: 8.0,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 2.0,
+                      ),
+
+                      //_currentPage+1
+                      Container(
+                        height: 20,
+                        width: 20,
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black)),
+                        child: Center(
+                            child: Text(
+                          "${_pageController.hasClients ? _pageController.page!.round() != 0 ? _currentPage : '-' : '-'}",
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(fontSize: 11),
+                        )),
+                      ),
+                      const SizedBox(
+                        width: 2.0,
+                      ),
+                      const Text(
+                        "Of",
+                        style: TextStyle(
+                          fontSize: 8.0,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 2.0,
+                      ),
+                      const Text(
+                        "99",
+                        style: TextStyle(
+                          fontSize: 8.0,
                         ),
                       ),
                     ],
                   ),
                 ),
-              ),
+              ],
             ),
-          ],
-        )),
-        bottomNavigationBar: SizedBox(
-          height: 120,
-          width: MediaQuery.of(context).size.width,
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  KamusSebelumnyaButtonWidget(
-                      onTap: _currentPage > 1 ? _loadPreviousPage : null),
-                  KamusSelanjutnyaButtonWidgetNew(onTap: _loadNextPage)
-                  // KamusSelanjutnyaButtonWidget(
-                  //   onTap: () {
-                  //     page.animateToPage(pageIndex + 1,
-                  //         duration: const Duration(milliseconds: 200),
-                  //         curve: Curves.easeOut);
-                  //     print(pageIndex);..
-                  //     // page.animateToPage(pageIndex--,
-                  //     //     duration: const Duration(milliseconds: 400),
-                  //     //     curve: Curves.linearToEaseOut);
-                  //   },
-                  // )
-                ],
-              ),
-              const SizedBox(
-                height: 5.0,
-              ),
-              //pakai hasclients, agar bisa di tangkap (await) dulu
-              // nilai _pagecontrollernya
-              Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "Page",
-                      style: TextStyle(
-                        fontSize: 8.0,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 2.0,
-                    ),
-
-                    //_currentPage+1
-                    Container(
-                      height: 20,
-                      width: 20,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black)),
-                      child: Center(
-                          child: Text(
-                        "${_pageController.hasClients ? _pageController.page!.round() != 0 ? _currentPage : '-' : '-'}",
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(fontSize: 11),
-                      )),
-                    ),
-                    const SizedBox(
-                      width: 2.0,
-                    ),
-                    const Text(
-                      "Of",
-                      style: TextStyle(
-                        fontSize: 8.0,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 2.0,
-                    ),
-                    const Text(
-                      "99",
-                      style: TextStyle(
-                        fontSize: 8.0,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
           ),
         ),
       ),

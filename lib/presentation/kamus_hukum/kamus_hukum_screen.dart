@@ -105,7 +105,7 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
 
     _currentPage = 1;
     _loadItems(_currentPage);
-    _scrollController.addListener(_scrollListener);
+    //_scrollController.addListener(_scrollListener);
     _pageController.addListener(() {
       // This is called whenever the page in the PageView changes
 
@@ -143,12 +143,13 @@ class _KamusHukumScreenState extends State<KamusHukumScreen> {
     if (_scrollController.offset >= 200) {
       if (_scrollEnabled) {
         setState(() {
-          _scrollEnabled = false;
+          //_scrollEnabled = false;
+          _scrollEnabled = true;
         });
       }
 
       //hanya bisa di scroll sampai height 400, atur di jumpto nya
-      _scrollController.jumpTo(300); //100 sudah cukup
+      _scrollController.jumpTo(500); //100 sudah cukup, 400
     }
   }
 
